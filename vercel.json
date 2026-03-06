@@ -18,11 +18,37 @@
       ]
     },
     {
-      "source": "/(.*\\.(png|webm|mp3))",
+      "source": "/(.*\\.png)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.webm)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        },
+        {
+          "key": "Content-Type",
+          "value": "video/webm"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.mp3)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        },
+        {
+          "key": "Content-Type",
+          "value": "audio/mpeg"
         }
       ]
     }
