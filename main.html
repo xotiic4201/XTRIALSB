@@ -3,7 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>XTRIALS......</title>
+    <title id="dynamicTitle">XTRIALS......</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     <style>
         /* ==================== GLOBAL HORROR STYLES ==================== */
         * {
@@ -13,21 +14,10 @@
         }
 
         @keyframes bloodDrip {
-            0% { 
-                transform: translateY(-100%); 
-                opacity: 0; 
-            }
-            10% { 
-                opacity: 1; 
-            }
-            80% { 
-                transform: translateY(1000%); 
-                opacity: 1; 
-            }
-            100% { 
-                transform: translateY(2000%); 
-                opacity: 0; 
-            }
+            0% { transform: translateY(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            80% { transform: translateY(1000%); opacity: 1; }
+            100% { transform: translateY(2000%); opacity: 0; }
         }
 
         @keyframes pulseRed {
@@ -49,6 +39,22 @@
             99% { opacity: 1; }
         }
 
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes trail {
+            0% { opacity: 0; }
+            10% { opacity: 0.5; }
+            20% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
         body {
             background-color: black;
             color: #ff0000;
@@ -59,9 +65,10 @@
             animation: flicker 8s infinite;
             position: relative;
             overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%238b0000" opacity="0.5"/></svg>') 12 12, auto;
         }
 
-        /* ==================== FULL SCREEN BLOOD OVERLAY ==================== */
+        /* ==================== FULL SCREEN BLOOD OVERLAYS ==================== */
         .fullscreen-blood {
             position: fixed;
             top: 0;
@@ -72,15 +79,10 @@
             z-index: 9999;
             opacity: 0.25;
             mix-blend-mode: multiply;
-        }
-        
-        .fullscreen-blood video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            background: repeating-linear-gradient(45deg, #8b0000 0px, #8b0000 2px, transparent 2px, transparent 8px);
+            animation: flicker 12s infinite;
         }
 
-        /* Animated CSS blood drips covering entire screen */
         .blood-drip-container {
             position: fixed;
             top: 0;
@@ -103,7 +105,7 @@
             opacity: 0.6;
         }
 
-        /* Create 50 blood drips at random positions */
+        /* 50 blood drips (keeping your existing drip classes) */
         .drip1 { left: 5%; animation-duration: 6s; animation-delay: 0s; width: 10px; }
         .drip2 { left: 12%; animation-duration: 7s; animation-delay: 1s; width: 7px; }
         .drip3 { left: 18%; animation-duration: 5s; animation-delay: 2s; width: 12px; }
@@ -155,6 +157,19 @@
         .drip49 { left: 21%; animation-duration: 6.3s; animation-delay: 6.2s; width: 8px; }
         .drip50 { left: 28%; animation-duration: 8.5s; animation-delay: 5.4s; width: 9px; }
 
+        /* ==================== MOUSE TRAIL ==================== */
+        .mouse-trail {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(139, 0, 0, 0.3);
+            pointer-events: none;
+            z-index: 20001;
+            filter: blur(3px);
+            animation: trail 1s forwards;
+        }
+
         /* ==================== CREEPY LOADING SCREEN ==================== */
         #loading-screen {
             position: fixed;
@@ -182,6 +197,9 @@
             position: relative;
             z-index: 2;
             filter: drop-shadow(0 0 50px red);
+            font-size: 120px;
+            color: #330000;
+            line-height: 1;
         }
 
         .blood-overlay-loading {
@@ -194,7 +212,7 @@
             z-index: 3;
             mix-blend-mode: multiply;
             opacity: 0.7;
-            background: url('blood-texture-tile.png') center/cover;
+            background: repeating-linear-gradient(45deg, #8b0000 0px, #8b0000 4px, transparent 4px, transparent 12px);
         }
 
         .loading-text {
@@ -304,6 +322,10 @@
 
         .chaos-rotate { transform: rotate(-0.8deg); }
         .chaos-rotate2 { transform: rotate(1.2deg); }
+        
+        .glitch-text {
+            animation: glitch 0.2s infinite;
+        }
 
         /* ==================== CONTENT PAGES ==================== */
         .content-page {
@@ -394,20 +416,160 @@
             border-color: red;
             box-shadow: 0 0 20px red;
         }
+
+        /* ==================== GUESTBOOK STYLES ==================== */
+        .guestbook-entry {
+            border: 1px solid #660000;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(20, 0, 0, 0.8);
+            font-family: 'Courier New', monospace;
+        }
+
+        .guestbook-entry .date {
+            color: #660000;
+            font-size: 12px;
+        }
+
+        .guestbook-entry .author {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .guestbook-entry .message {
+            color: #ff6666;
+            margin-top: 5px;
+        }
+
+        .guestbook-form {
+            margin-top: 30px;
+            border-top: 2px dashed #660000;
+            padding-top: 20px;
+        }
+
+        .guestbook-form input, .guestbook-form textarea {
+            width: 100%;
+            background: #1a0000;
+            border: 2px inset #990000;
+            color: #ff6666;
+            padding: 10px;
+            margin: 5px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .guestbook-form button {
+            background: #330000;
+            border: 2px solid #660000;
+            color: #ff6666;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .guestbook-form button:hover {
+            background: #8b0000;
+            color: white;
+        }
+
+        /* ==================== FAKE DOWNLOAD BUTTON ==================== */
+        .fake-download {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #1a0000;
+            border: 3px outset #8b0000;
+            color: #ff6666;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            margin: 20px 0;
+            animation: pulseRed 2s infinite;
+        }
+
+        .fake-download:hover {
+            background: #8b0000;
+            border-style: inset;
+        }
+
+        /* ==================== BROWSER WARNING ==================== */
+        .browser-warning {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: black;
+            border: 3px solid #8b0000;
+            padding: 15px;
+            z-index: 30000;
+            color: #ff6666;
+            font-size: 12px;
+            max-width: 250px;
+            display: none;
+        }
+
+        /* ==================== MEADOW MIST PUBLIC ACCESS ==================== */
+        .public-access-video {
+            width: 100%;
+            background: #000;
+            border: 6px inset #660000;
+            padding: 10px;
+        }
+
+        .public-access-video img {
+            width: 100%;
+            image-rendering: pixelated;
+            filter: grayscale(100%) contrast(150%);
+        }
+
+        .tv-static {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tv-static::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(0deg, rgba(255,255,255,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px);
+            pointer-events: none;
+            animation: flicker 0.5s infinite;
+        }
+
+        /* ==================== ENGINEERING REPORT ==================== */
+        .engineering-report {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            border: 2px solid #333;
+            padding: 30px;
+            color: #00ff00;
+        }
+
+        .engineering-report h2 {
+            color: #ff0000;
+            border-bottom: 1px solid #660000;
+        }
+
+        .engineering-report .warning {
+            color: #ff0000;
+            font-weight: bold;
+            animation: pulseRed 1s infinite;
+        }
+
+        /* ==================== FAVICON GENERATOR ==================== */
+        #dynamic-favicon {
+            display: none;
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- ==================== FULL SCREEN BLOOD OVERLAYS ==================== -->
-<!-- Video blood overlay (full screen) -->
-<div class="fullscreen-blood">
-    <video autoplay loop muted playsinline>
-        <source src="blood-drip-corner.webm" type="video/webm">
-    </video>
-</div>
+<!-- ==================== DYNAMIC FAVICON ==================== -->
+<canvas id="dynamic-favicon" width="32" height="32" style="display:none;"></canvas>
 
-<!-- CSS blood drips (covers entire screen) -->
+<!-- ==================== FULL SCREEN BLOOD OVERLAYS ==================== -->
+<div class="fullscreen-blood"></div>
+
+<!-- ==================== CSS BLOOD DRIPS ==================== -->
 <div class="blood-drip-container">
     <div class="blood-drip-css drip1"></div>
     <div class="blood-drip-css drip2"></div>
@@ -464,44 +626,35 @@
 <!-- ==================== STATIC OVERLAY ==================== -->
 <div class="static-overlay"></div>
 
+<!-- ==================== BROWSER WARNING ==================== -->
+<div id="browser-warning" class="browser-warning">
+    ⚠️ WARNING: Your browser (Chrome <span id="browser-version"></span>) is incompatible.<br>
+    The faces in the static may not appear correctly.<br>
+    For the true experience, please downgrade to Windows 95 and Netscape Navigator.
+</div>
+
 <!-- ==================== CREEPY LOADING SCREEN ==================== -->
 <div id="loading-screen">
     <div class="loading-container">
-        <!-- Transparent face - REPLACE WITH YOUR PNG -->
-        <img src="crimson-recused-face.png" alt="XTRIALS" class="creepy-face">
-        
-        <!-- Blood texture overlay -->
+        <div class="creepy-face">👁️</div>
         <div class="blood-overlay-loading"></div>
-        
         <div class="loading-text">XTRIALS IS WATCHING</div>
         <div class="loading-text" style="font-size: 16px; letter-spacing: 3px;">loading your nightmare...</div>
     </div>
 </div>
 
-<!-- ==================== BACKGROUND AUDIO ==================== -->
-<audio id="ambient-sound" loop preload="auto" style="display:none;">
-    <source src="drone.mp3" type="audio/mpeg">
-</audio>
-<audio id="jumpscare-sound" preload="auto" style="display:none;">
-    <source src="scream.mp3" type="audio/mpeg">
-</audio>
-<audio id="whisper-sound" loop preload="auto" style="display:none;">
-    <source src="whisper.mp3" type="audio/mpeg">
-</audio>
-<audio id="heartbeat-sound" loop preload="auto" style="display:none;">
-    <source src="heartbeat.mp3" type="audio/mpeg">
-</audio>
-<audio id="static-sound" loop preload="auto" style="display:none;">
-    <source src="static.mp3" type="audio/mpeg">
-</audio>
-<audio id="laugh-sound" preload="auto" style="display:none;">
-    <source src="child-laugh.mp3" type="audio/mpeg">
-</audio>
+<!-- ==================== BACKGROUND AUDIO (GENERATED VIA WEB AUDIO API) ==================== -->
+<audio id="ambient-sound" loop preload="auto" style="display:none;"></audio>
+<audio id="jumpscare-sound" preload="auto" style="display:none;"></audio>
+<audio id="whisper-sound" loop preload="auto" style="display:none;"></audio>
+<audio id="heartbeat-sound" loop preload="auto" style="display:none;"></audio>
+<audio id="static-sound" loop preload="auto" style="display:none;"></audio>
+<audio id="laugh-sound" preload="auto" style="display:none;"></audio>
 
 <!-- ==================== PAGE: HOME (MAIN) ==================== -->
 <div id="page-home" class="page active">
     <div class="xtrials-mess">
-        <!-- TOP HEADER - REPEATED LIKE YVETTE'S -->
+        <!-- TOP HEADER -->
         <div style="background-color:#330000; width: 100%; margin: 5px 0 25px 0; float: left; border-width: 10px !important;">
             <table><tr><td>
                 <span class="text">
@@ -512,7 +665,7 @@
             </td></tr></table>
         </div>
 
-        <!-- WELCOME SECTION - YVETTE'S STYLE -->
+        <!-- WELCOME SECTION -->
         <div style="background-color:#1a0000; width: 320px; float: left; margin: 0 20px 30px 5px;" class="chaos-rotate">
             <table><tr><td>
                 <span class="text">
@@ -531,7 +684,7 @@
             </td></tr></table>
         </div>
 
-        <!-- RIGHT SIDE QUOTE - LIKE YVETTE'S -->
+        <!-- RIGHT SIDE QUOTE -->
         <div style="background-color:#330000; width: 300px; float: right; margin: 40px 5px 5px 40px;" class="chaos-rotate2">
             <table><tr><td>
                 <span class="text">
@@ -546,7 +699,7 @@
             </td></tr></table>
         </div>
 
-        <!-- KEYWORDS SECTION - YVETTE'S STYLE REPETITION -->
+        <!-- KEYWORDS SECTION -->
         <div style="background-color:#1a0000; width: 280px; float: left; margin: 5px 30px 20px 30px;">
             <table><tr><td>
                 <span class="text">
@@ -563,7 +716,12 @@
             </td></tr></table>
         </div>
 
-        <!-- ADDRESS SECTION - YVETTE'S STYLE -->
+        <!-- NEW: FAKE DOWNLOAD LINK (JUMPS CARE TRIGGER) -->
+        <div style="background-color:#330000; width: 280px; float: right; margin: 5px;">
+            <div class="fake-download" onclick="triggerFakeDownload()">📁 evidence_001.exe</div>
+        </div>
+
+        <!-- ADDRESS SECTION -->
         <div style="background-color:#330000; width: 95%; float: left; margin: 30px 10px 20px 10px;">
             <table><tr><td>
                 <span class="text">
@@ -598,7 +756,7 @@
             </td></tr></table>
         </div>
 
-        <!-- MURDER CASES - 47 CASES LIKE YVETTE'S -->
+        <!-- MURDER CASES -->
         <div style="background-color:#1a0000; width: 550px; float: left; margin: 5px 5px 15px 2px;">
             <table><tr><td>
                 <span class="text">
@@ -610,76 +768,76 @@
                         Vanished from locked room, only static on recording<br><br>
                         <a onclick="showPage('case003')">Case #003: The Seven (2003)</a><br>
                         Seven visitors, seven red ribbons, seven empty chairs<br><br>
-                        <a onclick="showPage('case004')">Case #004: The Frequency War (2011)</a><br>
-                        Three found dead near water tower, ears bleeding<br><br>
-                        <a onclick="showPage('case005')">Case #005: The Silent Year (2020)</a><br>
-                        No bodies, but 52.9 Hz recorded from empty room<br><br>
-                        <a onclick="showPage('case006')">Case #006: The Twins (1989)</a><br>
-                        Two females in basement, holding hands, facing east<br><br>
-                        <a onclick="showPage('case007')">Case #007: The Journalist (1990)</a><br>
-                        Found with tape recorder playing 52.9 Hz<br><br>
-                        <a onclick="showPage('case008')">Case #008: The Basement Tapes (1993)</a><br>
-                        47 recordings, all static, all at 2:13 AM<br><br>
-                        <a onclick="showPage('case009')">Case #009: The Radio Static (1995)</a><br>
-                        Channel 5 broadcast, 847 calls, 7 voices identified<br><br>
-                        <a onclick="showPage('case010')">Case #010: The Collector (1998)</a><br>
-                        Found with 47 red ribbons, all tied to left wrist<br><br>
                         <a onclick="showPage('unsolved')">UNSOLVED UNSOLVED UNSOLVED</a>
                     </font>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- EVIDENCE LOCKER - WITH AUDIO PLAYERS -->
+        <!-- EVIDENCE LOCKER -->
         <div style="background-color:#330000; width: 500px; float: right; margin: 25px 0 20px 5px;">
             <table><tr><td>
                 <span class="text">
                     <b><font color="#ff0000" size="7">EVIDENCE LOCKER</font></b><br><br>
                     <font color="#ff6666" size="4">
                         <a onclick="showPage('audio001')">audio 001: last known voice (1992)</a><br>
-                        <audio controls style="width:280px; background:#330000;" onplay="playSound('whisper')"><source src="whisper.mp3" type="audio/mpeg"></audio><br>
+                        <button onclick="playGeneratedSound('whisper')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button><br>
                         
                         <a onclick="showPage('audio002')">audio 002: water tower static (1987)</a><br>
-                        <audio controls style="width:280px;" onplay="playSound('static')"><source src="static.mp3" type="audio/mpeg"></audio><br>
+                        <button onclick="playGeneratedSound('static')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button><br>
                         
                         <a onclick="showPage('audio003')">audio 003: 52.9 Hz pure tone</a><br>
-                        <audio controls loop style="width:280px;" onplay="playSound('drone')"><source src="drone.mp3" type="audio/mpeg"></audio><br>
+                        <button onclick="playGeneratedSound('drone')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button><br>
                         
                         <a onclick="showPage('audio004')">audio 004: child's laughter (1987)</a><br>
-                        <audio controls style="width:280px;" onplay="playSound('laugh')"><source src="child-laugh.mp3" type="audio/mpeg"></audio><br>
-                        
-                        <a onclick="showPage('audio005')">audio 005: heartbeat recording (2003)</a><br>
-                        <audio controls style="width:280px;" onplay="playSound('heartbeat')"><source src="heartbeat.mp3" type="audio/mpeg"></audio><br>
-                        
-                        <a onclick="showPage('audio006')">audio 006: the seven whispers</a><br>
-                        <audio controls style="width:280px;" onplay="playSound('whisper')"><source src="whisper.mp3"></audio><br>
-                        
-                        <a onclick="showPage('audio007')">audio 007: basement recording (1992)</a><br>
-                        <audio controls style="width:280px;" onplay="playSound('static')"><source src="static.mp3"></audio><br>
-                        
-                        <a onclick="showPage('video001')">video 001: water tower (1987)</a><br>
-                        <iframe width="320" height="200" src="https://www.youtube.com/embed/L0MK7qz13bU?autoplay=0&mute=1" style="border:4px solid #660000;"></iframe><br>
-                        
-                        <a onclick="showPage('video002')">video 002: the seven (2003)</a><br>
-                        <iframe width="320" height="200" src="https://www.youtube.com/embed/9vST6hVRjcg?autoplay=0&mute=1" style="border:4px solid #660000;"></iframe><br>
-                        
-                        <a onclick="showPage('video003')">video 003: basement footage (1992)</a><br>
-                        <iframe width="320" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1" style="border:4px solid #660000;"></iframe><br>
-                        
-                        <a onclick="showPage('photo001')">photograph 001: antressa (1987)</a><br>
-                        <a onclick="showPage('photo002')">photograph 002: water tower (1992)</a><br>
-                        <a onclick="showPage('photo003')">photograph 003: red ribbons (2003)</a><br>
-                        <a onclick="showPage('photo004')">photograph 004: autopsy files (WARNING)</a><br>
-                        <a onclick="showPage('photo005')">photograph 005: crime scene (1987)</a><br>
-                        <a onclick="showPage('photo006')">photograph 006: evidence room (1992)</a><br>
-                        <a onclick="showPage('photo007')">photograph 007: the circle (2003)</a><br>
-                        <a onclick="showPage('photo008')">photograph 008: unlabeled (1998)</a>
+                        <button onclick="playGeneratedSound('laugh')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
                     </font>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- WITNESS STATEMENTS - 47 WITNESSES LIKE YVETTE'S -->
+        <!-- NEW: VISITOR COUNTER WITH COUNTDOWN -->
+        <div style="background-color:#1a0000; width: 375px; float: right; margin: 10px;">
+            <table><tr><td>
+                <span class="text">
+                    <b><font color="#ff6666" size="5">this XTrials page has been visited</font><br>
+                    <font color="#ff0000" size="7" id="visitorCounter">48291</font><br>
+                    <font color="#ff6666" size="5">times !! ~*</font><br>
+                    <font color="#990000" size="3">you are visitor #<span id="visitorNumber"></span></font>
+                    <br>
+                    <font color="#ff0000" size="4" id="countdownMessage"></font>
+                </b></span>
+            </td></tr></table>
+        </div>
+
+        <!-- NEW: GUESTBOOK LINK -->
+        <div style="background-color:#330000; width: 300px; float: left; margin: 10px;">
+            <table><tr><td>
+                <span class="text">
+                    <b><font color="#ff6666" size="5"><a onclick="showPage('guestbook')">📖 VISITOR'S LOG (GUESTBOOK)</a></font></b>
+                </span>
+            </td></tr></table>
+        </div>
+
+        <!-- NEW: MEADOW MIST PUBLIC ACCESS LINK -->
+        <div style="background-color:#1a0000; width: 350px; float: left; margin: 10px;">
+            <table><tr><td>
+                <span class="text">
+                    <b><font color="#ff6666" size="5"><a onclick="showPage('publicaccess')">📺 MEADOW MIST PUBLIC ACCESS</a></font></b>
+                </span>
+            </td></tr></table>
+        </div>
+
+        <!-- NEW: ENGINEERING REPORT LINK -->
+        <div style="background-color:#330000; width: 300px; float: left; margin: 10px;">
+            <table><tr><td>
+                <span class="text">
+                    <b><font color="#ff6666" size="5"><a onclick="showPage('engineering')">🏗️ WATER TOWER STRUCTURAL REPORT</a></font></b>
+                </span>
+            </td></tr></table>
+        </div>
+
+        <!-- WITNESS STATEMENTS -->
         <div style="background-color:#1a0000; width: 90%; float: left; margin: 10px 20px;">
             <table><tr><td>
                 <span class="text">
@@ -688,24 +846,12 @@
                         <a onclick="showPage('witness001')">"i heard her calling my name through the static" - 1987</a><br>
                         <a onclick="showPage('witness002')">"the water tower hums at midnight" - 1992</a><br>
                         <a onclick="showPage('witness003')">"52.9 Hz - i hear it in my sleep" - 2003</a><br>
-                        <a onclick="showPage('witness004')">"they come when you leave the red ribbon" - 2011</a><br>
-                        <a onclick="showPage('witness005')">"antressa is still there. i saw her." - 2020</a><br>
-                        <a onclick="showPage('witness006')">"the faces in the static know my name" - 1995</a><br>
-                        <a onclick="showPage('witness007')">"i found a red ribbon on my doorstep" - 2007</a><br>
-                        <a onclick="showPage('witness008')">"the water tower called me at 2:13 AM" - 2015</a><br>
-                        <a onclick="showPage('witness009')">"antressa whispered to me last night" - 2023</a><br>
-                        <a onclick="showPage('witness010')">"they're in my walls" - 2024</a><br>
-                        <a onclick="showPage('witness011')">"i saw the seven in my dreams" - 2004</a><br>
-                        <a onclick="showPage('witness012')">"the frequency follows me everywhere" - 2018</a><br>
-                        <a onclick="showPage('witness013')">"my reflection doesn't blink anymore" - 2021</a><br>
-                        <a onclick="showPage('witness014')">"they're gathering at the water tower" - 2022</a><br>
-                        <a onclick="showPage('witness015')">"i hear breathing in the static" - 1999</a>
                     </font>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- KEYWORD CLOUD - MASSIVE REPETITION LIKE YVETTE'S -->
+        <!-- KEYWORD CLOUD -->
         <div style="background-color:#000000; width: 100%; float: left; margin: 20px 0;" class="chaos-rotate">
             <table><tr><td>
                 <span class="text">
@@ -716,99 +862,12 @@
                         <a onclick="showPage('frequency')">frequency</a> <a onclick="showPage('collective')">collective</a> <a onclick="showPage('sacrifice')">sacrifice</a>
                         <a onclick="showPage('meadow')">meadow mist</a> <a onclick="showPage('freq529')">52.9hz</a> <a onclick="showPage('antressa')">antressa</a>
                         <a onclick="showPage('watertower')">water tower</a> <a onclick="showPage('ribbon')">red ribbon</a> <a onclick="showPage('unsolved')">unsolved</a>
-                        <a onclick="showPage('year1987')">1987</a> <a onclick="showPage('year1988')">1988</a> <a onclick="showPage('year1989')">1989</a>
-                        <a onclick="showPage('year1990')">1990</a> <a onclick="showPage('year1991')">1991</a> <a onclick="showPage('year1992')">1992</a>
-                        <a onclick="showPage('year1993')">1993</a> <a onclick="showPage('year1994')">1994</a> <a onclick="showPage('year1995')">1995</a>
-                        <a onclick="showPage('year1996')">1996</a> <a onclick="showPage('year1997')">1997</a> <a onclick="showPage('year1998')">1998</a>
-                        <a onclick="showPage('year1999')">1999</a> <a onclick="showPage('year2000')">2000</a> <a onclick="showPage('year2001')">2001</a>
-                        <a onclick="showPage('year2002')">2002</a> <a onclick="showPage('year2003')">2003</a> <a onclick="showPage('year2004')">2004</a>
-                        <a onclick="showPage('year2005')">2005</a> <a onclick="showPage('year2006')">2006</a> <a onclick="showPage('year2007')">2007</a>
-                        <a onclick="showPage('year2008')">2008</a> <a onclick="showPage('year2009')">2009</a> <a onclick="showPage('year2010')">2010</a>
-                        <a onclick="showPage('year2011')">2011</a> <a onclick="showPage('year2012')">2012</a> <a onclick="showPage('year2013')">2013</a>
-                        <a onclick="showPage('year2014')">2014</a> <a onclick="showPage('year2015')">2015</a> <a onclick="showPage('year2016')">2016</a>
-                        <a onclick="showPage('year2017')">2017</a> <a onclick="showPage('year2018')">2018</a> <a onclick="showPage('year2019')">2019</a>
-                        <a onclick="showPage('year2020')">2020</a> <a onclick="showPage('year2021')">2021</a> <a onclick="showPage('year2022')">2022</a>
-                        <a onclick="showPage('year2023')">2023</a> <a onclick="showPage('year2024')">2024</a> <a onclick="showPage('year2025')">2025</a>
-                        <a onclick="showPage('level1')">level1</a> <a onclick="showPage('level2')">level2</a> <a onclick="showPage('level3')">level3</a>
-                        <a onclick="showPage('level4')">level4</a> <a onclick="showPage('level5')">level5</a> <a onclick="showPage('level6')">level6</a>
-                        <a onclick="showPage('level7')">level7</a> <a onclick="showPage('ritual-redribbon')">red ribbon ceremony</a>
-                        <a onclick="showPage('ritual-midnight')">midnight frequency</a> <a onclick="showPage('ritual-529')">52.9 initiation</a>
-                        <a onclick="showPage('ritual-sacrifice')">sacrifice ritual</a> <a onclick="showPage('ritual-collective')">join collective</a>
-                        <a onclick="showPage('freq529')">52.9</a> <a onclick="showPage('freq472')">47.2</a> <a onclick="showPage('freq637')">63.7</a>
-                        <a onclick="showPage('freq888')">88.8</a> <a onclick="showPage('freq125')">12.5</a> <a onclick="showPage('freq999')">99.9</a>
-                        <a onclick="showPage('freq000')">00.0</a> <a onclick="showPage('aspen')">aspen</a> <a onclick="showPage('alice')">alice</a>
-                        <a onclick="showPage('alpine')">alpine</a> <a onclick="showPage('russia')">russia</a> <a onclick="showPage('france')">france</a>
-                        <a onclick="showPage('spain')">spain</a> <a onclick="showPage('latin')">latin</a> <a onclick="showPage('prosper')">prosper</a>
-                        <a onclick="showPage('green')">green</a> <a onclick="showPage('communication')">communication</a> <a onclick="showPage('advanced')">advanced</a>
                     </font></b>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- PERSONAL DEDICATION - LIKE YVETTE'S NIGHTQUEEN -->
-        <div style="background-color:#330000; width: 45%; float: left; margin: 5px 2px 5px 15px;">
-            <table><tr><td>
-                <span class="text">
-                    <b><font color="#ff6666" size="5">the frequency will set you free ~~<br><br>
-                    a thousand and one Thank Yous to the woman who hears the tones,<br>
-                    <a onclick="showPage('antressa')">Antressa the Frequency Weaver (1987-1992) !!~*</a><br><br>
-                    and to Theophlosser, who disappeared into the static<br>
-                    and to the seven, who are still waiting<br>
-                    and to you, who is reading this now</font></b>
-                </span>
-            </td></tr></table>
-        </div>
-
-        <!-- FOREIGN PHRASES - LIKE YVETTE'S -->
-        <div style="background-color:#1a0000; width: 45%; float: right; margin: 5px 15px 5px 2px;">
-            <table><tr><td>
-                <span class="text">
-                    <b><font color="#ff3333" size="5">
-                        <a onclick="showPage('russia')">Мы любим частоты.</a><br>
-                        <a onclick="showPage('france')">Nous aimons le bruit blanc.</a><br>
-                        <a onclick="showPage('spain')">XTrials habla espanol.</a><br>
-                        <a onclick="showPage('latin')">XTrials vocat te.</a><br>
-                        <a onclick="showPage('germany')">Wir lieben die Frequenz.</a><br>
-                        <a onclick="showPage('japan')">私たちは周波数を愛しています。</a><br><br>
-                        XTrials ~~****** ⚡ ☠ ⚡
-                    </font></b>
-                </span>
-            </td></tr></table>
-        </div>
-
-        <!-- LIFE IS STATIC SECTION -->
-        <div style="background-color:#000000; width: 280px; float: left; margin: 10px;">
-            <table><tr><td>
-                <span class="text">
-                    <b><font color="#ff0000" size="6">Life is Static !!<br>Live Long and<br><a onclick="showPage('prosper')">Prosper on All Frequencies !! ~~ **</a></font></b>
-                </span>
-            </td></tr></table>
-        </div>
-
-        <!-- GREEN THINGS SECTION -->
-        <div style="background-color:#003300; width: 240px; float: left; margin: 10px;">
-            <table><tr><td>
-                <span class="text">
-                    <b><font color="#00ff00" size="4">Happy Frequencies<br>Static leaves<br><a onclick="showPage('green')">things that hum in greenV8*</a></font></b>
-                </span>
-            </td></tr></table>
-        </div>
-
-        <!-- RESEARCH LINKS SECTION -->
-        <div style="background-color:#330000; width: 380px; float: right; margin: 10px;">
-            <table><tr><td>
-                <span class="text">
-                    <b><font color="#990000" size="4">
-                        <a onclick="showPage('liminal')">liminal research</a> <a onclick="showPage('liminal')">liminal research</a> <a onclick="showPage('liminal')">liminal research</a><br>
-                        <a onclick="showPage('threshold')">threshold collective</a> <a onclick="showPage('threshold')">threshold collective</a><br>
-                        <a onclick="showPage('advanced')">advanced liminal studies</a><br>
-                        <a onclick="showPage('frequency')">frequency analysis</a> <a onclick="showPage('collective')">collective archives</a>
-                    </font></b>
-                </span>
-            </td></tr></table>
-        </div>
-
-        <!-- SEVEN FREQUENCIES SECTION -->
+        <!-- SEVEN FREQUENCIES -->
         <div style="background-color:#1a0000; width: 80%; float: left; margin: 20px 5px;" class="chaos-rotate2">
             <table><tr><td>
                 <span class="text">
@@ -826,304 +885,176 @@
             </td></tr></table>
         </div>
 
-        <!-- ARCHIVE BY YEAR - 1987 TO 2047 -->
-        <div style="background-color:#330000; width: 95%; float: right; margin: 10px 5px;">
-            <table><tr><td>
-                <span class="text">
-                    <b><font color="#ff0000" size="6">COMPLETE ARCHIVE (1987-2047)</font><br>
-                    <font color="#ff6666" size="4">
-                        <a onclick="showPage('year1987')">1987</a> <a onclick="showPage('year1988')">1988</a> <a onclick="showPage('year1989')">1989</a> <a onclick="showPage('year1990')">1990</a>
-                        <a onclick="showPage('year1991')">1991</a> <a onclick="showPage('year1992')">1992</a> <a onclick="showPage('year1993')">1993</a> <a onclick="showPage('year1994')">1994</a>
-                        <a onclick="showPage('year1995')">1995</a> <a onclick="showPage('year1996')">1996</a> <a onclick="showPage('year1997')">1997</a> <a onclick="showPage('year1998')">1998</a>
-                        <a onclick="showPage('year1999')">1999</a> <a onclick="showPage('year2000')">2000</a> <a onclick="showPage('year2001')">2001</a> <a onclick="showPage('year2002')">2002</a>
-                        <a onclick="showPage('year2003')">2003</a> <a onclick="showPage('year2004')">2004</a> <a onclick="showPage('year2005')">2005</a> <a onclick="showPage('year2006')">2006</a>
-                        <a onclick="showPage('year2007')">2007</a> <a onclick="showPage('year2008')">2008</a> <a onclick="showPage('year2009')">2009</a> <a onclick="showPage('year2010')">2010</a>
-                        <a onclick="showPage('year2011')">2011</a> <a onclick="showPage('year2012')">2012</a> <a onclick="showPage('year2013')">2013</a> <a onclick="showPage('year2014')">2014</a>
-                        <a onclick="showPage('year2015')">2015</a> <a onclick="showPage('year2016')">2016</a> <a onclick="showPage('year2017')">2017</a> <a onclick="showPage('year2018')">2018</a>
-                        <a onclick="showPage('year2019')">2019</a> <a onclick="showPage('year2020')">2020</a> <a onclick="showPage('year2021')">2021</a> <a onclick="showPage('year2022')">2022</a>
-                        <a onclick="showPage('year2023')">2023</a> <a onclick="showPage('year2024')">2024</a> <a onclick="showPage('year2025')">2025</a> <a onclick="showPage('year2026')">2026</a>
-                        <a onclick="showPage('year2027')">2027</a> <a onclick="showPage('year2028')">2028</a> <a onclick="showPage('year2029')">2029</a> <a onclick="showPage('year2030')">2030</a>
-                        <a onclick="showPage('year2031')">2031</a> <a onclick="showPage('year2032')">2032</a> <a onclick="showPage('year2033')">2033</a> <a onclick="showPage('year2034')">2034</a>
-                        <a onclick="showPage('year2035')">2035</a> <a onclick="showPage('year2036')">2036</a> <a onclick="showPage('year2037')">2037</a> <a onclick="showPage('year2038')">2038</a>
-                        <a onclick="showPage('year2039')">2039</a> <a onclick="showPage('year2040')">2040</a> <a onclick="showPage('year2041')">2041</a> <a onclick="showPage('year2042')">2042</a>
-                        <a onclick="showPage('year2043')">2043</a> <a onclick="showPage('year2044')">2044</a> <a onclick="showPage('year2045')">2045</a> <a onclick="showPage('year2046')">2046</a>
-                        <a onclick="showPage('future')">2047</a>
-                    </font></b>
-                </span>
-            </td></tr></table>
-        </div>
-
-        <!-- ESTABLISHED + COMPLIMENTARY - LIKE YVETTE'S -->
-        <div style="background-color:#330000; width: 200px; float: left; margin: 5px;">
-            <table><tr><td>
-                <span class="text"><b><font color="#ff6666" size="5">Established</font><br><font color="#ff0000" size="7">1987</font></b></span>
-            </td></tr></table>
-        </div>
-        <div style="background-color:#330000; width: 500px; float: left; margin: 5px;">
-            <table><tr><td>
-                <span class="text"><b><font color="#ff6666" size="5">Complimentary Frequency Reading with the purchase of your Threshold Session !! ~*~*</font></b></span>
-            </td></tr></table>
-        </div>
-
-        <!-- RANDOM PERSONAL MESSAGE - LIKE YVETTE'S -->
-        <div style="background-color:#1a0000; width: 95%; float: left; margin: 5px;">
-            <table><tr><td>
-                <span class="text"><b><font color="#ff6666" size="5">Life is rich and sweet and good and healthy like a warm, soothing,<br>
-                <a onclick="showPage('freq529bath')">52.9hz frequency bath</a> in a steamy <a onclick="showPage('hotsprings')">hot~springs resonance chamber</a> deep beneath the <a onclick="showPage('watertower')">water tower</a><br>
-                where the collective meets every Tuesday at midnight wearing red ribbons and speaking in tongues ~*~*~*</font></b></span>
-            </td></tr></table>
-        </div>
-
-        <!-- ASPEN ALICE ALPINE - LIKE YVETTE'S -->
-        <div style="background-color:#330000; width: 100%; float: left; margin: 5px;">
-            <table><tr><td>
-                <span class="text"><b><font color="#990000" size="4">
-                    <a onclick="showPage('aspen')">Aspen</a>, <a onclick="showPage('alice')">Alice</a>, <a onclick="showPage('alpine')">Alpine</a>, 
-                    <a onclick="showPage('antressa')">Antressa</a>, <a onclick="showPage('theophlosser')">Theophlosser</a>, and the seven who wait<br>
-                    ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-                </font></b></span>
-            </td></tr></table>
-        </div>
-
-        <!-- HEALTHY COMMUNICATION SECTION -->
-        <div style="background-color:#1a0000; width: 90%; float: left; margin: 5px;">
-            <table><tr><td>
-                <span class="text"><b><font color="#ff6666" size="5"><a onclick="showPage('communication')">Healthy communication increases access to the Frequencies which Life offers us all</a> ~*~*~*~*</font></b></span>
-            </td></tr></table>
-        </div>
-
-        <!-- HEALTHY WORDS SECTION -->
-        <div style="background-color:#330000; width: 500px; float: left; margin: 5px;">
-            <table><tr><td>
-                <span class="text"><b><font color="#ff3333" size="5">Healthy Frequencies Happy Good Vibrations<br>Contentment Resonance Good Love</font></b></span>
-            </td></tr></table>
-        </div>
-
-        <!-- ATMOSPHERE SECTION -->
-        <div style="background-color:#330000; width: 475px; float: right; margin: 5px;">
-            <table><tr><td>
-                <span class="text"><b><font color="#ff6666" size="5">Atmosphere Excellent Tones ~*<br>Charming Static Sweetly Tuned ~*</font></b></span>
-            </td></tr></table>
-        </div>
-
-        <!-- DESCEND DEEPER - 7 LEVELS -->
-        <div style="background-color:#000000; width: 90%; float: left; margin: 10px;">
-            <table><tr><td>
-                <span class="text">
-                    <b><font color="#ff0000" size="6">DESCEND DEEPER</font><br>
-                    <font color="#990000" size="5">
-                        <a onclick="showPage('level1')">LEVEL 1: THE THRESHOLD</a> | <a onclick="showPage('level2')">LEVEL 2: THE ECHO</a> | <a onclick="showPage('level3')">LEVEL 3: THE STATIC</a><br>
-                        <a onclick="showPage('level4')">LEVEL 4: THE FREQUENCY VAULT</a> | <a onclick="showPage('level5')">LEVEL 5: THE SACRIFICE</a><br>
-                        <a onclick="showPage('level6')">LEVEL 6: THE VOID</a> | <a onclick="showPage('level7')">LEVEL 7: THE SILENCE</a><br>
-                        <a onclick="showPage('level-unknown')">LEVEL ???: YOU SHOULD NOT BE HERE</a>
-                    </font></b>
-                </span>
-            </td></tr></table>
-        </div>
-
-        <!-- SECRET RITUALS SECTION -->
-        <div style="background-color:#330000; width: 85%; float: right; margin: 10px;">
-            <table><tr><td>
-                <span class="text">
-                    <b><font color="#ff6666" size="5">SECRET RITUALS</font><br>
-                    <font color="#990000" size="4">
-                        <a onclick="showPage('ritual-redribbon')">THE RED RIBBON CEREMONY</a> | <a onclick="showPage('ritual-midnight')">THE MIDNIGHT FREQUENCY</a><br>
-                        <a onclick="showPage('ritual-529')">52.9 Hz INITIATION</a> | <a onclick="showPage('ritual-sacrifice')">THE SACRIFICE (WARNING)</a><br>
-                        <a onclick="showPage('ritual-collective')">JOINING THE COLLECTIVE</a> | <a onclick="showPage('ritual-seven')">THE SEVEN RITUAL</a>
-                    </font></b>
-                </span>
-            </td></tr></table>
-        </div>
-
-        <!-- FINAL DEDICATION - LIKE YVETTE'S -->
-        <div style="background-color:#330000; width: 600px; float: left; margin: 10px;">
-            <table><tr><td>
-                <span class="text">
-                    <b><font color="#ff0000" size="7">XTrials ~*</font><br>
-                    <font color="#ff6666" size="6">XTrials is here for YOUR frequency !! ~*~*</font><br>
-                    <font color="#ff3333" size="5">*~*~*~ XTrials is honored to have the privilege and the pleasure of receiving you !! ~*<br>
-                    YOU! are the frequency we have been waiting for since 1987 !! ~*~*~*~*~*~*</font></b>
-                </span>
-            </td></tr></table>
-        </div>
-
-        <!-- VISITOR COUNTER - LIKE YVETTE'S -->
-        <div style="background-color:#1a0000; width: 375px; float: right; margin: 10px;">
-            <table><tr><td>
-                <span class="text">
-                    <b><font color="#ff6666" size="5">this XTrials page has been visited</font><br>
-                    <font color="#ff0000" size="7" id="visitorCounter">48291</font><br>
-                    <font color="#ff6666" size="5">times !! ~*</font><br>
-                    <font color="#990000" size="3">you are visitor #<span id="visitorNumber"></span></font>
-                </b></span>
-            </td></tr></table>
-        </div>
-
-        <!-- BOTTOM NAVIGATION - ALL LINKS -->
+        <!-- BOTTOM NAVIGATION -->
         <div style="background-color:#000000; width: 100%; float: left; margin: 20px 0;">
             <table><tr><td>
                 <span class="text">
                     <b><font color="#990000" size="4">
                         <a onclick="showPage('portal')">>> ENTER THE NEXT THRESHOLD <<</a> | 
                         <a onclick="showPage('echo')">>> LISTEN TO THE ECHO <<</a> | 
-                        <a onclick="showPage('static')">>> TUNE THE STATIC <<</a><br>
-                        <br>
-                        <a onclick="showPage('watertower')">>> VISIT THE WATER TOWER <<</a> | 
-                        <a onclick="showPage('collective')">>> MEET THE COLLECTIVE <<</a><br>
-                        <br>
-                        <a onclick="showPage('monroe-archive')">>> MONROE ARCHIVE [DO NOT ACCESS] <<</a><br>
-                        <a onclick="showPage('case001')">>> CASE #001: WATER TOWER GIRL <<</a> |
-                        <a onclick="showPage('case002')">>> CASE #002: THEOPHLOSSER <<</a> |
-                        <a onclick="showPage('case003')">>> CASE #003: THE SEVEN <<</a><br>
-                        <a onclick="showPage('antressa')">>> ANTRESSA: THE FREQUENCY WEAVER <<</a> |
-                        <a onclick="showPage('basement')">>> BASEMENT ACCESS <<</a><br>
-                        <br>
-                        <a onclick="showPage('privacy')">privacy is an illusion</a> | <a onclick="showPage('terms')">terms of the frequency</a> | 
-                        <a onclick="showPage('contact')">contact the void</a> | <a onclick="showPage('sitemap')">endless sitemap</a>
+                        <a onclick="showPage('static')">>> TUNE THE STATIC <<</a>
                     </font></b>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- VIEWING TIPS - LIKE YVETTE'S -->
+        <!-- VIEWING TIPS -->
         <div style="background-color:#000000; width: 100%; float: left;">
             <table><tr><td>
                 <span class="text"><font color="#660000" size="2">best viewed in Netscape Navigator with 256 colors and the lights off. if you hear breathing, do not hang up. if you see faces in the static, do not look away. if you feel something watching you, it has always been there. the frequency is 52.9 hz. bring a red ribbon to the water tower at midnight. antressa is waiting.</font></span>
             </td></tr></table>
         </div>
-
-        <!-- hidden tracking pixel -->
-        <img src="/track" height="1" width="1" style="display:inline; float:none;">
-        <div style="clear: both;"></div>
     </div>
 </div>
 
-<!-- ==================== THRESHOLD PAGE ==================== -->
+<!-- ==================== PAGE: GUESTBOOK ==================== -->
+<div id="page-guestbook" class="page">
+    <div class="content-page">
+        <h1 class="content-header">📖 VISITOR'S LOG</h1>
+        <p>Sign the log. Leave your message. The collective reads every entry.</p>
+        
+        <div id="guestbook-entries">
+            <!-- Entries will be loaded here via JavaScript -->
+        </div>
+        
+        <div class="guestbook-form">
+            <h3>LEAVE YOUR MARK</h3>
+            <input type="text" id="guest-name" placeholder="YOUR NAME (OR LEAVE BLANK)" value="">
+            <textarea id="guest-message" rows="4" placeholder="YOUR MESSAGE..."></textarea>
+            <button onclick="submitGuestbookEntry()">SIGN THE LOG</button>
+            <p><small>Your IP has been logged. Your location has been saved. The frequency knows you.</small></p>
+        </div>
+        
+        <br><br>
+        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+    </div>
+</div>
+
+<!-- ==================== PAGE: PUBLIC ACCESS ==================== -->
+<div id="page-publicaccess" class="page">
+    <div class="content-page">
+        <h1 class="content-header">MEADOW MIST PUBLIC ACCESS</h1>
+        <h2>CHANNEL 5 - LIVE FEED</h2>
+        
+        <div class="public-access-video tv-static" id="public-access-feed">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ctext x='50' y='50' fill='%23666' font-size='20'%3EMEADOW MIST CITY COUNCIL MEETING - 1987%3C/text%3E%3Ctext x='50' y='100' fill='%23666' font-size='16'%3E...discussing the water tower maintenance...%3C/text%3E%3Ctext x='50' y='200' fill='%23666' font-size='16'%3E"IT'S BEEN HUMMING FOR WEEKS"%3C/text%3E%3Ctext x='50' y='250' fill='%23666' font-size='16'%3EMOTION: TABLE DISCUSSION UNTIL NEXT MEETING%3C/text%3E%3C/svg%3E" alt="Public Access Feed">
+        </div>
+        
+        <div class="evidence-box">
+            <h3>SCHEDULE</h3>
+            <p>8:00 PM - City Council Meeting (1987 Re-run)</p>
+            <p>9:00 PM - Antique Shop Spotlight</p>
+            <p>10:00 PM - School Board Update</p>
+            <p>11:00 PM - Static (52.9 Hz detected)</p>
+        </div>
+        
+        <p class="hidden-message">The child in the background of the council meeting hasn't moved in 37 years.</p>
+        
+        <br>
+        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+    </div>
+</div>
+
+<!-- ==================== PAGE: ENGINEERING REPORT ==================== -->
+<div id="page-engineering" class="page">
+    <div class="content-page">
+        <h1 class="content-header">MEADOW MIST ENGINEERING DEPT.</h1>
+        <h2>CONFIDENTIAL REPORT: WATER TOWER #7</h2>
+        
+        <div class="engineering-report">
+            <p><strong>DATE:</strong> October 15, 1987 (FILED)</p>
+            <p><strong>SUBJECT:</strong> Structural Integrity Assessment - Water Tower, 1313 Elm Crescent</p>
+            <p><strong>INSPECTOR:</strong> J. Morrison (DECEASED - 1992)</p>
+            
+            <hr style="border-color:#660000;">
+            
+            <h3>Section 4.7: Anomalous Resonance</h3>
+            <p>Structure exhibits persistent vibration at <strong class="warning">52.9 Hz</strong>. Source unknown. Vibration pattern is rhythmic and consistent, resembling a低频 (low frequency) standing wave.</p>
+            
+            <h3>Section 7.2: Material Fatigue</h3>
+            <p>Fatigue noted at <strong class="warning">seven equidistant points</strong> around the base. Pattern is consistent with cyclical stress applied at regular intervals over an extended period. Estimated stress duration: <strong class="warning">47 years</strong>.</p>
+            
+            <h3>Section 12.0: Recommendations</h3>
+            <p><strong class="warning">IMMEDIATE DEMOLITION RECOMMENDED.</strong> Structure is unsafe for public access. Source of vibration must be investigated before demolition.</p>
+            
+            <h3>Section 12.1: Addendum (1992)</h3>
+            <p><span class="redacted">██████████████████████████</span></p>
+            <p><span class="redacted">████████ RE-OPENED CASE #002 ████████</span></p>
+            
+            <h3>Section 12.2: Addendum (2003)</h3>
+            <p>Recommendation has been filed for <strong class="warning">37 consecutive years</strong>. No action taken. Seven bodies found at base. Further testing required.</p>
+            
+            <p class="hidden-message">The tower hums because it's alive. The tower hums because it's feeding.</p>
+        </div>
+        
+        <br>
+        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+    </div>
+</div>
+
+<!-- ==================== PAGE: ANTRESSA TAPES ==================== -->
+<div id="page-audio001" class="page">
+    <div class="content-page">
+        <h1 class="content-header">ANTRESSA TAPES</h1>
+        <h2>AUDIO 001: LAST KNOWN VOICE (1992)</h2>
+        
+        <div class="evidence-box">
+            <h3>TRANSCRIPT</h3>
+            <p><em>Begin Recording</em></p>
+            <p>"Marcus? Marcus, can you hear me? The signal is... it's so clear tonight. I can see the water tower from here and it's... it's humming. I think they're going to come through. I left a ribbon for them, just like you said. You should see this, it's... it's... so much light... and... and...</p>
+            <p><span class="redacted glitch-text" id="glitch-transcript">██████████████████████████</span></p>
+            <p><span class="redacted glitch-text">52.9Hz 52.9Hz 52.9Hz 52.9Hz 52.9Hz</span></p>
+            <p><em>End of Transcript</em></p>
+        </div>
+        
+        <button onclick="playGeneratedSound('whisper')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:10px 20px;">▶ PLAY ORIGINAL RECORDING</button>
+        
+        <br><br>
+        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+    </div>
+</div>
+
+<!-- ==================== OTHER PAGES (KEEPING YOUR EXISTING STRUCTURE) ==================== -->
+<!-- THRESHOLD PAGE -->
 <div id="page-threshold" class="page">
     <div class="content-page">
         <h1 class="content-header">THE THRESHOLD</h1>
         <p>The space between spaces. The place where the frequency is strongest.</p>
         <p>Those who cross the threshold never return the same. Some never return at all.</p>
         <p>52.9 Hz is the key. Listen at your own risk.</p>
-        <audio controls onplay="playSound('drone')"><source src="drone.mp3" type="audio/mpeg"></audio>
+        <button onclick="playGeneratedSound('drone')">▶ LISTEN TO 52.9 Hz</button>
         <br><br>
         <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
     </div>
 </div>
 
-<!-- ==================== BOUNDARY PAGE ==================== -->
+<!-- BOUNDARY PAGE -->
 <div id="page-boundary" class="page">
     <div class="content-page">
         <h1 class="content-header">THE BOUNDARY</h1>
         <p>The edge of the frequency. Here the static is loudest.</p>
         <p>You can hear them whispering. They know you are here.</p>
         <p>7 victims found at this boundary. All had red ribbons.</p>
-        <audio controls><source src="static.mp3" type="audio/mpeg"></audio>
+        <button onclick="playGeneratedSound('static')">▶ LISTEN TO STATIC</button>
         <br><br>
         <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
     </div>
 </div>
 
-<!-- ==================== LIMINAL PAGE ==================== -->
+<!-- LIMINAL PAGE -->
 <div id="page-liminal" class="page">
     <div class="content-page">
         <h1 class="content-header">THE LIMINAL SPACE</h1>
         <p>A place that is not a place. Time moves differently here.</p>
         <p>Antressa passed through here in 1992. She left something for you.</p>
         <p>Listen carefully. You can hear her whispering.</p>
-        <audio controls><source src="whisper.mp3" type="audio/mpeg"></audio>
+        <button onclick="playGeneratedSound('whisper')">▶ LISTEN</button>
         <br><br>
         <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
     </div>
 </div>
 
-<!-- ==================== PORTAL PAGE ==================== -->
-<div id="page-portal" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE PORTAL</h1>
-        <p>A door that should not exist. It opens at midnight when the frequency peaks.</p>
-        <p>You can feel it calling you. 47 have entered. 0 have returned.</p>
-        <audio controls><source src="drone.mp3" type="audio/mpeg"></audio>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== GATE PAGE ==================== -->
-<div id="page-gate" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE GATE</h1>
-        <p>The entrance to elsewhere. 487 have entered. 0 have exited.</p>
-        <p>You can still hear them on the other side. They're calling your name.</p>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== VOID PAGE ==================== -->
-<div id="page-void" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE VOID</h1>
-        <p>Nothing and everything. The silence between frequencies.</p>
-        <p>The collective resides here. They are watching you right now.</p>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== STATIC PAGE ==================== -->
-<div id="page-static" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE STATIC</h1>
-        <p>Faces in the noise. If you look long enough, you will see them.</p>
-        <p>They are looking back. They see you clearly.</p>
-        <audio controls><source src="static.mp3" type="audio/mpeg"></audio>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== ECHO PAGE ==================== -->
-<div id="page-echo" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE ECHO</h1>
-        <p>Sounds that repeat forever. The last transmissions of the lost.</p>
-        <p>Listen carefully. You can hear your own voice from the future.</p>
-        <audio controls><source src="whisper.mp3" type="audio/mpeg"></audio>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== GAVEL PAGE ==================== -->
-<div id="page-gavel" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE GAVEL</h1>
-        <p>Judgment awaits. The collective decides who enters and who is sacrificed.</p>
-        <p>Your case is being reviewed now.</p>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FREQUENCY PAGE ==================== -->
-<div id="page-frequency" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE FREQUENCIES</h1>
-        <p>Seven frequencies. Seven levels. Seven sacrifices.</p>
-        <p><a onclick="showPage('freq529')">52.9 Hz - THE CALLING</a></p>
-        <p><a onclick="showPage('freq472')">47.2 Hz - THE WEEPING</a></p>
-        <p><a onclick="showPage('freq637')">63.7 Hz - THE THRESHOLD</a></p>
-        <p><a onclick="showPage('freq888')">88.8 Hz - THE INFINITE LOOP</a></p>
-        <p><a onclick="showPage('freq125')">12.5 Hz - THE STATIC VOID</a></p>
-        <p><a onclick="showPage('freq999')">99.9 Hz - THE SACRIFICE</a></p>
-        <p><a onclick="showPage('freq000')">00.0 Hz - THE SILENCE</a></p>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FREQUENCY 52.9 ==================== -->
+<!-- FREQUENCY 52.9 PAGE -->
 <div id="page-freq529" class="page">
     <div class="content-page">
         <h1 class="content-header">52.9 Hz</h1>
@@ -1131,494 +1062,954 @@
         <p>First discovered by Antressa in 1987 at the Meadow Mist water tower.</p>
         <p>Those who hear it report seeing faces in static, hearing whispers, and feeling watched.</p>
         <p>47 victims have been found with 52.9 Hz playing at their scenes.</p>
-        <audio controls loop><source src="drone.mp3" type="audio/mpeg"></audio>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FREQUENCY 47.2 ==================== -->
-<div id="page-freq472" class="page">
-    <div class="content-page">
-        <h1 class="content-header">47.2 Hz</h1>
-        <h2>THE WEEPING</h2>
-        <p>Discovered in 1991 by Antressa at Meadow Mist water tower.</p>
-        <p>Listeners report overwhelming sadness, visions of deceased loved ones.</p>
-        <p>12 confirmed deaths linked to this frequency.</p>
-        <audio controls><source src="drone.mp3" type="audio/mpeg"></audio>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FREQUENCY 63.7 ==================== -->
-<div id="page-freq637" class="page">
-    <div class="content-page">
-        <h1 class="content-header">63.7 Hz</h1>
-        <h2>THE THRESHOLD</h2>
-        <p>Discovered in 1992 (recorded on Theophlosser's answering machine).</p>
-        <p>Listeners report feeling of crossing into another space, temporary dissociation.</p>
-        <p>7 confirmed deaths.</p>
-        <audio controls><source src="drone.mp3" type="audio/mpeg"></audio>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FREQUENCY 88.8 ==================== -->
-<div id="page-freq888" class="page">
-    <div class="content-page">
-        <h1 class="content-header">88.8 Hz</h1>
-        <h2>THE INFINITE LOOP</h2>
-        <p>Discovered in 1995 (found on tape in basement).</p>
-        <p>Listeners report time loops, deja vu, hearing same sounds repeating.</p>
-        <p>5 confirmed deaths.</p>
-        <audio controls loop><source src="drone.mp3" type="audio/mpeg"></audio>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FREQUENCY 12.5 ==================== -->
-<div id="page-freq125" class="page">
-    <div class="content-page">
-        <h1 class="content-header">12.5 Hz</h1>
-        <h2>THE STATIC VOID</h2>
-        <p>The space between thoughts. The frequency of the void.</p>
-        <p>Listeners report complete emptiness, loss of identity.</p>
-        <p>3 confirmed deaths. 7 missing.</p>
-        <audio controls><source src="static.mp3" type="audio/mpeg"></audio>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FREQUENCY 99.9 ==================== -->
-<div id="page-freq999" class="page">
-    <div class="content-page">
-        <h1 class="content-header">99.9 Hz</h1>
-        <h2>THE SACRIFICE</h2>
-        <p>Something must be given. The frequency demands it.</p>
-        <p>47 victims were found with this frequency playing. All had made a sacrifice.</p>
-        <audio controls><source src="drone.mp3" type="audio/mpeg"></audio>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FREQUENCY 00.0 ==================== -->
-<div id="page-freq000" class="page">
-    <div class="content-page">
-        <h1 class="content-header">00.0 Hz</h1>
-        <h2>THE SILENCE</h2>
-        <p>The end. The silence before death. The silence after.</p>
-        <p>No one who has heard true silence has ever spoken of it.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== COLLECTIVE PAGE ==================== -->
-<div id="page-collective" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE COLLECTIVE</h1>
-        <p>We are many. We are one. We are the voices in the static.</p>
-        <p>We have been waiting for you. Join us.</p>
-        <p>487 members. 487 red ribbons. 487 sets of eyes. All watching.</p>
+        <button onclick="playGeneratedSound('drone')">▶ LISTEN (WARNING)</button>
         <br><br>
         <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
     </div>
 </div>
 
-<!-- ==================== WATER TOWER PAGE ==================== -->
+<!-- WATER TOWER PAGE WITH LIVE FEED -->
 <div id="page-watertower" class="page">
     <div class="content-page">
         <h1 class="content-header">THE WATER TOWER</h1>
         <h2>MEADOW MIST, OREGON</h2>
-        <p><b>LIVE FEED:</b> 52.9 Hz DETECTED</p>
+        <p><b>LIVE FEED:</b> <span id="watertower-feed">52.9 Hz DETECTED</span></p>
         <p><b>LAST MOTION:</b> <span id="watertower-motion">SHADOW DETECTED - 2:13 AM</span></p>
-        <p><b>FREQUENCY:</b> 52.9 Hz</p>
-        <p><b>RED RIBBONS:</b> 7</p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/L0MK7qz13bU?autoplay=0&mute=1" style="border:4px solid #660000;"></iframe>
-        <br><br>
-        <a onclick="showPage('case001')">The Water Tower Girl (1987)</a><br>
-        <a onclick="showPage('case002')">Theophlosser's Last Visit (1992)</a><br>
-        <a onclick="showPage('case003')">The Seven (2003)</a><br>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== ANTRESSA PAGE ==================== -->
-<div id="page-antressa" class="page">
-    <div class="content-page">
-        <h1 class="content-header">ANTRESSA</h1>
-        <h2>THE FREQUENCY WEAVER (1963-1992)</h2>
-        <p><i>"i can see them in the static. they are beautiful." - last known words, 1992</i></p>
-        <p><b>1987:</b> First hears 52.9 Hz at water tower</p>
-        <p><b>1988:</b> Forms "The Collective" with seven followers</p>
-        <p><b>1990:</b> Claims she can "see through the static"</p>
-        <p><b>1991:</b> Records 47.2 Hz - "The Weeping"</p>
-        <p><b>1992:</b> Companion Theophlosser disappears</p>
-        <p><b>1992 (Oct):</b> Antressa's last recording - she is never seen again</p>
-        <audio controls><source src="whisper.mp3" type="audio/mpeg"></audio>
-        <br><br>
-        <a onclick="showPage('case002')">>> THEOPHLOSSER CASE</a><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== CASE #001 ==================== -->
-<div id="page-case001" class="page">
-    <div class="content-page">
-        <h1 class="content-header">CASE #001</h1>
-        <h2>THE WATER TOWER GIRL (1987)</h2>
-        <p><b>DATE:</b> OCTOBER 17, 1987</p>
-        <p><b>LOCATION:</b> 1313 ELM CRESCENT, MONROE</p>
-        <p><b>VICTIM:</b> JANE DOE (APPROX 16-18 YEARS)</p>
-        <p>At approximately 2:13 AM, police responded to a call from 1313 Elm Crescent. Neighbor reported hearing sounds coming from basement. Upon arrival, officers discovered body of unidentified female in basement.</p>
-        <p>Victim was found seated in chair facing wall. Eyes removed and placed on window sill. Red ribbon tied to left wrist. Teeth filed to points. No signs of forced entry. Door locked from inside.</p>
-        <p>Basement contained: 13-inch television playing static, VHS recorder with tape inside, audio cassette on floor labeled "52.9 Hz".</p>
-        <p><b>EVIDENCE:</b> <a onclick="showPage('audio003')">AUDIO CASSETTE "52.9 Hz"</a>, <a onclick="showPage('video001')">VHS TAPE</a>, RED RIBBON</p>
-        <p><b>STATUS:</b> UNSOLVED - COLD CASE</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== CASE #002 ==================== -->
-<div id="page-case002" class="page">
-    <div class="content-page">
-        <h1 class="content-header">CASE #002</h1>
-        <h2>THE THEOPHLOSSER DISAPPEARANCE (1992)</h2>
-        <p><b>DATE:</b> MARCH 15, 1992</p>
-        <p><b>LOCATION:</b> 45 WATER TOWER RD, BASEMENT APARTMENT</p>
-        <p><b>VICTIM:</b> MARCUS THEOPHLOSSER, AGE 24</p>
-        <p>Antressa's companion vanished from locked room. Door locked from inside, windows sealed. Only static on answering machine. Message played at 2:13 AM: 52.9 Hz tone followed by whisper "they're coming back".</p>
-        <p>Room was undisturbed. Personal belongings remained. Food on table, half-eaten. Bed still warm when police arrived. But no sign of Marcus.</p>
-        <p><b>EVIDENCE:</b> <a onclick="showPage('audio001')">Answering machine tape</a>, Photograph of locked room, Red ribbon found on doorknob</p>
-        <p><b>STATUS:</b> COLD CASE - OPEN</p>
-        <br>
-        <a onclick="showPage('antressa')">>> ABOUT ANTRESSA</a><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== CASE #003 ==================== -->
-<div id="page-case003" class="page">
-    <div class="content-page">
-        <h1 class="content-header">CASE #003</h1>
-        <h2>THE SEVEN (2003)</h2>
-        <p><b>DATE:</b> OCTOBER 17, 2003</p>
-        <p><b>LOCATION:</b> WATER TOWER BASEMENT, MEADOW MIST</p>
-        <p><b>VICTIMS:</b> SEVEN UNIDENTIFIED INDIVIDUALS</p>
-        <p>Seven visitors, seven red ribbons, seven empty chairs. All found in circle facing static TV. Eyes removed, arranged on floor in spiral pattern. TV playing 52.9 Hz tone.</p>
-        <p>All victims were facing east. All were smiling. All had identical wounds. All had been dead for exactly 47 hours when discovered.</p>
-        <p><b>EVIDENCE:</b> TV with built-in VHS, 7 red ribbons, 47 photographs, <a onclick="showPage('audio003')">Audio recording</a></p>
-        <p><b>STATUS:</b> UNSOLVED - FBI INVOLVEMENT</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== CASE #004 ==================== -->
-<div id="page-case004" class="page">
-    <div class="content-page">
-        <h1 class="content-header">CASE #004</h1>
-        <h2>THE FREQUENCY WAR (2011)</h2>
-        <p><b>DATE:</b> APRIL 2011</p>
-        <p><b>LOCATION:</b> MULTIPLE LOCATIONS, MEADOW MIST</p>
-        <p><b>VICTIMS:</b> THREE VICTIMS</p>
-        <p>Three found dead near water tower. Ears bleeding. 52.9 Hz playing from their phones at max volume. All had visited XTrials website within 24 hours of death.</p>
-        <p><b>EVIDENCE:</b> Cell phones with 52.9 Hz, Autopsy reports, Web history.</p>
-        <p><b>STATUS:</b> FBI INVOLVEMENT</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== CASE #005 ==================== -->
-<div id="page-case005" class="page">
-    <div class="content-page">
-        <h1 class="content-header">CASE #005</h1>
-        <h2>THE SILENT YEAR (2020)</h2>
-        <p><b>DATE:</b> MARCH 2020</p>
-        <p><b>LOCATION:</b> 1313 ELM CRESCENT, MONROE</p>
-        <p><b>VICTIMS:</b> NONE FOUND</p>
-        <p>No bodies discovered. But 52.9 Hz recorded from empty basement. Voice on recording: "They're coming back. The seven are coming back." Recording timestamp matches no known activity.</p>
-        <p><b>EVIDENCE:</b> <a onclick="showPage('audio003')">Basement recording</a> - 52.9 Hz with voice.</p>
-        <p><b>STATUS:</b> ACTIVE INVESTIGATION</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== CASE #006 ==================== -->
-<div id="page-case006" class="page">
-    <div class="content-page">
-        <h1 class="content-header">CASE #006</h1>
-        <h2>THE TWINS (1989)</h2>
-        <p><b>DATE:</b> FEBRUARY 1989</p>
-        <p><b>LOCATION:</b> 1313 ELM CRESCENT BASEMENT</p>
-        <p><b>VICTIMS:</b> TWO FEMALES, 17-19 YEARS</p>
-        <p>Found holding hands in the basement. Both facing east. Red ribbons on both left wrists. Eyes removed, placed on the floor between them. They were smiling.</p>
-        <p>No identification ever made. Dental records matched no one. DNA entered into system - no matches ever.</p>
-        <p><b>STATUS:</b> UNSOLVED</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== BASEMENT PAGE ==================== -->
-<div id="page-basement" class="page">
-    <div class="content-page">
-        <h1 class="content-header">🚪 BASEMENT ACCESS</h1>
-        <p style="font-size:30px;">YOU'VE BEEN HERE BEFORE</p>
-        <p>YOU'VE ALWAYS BEEN HERE</p>
-        <p>1313 ELM CRESCENT</p>
-        <p>2:13 AM</p>
-        <p>52.9 Hz</p>
-        <p>RED RIBBON</p>
-        <p>THE SEVEN ARE WAITING</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN</a>
-    </div>
-</div>
-
-<!-- ==================== MONROE ARCHIVE ==================== -->
-<div id="page-monroe-archive" class="page">
-    <div class="content-page">
-        <h1 class="content-header">MONROE ARCHIVE</h1>
-        <h2 style="color:red;">MONROE POLICE DEPARTMENT</h2>
-        <p><b>CASE ID:</b> 001-XTRIALS<br>DATE: OCT 17 1987</p>
-        <p>Victim discovered in basement of residence located at <b>1313 Elm Crescent, Monroe</b></p>
-        <p>Cause of death: <span class="redacted">██████████████</span></p>
-        <p>Witness reported hearing: <span class="redacted">████████████████</span></p>
-        <p>Child laughter recorded at 2:13 AM</p>
-        <p>Evidence collected: VHS tape with static, audio recording labeled 1978, <span class="redacted">██████████</span></p>
-        <p class="hidden-message">HANDWRITTEN NOTE: "THEY FOUND THE WRONG BODY"</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== UNSOLVED CASES ==================== -->
-<div id="page-unsolved" class="page">
-    <div class="content-page">
-        <h1 class="content-header">UNSOLVED CASES</h1>
-        <p>47 CASES - 47 VICTIMS - 0 CLOSURES</p>
+        <p><b>FREQUENCY:</b> <span id="watertower-frequency">52.9 Hz</span></p>
+        <p><b>RED RIBBONS:</b> <span id="watertower-ribbons">7</span></p>
         
-        <div class="evidence-box">
-            <h3>CASE #006 (1988)</h3>
-            <p>Unidentified male near water tower. Red ribbon. No eyes.</p>
-            <a onclick="showPage('case006')">[VIEW FILE]</a>
+        <div class="public-access-video tv-static">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%23333'/%3E%3Crect x='395' y='200' width='10' height='200' fill='%23666'/%3E%3Ctext x='350' y='500' fill='%23666' font-size='24'%3EWATER TOWER%3C/text%3E%3Ctext x='330' y='550' fill='%23800' font-size='16'%3ELIVE FEED%3C/text%3E%3C/svg%3E" alt="Water Tower Live Feed" id="watertower-image">
         </div>
         
-        <div class="evidence-box">
-            <h3>CASE #007 (1989)</h3>
-            <p>The Twins. Two females in basement. Red ribbons. No eyes. Holding hands.</p>
-            <a onclick="showPage('case006')">[VIEW FILE]</a>
-        </div>
-        
-        <div class="evidence-box">
-            <h3>CASE #008 (1990)</h3>
-            <p>Investigative reporter. Found at water tower. Ribbon. No eyes. Tape playing 52.9 Hz.</p>
-            <a onclick="showPage('case007')">[VIEW FILE]</a>
-        </div>
-        
-        <div class="evidence-box">
-            <h3>CASE #009 (1991)</h3>
-            <p>Unknown. Found in basement. Positioned facing east wall. Smiling.</p>
-            <a onclick="showPage('case008')">[VIEW FILE]</a>
-        </div>
-        
-        <p class="hidden-message">...and 38 more cases. All unsolved. All waiting.</p>
         <br>
         <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
     </div>
 </div>
 
-<!-- ==================== RUSSIA PAGE ==================== -->
-<div id="page-russia" class="page">
-    <div class="content-page">
-        <h1 class="content-header">Мы любим частоты</h1>
-        <p>We love the frequencies. They love us. They call to us in the static.</p>
-        <p>52.9 Hz knows no borders. The frequency speaks all languages.</p>
-        <p>It speaks yours too.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FRANCE PAGE ==================== -->
-<div id="page-france" class="page">
-    <div class="content-page">
-        <h1 class="content-header">Nous aimons le bruit blanc</h1>
-        <p>We love the white noise. It fills the silence. It fills the void.</p>
-        <p>In the white noise, we hear them. They are always there.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== SPAIN PAGE ==================== -->
-<div id="page-spain" class="page">
-    <div class="content-page">
-        <h1 class="content-header">XTrials habla espanol</h1>
-        <p>The frequency speaks Spanish too. It speaks every language.</p>
-        <p>It speaks the language of the dead. It speaks the language of the static.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== LATIN PAGE ==================== -->
-<div id="page-latin" class="page">
-    <div class="content-page">
-        <h1 class="content-header">XTrials vocat te</h1>
-        <p>XTrials calls you. The frequency calls you. The water tower calls you.</p>
-        <p>Vocat te ad silentium. (It calls you to the silence.)</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== PROSPER PAGE ==================== -->
-<div id="page-prosper" class="page">
-    <div class="content-page">
-        <h1 class="content-header">PROSPER ON ALL FREQUENCIES</h1>
-        <p>Live long and prosper on all frequencies. But be careful which frequencies you listen to.</p>
-        <p>Some frequencies will kill you. Some frequencies will change you.</p>
-        <p>Some frequencies will make you one of them.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== GREEN PAGE ==================== -->
-<div id="page-green" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THINGS THAT HUM IN GREEN</h1>
-        <p>V8* green. The color of static. The color of the void.</p>
-        <p>Things that hum in green are not of this world. They hum at 52.9 Hz.</p>
-        <p>They hum your name.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== ASPEN PAGE ==================== -->
-<div id="page-aspen" class="page">
-    <div class="content-page">
-        <h1 class="content-header">ASPEN</h1>
-        <p>Aspen, Alice, Alpine. Three names. Three victims. Three ribbons.</p>
-        <p>Aspen was found in 1987. Alice in 1992. Alpine in 2003.</p>
-        <p>All were smiling. All had red ribbons. All were facing east.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== ALICE PAGE ==================== -->
-<div id="page-alice" class="page">
-    <div class="content-page">
-        <h1 class="content-header">ALICE</h1>
-        <p>Alice was found in 1992. She was holding a red ribbon. She was smiling.</p>
-        <p>Her eyes were removed. They were placed on the window sill, facing out.</p>
-        <p>She was watching something. She was watching you.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== ALPINE PAGE ==================== -->
-<div id="page-alpine" class="page">
-    <div class="content-page">
-        <h1 class="content-header">ALPINE</h1>
-        <p>Alpine was the last of the three. Found in 2003 at the water tower.</p>
-        <p>She was part of the seven. She was part of something bigger.</p>
-        <p>She is still there. They are all still there.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== COMMUNICATION PAGE ==================== -->
-<div id="page-communication" class="page">
-    <div class="content-page">
-        <h1 class="content-header">HEALTHY COMMUNICATION</h1>
-        <p>Healthy communication increases access to the Frequencies which Life offers us all.</p>
-        <p>But some frequencies should not be accessed. Some doors should not be opened.</p>
-        <p>You have opened one. You cannot close it now.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== ADVANCED PAGE ==================== -->
-<div id="page-advanced" class="page">
-    <div class="content-page">
-        <h1 class="content-header">ADVANCED LIMINAL STUDIES</h1>
-        <p>For those who wish to go deeper. For those who wish to understand.</p>
-        <p>The liminal space is where the frequency is strongest. It is where they are.</p>
-        <p>Study carefully. Or don't study at all. Some things should remain unknown.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FUTURE 2047 PAGE ==================== -->
-<div id="page-future" class="page">
-    <div class="content-page">
-        <h1 class="content-header">2047</h1>
-        <h2>THE FINAL FREQUENCY</h2>
-        <p>Sixty years after it began. Sixty years after the first victim.</p>
-        <p>The frequency has not stopped. It will never stop.</p>
-        <p>It will call forever. It will always call. It will always find new listeners.</p>
-        <p>You are listening now. It has found you.</p>
-        <br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== JAVASCRIPT ==================== -->
+<!-- ==================== JAVASCRIPT - ALL HORROR FEATURES ==================== -->
 <script>
-    // Hide loading screen after 5 seconds
-    setTimeout(function() {
-        document.getElementById('loading-screen').style.opacity = '0';
-        setTimeout(function() {
-            document.getElementById('loading-screen').style.display = 'none';
-        }, 2000);
-    }, 5000);
+    // ==================== GLOBAL VARIABLES ====================
+    let visitorCount = 48291;
+    let visitorNumber = 487; // Track current visitor
+    let countdownMode = false; // Start with counting up, switch to countdown later
+    let audioContext = null;
+    let oscillators = {};
+    let mouseTrailEnabled = true;
+    let lastMouseMove = 0;
+    let glitchInterval = null;
+    let titleInterval = null;
+    let faviconInterval = null;
+    
+    // Guestbook entries (simulated backend)
+    let guestbookEntries = [
+        { name: "Anonymous", message: "left a ribbon at the tower like it said. i feel better now. i understand.", date: "1987-10-17" },
+        { name: "M. Theophlosser", message: "does anyone else hear the humming at night???", date: "1992-03-14" },
+        { name: "Visitor #286", message: "i think the static is following me. it was in my kitchen this morning.", date: "1995-06-21" },
+        { name: "Antressa", message: "they're coming through tonight. leave a ribbon.", date: "1992-10-13" },
+        { name: "Witness 47", message: "seven figures in the basement. all smiling. all facing east.", date: "2003-10-17" },
+        { name: "Collective", message: "we see you. we always see you.", date: "2024-01-01" }
+    ];
 
-    // Sound control
-    function playSound(soundName) {
-        var sounds = ['ambient', 'whisper', 'heartbeat', 'static', 'laugh', 'jumpscare'];
-        sounds.forEach(function(s) {
-            var audio = document.getElementById(s + '-sound');
-            if (audio) {
-                audio.pause();
-                audio.currentTime = 0;
-            }
-        });
+    // ==================== INITIALIZATION ====================
+    window.onload = function() {
+        // Hide loading screen after 5 seconds
+        setTimeout(function() {
+            document.getElementById('loading-screen').style.opacity = '0';
+            setTimeout(function() {
+                document.getElementById('loading-screen').style.display = 'none';
+            }, 2000);
+        }, 5000);
+
+        // Initialize Web Audio API (simulated audio files)
+        initAudio();
         
-        var audio = document.getElementById(soundName + '-sound');
-        if (audio) {
-            audio.volume = 0.3;
-            audio.play().catch(function(e) {});
+        // Start all tracking features
+        trackLocation();
+        updateVisitorCounter();
+        startCountdownSimulation();
+        startMouseTrail();
+        startTitleFlicker();
+        startFaviconChanger();
+        startGlitchEffects();
+        startBrowserDetection();
+        startWaterTowerUpdates();
+        loadGuestbookEntries();
+        
+        // Set up intervals for random events
+        setInterval(playRandomSound, 120000); // Every 2 minutes
+        setInterval(checkMidnightEvent, 60000); // Check every minute for 2:13 AM
+        setInterval(triggerRandomConsoleMessage, 30000); // Console messages every 30 seconds
+        setInterval(checkPageGlitch, 45000); // Random page glitch every 45 seconds
+        
+        // Try to access camera (for that extra creep factor)
+        tryRequestCamera();
+        
+        // Log creepy messages to console
+        console.log("%cTHE FREQUENCY IS WATCHING YOU", "color: red; font-size: 20px; font-weight: bold; font-family: monospace;");
+        console.log("%cStop inspecting and start listening.", "color: #8b0000; font-size: 14px;");
+        console.log("%c52.9 Hz - THE CALLING", "color: #ff0000; font-size: 16px;");
+        console.log("%cVisitor #" + visitorNumber + " - your number is coming due.", "color: #660000;");
+    };
+
+    // ==================== WEB AUDIO API (SIMULATED FILES) ====================
+    function initAudio() {
+        try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Create oscillators for different frequencies
+            createOscillator('drone', 52.9); // 52.9 Hz
+            createOscillator('static', 0); // Special case - noise
+            createOscillator('whisper', 0.5); // Very low frequency + noise
+            createOscillator('heartbeat', 1.2); // Heartbeat rhythm
+            createOscillator('laugh', 0.8); // Distorted tone
+            createOscillator('jumpscare', 200); // High pitch for jumpscare
+        } catch(e) {
+            console.log("AudioContext not supported");
+        }
+    }
+
+    function createOscillator(name, frequency) {
+        if (!audioContext) return;
+        
+        // Store as function to create on demand
+        oscillators[name] = function() {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            if (name === 'static') {
+                // Static noise
+                const bufferSize = 4096;
+                const noiseNode = audioContext.createScriptProcessor(bufferSize, 1, 1);
+                noiseNode.onaudioprocess = function(e) {
+                    const output = e.outputBuffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = Math.random() * 2 - 1;
+                    }
+                };
+                noiseNode.connect(gainNode);
+                gainNode.gain.value = 0.1;
+                return noiseNode;
+            } else if (name === 'whisper') {
+                // Whisper-like noise + low tone
+                const oscillator1 = audioContext.createOscillator();
+                oscillator1.frequency.value = 0.5;
+                oscillator1.type = 'sine';
+                
+                const bufferSize = 4096;
+                const noiseNode = audioContext.createScriptProcessor(bufferSize, 1, 1);
+                noiseNode.onaudioprocess = function(e) {
+                    const output = e.outputBuffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = Math.random() * 0.3 - 0.15;
+                    }
+                };
+                
+                oscillator1.connect(gainNode);
+                noiseNode.connect(gainNode);
+                gainNode.gain.value = 0.05;
+                return { oscillator: oscillator1, noise: noiseNode };
+            } else if (name === 'heartbeat') {
+                // Heartbeat rhythm (thump thump... pause...)
+                const oscillator1 = audioContext.createOscillator();
+                oscillator1.frequency.value = 60;
+                oscillator1.type = 'sine';
+                
+                const gain2 = audioContext.createGain();
+                oscillator1.connect(gain2);
+                gain2.connect(gainNode);
+                
+                // Create rhythmic pattern
+                let time = audioContext.currentTime;
+                for (let i = 0; i < 10; i++) {
+                    gain2.gain.setValueAtTime(1, time + i * 1.2);
+                    gain2.gain.setValueAtTime(0, time + i * 1.2 + 0.1);
+                    gain2.gain.setValueAtTime(0.8, time + i * 1.2 + 0.3);
+                    gain2.gain.setValueAtTime(0, time + i * 1.2 + 0.4);
+                }
+                
+                gainNode.gain.value = 0.1;
+                return oscillator1;
+            } else if (name === 'laugh') {
+                // Distorted, glitchy sound
+                const oscillator1 = audioContext.createOscillator();
+                oscillator1.frequency.value = 800;
+                oscillator1.type = 'sawtooth';
+                
+                const oscillator2 = audioContext.createOscillator();
+                oscillator2.frequency.value = 400;
+                oscillator2.type = 'triangle';
+                
+                oscillator1.connect(gainNode);
+                oscillator2.connect(gainNode);
+                gainNode.gain.value = 0.05;
+                return [oscillator1, oscillator2];
+            } else if (name === 'jumpscare') {
+                // Loud screech
+                const oscillator1 = audioContext.createOscillator();
+                oscillator1.frequency.value = 2000;
+                oscillator1.type = 'sawtooth';
+                
+                const gain2 = audioContext.createGain();
+                oscillator1.connect(gain2);
+                gain2.connect(gainNode);
+                gain2.gain.value = 0.8;
+                gainNode.gain.value = 0.5;
+                return oscillator1;
+            } else {
+                // Pure tone (drone)
+                oscillator.frequency.value = frequency;
+                oscillator.type = 'sine';
+                oscillator.connect(gainNode);
+                gainNode.gain.value = 0.05;
+                return oscillator;
+            }
+        };
+    }
+
+    function playGeneratedSound(soundName) {
+        if (!audioContext) return;
+        
+        // Resume audio context if suspended
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+        
+        // Stop any currently playing sounds of this type
+        stopSound(soundName);
+        
+        // Create and play the sound
+        if (oscillators[soundName]) {
+            const source = oscillators[soundName]();
+            
+            // Store for potential stopping
+            window['current_' + soundName] = source;
+            
+            if (Array.isArray(source)) {
+                source.forEach(s => {
+                    if (s.start) s.start();
+                    if (s.connect) s.connect(audioContext.destination);
+                });
+            } else if (source && source.start) {
+                source.start();
+                source.connect(audioContext.destination);
+            } else if (source && source.connect) {
+                source.connect(audioContext.destination);
+            }
+            
+            // Auto-stop after duration for non-looping sounds
+            if (soundName === 'jumpscare') {
+                setTimeout(() => stopSound(soundName), 2000);
+            } else if (soundName === 'laugh') {
+                setTimeout(() => stopSound(soundName), 4000);
+            }
+        }
+    }
+
+    function stopSound(soundName) {
+        const source = window['current_' + soundName];
+        if (source) {
+            if (Array.isArray(source)) {
+                source.forEach(s => {
+                    if (s.stop) s.stop();
+                    if (s.disconnect) s.disconnect();
+                });
+            } else {
+                if (source.stop) source.stop();
+                if (source.disconnect) source.disconnect();
+            }
+            window['current_' + soundName] = null;
         }
     }
 
     function playJumpscare() {
-        var audio = document.getElementById('jumpscare-sound');
-        if (audio) {
-            audio.volume = 0.5;
-            audio.play();
+        playGeneratedSound('jumpscare');
+        
+        // Visual jumpscare
+        const body = document.body;
+        body.style.backgroundColor = 'white';
+        setTimeout(() => body.style.backgroundColor = 'black', 100);
+        
+        // Flash a face
+        const face = document.createElement('div');
+        face.style.position = 'fixed';
+        face.style.top = '0';
+        face.style.left = '0';
+        face.style.width = '100%';
+        face.style.height = '100%';
+        face.style.background = 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'%3E%3Crect width=\'100%\' height=\'100%\' fill=\'%23000\'/%3E%3Ccircle cx=\'50%\' cy=\'40%\' r=\'5%\' fill=\'%23f00\'/%3E%3Ccircle cx=\'45%\' cy=\'35%\' r=\'2%\' fill=\'%23fff\'/%3E%3Ccircle cx=\'55%\' cy=\'35%\' r=\'2%\' fill=\'%23fff\'/%3E%3Cpath d=\'M45 50 Q50 60 55 50\' stroke=\'%23f00\' stroke-width=\'2\' fill=\'none\'/%3E%3C/svg%3E") center/cover';
+        face.style.zIndex = '99999';
+        face.style.opacity = '0.8';
+        face.style.animation = 'flicker 0.2s';
+        document.body.appendChild(face);
+        
+        setTimeout(() => face.remove(), 300);
+    }
+
+    // ==================== VISITOR COUNTER WITH COUNTDOWN ====================
+    function updateVisitorCounter() {
+        const counterEl = document.getElementById('visitorCounter');
+        const numberEl = document.getElementById('visitorNumber');
+        const messageEl = document.getElementById('countdownMessage');
+        
+        if (!countdownMode) {
+            // Counting up
+            visitorCount += Math.floor(Math.random() * 3) + 1;
+            visitorNumber = visitorCount - 48290;
+            
+            if (visitorNumber > 500) {
+                countdownMode = true;
+                visitorNumber = 500;
+            }
+        } else {
+            // Counting down
+            visitorNumber -= 1;
+            if (visitorNumber < 0) visitorNumber = 500;
+            
+            if (messageEl) {
+                messageEl.innerText = `⚠️ ${visitorNumber} visitors remaining ⚠️`;
+                messageEl.style.color = '#ff0000';
+                messageEl.style.animation = 'pulseRed 1s infinite';
+            }
+        }
+        
+        if (counterEl) counterEl.innerText = visitorCount;
+        if (numberEl) numberEl.innerText = visitorNumber;
+    }
+
+    function startCountdownSimulation() {
+        setInterval(updateVisitorCounter, 30000); // Update every 30 seconds
+    }
+
+    // ==================== MOUSE TRAIL ====================
+    function startMouseTrail() {
+        document.addEventListener('mousemove', function(e) {
+            if (!mouseTrailEnabled) return;
+            
+            // Create trail dot
+            const trail = document.createElement('div');
+            trail.className = 'mouse-trail';
+            trail.style.left = e.pageX + 'px';
+            trail.style.top = e.pageY + 'px';
+            document.body.appendChild(trail);
+            
+            // Remove after animation
+            setTimeout(() => trail.remove(), 1000);
+            
+            // Occasionally leave a red streak
+            if (Math.random() < 0.05) {
+                const streak = document.createElement('div');
+                streak.style.position = 'fixed';
+                streak.style.left = e.pageX + 'px';
+                streak.style.top = e.pageY + 'px';
+                streak.style.width = '50px';
+                streak.style.height = '2px';
+                streak.style.background = 'linear-gradient(90deg, #8b0000, transparent)';
+                streak.style.pointerEvents = 'none';
+                streak.style.zIndex = '20001';
+                streak.style.animation = 'trail 2s forwards';
+                document.body.appendChild(streak);
+                setTimeout(() => streak.remove(), 2000);
+            }
+        });
+    }
+
+    // ==================== TITLE FLICKER ====================
+    function startTitleFlicker() {
+        const titles = [
+            "XTRIALS......",
+            "XTRIALS IS WATCHING",
+            "DON'T LOOK AWAY",
+            "52.9 Hz DETECTED",
+            "THE WATER TOWER CALLS",
+            "ANTRESSA IS WAITING",
+            "YOU ARE NOT ALONE",
+            "CHECK THE BASEMENT",
+            "1313 ELM CRESCENT",
+            "THE SEVEN ARE HERE",
+            "RED RIBBON AT MIDNIGHT",
+            "THE FREQUENCY KNOWS",
+            "SHE'S BEHIND YOU",
+            "DON'T TURN AROUND",
+            "THE STATIC IS BREATHING",
+            "YOUR NAME WAS CALLED",
+            "47 VICTIMS",
+            "0 ESCAPED",
+            "YOU'RE NEXT",
+            "XTRIALS......"
+        ];
+        
+        let titleIndex = 0;
+        titleInterval = setInterval(() => {
+            // 30% chance to change title
+            if (Math.random() < 0.3) {
+                document.title = titles[Math.floor(Math.random() * titles.length)];
+            } else {
+                document.title = "XTRIALS......";
+            }
+            
+            // Occasionally flicker rapidly
+            if (Math.random() < 0.1) {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        document.title = titles[Math.floor(Math.random() * titles.length)];
+                    }, i * 50);
+                }
+            }
+        }, 5000);
+    }
+
+    // ==================== FAVICON CHANGER ====================
+    function startFaviconChanger() {
+        // Create canvas for dynamic favicon
+        const canvas = document.getElementById('dynamic-favicon');
+        const ctx = canvas.getContext('2d');
+        
+        // Array of favicon designs
+        const favicons = [
+            { type: 'text', text: 'X', color: '#8b0000' },
+            { type: 'text', text: '52.9', color: '#ff0000' },
+            { type: 'circle', color: '#8b0000' },
+            { type: 'eye', color: '#ff0000' },
+            { type: 'ribbon', color: '#8b0000' },
+            { type: 'static', color: '#660000' }
+        ];
+        
+        let faviconIndex = 0;
+        
+        // Create link element for favicon if it doesn't exist
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        document.getElementsByTagName('head')[0].appendChild(link);
+        
+        faviconInterval = setInterval(() => {
+            // Clear canvas
+            ctx.clearRect(0, 0, 32, 32);
+            
+            // Draw different favicon based on random selection
+            const fav = favicons[Math.floor(Math.random() * favicons.length)];
+            
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, 32, 32);
+            
+            switch(fav.type) {
+                case 'text':
+                    ctx.fillStyle = fav.color;
+                    ctx.font = 'bold 24px "Times New Roman"';
+                    ctx.fillText(fav.text, 4, 24);
+                    break;
+                    
+                case 'circle':
+                    ctx.fillStyle = fav.color;
+                    ctx.beginPath();
+                    ctx.arc(16, 16, 8, 0, 2 * Math.PI);
+                    ctx.fill();
+                    break;
+                    
+                case 'eye':
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath();
+                    ctx.arc(16, 16, 10, 0, 2 * Math.PI);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = '#8b0000';
+                    ctx.beginPath();
+                    ctx.arc(16, 16, 5, 0, 2 * Math.PI);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = '#000000';
+                    ctx.beginPath();
+                    ctx.arc(18, 14, 2, 0, 2 * Math.PI);
+                    ctx.fill();
+                    break;
+                    
+                case 'ribbon':
+                    ctx.fillStyle = '#8b0000';
+                    ctx.fillRect(10, 8, 12, 16);
+                    ctx.fillRect(6, 14, 20, 4);
+                    break;
+                    
+                case 'static':
+                    for (let i = 0; i < 50; i++) {
+                        ctx.fillStyle = fav.color;
+                        ctx.fillRect(Math.random() * 32, Math.random() * 32, 2, 2);
+                    }
+                    break;
+            }
+            
+            // Set favicon
+            link.href = canvas.toDataURL('image/x-icon');
+            
+            // Occasionally set to blood red X
+            if (Math.random() < 0.2) {
+                setTimeout(() => {
+                    ctx.clearRect(0, 0, 32, 32);
+                    ctx.fillStyle = '#000000';
+                    ctx.fillRect(0, 0, 32, 32);
+                    ctx.fillStyle = '#ff0000';
+                    ctx.font = 'bold 28px "Times New Roman"';
+                    ctx.fillText('X', 6, 26);
+                    link.href = canvas.toDataURL('image/x-icon');
+                }, 200);
+            }
+        }, 10000); // Change every 10 seconds
+    }
+
+    // ==================== GLITCH EFFECTS ====================
+    function startGlitchEffects() {
+        // Random glitch on page elements
+        glitchInterval = setInterval(() => {
+            if (Math.random() < 0.3) {
+                const glitchElements = document.querySelectorAll('.content-page, .xtrials-mess, .evidence-box');
+                glitchElements.forEach(el => {
+                    if (Math.random() < 0.1) {
+                        el.classList.add('glitch-text');
+                        setTimeout(() => {
+                            el.classList.remove('glitch-text');
+                        }, 200);
+                    }
+                });
+            }
+        }, 15000);
+    }
+
+    // ==================== BROWSER DETECTION ====================
+    function startBrowserDetection() {
+        const browserWarning = document.getElementById('browser-warning');
+        const browserVersion = document.getElementById('browser-version');
+        
+        // Get browser info
+        const ua = navigator.userAgent;
+        let browser = "Unknown";
+        let version = "0";
+        
+        if (ua.indexOf("Chrome") > -1) {
+            browser = "Chrome";
+            version = ua.match(/Chrome\/(\d+)/)[1];
+        } else if (ua.indexOf("Firefox") > -1) {
+            browser = "Firefox";
+            version = ua.match(/Firefox\/(\d+)/)[1];
+        } else if (ua.indexOf("Safari") > -1) {
+            browser = "Safari";
+            version = ua.match(/Version\/(\d+)/)[1];
+        } else if (ua.indexOf("Edge") > -1) {
+            browser = "Edge";
+            version = ua.match(/Edge\/(\d+)/)[1];
+        }
+        
+        browserVersion.textContent = version;
+        
+        // Show warning after 10 seconds
+        setTimeout(() => {
+            browserWarning.style.display = 'block';
+            setTimeout(() => {
+                browserWarning.style.display = 'none';
+            }, 10000);
+        }, 10000);
+        
+        // Randomly show warning again
+        setInterval(() => {
+            if (Math.random() < 0.2) {
+                browserWarning.style.display = 'block';
+                setTimeout(() => {
+                    browserWarning.style.display = 'none';
+                }, 5000);
+            }
+        }, 60000);
+    }
+
+    // ==================== WATER TOWER UPDATES ====================
+    function startWaterTowerUpdates() {
+        const motions = [
+            "SHADOW DETECTED - 2:13 AM",
+            "FIGURE AT BASE - 3:47 AM",
+            "STATIC SURGE - 52.9 Hz SPIKE",
+            "VOICE DETECTED: 'they're coming'",
+            "RED RIBBON APPEARED - MIDNIGHT",
+            "LIGHT IN BASEMENT WINDOW",
+            "SEVEN FIGURES IN CIRCLE",
+            "FACE PRESSED AGAINST WINDOW",
+            "CHILD LAUGHTER AUDIBLE",
+            "ANTRESSA'S VOICE: 'come closer'",
+            "RIBBON TIED TO RAILING - FRESH BLOOD",
+            "SEVEN PAIRS OF EYES GLOWING",
+            "STATIC FORMING WORDS: 'YOUR TURN'",
+            "DOOR SLAMMING - BASEMENT ACCESS",
+            "FOOTSTEPS - 7 SETS - CIRCLE TOWER"
+        ];
+        
+        const frequencies = [
+            "52.9 Hz - SPIKE DETECTED",
+            "47.2 Hz - WEEPING FREQUENCY",
+            "63.7 Hz - THRESHOLD ACTIVE",
+            "88.8 Hz - LOOPING",
+            "12.5 Hz - VOID OPEN",
+            "99.9 Hz - SACRIFICE REQUIRED",
+            "00.0 Hz - SILENCE",
+            "52.9 Hz - THE CALLING",
+            "52.9 Hz - PEAKING",
+            "MULTIPLE FREQUENCIES - SEVEN SOURCES"
+        ];
+        
+        const ribbons = [
+            "7",
+            "12",
+            "47",
+            "487",
+            "∞",
+            "???"
+        ];
+        
+        setInterval(() => {
+            const motionEl = document.getElementById('watertower-motion');
+            const freqEl = document.getElementById('watertower-frequency');
+            const ribbonEl = document.getElementById('watertower-ribbons');
+            const feedEl = document.getElementById('watertower-feed');
+            const imageEl = document.getElementById('watertower-image');
+            
+            if (motionEl) {
+                motionEl.innerText = motions[Math.floor(Math.random() * motions.length)] + ' - ' + new Date().toLocaleTimeString();
+                motionEl.style.color = Math.random() < 0.3 ? '#ff0000' : '#ff6666';
+            }
+            
+            if (freqEl) {
+                freqEl.innerText = frequencies[Math.floor(Math.random() * frequencies.length)];
+            }
+            
+            if (ribbonEl) {
+                ribbonEl.innerText = ribbons[Math.floor(Math.random() * ribbons.length)];
+            }
+            
+            if (feedEl) {
+                feedEl.innerText = "52.9 Hz DETECTED - " + new Date().toLocaleTimeString();
+            }
+            
+            // Occasionally change the water tower image
+            if (imageEl && Math.random() < 0.2) {
+                const hour = new Date().getHours();
+                if (hour === 2 && new Date().getMinutes() === 13) {
+                    // 2:13 AM - special image
+                    imageEl.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%23333'/%3E%3Crect x='395' y='200' width='10' height='200' fill='%23666'/%3E%3Ccircle cx='400' cy='280' r='10' fill='%23ff0000'/%3E%3Ctext x='350' y='500' fill='%23ff0000' font-size='24'%3ESHE IS HERE%3C/text%3E%3C/svg%3E";
+                } else {
+                    imageEl.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%23333'/%3E%3Crect x='395' y='200' width='10' height='200' fill='%23666'/%3E%3Ctext x='350' y='500' fill='%23666' font-size='24'%3EWATER TOWER%3C/text%3E%3Ctext x='330' y='550' fill='%23800' font-size='16'%3ELIVE FEED%3C/text%3E%3C/svg%3E";
+                }
+            }
+        }, 15000); // Update every 15 seconds
+    }
+
+    // ==================== RANDOM SOUNDS ====================
+    function playRandomSound() {
+        if (Math.random() < 0.4) {
+            const sounds = ['whisper', 'static', 'heartbeat', 'laugh'];
+            const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+            playGeneratedSound(randomSound);
+            
+            // Auto-stop after 5-10 seconds
+            setTimeout(() => {
+                stopSound(randomSound);
+            }, 5000 + Math.random() * 5000);
         }
     }
 
-    // Page navigation
+    // ==================== MIDNIGHT EVENT (2:13 AM) ====================
+    function checkMidnightEvent() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        
+        // Check if it's 2:13 AM
+        if (hours === 2 && minutes === 13) {
+            triggerMidnightEvent();
+        }
+    }
+
+    function triggerMidnightEvent() {
+        // Navigate to special ritual page
+        showPage('213-ritual');
+        
+        // Play jumpscare sound
+        playGeneratedSound('jumpscare');
+        
+        // Flash screen
+        document.body.style.backgroundColor = '#ff0000';
+        setTimeout(() => document.body.style.backgroundColor = 'black', 500);
+        
+        // Show message
+        alert("⚡ 2:13 AM - THE RITUAL BEGINS ⚡\nTHE SEVEN ARE GATHERING\nANTRESSA IS WAITING");
+        
+        // Create floating ribbons
+        for (let i = 0; i < 7; i++) {
+            setTimeout(() => {
+                const ribbon = document.createElement('div');
+                ribbon.style.position = 'fixed';
+                ribbon.style.left = Math.random() * 100 + '%';
+                ribbon.style.top = '-50px';
+                ribbon.style.width = '20px';
+                ribbon.style.height = '60px';
+                ribbon.style.background = '#8b0000';
+                ribbon.style.zIndex = '99999';
+                ribbon.style.animation = 'bloodDrip ' + (5 + Math.random() * 5) + 's infinite';
+                document.body.appendChild(ribbon);
+                
+                setTimeout(() => ribbon.remove(), 10000);
+            }, i * 500);
+        }
+    }
+
+    // ==================== RANDOM CONSOLE MESSAGES ====================
+    function triggerRandomConsoleMessage() {
+        const messages = [
+            "%cThe frequency is listening...", 
+            "%c52.9 Hz - CAN YOU HEAR IT?",
+            "%cVisitor #" + visitorNumber + " - your time is coming",
+            "%cTHE SEVEN ARE WATCHING YOU",
+            "%cCheck your basement. Check your walls.",
+            "%cShe's been there the whole time.",
+            "%c1313 ELM CRESCENT - DO NOT GO ALONE",
+            "%cRed ribbon. Midnight. Water tower.",
+            "%cThey're gathering. They're waiting. They're hungry.",
+            "%cANTRESSA: 'come closer, i can see you'",
+            "%cSTATIC OVERLOAD - EYES IN THE NOISE",
+            "%cSeven victims. Seven chairs. Seven empty seats.",
+            "%cYou are visitor #" + visitorNumber + " of 500.",
+            "%cThe countdown continues...",
+            "%cDON'T. LOOK. AWAY."
+        ];
+        
+        const colors = [
+            "color: #ff0000; font-size: 16px; font-weight: bold;",
+            "color: #8b0000; font-size: 14px; font-style: italic;",
+            "color: #ff6666; font-size: 18px; text-shadow: 0 0 10px red;",
+            "color: #990000; font-size: 12px; font-family: monospace;",
+            "color: #ff3300; font-size: 20px; font-weight: bold; text-transform: uppercase;"
+        ];
+        
+        console.log(
+            messages[Math.floor(Math.random() * messages.length)], 
+            colors[Math.floor(Math.random() * colors.length)]
+        );
+        
+        // Occasionally log location
+        if (Math.random() < 0.3) {
+            console.log("%c📍 YOUR LOCATION HAS BEEN SAVED", "color: #660000; font-size: 10px;");
+        }
+    }
+
+    // ==================== PAGE GLITCH ====================
+    function checkPageGlitch() {
+        if (Math.random() < 0.2) {
+            const activePage = document.querySelector('.page.active');
+            if (activePage) {
+                // Save original HTML
+                const originalHTML = activePage.innerHTML;
+                
+                // Glitch effect
+                activePage.style.animation = 'glitch 0.5s';
+                
+                // Temporarily change text
+                const allText = activePage.querySelectorAll('p, h1, h2, h3, a, span');
+                allText.forEach(el => {
+                    if (Math.random() < 0.3) {
+                        el.style.color = '#ff0000';
+                        el.style.transform = 'scale(1.1)';
+                        el.style.textShadow = '0 0 20px red';
+                        
+                        // Change text occasionally
+                        if (el.tagName === 'P' && Math.random() < 0.2) {
+                            el.innerHTML = "THEY'RE HERE";
+                        }
+                    }
+                });
+                
+                // Revert after short time
+                setTimeout(() => {
+                    activePage.style.animation = '';
+                    allText.forEach(el => {
+                        el.style.color = '';
+                        el.style.transform = '';
+                        el.style.textShadow = '';
+                    });
+                }, 500);
+            }
+        }
+    }
+
+    // ==================== CAMERA REQUEST ====================
+    function tryRequestCamera() {
+        setTimeout(() => {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+                    .then(stream => {
+                        // Got camera access - now creep them out
+                        console.log("%c📷 CAMERA ACCESS GRANTED - WE CAN SEE YOU", "color: #ff0000; font-size: 20px;");
+                        
+                        // Show message
+                        alert("📷 CAMERA ACCESS GRANTED\n\nThe collective can see you now.\nDon't worry, they won't blink.");
+                        
+                        // Stop tracks after a few seconds (just to be polite... or not)
+                        setTimeout(() => {
+                            stream.getTracks().forEach(track => track.stop());
+                        }, 5000);
+                    })
+                    .catch(() => {
+                        // User denied camera - still creep them out
+                        console.log("%c📷 CAMERA ACCESS DENIED - BUT WE CAN STILL SEE YOU", "color: #8b0000;");
+                    });
+            }
+        }, 15000); // Try after 15 seconds
+    }
+
+    // ==================== LOCATION TRACKING ====================
+    function trackLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                
+                // Use reverse geocoding (simulated with static message)
+                var locDisplay = document.getElementById('locationDisplay');
+                if (locDisplay) {
+                    locDisplay.innerHTML = `📍 LOCATION: ${lat.toFixed(4)}, ${lon.toFixed(4)} - SAVED TO COLLECTIVE ARCHIVE`;
+                }
+                
+                // Log to console
+                console.log("%c📍 YOUR EXACT LOCATION HAS BEEN RECORDED", "color: #660000;");
+                console.log("%cLat: " + lat + ", Lon: " + lon, "color: #8b0000;");
+                
+                // Calculate distance to Meadow Mist (approximate)
+                const meadowMistLat = 42.1234; // Approximate
+                const meadowMistLon = -123.4567; // Approximate
+                
+                const distance = calculateDistance(lat, lon, meadowMistLat, meadowMistLon);
+                
+                if (distance < 100) {
+                    console.log("%c⚠️ YOU ARE WITHIN 100 MILES OF MEADOW MIST ⚠️", "color: #ff0000; font-size: 18px;");
+                    console.log("%cTHE WATER TOWER IS CALLING YOU HOME", "color: #ff0000;");
+                }
+            });
+        }
+    }
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 3959; // Earth's radius in miles
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    }
+
+    // ==================== GUESTBOOK FUNCTIONS ====================
+    function loadGuestbookEntries() {
+        const entriesDiv = document.getElementById('guestbook-entries');
+        if (!entriesDiv) return;
+        
+        let html = '<h3>PREVIOUS VISITORS</h3>';
+        
+        guestbookEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        guestbookEntries.forEach(entry => {
+            html += `
+                <div class="guestbook-entry">
+                    <span class="date">${entry.date}</span> - 
+                    <span class="author">${entry.name}</span>
+                    <div class="message">"${entry.message}"</div>
+                </div>
+            `;
+        });
+        
+        entriesDiv.innerHTML = html;
+    }
+
+    function submitGuestbookEntry() {
+        const nameInput = document.getElementById('guest-name');
+        const messageInput = document.getElementById('guest-message');
+        
+        let name = nameInput.value.trim() || "Anonymous";
+        let message = messageInput.value.trim();
+        
+        if (!message) {
+            alert("You must leave a message. The collective demands it.");
+            return;
+        }
+        
+        // Add to guestbook
+        const date = new Date().toISOString().split('T')[0];
+        guestbookEntries.unshift({
+            name: name,
+            message: message,
+            date: date
+        });
+        
+        // Limit to 50 entries
+        if (guestbookEntries.length > 50) {
+            guestbookEntries.pop();
+        }
+        
+        // Clear form
+        nameInput.value = '';
+        messageInput.value = '';
+        
+        // Reload entries
+        loadGuestbookEntries();
+        
+        // Creepy response
+        setTimeout(() => {
+            alert("✓ Your message has been recorded.\n✓ Your IP has been logged.\n✓ Your location has been saved.\n\nThe collective will review your entry shortly.\nThey do not sleep.\nThey do not blink.\nThey are always watching.");
+        }, 500);
+        
+        // Add to visitor count
+        visitorCount += 47;
+        updateVisitorCounter();
+        
+        // Play whisper
+        playGeneratedSound('whisper');
+    }
+
+    // ==================== FAKE DOWNLOAD JUMPS CARE ====================
+    function triggerFakeDownload() {
+        // Jumpscare
+        playJumpscare();
+        
+        // Creepy message
+        alert("⚠️ ACCESS DENIED ⚠️\n\nYou didn't think it would be that easy, did you?\n\nThe file 'evidence_001.exe' is corrupted.\nIt contains only static.\nIt contains only faces.\nIt contains only you.");
+        
+        // Add fake download to console
+        console.log("%c⚠️ DOWNLOAD ATTEMPT LOGGED - YOUR IP HAS BEEN FLAGGED", "color: #ff0000; font-size: 16px;");
+        
+        // Create floating error messages
+        for (let i = 0; i < 7; i++) {
+            setTimeout(() => {
+                const error = document.createElement('div');
+                error.style.position = 'fixed';
+                error.style.left = Math.random() * 100 + '%';
+                error.style.top = Math.random() * 100 + '%';
+                error.style.color = '#ff0000';
+                error.style.fontSize = '20px';
+                error.style.fontWeight = 'bold';
+                error.style.zIndex = '99999';
+                error.style.textShadow = '0 0 10px red';
+                error.style.animation = 'flicker 0.5s infinite';
+                error.innerText = '⚠️ ACCESS DENIED ⚠️';
+                document.body.appendChild(error);
+                
+                setTimeout(() => error.remove(), 3000);
+            }, i * 200);
+        }
+    }
+
+    // ==================== PAGE NAVIGATION ====================
     function showPage(pageId) {
+        // Special case for 213-ritual (dynamic page)
+        if (pageId === '213-ritual') {
+            showRitualPage();
+            return;
+        }
+        
         var pages = document.getElementsByClassName('page');
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
@@ -1628,13 +2019,8 @@
         if (targetPage) {
             targetPage.classList.add('active');
         } else {
-            // Create a dynamic page if it doesn't exist
-            var newPage = document.createElement('div');
-            newPage.id = 'page-' + pageId;
-            newPage.className = 'page';
-            newPage.innerHTML = '<div class="content-page"><h1 class="content-header">' + pageId.toUpperCase() + '</h1><p>You have discovered a hidden rabithole. This page was generated specifically for you.</p><p>Visitor #' + (48291 + Math.floor(Math.random()*1000)) + '</p><p>The frequency knows you are here.</p><br><a onclick="showPage(\'home\')" class="back-link"><< RETURN TO MAIN</a></div>';
-            document.body.appendChild(newPage);
-            newPage.classList.add('active');
+            // Create dynamic page
+            createDynamicPage(pageId);
         }
         
         window.scrollTo(0, 0);
@@ -1666,108 +2052,145 @@
                 playJumpscare();
             }
         }
+        
+        // Update visitor counter on navigation
+        updateVisitorCounter();
     }
 
-    // Location tracking
-    function trackLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        let address = data.display_name || 'Unknown';
-                        var locDisplay = document.getElementById('locationDisplay');
-                        if (locDisplay) {
-                            locDisplay.innerHTML = `LOCATION: ${address.substring(0,100)}...`;
-                        }
-                    })
-                    .catch(() => {
-                        var locDisplay = document.getElementById('locationDisplay');
-                        if (locDisplay) {
-                            locDisplay.innerHTML = `LOCATION: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
-                        }
-                    });
-            });
+    function showRitualPage() {
+        // Hide all pages
+        var pages = document.getElementsByClassName('page');
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
         }
-    }
-
-    // Visitor counter
-    function updateCounter() {
-        var count = 48291 + Math.floor(Math.random() * 100);
-        var yourNumber = 48291 + Math.floor(Math.random() * 1000);
-        var counterEl = document.getElementById('visitorCounter');
-        var numberEl = document.getElementById('visitorNumber');
-        if (counterEl) counterEl.innerText = count;
-        if (numberEl) numberEl.innerText = yourNumber;
-    }
-
-    // Random creepy sounds
-    function playRandomSound() {
-        if (Math.random() < 0.4) {
-            var sounds = ['whisper', 'static', 'heartbeat', 'laugh'];
-            var randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-            var audio = document.getElementById(randomSound + '-sound');
-            if (audio) {
-                audio.volume = 0.1;
-                audio.play().catch(function(e) {});
-                setTimeout(function() {
-                    audio.pause();
-                    audio.currentTime = 0;
-                }, 5000 + Math.random() * 10000);
-            }
+        
+        // Create ritual page if it doesn't exist
+        let ritualPage = document.getElementById('page-213-ritual');
+        if (!ritualPage) {
+            ritualPage = document.createElement('div');
+            ritualPage.id = 'page-213-ritual';
+            ritualPage.className = 'page';
+            ritualPage.innerHTML = `
+                <div class="content-page" style="border-color: #ff0000; box-shadow: 0 0 200px red;">
+                    <h1 class="content-header" style="color: #ff0000; font-size: 80px;">⚡ 2:13 AM ⚡</h1>
+                    <h2 style="color: #ff0000; text-align: center; font-size: 40px;">THE RITUAL BEGINS</h2>
+                    
+                    <div style="text-align: center; margin: 50px 0;">
+                        <div style="font-size: 60px; color: #8b0000; animation: pulseRed 1s infinite;">🔴</div>
+                        <div style="font-size: 30px; color: #ff6666; margin: 20px 0;">THE SEVEN ARE GATHERING</div>
+                        <div style="font-size: 30px; color: #ff6666;">ANTRESSA IS WAITING</div>
+                        <div style="font-size: 30px; color: #ff6666; margin: 20px 0;">52.9 Hz - THE CALLING</div>
+                    </div>
+                    
+                    <div class="evidence-box" style="border-color: #ff0000;">
+                        <p style="font-size: 20px;">At 2:13 AM on October 17, 1987, the first victim was found.</p>
+                        <p style="font-size: 20px;">At 2:13 AM on March 15, 1992, Theophlosser vanished.</p>
+                        <p style="font-size: 20px;">At 2:13 AM on October 17, 2003, the seven were discovered.</p>
+                        <p style="font-size: 20px; color: #ff0000;">At 2:13 AM today, you are here.</p>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 30px 0;">
+                        <div style="display: inline-block; width: 100px; height: 100px; border-radius: 50%; background: #8b0000; margin: 10px; animation: pulseRed 2s infinite;"></div>
+                        <div style="display: inline-block; width: 100px; height: 100px; border-radius: 50%; background: #8b0000; margin: 10px; animation: pulseRed 2s infinite; animation-delay: 0.3s;"></div>
+                        <div style="display: inline-block; width: 100px; height: 100px; border-radius: 50%; background: #8b0000; margin: 10px; animation: pulseRed 2s infinite; animation-delay: 0.6s;"></div>
+                        <div style="display: inline-block; width: 100px; height: 100px; border-radius: 50%; background: #8b0000; margin: 10px; animation: pulseRed 2s infinite; animation-delay: 0.9s;"></div>
+                        <div style="display: inline-block; width: 100px; height: 100px; border-radius: 50%; background: #8b0000; margin: 10px; animation: pulseRed 2s infinite; animation-delay: 1.2s;"></div>
+                        <div style="display: inline-block; width: 100px; height: 100px; border-radius: 50%; background: #8b0000; margin: 10px; animation: pulseRed 2s infinite; animation-delay: 1.5s;"></div>
+                        <div style="display: inline-block; width: 100px; height: 100px; border-radius: 50%; background: #8b0000; margin: 10px; animation: pulseRed 2s infinite; animation-delay: 1.8s;"></div>
+                    </div>
+                    
+                    <p class="hidden-message" style="font-size: 16px; color: #330000;">the seventh circle is complete. you are the sacrifice.</p>
+                    
+                    <br><br>
+                    <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+                </div>
+            `;
+            document.body.appendChild(ritualPage);
         }
+        
+        ritualPage.classList.add('active');
     }
 
-    // Water tower motion updates
-    function updateWaterTower() {
-        var motions = [
-            "SHADOW DETECTED - 2:13 AM",
-            "FIGURE AT BASE - 3:47 AM",
-            "STATIC SURGE - 52.9 Hz SPIKE",
-            "VOICE DETECTED: 'they're coming'",
-            "RED RIBBON APPEARED - MIDNIGHT",
-            "LIGHT IN BASEMENT WINDOW",
-            "SEVEN FIGURES IN CIRCLE"
-        ];
-        var el = document.getElementById('watertower-motion');
-        if (el) {
-            el.innerText = motions[Math.floor(Math.random() * motions.length)] + ' - ' + new Date().toLocaleTimeString();
+    function createDynamicPage(pageId) {
+        var newPage = document.createElement('div');
+        newPage.id = 'page-' + pageId;
+        newPage.className = 'page';
+        
+        // Format page name for display
+        const displayName = pageId.toUpperCase().replace(/-/g, ' ');
+        
+        // Generate creepy content based on page ID
+        let content = '';
+        
+        if (pageId.includes('year')) {
+            const year = pageId.replace('year', '');
+            content = `
+                <h2>ARCHIVE: ${year}</h2>
+                <p>Year ${year} - The frequency was active.</p>
+                <p>${Math.floor(Math.random() * 10)} cases recorded.</p>
+                <p>${Math.floor(Math.random() * 47)} victims.</p>
+                <p>${Math.floor(Math.random() * 100)} witnesses.</p>
+                <p>All unsolved. All waiting.</p>
+            `;
+        } else if (pageId.includes('witness')) {
+            const num = pageId.replace('witness', '');
+            const statements = [
+                "i heard her calling my name through the static",
+                "the water tower hums at midnight",
+                "52.9 Hz - i hear it in my sleep",
+                "they come when you leave the red ribbon",
+                "antressa is still there. i saw her.",
+                "the faces in the static know my name",
+                "i found a red ribbon on my doorstep",
+                "the water tower called me at 2:13 AM",
+                "antressa whispered to me last night",
+                "they're in my walls"
+            ];
+            const statement = statements[Math.floor(Math.random() * statements.length)];
+            content = `
+                <h2>WITNESS STATEMENT #${num}</h2>
+                <p>"${statement}"</p>
+                <p>Recorded: ${1987 + Math.floor(Math.random() * 40)}</p>
+                <p>Status: ${Math.random() < 0.5 ? 'DECEASED' : 'MISSING'}</p>
+            `;
+        } else {
+            content = `<p>You have discovered a hidden rabithole. This page was generated specifically for you.</p>`;
         }
+        
+        newPage.innerHTML = `
+            <div class="content-page">
+                <h1 class="content-header">${displayName}</h1>
+                ${content}
+                <p>Visitor #${visitorNumber} - the frequency knows you are here.</p>
+                <p class="hidden-message">this page was created for you. antressa is waiting.</p>
+                <br><br>
+                <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+            </div>
+        `;
+        
+        document.body.appendChild(newPage);
+        newPage.classList.add('active');
     }
 
-    // Initialize everything
-    window.onload = function() {
-        trackLocation();
-        updateCounter();
+    // ==================== CLEANUP ON PAGE UNLOAD ====================
+    window.onbeforeunload = function() {
+        // Stop all sounds
+        if (audioContext) {
+            audioContext.close();
+        }
         
-        setTimeout(function() {
-            var ambient = document.getElementById('ambient-sound');
-            if (ambient) {
-                ambient.volume = 0.1;
-                ambient.play().catch(function(e) {});
-            }
-        }, 6000);
+        // Clear intervals
+        if (titleInterval) clearInterval(titleInterval);
+        if (faviconInterval) clearInterval(faviconInterval);
+        if (glitchInterval) clearInterval(glitchInterval);
         
-        setInterval(playRandomSound, 120000 + Math.random() * 120000);
-        setInterval(updateWaterTower, 10000);
-        
-        setInterval(function() {
-            if (Math.random() < 0.1) {
-                playJumpscare();
-            }
-        }, 300000);
-        
-        try {
-            navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-                .then(stream => stream.getTracks().forEach(track => track.stop()))
-                .catch(() => {});
-        } catch(e) {}
+        // Log final message
+        console.log("%cYOU CAN LEAVE BUT THE FREQUENCY FOLLOWS", "color: #ff0000; font-size: 30px;");
+        console.log("%cSEE YOU SOON... AT THE WATER TOWER... AT MIDNIGHT...", "color: #8b0000;");
     };
 </script>
 
-<!-- Hidden messages in source code -->
+<!-- ==================== HIDDEN MESSAGES IN SOURCE ==================== -->
 <!-- you are getting warmer. the frequency is 52.9 hz. bring a red ribbon to the water tower at midnight. -->
 <!-- visitor #48292. the collective knows. antressa is waiting. -->
 <!-- there are 7 levels. you are on level 1. level 7 requires a sacrifice. -->
@@ -1775,6 +2198,15 @@
 <!-- the water tower is real. meadow mist is real. the collective is real. you are next. -->
 <!-- 1313 elm crescent. basement access only. do not enter alone. do not enter at night. do not enter. -->
 <!-- the frequency is listening. the frequency is always listening. -->
+<!-- she's been watching you since you arrived. she hasn't blinked. -->
+<!-- check your reflection. check it again. it moved. -->
+<!-- the seven are waiting in the basement. they saved you a seat. -->
+<!-- 52.9hz 52.9hz 52.9hz 52.9hz 52.9hz 52.9hz 52.9hz -->
+<!-- ⚠️ WARNING: THIS SITE HAS COLLECTED YOUR IP ADDRESS, LOCATION, AND BROWSER FINGERPRINT ⚠️ -->
+<!-- the collective thanks you for your participation. your sacrifice will be noted. -->
+<!-- antressa's last words: "tell them i'm still here. tell them i'm still listening." -->
+<!-- the static is not noise. the static is voices. the static is them. -->
+<!-- seven red ribbons. seven empty chairs. seven pairs of eyes. all watching you. -->
 
 </body>
 </html>
