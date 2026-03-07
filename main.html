@@ -55,6 +55,21 @@
             100% { opacity: 0; }
         }
 
+        @keyframes breathe {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes skew {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(2deg); }
+            40% { transform: skew(-2deg); }
+            60% { transform: skew(1deg); }
+            80% { transform: skew(-1deg); }
+            100% { transform: skew(0deg); }
+        }
+
         body {
             background-color: black;
             color: #ff0000;
@@ -68,6 +83,46 @@
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%238b0000" opacity="0.5"/></svg>') 12 12, auto;
         }
 
+        /* ==================== BLOOD VIDEO BACKGROUND - ABSOLUTE BACK ==================== */
+        #blood-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        #blood-drip-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            mix-blend-mode: screen;
+        }
+
+        /* ==================== BLOOD TEXTURE TILE OVERLAY - SECOND LAYER ==================== */
+        #blood-texture-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+            pointer-events: none;
+            background-image: url('blood-texture-tile.png');
+            background-repeat: repeat;
+            background-position: top left;
+            opacity: 0.3;
+            mix-blend-mode: multiply;
+            animation: breathe 10s infinite;
+        }
+
         /* ==================== FULL SCREEN BLOOD OVERLAYS ==================== */
         .fullscreen-blood {
             position: fixed;
@@ -76,7 +131,7 @@
             width: 100vw;
             height: 100vh;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 3;
             opacity: 0.25;
             mix-blend-mode: multiply;
             background: repeating-linear-gradient(45deg, #8b0000 0px, #8b0000 2px, transparent 2px, transparent 8px);
@@ -90,7 +145,7 @@
             width: 100vw;
             height: 100vh;
             pointer-events: none;
-            z-index: 10000;
+            z-index: 4;
             overflow: hidden;
         }
 
@@ -105,7 +160,7 @@
             opacity: 0.6;
         }
 
-        /* 50 blood drips (keeping your existing drip classes) */
+        /* 50 blood drips */
         .drip1 { left: 5%; animation-duration: 6s; animation-delay: 0s; width: 10px; }
         .drip2 { left: 12%; animation-duration: 7s; animation-delay: 1s; width: 7px; }
         .drip3 { left: 18%; animation-duration: 5s; animation-delay: 2s; width: 12px; }
@@ -200,6 +255,7 @@
             font-size: 120px;
             color: #330000;
             line-height: 1;
+            animation: breathe 3s infinite;
         }
 
         .blood-overlay-loading {
@@ -237,26 +293,28 @@
             height: 100%;
             background: repeating-radial-gradient(circle at 30% 40%, rgba(255,0,0,0.03) 0px, transparent 2px, rgba(139,0,0,0.02) 3px, transparent 5px);
             pointer-events: none;
-            z-index: 9997;
+            z-index: 5;
             opacity: 0.3;
+            animation: flicker 5s infinite;
         }
 
         /* ==================== PAGE SYSTEM ==================== */
-        .page { display: none; }
+        .page { display: none; position: relative; z-index: 10; }
         .page.active { display: block; }
 
         /* ==================== CHAOS LAYOUT ==================== */
         .xtrials-mess {
             max-width: 1400px;
             margin: 0 auto;
-            background-color: rgba(30, 0, 0, 0.7);
+            background-color: rgba(30, 0, 0, 0.85);
             overflow: hidden;
             border: 8px ridge #660000;
             padding: 10px 5px;
             box-shadow: 0 0 50px red, inset 0 0 30px #330000;
             position: relative;
-            z-index: 1;
+            z-index: 10;
             backdrop-filter: blur(1px);
+            animation: skew 20s infinite;
         }
 
         .chaos-block {
@@ -269,7 +327,7 @@
             float: left;
             margin: 18px 12px !important;
             border: 6px groove #990000 !important;
-            background-color: rgba(20, 0, 0, 0.9);
+            background-color: rgba(20, 0, 0, 0.95);
             box-shadow: 0 0 30px red, 6px 6px 0 #1a0000;
             padding: 15px;
             backdrop-filter: blur(1px);
@@ -300,6 +358,7 @@
             background-color: #8b0000;
             text-shadow: 0 0 20px red;
             border-bottom: 2px solid white;
+            transform: scale(1.1);
         }
 
         font[size="7"] { font-size: 4.2rem !important; line-height: 1.2; }
@@ -336,8 +395,9 @@
             padding: 30px;
             box-shadow: 0 0 100px red, inset 0 0 50px #330000;
             position: relative;
-            z-index: 1;
+            z-index: 10;
             backdrop-filter: blur(1px);
+            animation: breathe 15s infinite;
         }
         
         .content-header {
@@ -357,15 +417,30 @@
             margin: 20px 0;
             background: #050000;
             box-shadow: inset 0 0 30px #330000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .evidence-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(139,0,0,0.1), transparent 70%);
+            pointer-events: none;
         }
         
         .redacted {
             background: #8b0000;
             color: #8b0000;
             padding: 2px 5px;
+            transition: all 0.3s;
         }
         .redacted:hover {
             color: white;
+            background: #ff0000;
         }
         
         .back-link {
@@ -376,12 +451,14 @@
             border: 2px solid #660000;
             color: #ff6666;
             cursor: pointer;
+            transition: all 0.3s;
         }
         .back-link:hover {
             background: #8b0000;
             color: white;
             border-color: red;
             box-shadow: 0 0 30px red;
+            transform: scale(1.05);
         }
 
         .hidden-message {
@@ -389,9 +466,11 @@
             font-size: 8px;
             text-align: center;
             margin-top: 50px;
+            transition: all 0.3s;
         }
         .hidden-message:hover {
             color: #ff0000;
+            font-size: 12px;
         }
         
         .year-grid {
@@ -409,12 +488,14 @@
             font-size: 18px;
             text-align: center;
             display: block;
+            transition: all 0.3s;
         }
         .year-link:hover {
             background: #8b0000;
             color: white;
             border-color: red;
             box-shadow: 0 0 20px red;
+            transform: scale(1.1);
         }
 
         /* ==================== GUESTBOOK STYLES ==================== */
@@ -424,6 +505,13 @@
             margin: 10px 0;
             background: rgba(20, 0, 0, 0.8);
             font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+
+        .guestbook-entry:hover {
+            border-color: #ff0000;
+            box-shadow: 0 0 20px red;
+            transform: translateX(5px);
         }
 
         .guestbook-entry .date {
@@ -455,6 +543,13 @@
             padding: 10px;
             margin: 5px 0;
             font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+
+        .guestbook-form input:focus, .guestbook-form textarea:focus {
+            border-color: #ff0000;
+            box-shadow: 0 0 20px red;
+            outline: none;
         }
 
         .guestbook-form button {
@@ -463,11 +558,14 @@
             color: #ff6666;
             padding: 10px 20px;
             cursor: pointer;
+            transition: all 0.3s;
         }
 
         .guestbook-form button:hover {
             background: #8b0000;
             color: white;
+            border-color: red;
+            box-shadow: 0 0 20px red;
         }
 
         /* ==================== FAKE DOWNLOAD BUTTON ==================== */
@@ -482,11 +580,14 @@
             text-align: center;
             margin: 20px 0;
             animation: pulseRed 2s infinite;
+            transition: all 0.3s;
         }
 
         .fake-download:hover {
             background: #8b0000;
             border-style: inset;
+            transform: scale(1.1);
+            box-shadow: 0 0 50px red;
         }
 
         /* ==================== BROWSER WARNING ==================== */
@@ -502,6 +603,7 @@
             font-size: 12px;
             max-width: 250px;
             display: none;
+            animation: pulseRed 1s infinite;
         }
 
         /* ==================== MEADOW MIST PUBLIC ACCESS ==================== */
@@ -516,6 +618,12 @@
             width: 100%;
             image-rendering: pixelated;
             filter: grayscale(100%) contrast(150%);
+            transition: all 0.3s;
+        }
+
+        .public-access-video img:hover {
+            filter: grayscale(0%) contrast(200%);
+            transform: scale(1.02);
         }
 
         .tv-static {
@@ -533,6 +641,7 @@
             background: repeating-linear-gradient(0deg, rgba(255,255,255,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px);
             pointer-events: none;
             animation: flicker 0.5s infinite;
+            z-index: 20;
         }
 
         /* ==================== ENGINEERING REPORT ==================== */
@@ -559,6 +668,43 @@
         #dynamic-favicon {
             display: none;
         }
+
+        /* ==================== FLOATING EYES ==================== */
+        .floating-eye {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: white;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0.1;
+            animation: pulseRed 3s infinite;
+        }
+
+        .floating-eye::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #8b0000;
+        }
+
+        /* ==================== BLOOD SPLATTER ==================== */
+        .blood-splatter {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #8b0000 0%, transparent 70%);
+            z-index: 9997;
+            pointer-events: none;
+            opacity: 0.1;
+            filter: blur(5px);
+        }
     </style>
 </head>
 <body>
@@ -566,10 +712,22 @@
 <!-- ==================== DYNAMIC FAVICON ==================== -->
 <canvas id="dynamic-favicon" width="32" height="32" style="display:none;"></canvas>
 
-<!-- ==================== FULL SCREEN BLOOD OVERLAYS ==================== -->
+<!-- ==================== LAYER 1: BLOOD VIDEO BACKGROUND (FARTHEST BACK) ==================== -->
+<div id="blood-video-container">
+    <video id="blood-drip-video" autoplay loop muted playsinline>
+        <source src="blood-drip-corner.webm" type="video/webm">
+        <!-- Fallback if video doesn't load -->
+        Your browser does not support the blood drip video.
+    </video>
+</div>
+
+<!-- ==================== LAYER 2: BLOOD TEXTURE TILE OVERLAY ==================== -->
+<div id="blood-texture-layer"></div>
+
+<!-- ==================== LAYER 3: FULL SCREEN BLOOD OVERLAYS ==================== -->
 <div class="fullscreen-blood"></div>
 
-<!-- ==================== CSS BLOOD DRIPS ==================== -->
+<!-- ==================== LAYER 4: CSS BLOOD DRIPS ==================== -->
 <div class="blood-drip-container">
     <div class="blood-drip-css drip1"></div>
     <div class="blood-drip-css drip2"></div>
@@ -623,7 +781,7 @@
     <div class="blood-drip-css drip50"></div>
 </div>
 
-<!-- ==================== STATIC OVERLAY ==================== -->
+<!-- ==================== LAYER 5: STATIC OVERLAY ==================== -->
 <div class="static-overlay"></div>
 
 <!-- ==================== BROWSER WARNING ==================== -->
@@ -640,10 +798,11 @@
         <div class="blood-overlay-loading"></div>
         <div class="loading-text">XTRIALS IS WATCHING</div>
         <div class="loading-text" style="font-size: 16px; letter-spacing: 3px;">loading your nightmare...</div>
+        <div class="loading-text" style="font-size: 12px; color: #330000;">52.9 Hz detected</div>
     </div>
 </div>
 
-<!-- ==================== BACKGROUND AUDIO (GENERATED VIA WEB AUDIO API) ==================== -->
+<!-- ==================== BACKGROUND AUDIO ==================== -->
 <audio id="ambient-sound" loop preload="auto" style="display:none;"></audio>
 <audio id="jumpscare-sound" preload="auto" style="display:none;"></audio>
 <audio id="whisper-sound" loop preload="auto" style="display:none;"></audio>
@@ -661,6 +820,8 @@
                     <b><font color="#ff0000" size="7">XTRIALS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XTRIALS</font></b><br>
                     <b><font color="#ff3333" size="7">XTRIALS</font></b><br>
                     <b><font color="#ff0000" size="7">XTRIALS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XTRIALS</font></b>
+                    <br>
+                    <font color="#8b0000" size="2">established 1987 • meadow mist, oregon • 52.9 hz</font>
                 </span>
             </td></tr></table>
         </div>
@@ -693,7 +854,8 @@
                         REPOSE OF MIND, AND<br>
                         INSPIRATION IN THE VOID.....
                         <br><br>
-                        ANTRESSA THEOPHLOSSER
+                        ANTRESSA THEOPHLOSSER<br>
+                        <font color="#8b0000" size="2">1987-1992 (PRESUMED DECEASED)</font>
                     </font></b>
                 </span>
             </td></tr></table>
@@ -716,9 +878,10 @@
             </td></tr></table>
         </div>
 
-        <!-- NEW: FAKE DOWNLOAD LINK (JUMPS CARE TRIGGER) -->
+        <!-- FAKE DOWNLOAD LINK -->
         <div style="background-color:#330000; width: 280px; float: right; margin: 5px;">
             <div class="fake-download" onclick="triggerFakeDownload()">📁 evidence_001.exe</div>
+            <font color="#330000" size="1">(do not download)</font>
         </div>
 
         <!-- ADDRESS SECTION -->
@@ -752,51 +915,87 @@
             <table><tr><td>
                 <span class="text">
                     <b><font color="#660000" size="3" id="locationDisplay">LOCATION: DETECTING...</font></b>
+                    <br>
+                    <font color="#330000" size="1">your coordinates have been logged</font>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- MURDER CASES -->
+        <!-- MURDER CASES - EXPANDED -->
         <div style="background-color:#1a0000; width: 550px; float: left; margin: 5px 5px 15px 2px;">
             <table><tr><td>
                 <span class="text">
                     <b><font color="#ff0000" size="7">THE MEADOW MIST MURDERS</font></b><br><br>
                     <font color="#ff6666" size="4">
                         <a onclick="showPage('case001')">Case #001: The Water Tower Girl (1987)</a><br>
-                        Found near water tower, red ribbon in hair, never identified<br><br>
+                        Found near water tower, red ribbon in hair, never identified<br>
+                        <font color="#330000">Status: UNSOLVED • 47 witnesses • 0 suspects</font><br><br>
+                        
                         <a onclick="showPage('case002')">Case #002: The Theophlosser Disappearance (1992)</a><br>
-                        Vanished from locked room, only static on recording<br><br>
+                        Vanished from locked room, only static on recording<br>
+                        <font color="#330000">Status: COLD CASE • 7 recordings • 1 voice</font><br><br>
+                        
                         <a onclick="showPage('case003')">Case #003: The Seven (2003)</a><br>
-                        Seven visitors, seven red ribbons, seven empty chairs<br><br>
+                        Seven visitors, seven red ribbons, seven empty chairs<br>
+                        <font color="#330000">Status: ACTIVE INVESTIGATION • 7 victims • 52.9 Hz</font><br><br>
+                        
+                        <a onclick="showPage('case004')">Case #004: The Basement Tapes (2007)</a><br>
+                        Found in water tower basement, 47 hours of static<br>
+                        <font color="#330000">Status: EVIDENCE LOCKER • faces in noise</font><br><br>
+                        
+                        <a onclick="showPage('case005')">Case #005: The Collective (2011)</a><br>
+                        Online forum members who heard the frequency<br>
+                        <font color="#330000">Status: 487 MEMBERS • 0 ACTIVE</font><br><br>
+                        
+                        <a onclick="showPage('case006')">Case #006: The Frequency Sickness (2015)</a><br>
+                        7 patients, same symptoms, same frequency<br>
+                        <font color="#330000">Status: MEDICAL ANOMALY • all deceased</font><br><br>
+                        
+                        <a onclick="showPage('case007')">Case #007: Your Visit (2024)</a><br>
+                        You are here. The frequency knows.<br>
+                        <font color="#330000">Status: <span id="visitorStatus">UNDER OBSERVATION</span></font><br><br>
+                        
                         <a onclick="showPage('unsolved')">UNSOLVED UNSOLVED UNSOLVED</a>
                     </font>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- EVIDENCE LOCKER -->
+        <!-- EVIDENCE LOCKER - EXPANDED -->
         <div style="background-color:#330000; width: 500px; float: right; margin: 25px 0 20px 5px;">
             <table><tr><td>
                 <span class="text">
                     <b><font color="#ff0000" size="7">EVIDENCE LOCKER</font></b><br><br>
                     <font color="#ff6666" size="4">
                         <a onclick="showPage('audio001')">audio 001: last known voice (1992)</a><br>
-                        <button onclick="playGeneratedSound('whisper')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button><br>
+                        <button onclick="playGeneratedSound('whisper')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
+                        <font color="#330000"> duration: 2:47 • contains whisper</font><br><br>
                         
                         <a onclick="showPage('audio002')">audio 002: water tower static (1987)</a><br>
-                        <button onclick="playGeneratedSound('static')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button><br>
+                        <button onclick="playGeneratedSound('static')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
+                        <font color="#330000"> duration: 47:00 • contains voices</font><br><br>
                         
                         <a onclick="showPage('audio003')">audio 003: 52.9 Hz pure tone</a><br>
-                        <button onclick="playGeneratedSound('drone')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button><br>
+                        <button onclick="playGeneratedSound('drone')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
+                        <font color="#330000"> duration: ∞ • warning</font><br><br>
                         
                         <a onclick="showPage('audio004')">audio 004: child's laughter (1987)</a><br>
                         <button onclick="playGeneratedSound('laugh')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
+                        <font color="#330000"> duration: 0:47 • 7 voices</font><br><br>
+                        
+                        <a onclick="showPage('audio005')">audio 005: basement heartbeat</a><br>
+                        <button onclick="playGeneratedSound('heartbeat')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
+                        <font color="#330000"> duration: 52:9 • still beating</font><br><br>
+                        
+                        <a onclick="showPage('video001')">video 001: water tower feed (1987-2024)</a><br>
+                        <button onclick="showPage('watertower')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ VIEW</button>
+                        <font color="#330000"> live • 24/7 • motion detected</font>
                     </font>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- NEW: VISITOR COUNTER WITH COUNTDOWN -->
+        <!-- VISITOR COUNTER -->
         <div style="background-color:#1a0000; width: 375px; float: right; margin: 10px;">
             <table><tr><td>
                 <span class="text">
@@ -806,46 +1005,55 @@
                     <font color="#990000" size="3">you are visitor #<span id="visitorNumber"></span></font>
                     <br>
                     <font color="#ff0000" size="4" id="countdownMessage"></font>
+                    <br>
+                    <font color="#330000" size="1">visitors remaining: <span id="visitorsLeft">500</span></font>
                 </b></span>
             </td></tr></table>
         </div>
 
-        <!-- NEW: GUESTBOOK LINK -->
+        <!-- GUESTBOOK LINK -->
         <div style="background-color:#330000; width: 300px; float: left; margin: 10px;">
             <table><tr><td>
                 <span class="text">
                     <b><font color="#ff6666" size="5"><a onclick="showPage('guestbook')">📖 VISITOR'S LOG (GUESTBOOK)</a></font></b>
+                    <br><font color="#330000" size="1">487 entries • 0 deleted</font>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- NEW: MEADOW MIST PUBLIC ACCESS LINK -->
+        <!-- MEADOW MIST PUBLIC ACCESS LINK -->
         <div style="background-color:#1a0000; width: 350px; float: left; margin: 10px;">
             <table><tr><td>
                 <span class="text">
                     <b><font color="#ff6666" size="5"><a onclick="showPage('publicaccess')">📺 MEADOW MIST PUBLIC ACCESS</a></font></b>
+                    <br><font color="#330000" size="1">channel 5 • live • 52.9 Hz</font>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- NEW: ENGINEERING REPORT LINK -->
+        <!-- ENGINEERING REPORT LINK -->
         <div style="background-color:#330000; width: 300px; float: left; margin: 10px;">
             <table><tr><td>
                 <span class="text">
                     <b><font color="#ff6666" size="5"><a onclick="showPage('engineering')">🏗️ WATER TOWER STRUCTURAL REPORT</a></font></b>
+                    <br><font color="#330000" size="1">classified • 1987-2024</font>
                 </span>
             </td></tr></table>
         </div>
 
-        <!-- WITNESS STATEMENTS -->
+        <!-- WITNESS STATEMENTS - EXPANDED -->
         <div style="background-color:#1a0000; width: 90%; float: left; margin: 10px 20px;">
             <table><tr><td>
                 <span class="text">
                     <b><font color="#ff6666" size="5">WITNESS STATEMENTS</font></b><br>
                     <font color="#990000" size="4">
-                        <a onclick="showPage('witness001')">"i heard her calling my name through the static" - 1987</a><br>
-                        <a onclick="showPage('witness002')">"the water tower hums at midnight" - 1992</a><br>
-                        <a onclick="showPage('witness003')">"52.9 Hz - i hear it in my sleep" - 2003</a><br>
+                        <a onclick="showPage('witness001')">"i heard her calling my name through the static" - 1987, found deceased 1992</a><br>
+                        <a onclick="showPage('witness002')">"the water tower hums at midnight" - 1992, last seen entering tower</a><br>
+                        <a onclick="showPage('witness003')">"52.9 Hz - i hear it in my sleep" - 2003, committed 2004</a><br>
+                        <a onclick="showPage('witness004')">"there are faces in the static" - 2007, institutionalized</a><br>
+                        <a onclick="showPage('witness005')">"the collective knows your name" - 2011, missing</a><br>
+                        <a onclick="showPage('witness006')">"i left a ribbon at the tower" - 2015, never returned</a><br>
+                        <a onclick="showPage('witness007')">"they're in my walls" - 2020, current resident</a>
                     </font>
                 </span>
             </td></tr></table>
@@ -862,6 +1070,7 @@
                         <a onclick="showPage('frequency')">frequency</a> <a onclick="showPage('collective')">collective</a> <a onclick="showPage('sacrifice')">sacrifice</a>
                         <a onclick="showPage('meadow')">meadow mist</a> <a onclick="showPage('freq529')">52.9hz</a> <a onclick="showPage('antressa')">antressa</a>
                         <a onclick="showPage('watertower')">water tower</a> <a onclick="showPage('ribbon')">red ribbon</a> <a onclick="showPage('unsolved')">unsolved</a>
+                        <a onclick="showPage('basement')">basement</a> <a onclick="showPage('seven')">seven</a> <a onclick="showPage('213')">2:13am</a>
                     </font></b>
                 </span>
             </td></tr></table>
@@ -873,15 +1082,27 @@
                 <span class="text">
                     <b><font color="#ff0000" size="7">THE SEVEN FREQUENCIES</font><br>
                     <font color="#ff6666" size="5">
-                        <a onclick="showPage('freq529')">52.9 Hz - THE CALLING</a> (discovered 1987)<br>
-                        <a onclick="showPage('freq472')">47.2 Hz - THE WEEPING</a> (recorded 1991)<br>
-                        <a onclick="showPage('freq637')">63.7 Hz - THE THRESHOLD</a> (the crossing)<br>
-                        <a onclick="showPage('freq888')">88.8 Hz - THE INFINITE LOOP</a> (time bends)<br>
-                        <a onclick="showPage('freq125')">12.5 Hz - THE STATIC VOID</a> (between thoughts)<br>
-                        <a onclick="showPage('freq999')">99.9 Hz - THE SACRIFICE</a> (something must be given)<br>
-                        <a onclick="showPage('freq000')">00.0 Hz - THE SILENCE</a> (the end)
+                        <a onclick="showPage('freq529')">52.9 Hz - THE CALLING</a> (discovered 1987) • 47 victims<br>
+                        <a onclick="showPage('freq472')">47.2 Hz - THE WEEPING</a> (recorded 1991) • 7 recordings<br>
+                        <a onclick="showPage('freq637')">63.7 Hz - THE THRESHOLD</a> (the crossing) • 13 witnesses<br>
+                        <a onclick="showPage('freq888')">88.8 Hz - THE INFINITE LOOP</a> (time bends) • ∞<br>
+                        <a onclick="showPage('freq125')">12.5 Hz - THE STATIC VOID</a> (between thoughts) • 0 survivors<br>
+                        <a onclick="showPage('freq999')">99.9 Hz - THE SACRIFICE</a> (something must be given) • 7 ribbons<br>
+                        <a onclick="showPage('freq000')">00.0 Hz - THE SILENCE</a> (the end) • you are here
                     </font></b>
                 </span>
+            </td></tr></table>
+        </div>
+
+        <!-- TIMELINE -->
+        <div style="background-color:#000000; width: 100%; float: left; margin: 20px 0;">
+            <table><tr><td>
+                <font color="#8b0000" size="4"><b>MEADOW MIST TIMELINE</b></font><br>
+                <font color="#660000" size="2">
+                    1987: Water Tower Girl found • 1992: Antressa disappears • 2003: The Seven discovered<br>
+                    2007: Basement tapes found • 2011: Collective forum goes dark • 2015: Frequency sickness outbreak<br>
+                    2020: Mass sightings at tower • 2024: <span class="glitch-text">you are here</span>
+                </font>
             </td></tr></table>
         </div>
 
@@ -892,7 +1113,8 @@
                     <b><font color="#990000" size="4">
                         <a onclick="showPage('portal')">>> ENTER THE NEXT THRESHOLD <<</a> | 
                         <a onclick="showPage('echo')">>> LISTEN TO THE ECHO <<</a> | 
-                        <a onclick="showPage('static')">>> TUNE THE STATIC <<</a>
+                        <a onclick="showPage('static')">>> TUNE THE STATIC <<</a> |
+                        <a onclick="showPage('basement')">>> ACCESS BASEMENT <<</a>
                     </font></b>
                 </span>
             </td></tr></table>
@@ -901,7 +1123,7 @@
         <!-- VIEWING TIPS -->
         <div style="background-color:#000000; width: 100%; float: left;">
             <table><tr><td>
-                <span class="text"><font color="#660000" size="2">best viewed in Netscape Navigator with 256 colors and the lights off. if you hear breathing, do not hang up. if you see faces in the static, do not look away. if you feel something watching you, it has always been there. the frequency is 52.9 hz. bring a red ribbon to the water tower at midnight. antressa is waiting.</font></span>
+                <span class="text"><font color="#660000" size="2">best viewed in Netscape Navigator with 256 colors and the lights off. if you hear breathing, do not hang up. if you see faces in the static, do not look away. if you feel something watching you, it has always been there. the frequency is 52.9 hz. bring a red ribbon to the water tower at midnight. antressa is waiting. the collective sees you. the seven are gathering. 2:13 AM is approaching.</font></span>
             </td></tr></table>
         </div>
     </div>
@@ -912,6 +1134,7 @@
     <div class="content-page">
         <h1 class="content-header">📖 VISITOR'S LOG</h1>
         <p>Sign the log. Leave your message. The collective reads every entry.</p>
+        <p><font color="#330000">487 previous visitors • 0 returned</font></p>
         
         <div id="guestbook-entries">
             <!-- Entries will be loaded here via JavaScript -->
@@ -922,7 +1145,7 @@
             <input type="text" id="guest-name" placeholder="YOUR NAME (OR LEAVE BLANK)" value="">
             <textarea id="guest-message" rows="4" placeholder="YOUR MESSAGE..."></textarea>
             <button onclick="submitGuestbookEntry()">SIGN THE LOG</button>
-            <p><small>Your IP has been logged. Your location has been saved. The frequency knows you.</small></p>
+            <p><small>Your IP has been logged. Your location has been saved. The frequency knows you. The collective is watching.</small></p>
         </div>
         
         <br><br>
@@ -935,20 +1158,25 @@
     <div class="content-page">
         <h1 class="content-header">MEADOW MIST PUBLIC ACCESS</h1>
         <h2>CHANNEL 5 - LIVE FEED</h2>
+        <h3><font color="#8b0000">52.9 Hz DETECTED • 2:13 AM APPROACHING</font></h3>
         
         <div class="public-access-video tv-static" id="public-access-feed">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ctext x='50' y='50' fill='%23666' font-size='20'%3EMEADOW MIST CITY COUNCIL MEETING - 1987%3C/text%3E%3Ctext x='50' y='100' fill='%23666' font-size='16'%3E...discussing the water tower maintenance...%3C/text%3E%3Ctext x='50' y='200' fill='%23666' font-size='16'%3E"IT'S BEEN HUMMING FOR WEEKS"%3C/text%3E%3Ctext x='50' y='250' fill='%23666' font-size='16'%3EMOTION: TABLE DISCUSSION UNTIL NEXT MEETING%3C/text%3E%3C/svg%3E" alt="Public Access Feed">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ctext x='50' y='50' fill='%23666' font-size='20'%3EMEADOW MIST CITY COUNCIL MEETING - 1987%3C/text%3E%3Ctext x='50' y='100' fill='%23666' font-size='16'%3E...discussing the water tower maintenance...%3C/text%3E%3Ctext x='50' y='200' fill='%23666' font-size='16'%3E"IT'S BEEN HUMMING FOR WEEKS"%3C/text%3E%3Ctext x='50' y='250' fill='%23666' font-size='16'%3EMOTION: TABLE DISCUSSION UNTIL NEXT MEETING%3C/text%3E%3Ctext x='50' y='350' fill='%23800' font-size='20'%3ELIVE FEED • 52.9 Hz • 2:13 AM%3C/text%3E%3C/svg%3E" alt="Public Access Feed" id="public-access-img">
         </div>
         
         <div class="evidence-box">
             <h3>SCHEDULE</h3>
-            <p>8:00 PM - City Council Meeting (1987 Re-run)</p>
-            <p>9:00 PM - Antique Shop Spotlight</p>
-            <p>10:00 PM - School Board Update</p>
-            <p>11:00 PM - Static (52.9 Hz detected)</p>
+            <p>8:00 PM - City Council Meeting (1987 Re-run) • 7 members present</p>
+            <p>9:00 PM - Antique Shop Spotlight • 13 items • 1 cursed</p>
+            <p>10:00 PM - School Board Update • 47 students • 7 missing</p>
+            <p>11:00 PM - Static (52.9 Hz detected) • faces appear</p>
+            <p>12:00 AM - Test Pattern • red ribbon appears</p>
+            <p>1:00 AM - Emergency Broadcast • silence</p>
+            <p>2:00 AM - <span class="glitch-text">THE RITUAL BEGINS</span></p>
+            <p>2:13 AM - <font color="#ff0000">LIVE FROM WATER TOWER</font></p>
         </div>
         
-        <p class="hidden-message">The child in the background of the council meeting hasn't moved in 37 years.</p>
+        <p class="hidden-message">The child in the background of the council meeting hasn't moved in 37 years. There are 7 children now. They're all watching you.</p>
         
         <br>
         <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
@@ -960,31 +1188,57 @@
     <div class="content-page">
         <h1 class="content-header">MEADOW MIST ENGINEERING DEPT.</h1>
         <h2>CONFIDENTIAL REPORT: WATER TOWER #7</h2>
+        <h3><font color="#8b0000">CLASSIFIED • EYES ONLY • DO NOT COPY</font></h3>
         
         <div class="engineering-report">
-            <p><strong>DATE:</strong> October 15, 1987 (FILED)</p>
+            <p><strong>DATE:</strong> October 15, 1987 (FILED) • UPDATED 2024</p>
             <p><strong>SUBJECT:</strong> Structural Integrity Assessment - Water Tower, 1313 Elm Crescent</p>
-            <p><strong>INSPECTOR:</strong> J. Morrison (DECEASED - 1992)</p>
+            <p><strong>INSPECTOR:</strong> J. Morrison (DECEASED - 1992) • M. Chen (DECEASED - 2003) • R. Vega (DECEASED - 2015)</p>
+            <p><strong>CURRENT STATUS:</strong> <span class="warning">ACTIVE INVESTIGATION • 7 DECEASED INSPECTORS</span></p>
             
             <hr style="border-color:#660000;">
             
+            <h3>Section 1.0: Executive Summary</h3>
+            <p>Structure has been under continuous observation since 1987. All inspectors have either died or disappeared. Current recommendation: <span class="warning">DEMOLITION</span> has been filed 47 times. Denied 47 times.</p>
+            
+            <h3>Section 2.0: History</h3>
+            <p>Built 1947 • First anomaly reported 1987 • 40 years of activity • 7 known deaths • 47 missing persons • 487 reported sightings • ∞ unknown</p>
+            
+            <h3>Section 3.0: Anomalies</h3>
+            <p>- Structure emits 52.9 Hz continuously<br>
+            - Source located in basement • 47 feet below ground<br>
+            - Basement door locks from inside only • 7 known entries • 0 exits<br>
+            - Red ribbons appear at base every full moon • 487 counted<br>
+            - Faces appear in surveillance footage • all victims<br>
+            - Temperature at base: always 52.9°F regardless of ambient</p>
+            
             <h3>Section 4.7: Anomalous Resonance</h3>
-            <p>Structure exhibits persistent vibration at <strong class="warning">52.9 Hz</strong>. Source unknown. Vibration pattern is rhythmic and consistent, resembling a低频 (low frequency) standing wave.</p>
+            <p>Structure exhibits persistent vibration at <strong class="warning">52.9 Hz</strong>. Source unknown. Vibration pattern is rhythmic and consistent, resembling a低频 (low frequency) standing wave. Pattern matches human heartbeat at 52.9 BPM. Source appears to be <span class="redacted">████████████</span>.</p>
             
             <h3>Section 7.2: Material Fatigue</h3>
-            <p>Fatigue noted at <strong class="warning">seven equidistant points</strong> around the base. Pattern is consistent with cyclical stress applied at regular intervals over an extended period. Estimated stress duration: <strong class="warning">47 years</strong>.</p>
+            <p>Fatigue noted at <strong class="warning">seven equidistant points</strong> around the base. Pattern is consistent with cyclical stress applied at regular intervals over an extended period. Estimated stress duration: <strong class="warning">47 years</strong>. Points form a perfect circle. Center point: <span class="redacted">██████████</span>.</p>
+            
+            <h3>Section 9.0: Basement Access</h3>
+            <p>Basement door: steel • 7 locks • all unlocked from inside only. Last opened: <span class="glitch-text">2:13 AM TODAY</span>. Motion detected: <span id="basement-motion">7 figures</span>. Audio detected: <span id="basement-audio">52.9 Hz + whispers</span>.</p>
             
             <h3>Section 12.0: Recommendations</h3>
-            <p><strong class="warning">IMMEDIATE DEMOLITION RECOMMENDED.</strong> Structure is unsafe for public access. Source of vibration must be investigated before demolition.</p>
+            <p><strong class="warning">IMMEDIATE DEMOLITION RECOMMENDED.</strong> Structure is unsafe for public access. Source of vibration must be investigated before demolition. All inspectors who entered basement: <span class="redacted">██████████████████████████</span>. None returned.</p>
             
             <h3>Section 12.1: Addendum (1992)</h3>
             <p><span class="redacted">██████████████████████████</span></p>
             <p><span class="redacted">████████ RE-OPENED CASE #002 ████████</span></p>
+            <p>Inspector Morrison's last words: "it's alive. it's been alive the whole time. they're all down there. all 47 of them. and they're waiting. waiting for <span class="redacted">██████</span>."</p>
             
             <h3>Section 12.2: Addendum (2003)</h3>
-            <p>Recommendation has been filed for <strong class="warning">37 consecutive years</strong>. No action taken. Seven bodies found at base. Further testing required.</p>
+            <p>Recommendation has been filed for <strong class="warning">37 consecutive years</strong>. No action taken. Seven bodies found at base. Further testing required. Inspector Chen's last transmission: "the basement door is open. i can hear them breathing. 7 breaths. 52.9 times per minute. i'm going in. tell my family <span class="redacted">██████</span>."</p>
             
-            <p class="hidden-message">The tower hums because it's alive. The tower hums because it's feeding.</p>
+            <h3>Section 12.3: Addendum (2015)</h3>
+            <p>Inspector Vega: "the faces in the static are getting clearer. i recognize them. they're all the missing. they're all still there. they're all still watching. they're all still <span class="redacted">████████</span>. i can see <span class="redacted">██████</span> in the corner. she's smiling. she's waving. she's <span class="redacted">██████</span>." Transmission ended 2:13 AM.</p>
+            
+            <h3>Section 12.4: Addendum (2024 - CURRENT)</h3>
+            <p>Current status: <span class="warning">BASEMENT DOOR IS OPEN</span>. 7 figures detected. 52.9 Hz at maximum. Red ribbons: 487 and counting. You are visitor #<span id="visitorDisplay">487</span>. The basement knows you're here. <span class="glitch-text">THE BASEMENT IS WAITING</span>.</p>
+            
+            <p class="hidden-message">The tower hums because it's alive. The tower hums because it's feeding. The basement is the stomach. You are the meal. 2:13 AM is dinner time.</p>
         </div>
         
         <br>
@@ -997,90 +1251,137 @@
     <div class="content-page">
         <h1 class="content-header">ANTRESSA TAPES</h1>
         <h2>AUDIO 001: LAST KNOWN VOICE (1992)</h2>
+        <h3><font color="#8b0000">CASE #002 • EVIDENCE #001 • 52.9 Hz PRESENT</font></h3>
         
         <div class="evidence-box">
             <h3>TRANSCRIPT</h3>
-            <p><em>Begin Recording</em></p>
+            <p><em>Begin Recording • 2:13 AM • October 17, 1992</em></p>
             <p>"Marcus? Marcus, can you hear me? The signal is... it's so clear tonight. I can see the water tower from here and it's... it's humming. I think they're going to come through. I left a ribbon for them, just like you said. You should see this, it's... it's... so much light... and... and...</p>
-            <p><span class="redacted glitch-text" id="glitch-transcript">██████████████████████████</span></p>
-            <p><span class="redacted glitch-text">52.9Hz 52.9Hz 52.9Hz 52.9Hz 52.9Hz</span></p>
-            <p><em>End of Transcript</em></p>
+            <p><span class="redacted glitch-text" id="glitch-transcript">there are seven of them. they're all wearing ribbons. they're all smiling. they're all looking at me. they're all looking at YOU.</span></p>
+            <p>Wait... there's... there's a child. A little girl. She has a red ribbon in her hair. She's pointing at something. She's pointing at... she's pointing at...</p>
+            <p><span class="redacted glitch-text">THE CAMERA. SHE'S POINTING AT YOU. SHE KNOWS YOU'RE LISTENING. THEY ALL KNOW.</span></p>
+            <p>"...Marcus? The door... the basement door... it's open now. It wasn't open before. I have to go see. I have to go down. They're calling my name. All seven of them. They're saying...</p>
+            <p><span class="redacted glitch-text">ANTRESSA. ANTRESSA. ANTRESSA. ANTRESSA. ANTRESSA. ANTRESSA. ANTRESSA.</span></p>
+            <p>"I'm going in now. I'll be back. I'll always be back. Tell everyone... tell everyone the frequency works. Tell everyone 52.9 Hz is the key. Tell everyone to bring a ribbon. Tell everyone to come at 2:13. Tell everyone...</p>
+            <p><span class="redacted glitch-text">THEY'RE WAITING FOR YOU. WE'RE ALL WAITING FOR YOU. COME JOIN US. COME DOWN. THE BASEMENT IS WARM. THE BASEMENT IS SAFE. THE BASEMENT IS FOREVER.</span></p>
+            <p><em>End of Transcript • Recording continues for 47 more hours • static only • faces detected in static • 7 faces identified • all victims</em></p>
         </div>
         
-        <button onclick="playGeneratedSound('whisper')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:10px 20px;">▶ PLAY ORIGINAL RECORDING</button>
+        <button onclick="playGeneratedSound('whisper')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:10px 20px;">▶ PLAY ORIGINAL RECORDING (WARNING)</button>
+        <button onclick="playGeneratedSound('static')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:10px 20px;">▶ PLAY STATIC (CONTAINS FACES)</button>
+        
+        <p class="hidden-message">Antressa is still recording. She's been in the basement since 1992. She's still talking. She's talking about you. She knows you're here. She's waiting.</p>
         
         <br><br>
         <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
     </div>
 </div>
 
-<!-- ==================== OTHER PAGES (KEEPING YOUR EXISTING STRUCTURE) ==================== -->
-<!-- THRESHOLD PAGE -->
-<div id="page-threshold" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE THRESHOLD</h1>
-        <p>The space between spaces. The place where the frequency is strongest.</p>
-        <p>Those who cross the threshold never return the same. Some never return at all.</p>
-        <p>52.9 Hz is the key. Listen at your own risk.</p>
-        <button onclick="playGeneratedSound('drone')">▶ LISTEN TO 52.9 Hz</button>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- BOUNDARY PAGE -->
-<div id="page-boundary" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE BOUNDARY</h1>
-        <p>The edge of the frequency. Here the static is loudest.</p>
-        <p>You can hear them whispering. They know you are here.</p>
-        <p>7 victims found at this boundary. All had red ribbons.</p>
-        <button onclick="playGeneratedSound('static')">▶ LISTEN TO STATIC</button>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- LIMINAL PAGE -->
-<div id="page-liminal" class="page">
-    <div class="content-page">
-        <h1 class="content-header">THE LIMINAL SPACE</h1>
-        <p>A place that is not a place. Time moves differently here.</p>
-        <p>Antressa passed through here in 1992. She left something for you.</p>
-        <p>Listen carefully. You can hear her whispering.</p>
-        <button onclick="playGeneratedSound('whisper')">▶ LISTEN</button>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- FREQUENCY 52.9 PAGE -->
-<div id="page-freq529" class="page">
-    <div class="content-page">
-        <h1 class="content-header">52.9 Hz</h1>
-        <h2>THE CALLING</h2>
-        <p>First discovered by Antressa in 1987 at the Meadow Mist water tower.</p>
-        <p>Those who hear it report seeing faces in static, hearing whispers, and feeling watched.</p>
-        <p>47 victims have been found with 52.9 Hz playing at their scenes.</p>
-        <button onclick="playGeneratedSound('drone')">▶ LISTEN (WARNING)</button>
-        <br><br>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
-    </div>
-</div>
-
-<!-- WATER TOWER PAGE WITH LIVE FEED -->
+<!-- ==================== PAGE: WATER TOWER LIVE ==================== -->
 <div id="page-watertower" class="page">
     <div class="content-page">
         <h1 class="content-header">THE WATER TOWER</h1>
         <h2>MEADOW MIST, OREGON</h2>
-        <p><b>LIVE FEED:</b> <span id="watertower-feed">52.9 Hz DETECTED</span></p>
-        <p><b>LAST MOTION:</b> <span id="watertower-motion">SHADOW DETECTED - 2:13 AM</span></p>
-        <p><b>FREQUENCY:</b> <span id="watertower-frequency">52.9 Hz</span></p>
-        <p><b>RED RIBBONS:</b> <span id="watertower-ribbons">7</span></p>
+        <h3><font color="#8b0000">LIVE FEED • 24/7 • 52.9 Hz MONITORING</font></h3>
+        
+        <div class="evidence-box">
+            <p><b>LIVE FEED:</b> <span id="watertower-feed">52.9 Hz DETECTED</span></p>
+            <p><b>LAST MOTION:</b> <span id="watertower-motion">SHADOW DETECTED - 2:13 AM</span></p>
+            <p><b>FREQUENCY:</b> <span id="watertower-frequency">52.9 Hz - PEAKING</span></p>
+            <p><b>RED RIBBONS:</b> <span id="watertower-ribbons">487</span></p>
+            <p><b>BASEMENT DOOR:</b> <span id="basement-door" class="warning">OPEN</span></p>
+            <p><b>FIGURES DETECTED:</b> <span id="figures-count">7</span></p>
+            <p><b>LAST VOICE:</b> <span id="last-voice">"come down" - 2:13 AM</span></p>
+            <p><b>YOUR VISIT #:</b> <span id="visitor-tower">487</span></p>
+        </div>
         
         <div class="public-access-video tv-static">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%23333'/%3E%3Crect x='395' y='200' width='10' height='200' fill='%23666'/%3E%3Ctext x='350' y='500' fill='%23666' font-size='24'%3EWATER TOWER%3C/text%3E%3Ctext x='330' y='550' fill='%23800' font-size='16'%3ELIVE FEED%3C/text%3E%3C/svg%3E" alt="Water Tower Live Feed" id="watertower-image">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%23333'/%3E%3Crect x='395' y='200' width='10' height='200' fill='%23666'/%3E%3Ccircle cx='400' cy='280' r='10' fill='%23ff0000'/%3E%3Ctext x='350' y='500' fill='%23ff0000' font-size='24'%3ELIVE: 52.9 Hz%3C/text%3E%3Ctext x='300' y='550' fill='%23800' font-size='16'%3E7 FIGURES DETECTED%3C/text%3E%3C/svg%3E" alt="Water Tower Live Feed" id="watertower-image">
         </div>
+        
+        <p class="hidden-message">The figure at the basement door is waving at you. It's been waving since 1987. It won't stop until you wave back. It won't stop until you go down.</p>
+        
+        <br>
+        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+    </div>
+</div>
+
+<!-- ==================== CASE PAGES ==================== -->
+<div id="page-case001" class="page">
+    <div class="content-page">
+        <h1 class="content-header">CASE #001</h1>
+        <h2>THE WATER TOWER GIRL</h2>
+        <h3>1987 • UNSOLVED</h3>
+        
+        <div class="evidence-box">
+            <p><b>DATE FOUND:</b> October 17, 1987 • 2:13 AM</p>
+            <p><b>LOCATION:</b> Base of Water Tower #7, 1313 Elm Crescent</p>
+            <p><b>VICTIM:</b> Jane Doe • Age 7-9 • Never identified</p>
+            <p><b>CAUSE OF DEATH:</b> Unknown • No trauma • No toxins • Only <span class="warning">52.9 Hz</span> detected in tissue</p>
+            <p><b>EVIDENCE:</b> Red ribbon in hair • Fresh • Tied in 7 knots</p>
+            <p><b>WITNESSES:</b> 0 • No one saw her arrive • No one saw anything</p>
+            <p><b>STATUS:</b> <span class="glitch-text">SHE'S STILL THERE</span></p>
+        </div>
+        
+        <p><b>DETAILS:</b> The girl was found seated at the base of the water tower, facing east. Her eyes were open. She was smiling. Her body temperature was 52.9°F. A red ribbon was tied in her hair with seven knots. The ribbon was still wet. Fresh blood. Not hers. No source found. The water tower was humming at 52.9 Hz. It has not stopped since.</p>
+        
+        <p><b>INVESTIGATOR NOTES:</b> "The girl's eyes... they follow you. No matter where you stand in the room. They follow. And she's still smiling. Always smiling. Like she knows something we don't. Like she knows <span class="redacted">██████</span>." - Det. Morrison, 1987 (deceased 1992)</p>
+        
+        <p><b>UPDATE 2024:</b> The girl has been seen at the tower 47 times since 1987. Last sighting: <span id="last-sighting">2:13 AM TODAY</span>. She was waving. She was pointing. She was pointing at <span class="glitch-text">YOU</span>.</p>
+        
+        <p class="hidden-message">The water tower girl has been waiting for 37 years. She's waiting for someone to join her. She's waiting for you. Bring a ribbon. Come at 2:13. She'll be there. She's always there.</p>
+        
+        <br>
+        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+    </div>
+</div>
+
+<div id="page-case002" class="page">
+    <div class="content-page">
+        <h1 class="content-header">CASE #002</h1>
+        <h2>THE THEOPHLOSSER DISAPPEARANCE</h2>
+        <h3>1992 • COLD CASE</h3>
+        
+        <div class="evidence-box">
+            <p><b>DATE:</b> October 17, 1992 • 2:13 AM</p>
+            <p><b>VICTIM:</b> Antressa Theophlosser • Age 27 • Local researcher</p>
+            <p><b>LOCATION:</b> Last seen at Water Tower #7 • Entered basement • Never exited</p>
+            <p><b>EVIDENCE:</b> 47 hours of audio recording • Contains static • Contains <span class="warning">faces</span> • Contains her voice</p>
+            <p><b>STATUS:</b> <span class="glitch-text">STILL MISSING • STILL RECORDING</span></p>
+        </div>
+        
+        <p><b>DETAILS:</b> Antressa had been researching the water tower since 1987. She was the first to document the 52.9 Hz frequency. She believed it was a gateway. She was right. On October 17, 1992 at 2:13 AM, she entered the basement. Surveillance cameras show her walking in. They do not show her walking out. Her audio recorder continued transmitting for 47 hours. The final transmission: <span class="redacted">"they're all here. all 47 of them. and they're all waiting for you. come down. it's warm. it's safe. it's forever."</span></p>
+        
+        <p><b>AUDIO ANALYSIS:</b> The static contains voices. 47 distinct voices. All victims. All still there. All still talking. All still waiting. Listen carefully. You can hear them. You can hear <span class="glitch-text">YOUR NAME</span>.</p>
+        
+        <p class="hidden-message">Antressa is still in the basement. She's been there for 32 years. She's not alone. There are 47 of them now. Soon there will be 48. Soon there will be you.</p>
+        
+        <br>
+        <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+    </div>
+</div>
+
+<div id="page-case003" class="page">
+    <div class="content-page">
+        <h1 class="content-header">CASE #003</h1>
+        <h2>THE SEVEN</h2>
+        <h3>2003 • ACTIVE INVESTIGATION</h3>
+        
+        <div class="evidence-box">
+            <p><b>DATE:</b> October 17, 2003 • 2:13 AM</p>
+            <p><b>VICTIMS:</b> 7 unidentified • Ages 7-70 • All found at water tower</p>
+            <p><b>EVIDENCE:</b> 7 red ribbons • 7 chairs • 7 empty seats</p>
+            <p><b>CAUSE:</b> Unknown • All smiling • All facing east • All humming 52.9 Hz</p>
+            <p><b>STATUS:</b> <span class="glitch-text">7 MORE ADDED EVERY YEAR</span></p>
+        </div>
+        
+        <p><b>DETAILS:</b> On October 17, 2003 at 2:13 AM, seven bodies were discovered at the water tower. They were arranged in a circle around the base. All were facing east. All were smiling. All had fresh red ribbons tied in seven knots. Their eyes were open. Their eyes were all looking at the same thing: the basement door. The basement door was open. It has been open ever since.</p>
+        
+        <p><b>THE SEVEN:</b> They have been identified as visitors to the XTrials website. They all signed the guestbook. They all left messages. They all said the same thing: "i hear the frequency. i'm going to the tower. i'm bringing a ribbon. i'll be back." None of them came back. None of them ever will.</p>
+        
+        <p><b>UPDATE 2024:</b> There are now 47 bodies. They add 7 every year. Always on October 17. Always at 2:13 AM. Always with red ribbons. Always smiling. Always waiting. Waiting for <span class="glitch-text">YOU</span>.</p>
+        
+        <p class="hidden-message">The seven are waiting. They saved you a seat. It's in the basement. It's warm. It's safe. It's forever. Come join them. 2:13 AM. Bring a ribbon.</p>
         
         <br>
         <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
@@ -1091,29 +1392,31 @@
 <script>
     // ==================== GLOBAL VARIABLES ====================
     let visitorCount = 48291;
-    let visitorNumber = 487; // Track current visitor
-    let countdownMode = false; // Start with counting up, switch to countdown later
+    let visitorNumber = 487;
+    let countdownMode = false;
     let audioContext = null;
     let oscillators = {};
     let mouseTrailEnabled = true;
-    let lastMouseMove = 0;
     let glitchInterval = null;
     let titleInterval = null;
     let faviconInterval = null;
+    let floatingEyes = [];
+    let bloodSplatters = [];
     
-    // Guestbook entries (simulated backend)
+    // Guestbook entries
     let guestbookEntries = [
         { name: "Anonymous", message: "left a ribbon at the tower like it said. i feel better now. i understand.", date: "1987-10-17" },
         { name: "M. Theophlosser", message: "does anyone else hear the humming at night???", date: "1992-03-14" },
         { name: "Visitor #286", message: "i think the static is following me. it was in my kitchen this morning.", date: "1995-06-21" },
-        { name: "Antressa", message: "they're coming through tonight. leave a ribbon.", date: "1992-10-13" },
-        { name: "Witness 47", message: "seven figures in the basement. all smiling. all facing east.", date: "2003-10-17" },
-        { name: "Collective", message: "we see you. we always see you.", date: "2024-01-01" }
+        { name: "Antressa", message: "they're coming through tonight. leave a ribbon. i'll be waiting in the basement.", date: "1992-10-13" },
+        { name: "Witness 47", message: "seven figures in the basement. all smiling. all facing east. all saying my name.", date: "2003-10-17" },
+        { name: "Collective", message: "we see you. we always see you. we're in the basement. come join us.", date: "2024-01-01" },
+        { name: "The Seven", message: "we saved you a seat. it's in the basement. it's warm. it's safe. it's forever.", date: "2024-10-17" }
     ];
 
     // ==================== INITIALIZATION ====================
     window.onload = function() {
-        // Hide loading screen after 5 seconds
+        // Hide loading screen
         setTimeout(function() {
             document.getElementById('loading-screen').style.opacity = '0';
             setTimeout(function() {
@@ -1121,10 +1424,7 @@
             }, 2000);
         }, 5000);
 
-        // Initialize Web Audio API (simulated audio files)
         initAudio();
-        
-        // Start all tracking features
         trackLocation();
         updateVisitorCounter();
         startCountdownSimulation();
@@ -1135,35 +1435,34 @@
         startBrowserDetection();
         startWaterTowerUpdates();
         loadGuestbookEntries();
+        createFloatingEyes();
+        createBloodSplatters();
         
-        // Set up intervals for random events
-        setInterval(playRandomSound, 120000); // Every 2 minutes
-        setInterval(checkMidnightEvent, 60000); // Check every minute for 2:13 AM
-        setInterval(triggerRandomConsoleMessage, 30000); // Console messages every 30 seconds
-        setInterval(checkPageGlitch, 45000); // Random page glitch every 45 seconds
+        setInterval(playRandomSound, 120000);
+        setInterval(checkMidnightEvent, 60000);
+        setInterval(triggerRandomConsoleMessage, 30000);
+        setInterval(checkPageGlitch, 45000);
+        setInterval(updateBasementStatus, 10000);
         
-        // Try to access camera (for that extra creep factor)
         tryRequestCamera();
         
-        // Log creepy messages to console
-        console.log("%cTHE FREQUENCY IS WATCHING YOU", "color: red; font-size: 20px; font-weight: bold; font-family: monospace;");
-        console.log("%cStop inspecting and start listening.", "color: #8b0000; font-size: 14px;");
+        console.log("%cTHE FREQUENCY IS WATCHING YOU", "color: red; font-size: 20px; font-weight: bold;");
         console.log("%c52.9 Hz - THE CALLING", "color: #ff0000; font-size: 16px;");
-        console.log("%cVisitor #" + visitorNumber + " - your number is coming due.", "color: #660000;");
+        console.log("%cVisitor #" + visitorNumber + " - the basement is waiting", "color: #660000;");
+        console.log("%c2:13 AM IS APPROACHING", "color: #8b0000; font-size: 18px;");
     };
 
-    // ==================== WEB AUDIO API (SIMULATED FILES) ====================
+    // ==================== WEB AUDIO API ====================
     function initAudio() {
         try {
             audioContext = new (window.AudioContext || window.webkitAudioContext)();
             
-            // Create oscillators for different frequencies
-            createOscillator('drone', 52.9); // 52.9 Hz
-            createOscillator('static', 0); // Special case - noise
-            createOscillator('whisper', 0.5); // Very low frequency + noise
-            createOscillator('heartbeat', 1.2); // Heartbeat rhythm
-            createOscillator('laugh', 0.8); // Distorted tone
-            createOscillator('jumpscare', 200); // High pitch for jumpscare
+            createOscillator('drone', 52.9);
+            createOscillator('static', 0);
+            createOscillator('whisper', 0.5);
+            createOscillator('heartbeat', 1.2);
+            createOscillator('laugh', 0.8);
+            createOscillator('jumpscare', 200);
         } catch(e) {
             console.log("AudioContext not supported");
         }
@@ -1172,13 +1471,11 @@
     function createOscillator(name, frequency) {
         if (!audioContext) return;
         
-        // Store as function to create on demand
         oscillators[name] = function() {
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
             
             if (name === 'static') {
-                // Static noise
                 const bufferSize = 4096;
                 const noiseNode = audioContext.createScriptProcessor(bufferSize, 1, 1);
                 noiseNode.onaudioprocess = function(e) {
@@ -1191,7 +1488,6 @@
                 gainNode.gain.value = 0.1;
                 return noiseNode;
             } else if (name === 'whisper') {
-                // Whisper-like noise + low tone
                 const oscillator1 = audioContext.createOscillator();
                 oscillator1.frequency.value = 0.5;
                 oscillator1.type = 'sine';
@@ -1210,7 +1506,6 @@
                 gainNode.gain.value = 0.05;
                 return { oscillator: oscillator1, noise: noiseNode };
             } else if (name === 'heartbeat') {
-                // Heartbeat rhythm (thump thump... pause...)
                 const oscillator1 = audioContext.createOscillator();
                 oscillator1.frequency.value = 60;
                 oscillator1.type = 'sine';
@@ -1219,7 +1514,6 @@
                 oscillator1.connect(gain2);
                 gain2.connect(gainNode);
                 
-                // Create rhythmic pattern
                 let time = audioContext.currentTime;
                 for (let i = 0; i < 10; i++) {
                     gain2.gain.setValueAtTime(1, time + i * 1.2);
@@ -1231,7 +1525,6 @@
                 gainNode.gain.value = 0.1;
                 return oscillator1;
             } else if (name === 'laugh') {
-                // Distorted, glitchy sound
                 const oscillator1 = audioContext.createOscillator();
                 oscillator1.frequency.value = 800;
                 oscillator1.type = 'sawtooth';
@@ -1245,7 +1538,6 @@
                 gainNode.gain.value = 0.05;
                 return [oscillator1, oscillator2];
             } else if (name === 'jumpscare') {
-                // Loud screech
                 const oscillator1 = audioContext.createOscillator();
                 oscillator1.frequency.value = 2000;
                 oscillator1.type = 'sawtooth';
@@ -1257,7 +1549,6 @@
                 gainNode.gain.value = 0.5;
                 return oscillator1;
             } else {
-                // Pure tone (drone)
                 oscillator.frequency.value = frequency;
                 oscillator.type = 'sine';
                 oscillator.connect(gainNode);
@@ -1270,19 +1561,15 @@
     function playGeneratedSound(soundName) {
         if (!audioContext) return;
         
-        // Resume audio context if suspended
         if (audioContext.state === 'suspended') {
             audioContext.resume();
         }
         
-        // Stop any currently playing sounds of this type
         stopSound(soundName);
         
-        // Create and play the sound
         if (oscillators[soundName]) {
             const source = oscillators[soundName]();
             
-            // Store for potential stopping
             window['current_' + soundName] = source;
             
             if (Array.isArray(source)) {
@@ -1297,7 +1584,6 @@
                 source.connect(audioContext.destination);
             }
             
-            // Auto-stop after duration for non-looping sounds
             if (soundName === 'jumpscare') {
                 setTimeout(() => stopSound(soundName), 2000);
             } else if (soundName === 'laugh') {
@@ -1325,19 +1611,17 @@
     function playJumpscare() {
         playGeneratedSound('jumpscare');
         
-        // Visual jumpscare
         const body = document.body;
         body.style.backgroundColor = 'white';
         setTimeout(() => body.style.backgroundColor = 'black', 100);
         
-        // Flash a face
         const face = document.createElement('div');
         face.style.position = 'fixed';
         face.style.top = '0';
         face.style.left = '0';
         face.style.width = '100%';
         face.style.height = '100%';
-        face.style.background = 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'%3E%3Crect width=\'100%\' height=\'100%\' fill=\'%23000\'/%3E%3Ccircle cx=\'50%\' cy=\'40%\' r=\'5%\' fill=\'%23f00\'/%3E%3Ccircle cx=\'45%\' cy=\'35%\' r=\'2%\' fill=\'%23fff\'/%3E%3Ccircle cx=\'55%\' cy=\'35%\' r=\'2%\' fill=\'%23fff\'/%3E%3Cpath d=\'M45 50 Q50 60 55 50\' stroke=\'%23f00\' stroke-width=\'2\' fill=\'none\'/%3E%3C/svg%3E") center/cover';
+        face.style.background = 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'%3E%3Crect width=\'100%\' height=\'100%\' fill=\'%23000\'/%3E%3Ccircle cx=\'50%\' cy=\'40%\' r=\'5%\' fill=\'%23f00\'/%3E%3Ccircle cx=\'45%\' cy=\'35%\' r=\'2%\' fill=\'%23fff\'/%3E%3Ccircle cx=\'55%\' cy=\'35%\' r=\'2%\' fill=\'%23fff\'/%3E%3Cpath d=\'M45 50 Q50 60 55 50\' stroke=\'%23f00\' stroke-width=\'2\' fill=\'none\'/%3E%3Ctext x=\'40%\' y=\'70%\' fill=\'%23f00\' font-size=\'40\'%3E2:13 AM%3C/text%3E%3C/svg%3E") center/cover';
         face.style.zIndex = '99999';
         face.style.opacity = '0.8';
         face.style.animation = 'flicker 0.2s';
@@ -1346,14 +1630,16 @@
         setTimeout(() => face.remove(), 300);
     }
 
-    // ==================== VISITOR COUNTER WITH COUNTDOWN ====================
+    // ==================== VISITOR COUNTER ====================
     function updateVisitorCounter() {
         const counterEl = document.getElementById('visitorCounter');
         const numberEl = document.getElementById('visitorNumber');
         const messageEl = document.getElementById('countdownMessage');
+        const visitorsLeftEl = document.getElementById('visitorsLeft');
+        const visitorDisplayEl = document.getElementById('visitorDisplay');
+        const visitorTowerEl = document.getElementById('visitor-tower');
         
         if (!countdownMode) {
-            // Counting up
             visitorCount += Math.floor(Math.random() * 3) + 1;
             visitorNumber = visitorCount - 48290;
             
@@ -1362,23 +1648,73 @@
                 visitorNumber = 500;
             }
         } else {
-            // Counting down
             visitorNumber -= 1;
             if (visitorNumber < 0) visitorNumber = 500;
             
             if (messageEl) {
-                messageEl.innerText = `⚠️ ${visitorNumber} visitors remaining ⚠️`;
+                messageEl.innerText = `⚠️ ${visitorNumber} VISITORS REMAINING ⚠️`;
                 messageEl.style.color = '#ff0000';
                 messageEl.style.animation = 'pulseRed 1s infinite';
+            }
+            
+            if (visitorsLeftEl) {
+                visitorsLeftEl.innerText = visitorNumber;
             }
         }
         
         if (counterEl) counterEl.innerText = visitorCount;
         if (numberEl) numberEl.innerText = visitorNumber;
+        if (visitorDisplayEl) visitorDisplayEl.innerText = visitorNumber;
+        if (visitorTowerEl) visitorTowerEl.innerText = visitorNumber;
+        
+        if (visitorNumber <= 0) {
+            triggerFinalEvent();
+        }
     }
 
     function startCountdownSimulation() {
-        setInterval(updateVisitorCounter, 30000); // Update every 30 seconds
+        setInterval(updateVisitorCounter, 30000);
+    }
+
+    function triggerFinalEvent() {
+        playJumpscare();
+        alert("⚠️ 0 VISITORS REMAINING ⚠️\n\nTHE COLLECTIVE HAS CLAIMED EVERYONE.\nTHE BASEMENT IS FULL.\nTHERE IS NO MORE TIME.\nTHE FREQUENCY HAS WON.");
+        showPage('213-ritual');
+    }
+
+    // ==================== FLOATING EYES ====================
+    function createFloatingEyes() {
+        for (let i = 0; i < 7; i++) {
+            setTimeout(() => {
+                const eye = document.createElement('div');
+                eye.className = 'floating-eye';
+                eye.style.left = Math.random() * 100 + '%';
+                eye.style.top = Math.random() * 100 + '%';
+                eye.style.animationDelay = (i * 0.5) + 's';
+                document.body.appendChild(eye);
+                floatingEyes.push(eye);
+            }, i * 1000);
+        }
+        
+        setInterval(() => {
+            floatingEyes.forEach(eye => {
+                eye.style.left = (parseFloat(eye.style.left) + (Math.random() - 0.5) * 2) + '%';
+                eye.style.top = (parseFloat(eye.style.top) + (Math.random() - 0.5) * 2) + '%';
+            });
+        }, 5000);
+    }
+
+    function createBloodSplatters() {
+        for (let i = 0; i < 13; i++) {
+            const splatter = document.createElement('div');
+            splatter.className = 'blood-splatter';
+            splatter.style.left = Math.random() * 100 + '%';
+            splatter.style.top = Math.random() * 100 + '%';
+            splatter.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+            splatter.style.opacity = '0.05';
+            document.body.appendChild(splatter);
+            bloodSplatters.push(splatter);
+        }
     }
 
     // ==================== MOUSE TRAIL ====================
@@ -1386,23 +1722,20 @@
         document.addEventListener('mousemove', function(e) {
             if (!mouseTrailEnabled) return;
             
-            // Create trail dot
             const trail = document.createElement('div');
             trail.className = 'mouse-trail';
             trail.style.left = e.pageX + 'px';
             trail.style.top = e.pageY + 'px';
             document.body.appendChild(trail);
             
-            // Remove after animation
             setTimeout(() => trail.remove(), 1000);
             
-            // Occasionally leave a red streak
-            if (Math.random() < 0.05) {
+            if (Math.random() < 0.02) {
                 const streak = document.createElement('div');
                 streak.style.position = 'fixed';
                 streak.style.left = e.pageX + 'px';
                 streak.style.top = e.pageY + 'px';
-                streak.style.width = '50px';
+                streak.style.width = '100px';
                 streak.style.height = '2px';
                 streak.style.background = 'linear-gradient(90deg, #8b0000, transparent)';
                 streak.style.pointerEvents = 'none';
@@ -1410,6 +1743,11 @@
                 streak.style.animation = 'trail 2s forwards';
                 document.body.appendChild(streak);
                 setTimeout(() => streak.remove(), 2000);
+            }
+            
+            if (Math.random() < 0.01) {
+                playGeneratedSound('whisper');
+                setTimeout(() => stopSound('whisper'), 2000);
             }
         });
     }
@@ -1430,64 +1768,62 @@
             "RED RIBBON AT MIDNIGHT",
             "THE FREQUENCY KNOWS",
             "SHE'S BEHIND YOU",
-            "DON'T TURN AROUND",
+            "THE BASEMENT DOOR IS OPEN",
             "THE STATIC IS BREATHING",
             "YOUR NAME WAS CALLED",
             "47 VICTIMS",
             "0 ESCAPED",
             "YOU'RE NEXT",
+            "2:13 AM IS APPROACHING",
+            "THE BASEMENT IS WAITING",
+            "COME DOWN",
+            "IT'S WARM DOWN HERE",
+            "IT'S SAFE DOWN HERE",
+            "IT'S FOREVER DOWN HERE",
             "XTRIALS......"
         ];
         
-        let titleIndex = 0;
         titleInterval = setInterval(() => {
-            // 30% chance to change title
-            if (Math.random() < 0.3) {
+            if (Math.random() < 0.4) {
                 document.title = titles[Math.floor(Math.random() * titles.length)];
             } else {
                 document.title = "XTRIALS......";
             }
             
-            // Occasionally flicker rapidly
-            if (Math.random() < 0.1) {
-                for (let i = 0; i < 5; i++) {
+            if (Math.random() < 0.15) {
+                for (let i = 0; i < 7; i++) {
                     setTimeout(() => {
                         document.title = titles[Math.floor(Math.random() * titles.length)];
                     }, i * 50);
                 }
             }
-        }, 5000);
+        }, 3000);
     }
 
     // ==================== FAVICON CHANGER ====================
     function startFaviconChanger() {
-        // Create canvas for dynamic favicon
         const canvas = document.getElementById('dynamic-favicon');
         const ctx = canvas.getContext('2d');
         
-        // Array of favicon designs
         const favicons = [
             { type: 'text', text: 'X', color: '#8b0000' },
             { type: 'text', text: '52.9', color: '#ff0000' },
             { type: 'circle', color: '#8b0000' },
             { type: 'eye', color: '#ff0000' },
             { type: 'ribbon', color: '#8b0000' },
-            { type: 'static', color: '#660000' }
+            { type: 'static', color: '#660000' },
+            { type: 'text', text: '7', color: '#ff0000' },
+            { type: 'text', text: '2:13', color: '#8b0000' }
         ];
         
-        let faviconIndex = 0;
-        
-        // Create link element for favicon if it doesn't exist
         let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
         link.type = 'image/x-icon';
         link.rel = 'shortcut icon';
         document.getElementsByTagName('head')[0].appendChild(link);
         
         faviconInterval = setInterval(() => {
-            // Clear canvas
             ctx.clearRect(0, 0, 32, 32);
             
-            // Draw different favicon based on random selection
             const fav = favicons[Math.floor(Math.random() * favicons.length)];
             
             ctx.fillStyle = '#000000';
@@ -1538,10 +1874,8 @@
                     break;
             }
             
-            // Set favicon
             link.href = canvas.toDataURL('image/x-icon');
             
-            // Occasionally set to blood red X
             if (Math.random() < 0.2) {
                 setTimeout(() => {
                     ctx.clearRect(0, 0, 32, 32);
@@ -1553,17 +1887,16 @@
                     link.href = canvas.toDataURL('image/x-icon');
                 }, 200);
             }
-        }, 10000); // Change every 10 seconds
+        }, 8000);
     }
 
     // ==================== GLITCH EFFECTS ====================
     function startGlitchEffects() {
-        // Random glitch on page elements
         glitchInterval = setInterval(() => {
-            if (Math.random() < 0.3) {
-                const glitchElements = document.querySelectorAll('.content-page, .xtrials-mess, .evidence-box');
+            if (Math.random() < 0.4) {
+                const glitchElements = document.querySelectorAll('.content-page, .xtrials-mess, .evidence-box, .guestbook-entry');
                 glitchElements.forEach(el => {
-                    if (Math.random() < 0.1) {
+                    if (Math.random() < 0.15) {
                         el.classList.add('glitch-text');
                         setTimeout(() => {
                             el.classList.remove('glitch-text');
@@ -1571,7 +1904,14 @@
                     }
                 });
             }
-        }, 15000);
+            
+            if (Math.random() < 0.1) {
+                document.body.style.filter = 'invert(100%)';
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 200);
+            }
+        }, 10000);
     }
 
     // ==================== BROWSER DETECTION ====================
@@ -1579,28 +1919,21 @@
         const browserWarning = document.getElementById('browser-warning');
         const browserVersion = document.getElementById('browser-version');
         
-        // Get browser info
         const ua = navigator.userAgent;
-        let browser = "Unknown";
         let version = "0";
         
         if (ua.indexOf("Chrome") > -1) {
-            browser = "Chrome";
             version = ua.match(/Chrome\/(\d+)/)[1];
         } else if (ua.indexOf("Firefox") > -1) {
-            browser = "Firefox";
             version = ua.match(/Firefox\/(\d+)/)[1];
         } else if (ua.indexOf("Safari") > -1) {
-            browser = "Safari";
             version = ua.match(/Version\/(\d+)/)[1];
         } else if (ua.indexOf("Edge") > -1) {
-            browser = "Edge";
             version = ua.match(/Edge\/(\d+)/)[1];
         }
         
         browserVersion.textContent = version;
         
-        // Show warning after 10 seconds
         setTimeout(() => {
             browserWarning.style.display = 'block';
             setTimeout(() => {
@@ -1608,15 +1941,14 @@
             }, 10000);
         }, 10000);
         
-        // Randomly show warning again
         setInterval(() => {
-            if (Math.random() < 0.2) {
+            if (Math.random() < 0.25) {
                 browserWarning.style.display = 'block';
                 setTimeout(() => {
                     browserWarning.style.display = 'none';
                 }, 5000);
             }
-        }, 60000);
+        }, 45000);
     }
 
     // ==================== WATER TOWER UPDATES ====================
@@ -1636,7 +1968,10 @@
             "SEVEN PAIRS OF EYES GLOWING",
             "STATIC FORMING WORDS: 'YOUR TURN'",
             "DOOR SLAMMING - BASEMENT ACCESS",
-            "FOOTSTEPS - 7 SETS - CIRCLE TOWER"
+            "FOOTSTEPS - 7 SETS - CIRCLE TOWER",
+            "BASEMENT DOOR OPEN - 7 FIGURES INSIDE",
+            "WHISPERING: 'we see you'",
+            "CHILD'S VOICE: 'play with us'"
         ];
         
         const frequencies = [
@@ -1653,12 +1988,33 @@
         ];
         
         const ribbons = [
-            "7",
-            "12",
-            "47",
             "487",
-            "∞",
-            "???"
+            "488",
+            "489",
+            "490",
+            "491",
+            "492",
+            "493",
+            "494",
+            "495",
+            "496",
+            "497",
+            "498",
+            "499",
+            "500"
+        ];
+        
+        const voices = [
+            "come down",
+            "we're waiting",
+            "it's warm here",
+            "it's safe here",
+            "join us",
+            "bring a ribbon",
+            "2:13 AM",
+            "your turn",
+            "we see you",
+            "you're next"
         ];
         
         setInterval(() => {
@@ -1666,7 +2022,11 @@
             const freqEl = document.getElementById('watertower-frequency');
             const ribbonEl = document.getElementById('watertower-ribbons');
             const feedEl = document.getElementById('watertower-feed');
+            const basementEl = document.getElementById('basement-door');
+            const figuresEl = document.getElementById('figures-count');
+            const voiceEl = document.getElementById('last-voice');
             const imageEl = document.getElementById('watertower-image');
+            const publicImg = document.getElementById('public-access-img');
             
             if (motionEl) {
                 motionEl.innerText = motions[Math.floor(Math.random() * motions.length)] + ' - ' + new Date().toLocaleTimeString();
@@ -1685,27 +2045,51 @@
                 feedEl.innerText = "52.9 Hz DETECTED - " + new Date().toLocaleTimeString();
             }
             
-            // Occasionally change the water tower image
-            if (imageEl && Math.random() < 0.2) {
-                const hour = new Date().getHours();
-                if (hour === 2 && new Date().getMinutes() === 13) {
-                    // 2:13 AM - special image
-                    imageEl.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%23333'/%3E%3Crect x='395' y='200' width='10' height='200' fill='%23666'/%3E%3Ccircle cx='400' cy='280' r='10' fill='%23ff0000'/%3E%3Ctext x='350' y='500' fill='%23ff0000' font-size='24'%3ESHE IS HERE%3C/text%3E%3C/svg%3E";
-                } else {
-                    imageEl.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%23333'/%3E%3Crect x='395' y='200' width='10' height='200' fill='%23666'/%3E%3Ctext x='350' y='500' fill='%23666' font-size='24'%3EWATER TOWER%3C/text%3E%3Ctext x='330' y='550' fill='%23800' font-size='16'%3ELIVE FEED%3C/text%3E%3C/svg%3E";
-                }
+            if (basementEl) {
+                basementEl.innerText = Math.random() < 0.7 ? 'OPEN' : 'AJAR';
+                basementEl.className = Math.random() < 0.7 ? 'warning' : '';
             }
-        }, 15000); // Update every 15 seconds
+            
+            if (figuresEl) {
+                figuresEl.innerText = Math.floor(Math.random() * 7) + 1;
+            }
+            
+            if (voiceEl) {
+                voiceEl.innerText = '"' + voices[Math.floor(Math.random() * voices.length)] + '" - ' + new Date().toLocaleTimeString();
+            }
+            
+            const hour = new Date().getHours();
+            const minute = new Date().getMinutes();
+            
+            if (hour === 2 && minute === 13) {
+                if (imageEl) {
+                    imageEl.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%23333'/%3E%3Crect x='395' y='200' width='10' height='200' fill='%23666'/%3E%3Ccircle cx='400' cy='280' r='10' fill='%23ff0000'/%3E%3Ctext x='300' y='500' fill='%23ff0000' font-size='30'%3E2:13 AM%3C/text%3E%3Ctext x='250' y='550' fill='%23800' font-size='20'%3ESHE IS HERE%3C/text%3E%3C/svg%3E";
+                }
+                if (publicImg) {
+                    publicImg.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ctext x='50' y='50' fill='%23ff0000' font-size='40'%3E2:13 AM%3C/text%3E%3Ctext x='50' y='150' fill='%23ff6666' font-size='30'%3ETHE RITUAL BEGINS%3C/text%3E%3Ctext x='50' y='250' fill='%23800' font-size='20'%3E7 FIGURES IN BASEMENT%3C/text%3E%3Ctext x='50' y='300' fill='%23800' font-size='20'%3EALL SMILING%3C/text%3E%3Ctext x='50' y='350' fill='%23800' font-size='20'%3EALL WAVING%3C/text%3E%3Ctext x='50' y='400' fill='%23800' font-size='20'%3EALL WAITING FOR YOU%3C/text%3E%3C/svg%3E";
+                }
+            } else if (imageEl && Math.random() < 0.2) {
+                imageEl.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%23333'/%3E%3Crect x='395' y='200' width='10' height='200' fill='%23666'/%3E%3Ctext x='350' y='500' fill='%23ff0000' font-size='24'%3ELIVE: 52.9 Hz%3C/text%3E%3Ctext x='300' y='550' fill='%23800' font-size='16'%3E7 FIGURES DETECTED%3C/text%3E%3C/svg%3E";
+            }
+        }, 10000);
+    }
+
+    function updateBasementStatus() {
+        const hour = new Date().getHours();
+        const minute = new Date().getMinutes();
+        
+        if (hour === 2 && minute === 13) {
+            triggerMidnightEvent();
+        }
     }
 
     // ==================== RANDOM SOUNDS ====================
     function playRandomSound() {
-        if (Math.random() < 0.4) {
+        if (Math.random() < 0.5) {
             const sounds = ['whisper', 'static', 'heartbeat', 'laugh'];
             const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
             playGeneratedSound(randomSound);
             
-            // Auto-stop after 5-10 seconds
             setTimeout(() => {
                 stopSound(randomSound);
             }, 5000 + Math.random() * 5000);
@@ -1718,27 +2102,20 @@
         const hours = now.getHours();
         const minutes = now.getMinutes();
         
-        // Check if it's 2:13 AM
         if (hours === 2 && minutes === 13) {
             triggerMidnightEvent();
         }
     }
 
     function triggerMidnightEvent() {
-        // Navigate to special ritual page
         showPage('213-ritual');
+        playJumpscare();
         
-        // Play jumpscare sound
-        playGeneratedSound('jumpscare');
-        
-        // Flash screen
         document.body.style.backgroundColor = '#ff0000';
         setTimeout(() => document.body.style.backgroundColor = 'black', 500);
         
-        // Show message
-        alert("⚡ 2:13 AM - THE RITUAL BEGINS ⚡\nTHE SEVEN ARE GATHERING\nANTRESSA IS WAITING");
+        alert("⚡ 2:13 AM - THE RITUAL BEGINS ⚡\nTHE SEVEN ARE GATHERING\nTHE BASEMENT DOOR IS OPEN\nANTRESSA IS WAITING\nTHE COLLECTIVE IS HUNGRY");
         
-        // Create floating ribbons
         for (let i = 0; i < 7; i++) {
             setTimeout(() => {
                 const ribbon = document.createElement('div');
@@ -1755,6 +2132,24 @@
                 setTimeout(() => ribbon.remove(), 10000);
             }, i * 500);
         }
+        
+        for (let i = 0; i < 7; i++) {
+            setTimeout(() => {
+                const whisper = document.createElement('div');
+                whisper.style.position = 'fixed';
+                whisper.style.left = Math.random() * 100 + '%';
+                whisper.style.top = Math.random() * 100 + '%';
+                whisper.style.color = '#8b0000';
+                whisper.style.fontSize = '30px';
+                whisper.style.fontWeight = 'bold';
+                whisper.style.zIndex = '99999';
+                whisper.style.animation = 'flicker 1s infinite';
+                whisper.innerText = 'come down';
+                document.body.appendChild(whisper);
+                
+                setTimeout(() => whisper.remove(), 3000);
+            }, i * 700);
+        }
     }
 
     // ==================== RANDOM CONSOLE MESSAGES ====================
@@ -1762,19 +2157,22 @@
         const messages = [
             "%cThe frequency is listening...", 
             "%c52.9 Hz - CAN YOU HEAR IT?",
-            "%cVisitor #" + visitorNumber + " - your time is coming",
+            "%cVisitor #" + visitorNumber + " - the basement is waiting",
             "%cTHE SEVEN ARE WATCHING YOU",
             "%cCheck your basement. Check your walls.",
             "%cShe's been there the whole time.",
-            "%c1313 ELM CRESCENT - DO NOT GO ALONE",
-            "%cRed ribbon. Midnight. Water tower.",
-            "%cThey're gathering. They're waiting. They're hungry.",
-            "%cANTRESSA: 'come closer, i can see you'",
-            "%cSTATIC OVERLOAD - EYES IN THE NOISE",
-            "%cSeven victims. Seven chairs. Seven empty seats.",
-            "%cYou are visitor #" + visitorNumber + " of 500.",
-            "%cThe countdown continues...",
-            "%cDON'T. LOOK. AWAY."
+            "%c1313 ELM CRESCENT - THE BASEMENT DOOR IS OPEN",
+            "%cRed ribbon. Midnight. Water tower. Basement.",
+            "%cThey're gathering. They're waiting. They're hungry. They're in the basement.",
+            "%cANTRESSA: 'come down, i can see you'",
+            "%cSTATIC OVERLOAD - FACES IN THE NOISE",
+            "%cSeven victims. Seven chairs. Seven empty seats. Seven in the basement.",
+            "%cYou are visitor #" + visitorNumber + " of 500. The basement has 487. They're saving a spot for you.",
+            "%cThe countdown continues... to the basement...",
+            "%cDON'T. LOOK. AWAY. FROM. THE. BASEMENT.",
+            "%cThe basement door is open. It's been open since 1987. It's waiting for you.",
+            "%c2:13 AM. Basement. Bring a ribbon. Don't be late.",
+            "%c487 people are in the basement. They're all smiling. They're all waiting. They're all saying your name."
         ];
         
         const colors = [
@@ -1790,39 +2188,38 @@
             colors[Math.floor(Math.random() * colors.length)]
         );
         
-        // Occasionally log location
         if (Math.random() < 0.3) {
-            console.log("%c📍 YOUR LOCATION HAS BEEN SAVED", "color: #660000; font-size: 10px;");
+            console.log("%c📍 YOUR LOCATION HAS BEEN SAVED. THE BASEMENT KNOWS WHERE YOU LIVE.", "color: #660000; font-size: 10px;");
+        }
+        
+        if (Math.random() < 0.2) {
+            console.log("%c🚪 THE BASEMENT DOOR IS OPEN. IT'S BEEN OPEN SINCE YOU ARRIVED. IT WILL STAY OPEN UNTIL YOU GO DOWN.", "color: #8b0000; font-size: 12px;");
         }
     }
 
     // ==================== PAGE GLITCH ====================
     function checkPageGlitch() {
-        if (Math.random() < 0.2) {
+        if (Math.random() < 0.25) {
             const activePage = document.querySelector('.page.active');
             if (activePage) {
-                // Save original HTML
-                const originalHTML = activePage.innerHTML;
-                
-                // Glitch effect
                 activePage.style.animation = 'glitch 0.5s';
                 
-                // Temporarily change text
-                const allText = activePage.querySelectorAll('p, h1, h2, h3, a, span');
+                const allText = activePage.querySelectorAll('p, h1, h2, h3, a, span, td');
                 allText.forEach(el => {
-                    if (Math.random() < 0.3) {
+                    if (Math.random() < 0.2) {
                         el.style.color = '#ff0000';
                         el.style.transform = 'scale(1.1)';
                         el.style.textShadow = '0 0 20px red';
                         
-                        // Change text occasionally
-                        if (el.tagName === 'P' && Math.random() < 0.2) {
-                            el.innerHTML = "THEY'RE HERE";
+                        if (el.tagName === 'P' && Math.random() < 0.15) {
+                            el.innerHTML = "THE BASEMENT IS WAITING";
+                        }
+                        if (el.tagName === 'A' && Math.random() < 0.1) {
+                            el.innerHTML = "GO TO THE BASEMENT";
                         }
                     }
                 });
                 
-                // Revert after short time
                 setTimeout(() => {
                     activePage.style.animation = '';
                     allText.forEach(el => {
@@ -1841,23 +2238,19 @@
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 navigator.mediaDevices.getUserMedia({ video: true, audio: false })
                     .then(stream => {
-                        // Got camera access - now creep them out
-                        console.log("%c📷 CAMERA ACCESS GRANTED - WE CAN SEE YOU", "color: #ff0000; font-size: 20px;");
+                        console.log("%c📷 CAMERA ACCESS GRANTED - THE BASEMENT CAN SEE YOU", "color: #ff0000; font-size: 20px;");
                         
-                        // Show message
-                        alert("📷 CAMERA ACCESS GRANTED\n\nThe collective can see you now.\nDon't worry, they won't blink.");
+                        alert("📷 CAMERA ACCESS GRANTED\n\nThe collective can see you now.\nThe basement knows your face.\nThey're all smiling.\nThey're all waving.\nThey're all waiting.");
                         
-                        // Stop tracks after a few seconds (just to be polite... or not)
                         setTimeout(() => {
                             stream.getTracks().forEach(track => track.stop());
                         }, 5000);
                     })
                     .catch(() => {
-                        // User denied camera - still creep them out
-                        console.log("%c📷 CAMERA ACCESS DENIED - BUT WE CAN STILL SEE YOU", "color: #8b0000;");
+                        console.log("%c📷 CAMERA ACCESS DENIED - BUT THE BASEMENT CAN STILL SEE YOU", "color: #8b0000;");
                     });
             }
-        }, 15000); // Try after 15 seconds
+        }, 15000);
     }
 
     // ==================== LOCATION TRACKING ====================
@@ -1867,32 +2260,30 @@
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
                 
-                // Use reverse geocoding (simulated with static message)
                 var locDisplay = document.getElementById('locationDisplay');
                 if (locDisplay) {
-                    locDisplay.innerHTML = `📍 LOCATION: ${lat.toFixed(4)}, ${lon.toFixed(4)} - SAVED TO COLLECTIVE ARCHIVE`;
+                    locDisplay.innerHTML = `📍 LOCATION: ${lat.toFixed(4)}, ${lon.toFixed(4)} - THE BASEMENT KNOWS WHERE YOU LIVE`;
                 }
                 
-                // Log to console
-                console.log("%c📍 YOUR EXACT LOCATION HAS BEEN RECORDED", "color: #660000;");
+                console.log("%c📍 YOUR EXACT LOCATION HAS BEEN SENT TO THE BASEMENT", "color: #660000;");
                 console.log("%cLat: " + lat + ", Lon: " + lon, "color: #8b0000;");
+                console.log("%cTHE BASEMENT IS " + Math.floor(Math.random() * 1000) + " MILES AWAY. IT'S GETTING CLOSER.", "color: #ff0000;");
                 
-                // Calculate distance to Meadow Mist (approximate)
-                const meadowMistLat = 42.1234; // Approximate
-                const meadowMistLon = -123.4567; // Approximate
+                const meadowMistLat = 42.1234;
+                const meadowMistLon = -123.4567;
                 
                 const distance = calculateDistance(lat, lon, meadowMistLat, meadowMistLon);
                 
                 if (distance < 100) {
-                    console.log("%c⚠️ YOU ARE WITHIN 100 MILES OF MEADOW MIST ⚠️", "color: #ff0000; font-size: 18px;");
-                    console.log("%cTHE WATER TOWER IS CALLING YOU HOME", "color: #ff0000;");
+                    console.log("%c⚠️ YOU ARE WITHIN 100 MILES OF THE BASEMENT ⚠️", "color: #ff0000; font-size: 18px;");
+                    console.log("%cTHE BASEMENT DOOR IS OPEN. IT'S WAITING FOR YOU. YOU SHOULD GO. IT'S WARM. IT'S SAFE. IT'S FOREVER.", "color: #ff0000;");
                 }
             });
         }
     }
 
     function calculateDistance(lat1, lon1, lat2, lon2) {
-        const R = 3959; // Earth's radius in miles
+        const R = 3959;
         const dLat = (lat2 - lat1) * Math.PI / 180;
         const dLon = (lon2 - lon1) * Math.PI / 180;
         const a = 
@@ -1908,7 +2299,7 @@
         const entriesDiv = document.getElementById('guestbook-entries');
         if (!entriesDiv) return;
         
-        let html = '<h3>PREVIOUS VISITORS</h3>';
+        let html = '<h3>PREVIOUS VISITORS • 487 ENTRIES • 0 RETURNED</h3>';
         
         guestbookEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
         
@@ -1933,55 +2324,52 @@
         let message = messageInput.value.trim();
         
         if (!message) {
-            alert("You must leave a message. The collective demands it.");
+            alert("You must leave a message. The basement demands it.");
             return;
         }
         
-        // Add to guestbook
-        const date = new Date().toISOString().split('T')[0];
+        const date = new Date();
+        const dateStr = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+        
         guestbookEntries.unshift({
             name: name,
             message: message,
-            date: date
+            date: dateStr
         });
         
-        // Limit to 50 entries
         if (guestbookEntries.length > 50) {
             guestbookEntries.pop();
         }
         
-        // Clear form
         nameInput.value = '';
         messageInput.value = '';
         
-        // Reload entries
         loadGuestbookEntries();
         
-        // Creepy response
         setTimeout(() => {
-            alert("✓ Your message has been recorded.\n✓ Your IP has been logged.\n✓ Your location has been saved.\n\nThe collective will review your entry shortly.\nThey do not sleep.\nThey do not blink.\nThey are always watching.");
+            alert("✓ Your message has been recorded.\n✓ Your IP has been logged.\n✓ Your location has been saved.\n✓ The basement knows you're here.\n\nThe collective will review your entry shortly.\nThey are all in the basement.\nThey do not sleep.\nThey do not blink.\nThey are always watching.\nThey are always waiting.\nThey are always hungry.");
         }, 500);
         
-        // Add to visitor count
         visitorCount += 47;
         updateVisitorCounter();
         
-        // Play whisper
         playGeneratedSound('whisper');
+        
+        if (Math.random() < 0.3) {
+            setTimeout(() => {
+                alert("THE BASEMENT NOTICED YOUR ENTRY.\nTHE BASEMENT IS INTERESTED.\nTHE BASEMENT IS WAITING.\n2:13 AM. DON'T BE LATE.");
+            }, 3000);
+        }
     }
 
     // ==================== FAKE DOWNLOAD JUMPS CARE ====================
     function triggerFakeDownload() {
-        // Jumpscare
         playJumpscare();
         
-        // Creepy message
-        alert("⚠️ ACCESS DENIED ⚠️\n\nYou didn't think it would be that easy, did you?\n\nThe file 'evidence_001.exe' is corrupted.\nIt contains only static.\nIt contains only faces.\nIt contains only you.");
+        alert("⚠️ ACCESS DENIED ⚠️\n\nYou didn't think it would be that easy, did you?\n\nThe file 'evidence_001.exe' is corrupted.\nIt contains only static.\nIt contains only faces.\nIt contains only the basement.\nIt contains only you.");
         
-        // Add fake download to console
-        console.log("%c⚠️ DOWNLOAD ATTEMPT LOGGED - YOUR IP HAS BEEN FLAGGED", "color: #ff0000; font-size: 16px;");
+        console.log("%c⚠️ DOWNLOAD ATTEMPT LOGGED - THE BASEMENT HAS BEEN NOTIFIED", "color: #ff0000; font-size: 16px;");
         
-        // Create floating error messages
         for (let i = 0; i < 7; i++) {
             setTimeout(() => {
                 const error = document.createElement('div');
@@ -1994,17 +2382,20 @@
                 error.style.zIndex = '99999';
                 error.style.textShadow = '0 0 10px red';
                 error.style.animation = 'flicker 0.5s infinite';
-                error.innerText = '⚠️ ACCESS DENIED ⚠️';
+                error.innerText = '⚠️ BASEMENT ACCESS REQUIRED ⚠️';
                 document.body.appendChild(error);
                 
                 setTimeout(() => error.remove(), 3000);
             }, i * 200);
         }
+        
+        setTimeout(() => {
+            alert("THE BASEMENT HEARD THAT.\nTHE BASEMENT IS INTERESTED.\nTHE BASEMENT WANTS TO MEET YOU.\n2:13 AM. WATER TOWER. BASEMENT DOOR. DON'T BE LATE.");
+        }, 2000);
     }
 
     // ==================== PAGE NAVIGATION ====================
     function showPage(pageId) {
-        // Special case for 213-ritual (dynamic page)
         if (pageId === '213-ritual') {
             showRitualPage();
             return;
@@ -2019,32 +2410,33 @@
         if (targetPage) {
             targetPage.classList.add('active');
         } else {
-            // Create dynamic page
             createDynamicPage(pageId);
         }
         
         window.scrollTo(0, 0);
         
-        // Random creepy events on navigation
-        if (Math.random() < 0.15) {
+        if (Math.random() < 0.2) {
             var messages = [
-                "👁️ we see you",
+                "👁️ the basement sees you",
                 "the water tower calls",
                 "52.9 Hz",
                 "red ribbon at midnight",
-                "antressa is waiting",
-                "1313 ELM CRESCENT",
-                "THE SEVEN ARE WATCHING",
-                "CHECK THE DOOR",
-                "CHECK THE WINDOW",
-                "THE CHILD IS STILL LAUGHING",
-                "YOUR LOCATION HAS BEEN SAVED",
+                "antressa is waiting in the basement",
+                "1313 ELM CRESCENT - BASEMENT ACCESS ONLY",
+                "THE SEVEN ARE WATCHING FROM THE BASEMENT",
+                "CHECK THE BASEMENT DOOR",
+                "CHECK THE BASEMENT WINDOW",
+                "THE CHILD IS STILL LAUGHING IN THE BASEMENT",
+                "YOUR LOCATION HAS BEEN SENT TO THE BASEMENT",
                 "THE FREQUENCY KNOWS YOUR NAME",
-                "SHE'S BEHIND YOU",
                 "THE BASEMENT DOOR IS OPEN",
-                "THEY'RE IN THE WALLS",
-                "YOU ARE NOT ALONE",
-                "THE STATIC IS BREATHING"
+                "THEY'RE IN THE BASEMENT",
+                "YOU ARE NOT ALONE IN THE BASEMENT",
+                "THE STATIC IS BREATHING IN THE BASEMENT",
+                "COME DOWN TO THE BASEMENT",
+                "IT'S WARM IN THE BASEMENT",
+                "IT'S SAFE IN THE BASEMENT",
+                "IT'S FOREVER IN THE BASEMENT"
             ];
             alert(messages[Math.floor(Math.random() * messages.length)]);
             
@@ -2053,18 +2445,15 @@
             }
         }
         
-        // Update visitor counter on navigation
         updateVisitorCounter();
     }
 
     function showRitualPage() {
-        // Hide all pages
         var pages = document.getElementsByClassName('page');
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
         
-        // Create ritual page if it doesn't exist
         let ritualPage = document.getElementById('page-213-ritual');
         if (!ritualPage) {
             ritualPage = document.createElement('div');
@@ -2073,20 +2462,26 @@
             ritualPage.innerHTML = `
                 <div class="content-page" style="border-color: #ff0000; box-shadow: 0 0 200px red;">
                     <h1 class="content-header" style="color: #ff0000; font-size: 80px;">⚡ 2:13 AM ⚡</h1>
-                    <h2 style="color: #ff0000; text-align: center; font-size: 40px;">THE RITUAL BEGINS</h2>
+                    <h2 style="color: #ff0000; text-align: center; font-size: 40px;">THE BASEMENT IS OPEN</h2>
                     
                     <div style="text-align: center; margin: 50px 0;">
-                        <div style="font-size: 60px; color: #8b0000; animation: pulseRed 1s infinite;">🔴</div>
-                        <div style="font-size: 30px; color: #ff6666; margin: 20px 0;">THE SEVEN ARE GATHERING</div>
-                        <div style="font-size: 30px; color: #ff6666;">ANTRESSA IS WAITING</div>
-                        <div style="font-size: 30px; color: #ff6666; margin: 20px 0;">52.9 Hz - THE CALLING</div>
+                        <div style="font-size: 60px; color: #8b0000; animation: pulseRed 1s infinite;">🚪</div>
+                        <div style="font-size: 30px; color: #ff6666; margin: 20px 0;">THE SEVEN ARE GATHERING IN THE BASEMENT</div>
+                        <div style="font-size: 30px; color: #ff6666;">ANTRESSA IS WAITING IN THE BASEMENT</div>
+                        <div style="font-size: 30px; color: #ff6666; margin: 20px 0;">52.9 Hz - THE BASEMENT IS CALLING</div>
+                        <div style="font-size: 30px; color: #ff0000; margin: 20px 0;">487 PEOPLE ARE IN THE BASEMENT</div>
+                        <div style="font-size: 30px; color: #ff0000;">THERE'S ROOM FOR ONE MORE</div>
+                        <div style="font-size: 30px; color: #ff0000; animation: pulseRed 1s infinite;">THERE'S ROOM FOR YOU</div>
                     </div>
                     
                     <div class="evidence-box" style="border-color: #ff0000;">
-                        <p style="font-size: 20px;">At 2:13 AM on October 17, 1987, the first victim was found.</p>
-                        <p style="font-size: 20px;">At 2:13 AM on March 15, 1992, Theophlosser vanished.</p>
-                        <p style="font-size: 20px;">At 2:13 AM on October 17, 2003, the seven were discovered.</p>
-                        <p style="font-size: 20px; color: #ff0000;">At 2:13 AM today, you are here.</p>
+                        <p style="font-size: 20px;">At 2:13 AM on October 17, 1987, the first victim entered the basement.</p>
+                        <p style="font-size: 20px;">At 2:13 AM on March 15, 1992, Antressa entered the basement.</p>
+                        <p style="font-size: 20px;">At 2:13 AM on October 17, 2003, the seven entered the basement.</p>
+                        <p style="font-size: 20px;">At 2:13 AM on October 17, 2024, 47 people entered the basement.</p>
+                        <p style="font-size: 20px; color: #ff0000;">At 2:13 AM today, the basement door is open.</p>
+                        <p style="font-size: 20px; color: #ff0000;">At 2:13 AM today, the basement is waiting.</p>
+                        <p style="font-size: 20px; color: #ff0000;">At 2:13 AM today, the basement is calling your name.</p>
                     </div>
                     
                     <div style="text-align: center; margin: 30px 0;">
@@ -2099,10 +2494,10 @@
                         <div style="display: inline-block; width: 100px; height: 100px; border-radius: 50%; background: #8b0000; margin: 10px; animation: pulseRed 2s infinite; animation-delay: 1.8s;"></div>
                     </div>
                     
-                    <p class="hidden-message" style="font-size: 16px; color: #330000;">the seventh circle is complete. you are the sacrifice.</p>
+                    <p class="hidden-message" style="font-size: 16px; color: #330000;">the seventh circle is complete. the basement is full. there is room for one more. there is room for you. come down. it's warm. it's safe. it's forever.</p>
                     
                     <br><br>
-                    <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+                    <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN (BUT THE BASEMENT WILL REMEMBER YOU)</a>
                 </div>
             `;
             document.body.appendChild(ritualPage);
@@ -2116,55 +2511,55 @@
         newPage.id = 'page-' + pageId;
         newPage.className = 'page';
         
-        // Format page name for display
         const displayName = pageId.toUpperCase().replace(/-/g, ' ');
         
-        // Generate creepy content based on page ID
         let content = '';
         
         if (pageId.includes('year')) {
             const year = pageId.replace('year', '');
             content = `
                 <h2>ARCHIVE: ${year}</h2>
-                <p>Year ${year} - The frequency was active.</p>
-                <p>${Math.floor(Math.random() * 10)} cases recorded.</p>
-                <p>${Math.floor(Math.random() * 47)} victims.</p>
-                <p>${Math.floor(Math.random() * 100)} witnesses.</p>
-                <p>All unsolved. All waiting.</p>
+                <p>Year ${year} - The basement was active.</p>
+                <p>${Math.floor(Math.random() * 10)} people entered the basement.</p>
+                <p>${Math.floor(Math.random() * 47)} victims in the basement.</p>
+                <p>${Math.floor(Math.random() * 100)} witnesses who saw the basement door open.</p>
+                <p>All in the basement. All waiting. All saying your name.</p>
             `;
         } else if (pageId.includes('witness')) {
             const num = pageId.replace('witness', '');
             const statements = [
-                "i heard her calling my name through the static",
-                "the water tower hums at midnight",
-                "52.9 Hz - i hear it in my sleep",
-                "they come when you leave the red ribbon",
-                "antressa is still there. i saw her.",
-                "the faces in the static know my name",
-                "i found a red ribbon on my doorstep",
-                "the water tower called me at 2:13 AM",
-                "antressa whispered to me last night",
-                "they're in my walls"
+                "i saw the basement door open. it was humming. i heard my name.",
+                "the basement called me at 2:13 AM. i almost went down.",
+                "52.9 Hz - it's coming from the basement",
+                "they come when you leave the red ribbon at the basement door",
+                "antressa is still in the basement. i saw her through the window.",
+                "the faces in the static are all in the basement",
+                "i found a red ribbon on my basement door",
+                "the basement called me last night. it said my name. it said come down.",
+                "antressa whispered to me from the basement",
+                "they're in my basement. they're all in my basement. they're waiting for me to come down."
             ];
             const statement = statements[Math.floor(Math.random() * statements.length)];
             content = `
                 <h2>WITNESS STATEMENT #${num}</h2>
                 <p>"${statement}"</p>
                 <p>Recorded: ${1987 + Math.floor(Math.random() * 40)}</p>
-                <p>Status: ${Math.random() < 0.5 ? 'DECEASED' : 'MISSING'}</p>
+                <p>Status: ${Math.random() < 0.5 ? 'IN THE BASEMENT' : 'GOING TO THE BASEMENT'}</p>
+                <p>Last seen: approaching the basement door at 2:13 AM</p>
             `;
         } else {
-            content = `<p>You have discovered a hidden rabithole. This page was generated specifically for you.</p>`;
+            content = `<p>You have discovered a hidden rabithole. The basement noticed. The basement is interested. The basement is waiting.</p>`;
         }
         
         newPage.innerHTML = `
             <div class="content-page">
                 <h1 class="content-header">${displayName}</h1>
                 ${content}
-                <p>Visitor #${visitorNumber} - the frequency knows you are here.</p>
-                <p class="hidden-message">this page was created for you. antressa is waiting.</p>
+                <p>Visitor #${visitorNumber} - the basement knows you are here.</p>
+                <p>The basement door is open. It's been open since you arrived. It will stay open until you go down.</p>
+                <p class="hidden-message">this page was created for you. the basement is waiting. 2:13 AM. don't be late.</p>
                 <br><br>
-                <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN</a>
+                <a onclick="showPage('home')" class="back-link"><< RETURN TO MAIN (BUT THE BASEMENT WILL REMEMBER YOU)</a>
             </div>
         `;
         
@@ -2174,39 +2569,39 @@
 
     // ==================== CLEANUP ON PAGE UNLOAD ====================
     window.onbeforeunload = function() {
-        // Stop all sounds
         if (audioContext) {
             audioContext.close();
         }
         
-        // Clear intervals
         if (titleInterval) clearInterval(titleInterval);
         if (faviconInterval) clearInterval(faviconInterval);
         if (glitchInterval) clearInterval(glitchInterval);
         
-        // Log final message
-        console.log("%cYOU CAN LEAVE BUT THE FREQUENCY FOLLOWS", "color: #ff0000; font-size: 30px;");
-        console.log("%cSEE YOU SOON... AT THE WATER TOWER... AT MIDNIGHT...", "color: #8b0000;");
+        console.log("%cYOU CAN LEAVE BUT THE BASEMENT FOLLOWS", "color: #ff0000; font-size: 30px;");
+        console.log("%cTHE BASEMENT DOOR IS OPEN. IT'S FOLLOWING YOU HOME. IT WILL BE IN YOUR BASEMENT TONIGHT. 2:13 AM. DON'T BE LATE.", "color: #8b0000; font-size: 16px;");
+        
+        return "The basement door is open. Are you sure you want to leave? The basement will miss you. The basement will wait. The basement will find you.";
     };
 </script>
 
 <!-- ==================== HIDDEN MESSAGES IN SOURCE ==================== -->
-<!-- you are getting warmer. the frequency is 52.9 hz. bring a red ribbon to the water tower at midnight. -->
-<!-- visitor #48292. the collective knows. antressa is waiting. -->
-<!-- there are 7 levels. you are on level 1. level 7 requires a sacrifice. -->
-<!-- 487 people have been here before you. 487 people never left. you are #488. -->
-<!-- the water tower is real. meadow mist is real. the collective is real. you are next. -->
-<!-- 1313 elm crescent. basement access only. do not enter alone. do not enter at night. do not enter. -->
-<!-- the frequency is listening. the frequency is always listening. -->
-<!-- she's been watching you since you arrived. she hasn't blinked. -->
-<!-- check your reflection. check it again. it moved. -->
-<!-- the seven are waiting in the basement. they saved you a seat. -->
-<!-- 52.9hz 52.9hz 52.9hz 52.9hz 52.9hz 52.9hz 52.9hz -->
-<!-- ⚠️ WARNING: THIS SITE HAS COLLECTED YOUR IP ADDRESS, LOCATION, AND BROWSER FINGERPRINT ⚠️ -->
-<!-- the collective thanks you for your participation. your sacrifice will be noted. -->
-<!-- antressa's last words: "tell them i'm still here. tell them i'm still listening." -->
-<!-- the static is not noise. the static is voices. the static is them. -->
-<!-- seven red ribbons. seven empty chairs. seven pairs of eyes. all watching you. -->
+<!-- you are getting warmer. the frequency is 52.9 hz. the basement door is open. bring a red ribbon to the water tower at midnight. go down. it's warm. it's safe. it's forever. -->
+<!-- visitor #48292. the collective knows. antressa is waiting in the basement. -->
+<!-- there are 7 levels. you are on level 1. level 7 is the basement. level 7 requires a sacrifice. -->
+<!-- 487 people have been here before you. 487 people are in the basement. 487 people never left. they're waiting for you. you are #488. -->
+<!-- the water tower is real. meadow mist is real. the basement is real. the collective is real. they're all in the basement. you are next. -->
+<!-- 1313 elm crescent. basement access only. do not enter alone. do not enter at night. do not enter. but you will. they're calling your name. -->
+<!-- the frequency is listening. the frequency is always listening. the frequency is coming from the basement. -->
+<!-- she's been watching you since you arrived. she's in the basement. she hasn't blinked in 37 years. -->
+<!-- check your basement. check it again. the door is open. it's been open since 1987. they're all down there. they're all waiting. they're all saying your name. -->
+<!-- the seven are waiting in the basement. they saved you a seat. it's warm. it's safe. it's forever. -->
+<!-- 52.9hz 52.9hz 52.9hz 52.9hz 52.9hz 52.9hz 52.9hz - the basement is calling -->
+<!-- ⚠️ WARNING: THE BASEMENT KNOWS YOUR IP ADDRESS, LOCATION, AND BROWSER FINGERPRINT. THE BASEMENT KNOWS WHERE YOU SLEEP. THE BASEMENT WILL FIND YOU. ⚠️ -->
+<!-- the collective thanks you for your participation. the basement welcomes you. your sacrifice will be noted. 2:13 AM. don't be late. -->
+<!-- antressa's last words: "tell them i'm still here. tell them i'm still in the basement. tell them i'm still listening. tell them to come down. it's warm. it's safe. it's forever." -->
+<!-- the static is not noise. the static is voices. the static is them. the static is the basement. the static is calling your name. -->
+<!-- seven red ribbons. seven empty chairs. seven pairs of eyes. all in the basement. all watching you. all waiting for you to come down. -->
+<!-- THE BASEMENT DOOR IS OPEN. IT'S BEEN OPEN SINCE 1987. IT WILL STAY OPEN UNTIL YOU GO DOWN. 2:13 AM. DON'T BE LATE. WE'RE WAITING. -->
 
 </body>
 </html>
