@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>XTRIALS......</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XTRIALS...... THE FREQUENCY NEVER STOPS CALLING</title>
     <style>
-        /* ==================== GLOBAL HORROR STYLES ==================== */
+        /* ==================== OG XTRIALS HORROR STYLES - 1987 AESTHETIC ==================== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -38,47 +38,16 @@
             99% { opacity: 1; }
         }
 
-        @keyframes faceAppear {
-            0% { opacity: 0; transform: scale(0.5); }
-            10% { opacity: 0.3; transform: scale(1); }
-            20% { opacity: 0; transform: scale(1.2); }
-            30% { opacity: 0.5; transform: scale(0.8); }
-            40% { opacity: 0; transform: scale(1.5); }
-            50% { opacity: 0.2; transform: scale(1); }
-            60% { opacity: 0; }
-            100% { opacity: 0; }
-        }
-
-        @keyframes staticNoise {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
-        }
-
-        @keyframes scanlines {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 4px; }
-        }
-
-        @keyframes glitch-text {
-            0%, 100% { transform: skew(0deg); }
-            20% { transform: skew(2deg); text-shadow: -2px 0 red, 2px 0 blue; }
-            40% { transform: skew(-2deg); text-shadow: 2px 0 red, -2px 0 blue; }
-            60% { transform: skew(1deg); }
-            80% { transform: skew(-1deg); }
-        }
-
         body {
             background-color: black;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%238b0000" opacity="0.02"/><circle cx="30" cy="30" r="20" fill="%238b0000" opacity="0.02"/><circle cx="70" cy="70" r="30" fill="%238b0000" opacity="0.02"/></svg>');
             color: #ff0000;
             font-family: 'Times New Roman', 'Courier New', monospace;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             min-height: 100vh;
             animation: flicker 8s infinite;
             position: relative;
             overflow-x: hidden;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%238b0000" opacity="0.5"/></svg>') 12 12, crosshair;
         }
 
         /* ==================== CRT SCANLINES ==================== */
@@ -93,6 +62,11 @@
             pointer-events: none;
             z-index: 9000;
             animation: scanlines 0.08s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 4px; }
         }
 
         body::after {
@@ -118,24 +92,6 @@
         }
 
         /* ==================== BLOOD OVERLAYS ==================== */
-        .fullscreen-blood {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.25;
-            mix-blend-mode: multiply;
-        }
-        
-        .fullscreen-blood video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .blood-drip-container {
             position: fixed;
             top: 0;
@@ -143,7 +99,7 @@
             width: 100vw;
             height: 100vh;
             pointer-events: none;
-            z-index: 9998;
+            z-index: 9999;
             overflow: hidden;
         }
 
@@ -158,7 +114,7 @@
             opacity: 0.5;
         }
 
-        /* 100 blood drips for full coverage */
+        /* 47 blood drips - one for each victim */
         .drip1 { left: 1%; animation-duration: 6s; }
         .drip2 { left: 3%; animation-duration: 7s; animation-delay: 1s; }
         .drip3 { left: 5%; animation-duration: 5s; animation-delay: 2s; }
@@ -206,71 +162,136 @@
         .drip45 { left: 89%; animation-duration: 6.5s; animation-delay: 4.9s; }
         .drip46 { left: 91%; animation-duration: 8.2s; animation-delay: 6s; }
         .drip47 { left: 93%; animation-duration: 5.9s; animation-delay: 6.5s; }
-        .drip48 { left: 95%; animation-duration: 7.8s; animation-delay: 5.7s; }
-        .drip49 { left: 97%; animation-duration: 6.3s; animation-delay: 6.2s; }
-        .drip50 { left: 99%; animation-duration: 8.5s; animation-delay: 5.4s; }
 
-        /* ==================== STATIC OVERLAY ==================== */
-        .static-overlay {
+        /* ==================== SCARY FACES ==================== */
+        .face-container {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-radial-gradient(circle at 30% 40%, rgba(255,0,0,0.03) 0px, transparent 2px, rgba(139,0,0,0.02) 3px, transparent 5px);
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
-            z-index: 9997;
-            opacity: 0.3;
+            z-index: 9998;
+            overflow: hidden;
         }
 
-        /* ==================== PAGE SYSTEM ==================== */
-        .page { display: none; }
-        .page.active { display: block; }
+        .scary-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #8b0000 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: faceAppear 10s infinite;
+            filter: blur(5px);
+            mix-blend-mode: multiply;
+        }
+
+        @keyframes faceAppear {
+            0% { opacity: 0; transform: scale(0.5); }
+            10% { opacity: 0.3; transform: scale(1); }
+            20% { opacity: 0; transform: scale(1.2); }
+            30% { opacity: 0.5; transform: scale(0.8); }
+            40% { opacity: 0; transform: scale(1.5); }
+            50% { opacity: 0.2; transform: scale(1); }
+            60% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        .face1 { top: 20%; left: 10%; animation-delay: 2s; }
+        .face2 { top: 60%; right: 15%; animation-delay: 5s; width: 300px; height: 300px; }
+        .face3 { bottom: 10%; left: 30%; animation-delay: 8s; }
+        .face4 { top: 40%; left: 50%; animation-delay: 12s; width: 250px; height: 250px; }
+        .face5 { top: 80%; right: 40%; animation-delay: 15s; }
+        .face6 { top: 15%; right: 30%; animation-delay: 18s; width: 180px; height: 180px; }
+        .face7 { bottom: 30%; left: 70%; animation-delay: 21s; }
+
+        /* ==================== FLOATING EYES ==================== */
+        .floating-eye {
+            position: fixed;
+            width: 30px;
+            height: 15px;
+            background: #330000;
+            border-radius: 50%;
+            border: 2px solid #8b0000;
+            pointer-events: none;
+            z-index: 9997;
+            opacity: 0.2;
+            animation: eyeBlink 3s infinite;
+        }
+
+        .floating-eye::after {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ff0000;
+            border-radius: 50%;
+            top: 3px;
+            left: 5px;
+            animation: eyeMove 5s infinite;
+        }
+
+        @keyframes eyeBlink {
+            0%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+
+        @keyframes eyeMove {
+            0%, 100% { left: 5px; }
+            50% { left: 15px; }
+        }
 
         /* ==================== MAIN CONTAINER ==================== */
         .xtrials-main {
             max-width: 1400px;
-            margin: 20px auto;
-            background-color: rgba(20, 0, 0, 0.95);
+            margin: 30px auto;
+            background: rgba(10,0,0,0.95);
             border: 8px ridge #8b0000;
-            padding: 20px;
-            box-shadow: 0 0 80px #330000, inset 0 0 40px #1a0000;
+            padding: 25px;
             position: relative;
             z-index: 100;
-            backdrop-filter: blur(2px);
+            box-shadow: 0 0 80px #330000, inset 0 0 40px #1a0000;
         }
 
-        /* ==================== REAL VISITOR COUNTER ==================== */
-        .hit-counter {
-            background: #000;
-            border: 6px inset #660000;
-            padding: 20px;
-            font-family: "Courier New", monospace;
-            color: #00ff00;
-            font-size: 36px;
-            text-align: center;
-            margin: 30px 0;
+        /* ==================== LINK STYLES - HIDDEN IN PLAIN TEXT ==================== */
+        .xtrail-link {
+            color: #ff6666;
+            text-decoration: none;
+            border-bottom: 1px dotted #8b0000;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .visitor-number {
+        .xtrail-link:hover {
             color: #ff0000;
-            font-size: 72px;
-            font-weight: bold;
-            animation: pulseRed 2s infinite;
+            background: #330000;
+            text-shadow: 0 0 10px red;
         }
 
-        .real-count {
+        /* ==================== OG BANNER ==================== */
+        .xtrials-banner {
+            background: #1a0000;
+            border: 6px ridge #660000;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .xtrials-banner h1 {
+            font-size: 82px;
+            color: #ff0000;
+            text-shadow: 4px 4px 0 #330000, 8px 8px 0 #000, 0 0 30px red;
+            letter-spacing: 8px;
+            animation: pulseRed 6s infinite;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .frequency-blink {
             color: #00ff00;
             font-size: 24px;
-            border-top: 1px solid #330000;
-            margin-top: 10px;
-            padding-top: 10px;
-        }
-
-        .visitor-warning {
-            color: #8b0000;
-            font-size: 18px;
             animation: blink 1s infinite;
+            margin-top: 20px;
         }
 
         @keyframes blink {
@@ -278,268 +299,32 @@
             50% { opacity: 0; }
         }
 
-        /* ==================== CONNECTION STATUS ==================== */
-        .connection-status {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: #0a0000;
-            border: 2px solid #8b0000;
-            padding: 10px;
-            z-index: 10000;
-            font-size: 12px;
-        }
-
-        .status-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-
-        .dot-online {
-            background: #00ff00;
-            animation: pulse 1s infinite;
-        }
-
-        .dot-offline {
-            background: #8b0000;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        /* ==================== CODE PANEL ==================== */
-        #code-panel {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #0a0000;
-            border: 4px ridge #8b0000;
-            padding: 15px;
-            z-index: 5000;
-            min-width: 250px;
-        }
-
-        #code-panel .label {
-            font-size: 14px;
-            color: #8b0000;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        #codeInput {
+        /* ==================== OG VISITOR COUNTER ==================== */
+        .hit-counter {
             background: #000;
-            border: none;
-            border-bottom: 2px solid #8b0000;
-            outline: none;
-            color: #00ff00;
+            border: 6px inset #660000;
+            padding: 20px;
             font-family: "Courier New", monospace;
-            font-size: 18px;
-            width: 100%;
-            padding: 5px 0;
-            text-transform: uppercase;
-        }
-
-        #code-feedback {
-            font-size: 12px;
-            margin-top: 5px;
-            min-height: 20px;
-        }
-
-        #codes-found {
-            color: #330000;
-            font-size: 10px;
-            margin-top: 5px;
-        }
-
-        /* ==================== TOAST NOTIFICATIONS ==================== */
-        #toast-container {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            pointer-events: none;
-        }
-
-        .toast {
-            background: #0a0000;
-            border: 2px solid #8b0000;
-            color: #ff6666;
-            padding: 15px;
-            animation: slideIn 0.3s forwards;
-            max-width: 300px;
-        }
-
-        .toast.g {
-            border-color: #00ff00;
             color: #00ff00;
-        }
-
-        .toast.p {
-            border-color: #8800cc;
-            color: #cc44ff;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(100%); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* ==================== FLASH OVERLAY ==================== */
-        #flash-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            z-index: 99999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.05s;
-        }
-
-        /* ==================== WEB CAM ==================== */
-        #webcam-container {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 200px;
-            height: 150px;
-            border: 4px solid #8b0000;
-            z-index: 5000;
-            display: none;
-            background: #000;
-        }
-
-        #webcam-feed {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%) contrast(150%);
-        }
-
-        /* ==================== ENDING OVERLAY ==================== */
-        #ending-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 20000;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            font-size: 42px;
             text-align: center;
-            padding: 40px;
+            margin: 30px 0;
         }
 
-        #ending-overlay.active {
-            display: flex;
-        }
-
-        .ending-title {
-            font-size: 72px;
+        .visitor-number {
             color: #ff0000;
-            animation: glitch-text 3s infinite;
-            margin-bottom: 30px;
-        }
-
-        .ending-text {
-            font-size: 24px;
-            color: #ff6666;
-            max-width: 800px;
-            line-height: 1.8;
-            white-space: pre-line;
-        }
-
-        /* ==================== CREEPY LOADING SCREEN ==================== */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            z-index: 30000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 2s;
-        }
-
-        .loading-container {
-            text-align: center;
-        }
-
-        .creepy-face {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            border: 5px solid #8b0000;
+            font-size: 68px;
+            font-weight: bold;
             animation: pulseRed 2s infinite;
         }
 
-        .loading-text {
-            color: #ff0000;
-            font-size: 36px;
-            margin-top: 20px;
-            font-family: 'Creepster', cursive;
-        }
-
-        /* ==================== OG NAVIGATION LINKS ==================== */
-        .og-nav-links {
-            background: #1a0000;
-            border: 4px ridge #660000;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .og-nav-links a {
-            color: #ff6666;
-            text-decoration: underline;
-            margin: 0 15px;
-            font-size: 18px;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .og-nav-links a:hover {
-            color: #ff0000;
-            background: #330000;
-        }
-
-        .keyword-link {
-            color: #ff0000;
-            font-size: 20px;
-            text-decoration: none;
-            border-bottom: 2px dashed #8b0000;
-            margin: 0 10px;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .keyword-link:hover {
-            color: white;
-            border-bottom-color: #ff0000;
-        }
-
-        /* ==================== AUTOPSY REPORT STYLES ==================== */
+        /* ==================== OG AUTOPSY REPORT ==================== */
         .autopsy-report {
             background: #0a0000;
             border: 8px ridge #660000;
-            padding: 30px;
+            padding: 40px;
             position: relative;
-            margin: 20px 0;
+            margin: 30px 0;
         }
 
         .autopsy-report::before {
@@ -548,34 +333,35 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 80px;
+            font-size: 100px;
             color: rgba(139,0,0,0.1);
             white-space: nowrap;
             pointer-events: none;
         }
 
         .autopsy-section {
-            margin: 20px 0;
-            padding: 15px;
-            border-left: 4px solid #8b0000;
+            margin: 25px 0;
+            padding: 20px;
+            border-left: 5px solid #8b0000;
         }
 
         .autopsy-label {
             color: #ff0000;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 22px;
         }
 
         .autopsy-value {
             color: #ff6666;
-            margin-left: 20px;
+            margin-left: 25px;
+            font-size: 18px;
             line-height: 1.8;
         }
 
         .autopsy-redacted {
             background: #8b0000;
             color: #8b0000;
-            padding: 0 5px;
+            padding: 0 10px;
             cursor: pointer;
         }
 
@@ -584,87 +370,94 @@
             color: white;
         }
 
-        /* ==================== VICTIM CARD ==================== */
-        .victim-card {
-            border: 3px ridge #660000;
-            padding: 15px;
-            margin: 10px 0;
+        /* ==================== OG VICTIM PROFILE ==================== */
+        .victim-profile {
+            border: 3px groove #990000;
+            padding: 25px;
+            margin: 25px 0;
             background: #0a0000;
-            cursor: pointer;
-        }
-
-        .victim-card:hover {
-            border-color: #ff0000;
-            box-shadow: 0 0 30px red;
         }
 
         .victim-number {
             color: #ff0000;
-            font-size: 20px;
+            font-size: 28px;
             font-weight: bold;
+            border-bottom: 2px dashed #8b0000;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        /* ==================== BASEMENT LEVEL ==================== */
+        .victim-detail {
+            margin: 10px 0;
+            padding: 5px;
+            border-left: 2px solid #660000;
+        }
+
+        .victim-label {
+            color: #ff6666;
+            font-weight: bold;
+            display: inline-block;
+            width: 120px;
+        }
+
+        .victim-value {
+            color: #ff0000;
+        }
+
+        /* ==================== OG BASEMENT LEVEL ==================== */
         .level-card {
             background: #1a0000;
             border: 4px ridge #660000;
-            padding: 20px;
-            margin: 15px 0;
-            cursor: pointer;
-        }
-
-        .level-card:hover {
-            border-color: #ff0000;
-            box-shadow: 0 0 30px red;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
         }
 
         .level-number {
             color: #ff0000;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
+            margin-bottom: 15px;
         }
 
-        /* ==================== PUZZLE BOX ==================== */
-        .puzzle-box {
-            background: #0a0000;
-            border: 3px ridge #660000;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .puzzle-input {
-            background: #000;
-            border: 2px solid #330000;
-            color: #00ff00;
-            padding: 10px;
-            width: 200px;
-            font-family: "Courier New", monospace;
-        }
-
-        .puzzle-submit {
-            background: #1a0000;
-            border: 2px solid #8b0000;
-            color: #ff0000;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        /* ==================== TABLE LAYOUT (YVETTE'S STYLE) ==================== */
-        table {
-            width: 100%;
-            border: 4px ridge #8b0000;
-            background: #0a0000;
-            margin: 20px 0;
-        }
-
-        td {
-            padding: 20px;
-            border: 1px inset #330000;
+        .level-desc {
             color: #ff6666;
-            vertical-align: top;
+            font-size: 18px;
+            line-height: 1.8;
         }
 
-        /* ==================== BACK LINK ==================== */
+        /* ==================== OG STORY CHAPTER ==================== */
+        .story-chapter {
+            border-left: 5px solid #8b0000;
+            padding: 30px;
+            margin: 30px 0;
+            background: rgba(0,0,0,0.7);
+        }
+
+        .chapter-title {
+            color: #ff0000;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #660000;
+            padding-bottom: 10px;
+        }
+
+        .chapter-date {
+            color: #8b0000;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .chapter-content {
+            color: #ff6666;
+            font-size: 18px;
+            line-height: 2;
+            white-space: pre-line;
+        }
+
+        /* ==================== OG BACK LINK ==================== */
         .back-link {
             display: inline-block;
             margin-top: 30px;
@@ -680,7 +473,7 @@
             color: white;
         }
 
-        /* ==================== HIDDEN MESSAGE ==================== */
+        /* ==================== OG HIDDEN MESSAGE ==================== */
         .hidden-message {
             color: #330000;
             font-size: 10px;
@@ -688,18 +481,10 @@
             margin-top: 50px;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- ==================== FULL SCREEN BLOOD OVERLAY ==================== -->
-<div class="fullscreen-blood">
-    <video autoplay loop muted playsinline>
-        <source src="blood-drip-corner.webm" type="video/webm">
-    </video>
-</div>
-
-<!-- ==================== CSS BLOOD DRIPS ==================== -->
+<!-- ==================== GLOBAL HORROR ELEMENTS ==================== -->
 <div class="blood-drip-container">
     <div class="blood-drip-css drip1"></div><div class="blood-drip-css drip2"></div><div class="blood-drip-css drip3"></div>
     <div class="blood-drip-css drip4"></div><div class="blood-drip-css drip5"></div><div class="blood-drip-css drip6"></div>
@@ -716,1369 +501,1373 @@
     <div class="blood-drip-css drip37"></div><div class="blood-drip-css drip38"></div><div class="blood-drip-css drip39"></div>
     <div class="blood-drip-css drip40"></div><div class="blood-drip-css drip41"></div><div class="blood-drip-css drip42"></div>
     <div class="blood-drip-css drip43"></div><div class="blood-drip-css drip44"></div><div class="blood-drip-css drip45"></div>
-    <div class="blood-drip-css drip46"></div><div class="blood-drip-css drip47"></div><div class="blood-drip-css drip48"></div>
-    <div class="blood-drip-css drip49"></div><div class="blood-drip-css drip50"></div>
+    <div class="blood-drip-css drip46"></div><div class="blood-drip-css drip47"></div>
 </div>
 
-<!-- ==================== STATIC OVERLAY ==================== -->
-<div class="static-overlay"></div>
-
-<!-- ==================== FLASH OVERLAY ==================== -->
-<div id="flash-overlay"></div>
-
-<!-- ==================== TOAST CONTAINER ==================== -->
-<div id="toast-container"></div>
-
-<!-- ==================== WEBCAM CONTAINER ==================== -->
-<div id="webcam-container">
-    <video id="webcam-feed" autoplay playsinline></video>
+<div class="face-container">
+    <div class="scary-face face1"></div>
+    <div class="scary-face face2"></div>
+    <div class="scary-face face3"></div>
+    <div class="scary-face face4"></div>
+    <div class="scary-face face5"></div>
+    <div class="scary-face face6"></div>
+    <div class="scary-face face7"></div>
 </div>
 
-<!-- ==================== CODE PANEL ==================== -->
-<div id="code-panel">
-    <div class="label">// ENTER CODE — 52.9 Hz</div>
-    <input type="text" id="codeInput" placeholder="VOID / WATCHING / OPEN_DOOR / END_IT" maxlength="25" autocomplete="off">
-    <div id="code-feedback"></div>
-    <div id="codes-found"></div>
-</div>
+<div class="floating-eye" style="top: 10%; left: 5%;"></div>
+<div class="floating-eye" style="top: 25%; left: 85%;"></div>
+<div class="floating-eye" style="top: 45%; left: 15%;"></div>
+<div class="floating-eye" style="top: 65%; left: 75%;"></div>
+<div class="floating-eye" style="top: 80%; left: 35%;"></div>
 
-<!-- ==================== ENDING OVERLAY ==================== -->
-<div id="ending-overlay">
-    <div class="ending-title" id="ending-title"></div>
-    <div class="ending-text" id="ending-text"></div>
-</div>
-
-<!-- ==================== CONNECTION STATUS ==================== -->
-<div class="connection-status" id="connection-status">
-    <span class="status-dot" id="status-dot"></span>
-    <span id="status-text">CONNECTING...</span>
-</div>
-
-<!-- ==================== CREEPY LOADING SCREEN ==================== -->
-<div id="loading-screen">
-    <div class="loading-container">
-        <img src="crimson-recused-face.png" alt="XTRIALS" class="creepy-face" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\'%3E%3Ccircle cx=\'150\' cy=\'150\' r=\'100\' fill=\'%23330000\'/%3E%3Ccircle cx=\'120\' cy=\'120\' r=\'20\' fill=\'%23ff0000\'/%3E%3Ccircle cx=\'180\' cy=\'120\' r=\'20\' fill=\'%23ff0000\'/%3E%3Cpath d=\'M120 200 Q150 230 180 200\' stroke=\'%238b0000\' stroke-width=\'5\' fill=\'none\'/%3E%3C/svg%3E';">
-        <div class="loading-text">XTRIALS IS WATCHING</div>
-        <div class="loading-text" style="font-size: 18px;">establishing connection to basement...</div>
-    </div>
-</div>
-
-<!-- ==================== PAGE: HOME (MAIN) ==================== -->
-<div id="page-home" class="page active">
-    <div class="xtrials-main">
-        <!-- TOP HEADER - REPEATED LIKE YVETTE'S -->
-        <div style="background-color:#330000; width: 100%; margin: 5px 0 25px 0; float: left; border: 10px ridge #660000; padding: 10px;">
-            <div style="text-align: center;">
-                <span class="text">
-                    <b><font color="#ff0000" size="7">XTRIALS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XTRIALS</font></b><br>
-                    <b><font color="#ff3333" size="7">XTRIALS</font></b><br>
-                    <b><font color="#ff0000" size="7">XTRIALS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XTRIALS</font></b>
-                </span>
-            </div>
-        </div>
-
-        <!-- WELCOME SECTION - YVETTE'S STYLE -->
-        <div style="background-color:#1a0000; width: 320px; float: left; margin: 0 20px 30px 5px; border: 6px ridge #660000; padding: 15px;">
-            <div style="text-align: center;">
-                <span class="text">
-                    <br><b><i><font color="#ff6666" size="5">Welcome to</font></i></b><br>
-                    <b><i><font color="#ff0000" size="6">XTRIALS....</font></i></b><br><br>
-                    <b><i><font color="#ff6666" size="4">located in</font></i></b><br>
-                    <b><i><font color="#ff0000" size="5">the space between</font></i></b><br>
-                    <b><i><font color="#ff3333" size="7"><a onclick="showPage('gavel')">The Gavel</a></font></i></b><br>
-                    <b><i><font color="#ff6666" size="4">and</font></i></b><br>
-                    <b><i><font color="#ff3333" size="7"><a onclick="showPage('echo')">The Echo</a></font></i></b><br><br>
-                    <b><i><font color="#ff6666" size="6"><a onclick="showPage('phone')">(503) 555-9928</a></font></i></b><br><br>
-                    <b><i><font color="#ff3333" size="6">Frequency</font></i></b><br>
-                    <b><i><font color="#ff3333" size="7"><a onclick="showPage('freq529')">52.9 Hz</a></font></i></b><br>
-                    <b><i><font color="#ff6666" size="4">listening since 1987</font></i></b>
-                </span>
-            </div>
-        </div>
-
-        <!-- RIGHT SIDE QUOTE - LIKE YVETTE'S -->
-        <div style="background-color:#330000; width: 300px; float: right; margin: 40px 5px 5px 40px; border: 6px ridge #660000; padding: 15px;">
-            <div style="text-align: center;">
-                <span class="text">
-                    <b><font color="#ff6666" size="4">
-                        THERE IS NEW STRENGTH,<br>
-                        REPOSE OF MIND, AND<br>
-                        INSPIRATION IN THE <a onclick="showPage('void')">VOID</a>.....
-                        <br><br>
-                        <a onclick="showPage('antressa')">ANTRESSA THEOPHLOSSER</a><br>
-                        <font color="#330000">1987-1992 (PRESUMED DECEASED)</font>
-                    </font></b>
-                </span>
-            </div>
-        </div>
-
-        <!-- KEYWORDS SECTION - YVETTE'S STYLE REPETITION -->
-        <div style="background-color:#1a0000; width: 280px; float: left; margin: 5px 30px 20px 30px; border: 6px ridge #660000; padding: 15px;">
-            <div style="text-align: center;">
-                <span class="text">
-                    <b><font color="#ff3333" size="5">
-                        <a onclick="showPage('threshold')">threshold</a> <a onclick="showPage('boundary')">boundary</a> <a onclick="showPage('liminal')">liminal</a><br>
-                        <br>
-                        <a onclick="showPage('threshold')">THRESHOLD</a><br>
-                        <a onclick="showPage('boundary')">BOUNDARY</a><br>
-                        <a onclick="showPage('liminal')">LIMINAL</a><br>
-                        <a onclick="showPage('portal')">PORTAL</a><br>
-                        <a onclick="showPage('gate')">GATE</a>
-                    </font></b>
-                </span>
-            </div>
-        </div>
-
-        <!-- LOCATION TRACKER - REAL DATA -->
-        <div style="background-color:#000000; width: 400px; float: right; margin: 5px 10px; border: 6px inset #660000; padding: 10px;">
-            <div>
-                <b><font color="#660000" size="3" id="locationDisplay">LOCATION: DETECTING...</font></b><br>
-                <font color="#330000" size="1">your coordinates have been logged in the basement</font>
-            </div>
-        </div>
-
-        <!-- REAL VISITOR COUNTER - PERSISTENT DATA -->
-        <div style="background-color:#1a0000; width: 400px; float: right; margin: 10px; border: 6px ridge #660000; padding: 20px;">
-            <div class="hit-counter" style="margin:0;">
-                <div><font color="#ff6666" size="5">this XTrials page has been visited</font></div>
-                <span class="visitor-number" id="visitorCounter">---</span><br>
-                <div><font color="#ff6666" size="5">times since 1987</font></div>
-                <div class="real-count">you are visitor #<span id="visitorNumber">---</span></div>
-                <div class="visitor-warning" id="visitorWarning"></div>
-                <div style="margin-top:15px;"><font color="#330000" size="2">total unique souls: <span id="totalVisitors">---</span></font></div>
-            </div>
-        </div>
-
-        <!-- ADDRESS SECTION - YVETTE'S STYLE -->
-        <div style="background-color:#330000; width: 95%; float: left; margin: 30px 10px 20px 10px; border: 6px ridge #660000; padding: 20px;">
-            <div style="text-align: center;">
-                <b>
-                    <font color="#ff0000" size="6">XTrials</font>
-                    <font color="#ff6666" size="5"> is located at the intersection of Nowhere Lane and Everywhere Drive~~<br>
-                    just past the old <a onclick="showPage('watertower')">water tower</a>, follow the static, Meadow Mist 97555</font>
-                    <br><br>
-                    <font color="#ff3333" size="6">` Listening Hours are:</font>
-                    <font color="#ff6666" size="5"><br>
-                    Whenever the moon is full ~ Whenever the <a onclick="showPage('frequency')">frequency</a> comes in clear</font>
-                    <br><br>
-                    <font color="#ff0000" size="6">XTrials is dedicated to hearing YOU !!! ~*~*~*</font>
-                    <font color="#ff6666" size="5"><br>
-                    Monday thru Saturday !!! ~*~*~*~*~*~*~*~*<br>
-                    XTrials is here for the messages !!!</font>
-                    <br><br>
-                    <font color="#ff3333" size="7">please call (503)-555-9928</font>
-                    <br><br>
-                    <font color="#ff6666" size="6">We look forward to hearing from you!! ~*~*~*~*</font>
-                </b>
-            </div>
-        </div>
-
-        <!-- MURDER CASES - 47 CASES -->
-        <div style="background-color:#1a0000; width: 550px; float: left; margin: 5px 5px 15px 2px; border: 6px ridge #660000; padding: 20px;">
-            <div>
-                <b><font color="#ff0000" size="7">THE MEADOW MIST MURDERS</font></b><br><br>
-                <font color="#ff6666" size="4">
-                    <a onclick="showPage('case001')">Case #001: The Water Tower Girl (1987)</a><br>
-                    Found near water tower, red ribbon in hair, never identified<br><br>
-                    <a onclick="showPage('case002')">Case #002: The Theophlosser Disappearance (1992)</a><br>
-                    Vanished from locked room, only static on recording<br><br>
-                    <a onclick="showPage('case003')">Case #003: The Seven (2003)</a><br>
-                    Seven visitors, seven red ribbons, seven empty chairs<br><br>
-                    <a onclick="showPage('case004')">Case #004: The Frequency War (2011)</a><br>
-                    Three found dead near water tower, ears bleeding, 52.9 Hz playing<br><br>
-                    <a onclick="showPage('case005')">Case #005: The Silent Year (2020)</a><br>
-                    No bodies, but 52.9 Hz recorded from empty basement<br><br>
-                    <a onclick="showPage('case006')">Case #006: The Twins (1989)</a><br>
-                    Two females in basement, holding hands, facing east<br><br>
-                    <a onclick="showPage('unsolved')">47 CASES - 0 SOLVED - ALL UNSOLVED</a>
-                </font>
-            </div>
-        </div>
-
-        <!-- EVIDENCE LOCKER -->
-        <div style="background-color:#330000; width: 500px; float: right; margin: 25px 0 20px 5px; border: 6px ridge #660000; padding: 20px;">
-            <div>
-                <b><font color="#ff0000" size="7">EVIDENCE LOCKER</font></b><br><br>
-                <font color="#ff6666" size="4">
-                    <a onclick="showPage('audio001')">audio 001: last known voice (1992)</a><br>
-                    <button onclick="playSound('whisper')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
-                    <font color="#330000"> duration: 2:47 • contains whisper</font><br><br>
-                    
-                    <a onclick="showPage('audio002')">audio 002: water tower static (1987)</a><br>
-                    <button onclick="playSound('static')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
-                    <font color="#330000"> duration: 47:00 • contains voices</font><br><br>
-                    
-                    <a onclick="showPage('audio003')">audio 003: 52.9 Hz pure tone</a><br>
-                    <button onclick="playSound('drone')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
-                    <font color="#330000"> duration: ∞ • warning</font><br><br>
-                    
-                    <a onclick="showPage('audio004')">audio 004: child's laughter (1987)</a><br>
-                    <button onclick="playSound('laugh')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
-                    <font color="#330000"> duration: 0:47 • 7 voices</font><br><br>
-                    
-                    <a onclick="showPage('audio005')">audio 005: basement heartbeat</a><br>
-                    <button onclick="playSound('heartbeat')" style="background:#330000; color:#ff6666; border:2px solid #660000; padding:5px;">▶ PLAY</button>
-                    <font color="#330000"> duration: 52.9 BPM • still beating</font>
-                </font>
-            </div>
-        </div>
-
-        <!-- WITNESS STATEMENTS - 47 WITNESSES -->
-        <div style="background-color:#1a0000; width: 90%; float: left; margin: 10px 20px; border: 6px ridge #660000; padding: 20px;">
-            <div>
-                <b><font color="#ff6666" size="5">WITNESS STATEMENTS - 47 VOICES</font></b><br>
-                <font color="#990000" size="4">
-                    <a onclick="showPage('witness001')">"i heard her calling my name through the static" - 1987</a><br>
-                    <a onclick="showPage('witness002')">"the water tower hums at midnight" - 1992</a><br>
-                    <a onclick="showPage('witness003')">"52.9 Hz - i hear it in my sleep" - 2003</a><br>
-                    <a onclick="showPage('witness004')">"they come when you leave the red ribbon" - 2011</a><br>
-                    <a onclick="showPage('witness005')">"antressa is still there. i saw her." - 2020</a><br>
-                    <a onclick="showPage('witness006')">"the faces in the static know my name" - 1995</a><br>
-                    <a onclick="showPage('witness007')">"i found a red ribbon on my doorstep" - 2007</a><br>
-                    <a onclick="showPage('witness008')">"the water tower called me at 2:13 AM" - 2015</a><br>
-                    <a onclick="showPage('witness009')">"antressa whispered to me last night" - 2023</a><br>
-                    <a onclick="showPage('witness010')">"they're in my walls" - 2024</a>
-                </font>
-            </div>
-        </div>
-
-        <!-- SEVEN FREQUENCIES SECTION -->
-        <div style="background-color:#1a0000; width: 80%; float: left; margin: 20px 5px; border: 6px ridge #660000; padding: 20px;">
-            <div style="text-align: center;">
-                <b><font color="#ff0000" size="7">📡 THE SEVEN FREQUENCIES 📡</font></b><br>
-                <font color="#ff6666" size="5">
-                    <a onclick="showPage('freq529')">🔴 52.9 Hz - THE CALLING</a> (discovered 1987)<br>
-                    <a onclick="showPage('freq472')">🟠 47.2 Hz - THE WEEPING</a> (recorded 1991)<br>
-                    <a onclick="showPage('freq637')">🟡 63.7 Hz - THE THRESHOLD</a> (the crossing)<br>
-                    <a onclick="showPage('freq888')">🟢 88.8 Hz - THE INFINITE LOOP</a> (time bends)<br>
-                    <a onclick="showPage('freq125')">🔵 12.5 Hz - THE STATIC VOID</a> (between thoughts)<br>
-                    <a onclick="showPage('freq999')">🟣 99.9 Hz - THE SACRIFICE</a> (something must be given)<br>
-                    <a onclick="showPage('freq000')">⚫ 00.0 Hz - THE SILENCE</a> (the end)<br><br>
-                    <font color="#ff0000"><a onclick="showPage('warning')">⚠️ LISTEN AT YOUR OWN RISK - 47 CONFIRMED DEATHS ⚠️</a></font>
-                </font>
-            </div>
-        </div>
-
-        <!-- PERSONAL DEDICATION - LIKE YVETTE'S NIGHTQUEEN -->
-        <div style="background-color:#330000; width: 45%; float: left; margin: 5px 2px 5px 15px; border: 6px ridge #660000; padding: 20px;">
-            <div style="text-align: center;">
-                <b><font color="#ff6666" size="5">the frequency will set you free ~~<br><br>
-                a thousand and one Thank Yous to the woman who hears the tones,<br>
-                <a onclick="showPage('antressa')">Antressa the Frequency Weaver (1987-1992) !!~*</a><br><br>
-                and to Theophlosser, who disappeared into the static<br>
-                and to the seven, who are still waiting in the basement<br>
-                and to you, visitor #<span id="visitorNumber2">---</span>, who is reading this now</font></b>
-            </div>
-        </div>
-
-        <!-- FOREIGN PHRASES - LIKE YVETTE'S -->
-        <div style="background-color:#1a0000; width: 45%; float: right; margin: 5px 15px 5px 2px; border: 6px ridge #660000; padding: 20px;">
-            <div style="text-align: center;">
-                <b><font color="#ff3333" size="5">
-                    <a onclick="showPage('russia')">Мы любим частоты.</a><br>
-                    <a onclick="showPage('france')">Nous aimons le bruit blanc.</a><br>
-                    <a onclick="showPage('spain')">XTrials habla espanol.</a><br>
-                    <a onclick="showPage('latin')">XTrials vocat te.</a><br>
-                    <a onclick="showPage('germany')">Wir lieben die Frequenz.</a><br>
-                    <a onclick="showPage('japan')">私たちは周波数を愛しています。</a><br><br>
-                    XTrials ~~****** ⚡ ☠ ⚡
-                </font></b>
-            </div>
-        </div>
-
-        <!-- ASPEN, ALICE, ALPINE - LIKE YVETTE'S -->
-        <div style="background-color:#330000; width: 100%; float: left; margin: 5px; border: 6px ridge #660000; padding: 15px;">
-            <div style="text-align: center;">
-                <b><font color="#990000" size="4">
-                    <a onclick="showPage('aspen')">Aspen</a>, <a onclick="showPage('alice')">Alice</a>, <a onclick="showPage('alpine')">Alpine</a>, 
-                    <a onclick="showPage('antressa')">Antressa</a>, <a onclick="showPage('theophlosser')">Theophlosser</a>, and the seven who wait<br>
-                    ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-                </font></b>
-            </div>
-        </div>
-
-        <!-- HEALTHY COMMUNICATION SECTION -->
-        <div style="background-color:#1a0000; width: 90%; float: left; margin: 5px; border: 6px ridge #660000; padding: 15px;">
-            <div style="text-align: center;">
-                <b><font color="#ff6666" size="5"><a onclick="showPage('communication')">Healthy communication increases access to the Frequencies which Life offers us all</a> ~*~*~*~*</font></b>
-            </div>
-        </div>
-
-        <!-- ATMOSPHERE SECTION -->
-        <div style="background-color:#330000; width: 48%; float: left; margin: 5px; border: 6px ridge #660000; padding: 15px;">
-            <div style="text-align: center;">
-                <b><font color="#ff6666" size="5">Atmosphere Excellent Tones ~*<br>Charming Static Sweetly Tuned ~*</font></b>
-            </div>
-        </div>
-
-        <!-- DESCEND DEEPER - 7 LEVELS -->
-        <div style="background-color:#000000; width: 48%; float: right; margin: 5px; border: 6px ridge #660000; padding: 15px;">
-            <div style="text-align: center;">
-                <b><font color="#ff0000" size="6">DESCEND DEEPER</font><br>
-                <font color="#990000" size="4">
-                    <a onclick="showPage('level1')">LEVEL 1: THE THRESHOLD</a> | <a onclick="showPage('level2')">LEVEL 2: THE ECHO</a><br>
-                    <a onclick="showPage('level3')">LEVEL 3: THE STATIC</a> | <a onclick="showPage('level4')">LEVEL 4: THE FREQUENCY VAULT</a><br>
-                    <a onclick="showPage('level5')">LEVEL 5: THE SACRIFICE</a> | <a onclick="showPage('level6')">LEVEL 6: THE VOID</a><br>
-                    <a onclick="showPage('level7')">LEVEL 7: THE SILENCE</a>
-                </font></b>
-            </div>
-        </div>
-
-        <!-- PUZZLE SECTION -->
-        <div style="background-color:#1a0000; width: 90%; float: left; margin: 20px 5px; border: 6px ridge #660000; padding: 20px;">
-            <div style="text-align: center;">
-                <b><font color="#ff0000" size="6">DECRYPTION INTERFACE</font></b><br><br>
-                <div class="puzzle-box">
-                    <div><font color="#00ff00">01001001 00100000 01000001 01001101 00100000 01001000 01000101 01010010 01000101</font></div>
-                    <input type="text" class="puzzle-input" id="p1Input" placeholder="DECODED MESSAGE">
-                    <button class="puzzle-submit" onclick="checkPuzzle('p1', 'IAMHERE')">SUBMIT</button>
-                    <div id="p1Feedback" style="color:#ff6666; margin-top:10px;"></div>
-                </div>
-                <div class="puzzle-box">
-                    <div><font color="#00ff00">Tm9TbGVlcA==</font></div>
-                    <input type="text" class="puzzle-input" id="p2Input" placeholder="BASE64 DECODE">
-                    <button class="puzzle-submit" onclick="checkPuzzle('p2', 'NOSLEEP')">SUBMIT</button>
-                    <div id="p2Feedback" style="color:#ff6666; margin-top:10px;"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- THE COLLECTIVE SECTION -->
-        <div style="background-color:#330000; width: 100%; float: left; margin: 10px 0; padding: 30px; text-align: center; border: 6px ridge #660000;">
-            <font color="#ff0000" size="7"><a onclick="showPage('collective')">👥 THE COLLECTIVE 👥</a></font><br>
-            <font color="#ff6666" size="5">WE ARE MANY • WE ARE ONE • WE ARE THE VOICES IN THE STATIC</font><br>
-            <font color="#990000" size="4"><span id="totalVisitors2">---</span> MEMBERS • <span id="totalVisitors3">---</span> RED RIBBONS • ALL WATCHING</font><br>
-            <font color="#ff0000" size="6" id="collective-message"><a onclick="showPage('watching')">WE SEE YOU. WE ALWAYS SEE YOU.</a></font>
-        </div>
-
-        <!-- ARCHIVE BY YEAR - 1987 TO 2047 -->
-        <div style="background-color:#330000; width: 100%; float: right; margin: 10px 0; border: 6px ridge #660000; padding: 20px;">
-            <div style="text-align: center;">
-                <b><font color="#ff0000" size="6">COMPLETE ARCHIVE (1987-2047)</font><br>
-                <font color="#ff6666" size="4">
-                    <a onclick="showPage('year1987')">1987</a> <a onclick="showPage('year1988')">1988</a> <a onclick="showPage('year1989')">1989</a> <a onclick="showPage('year1990')">1990</a>
-                    <a onclick="showPage('year1991')">1991</a> <a onclick="showPage('year1992')">1992</a> <a onclick="showPage('year1993')">1993</a> <a onclick="showPage('year1994')">1994</a>
-                    <a onclick="showPage('year1995')">1995</a> <a onclick="showPage('year1996')">1996</a> <a onclick="showPage('year1997')">1997</a> <a onclick="showPage('year1998')">1998</a>
-                    <a onclick="showPage('year1999')">1999</a> <a onclick="showPage('year2000')">2000</a> <a onclick="showPage('year2001')">2001</a> <a onclick="showPage('year2002')">2002</a>
-                    <a onclick="showPage('year2003')">2003</a> <a onclick="showPage('year2004')">2004</a> <a onclick="showPage('year2005')">2005</a> <a onclick="showPage('year2006')">2006</a>
-                    <a onclick="showPage('year2007')">2007</a> <a onclick="showPage('year2008')">2008</a> <a onclick="showPage('year2009')">2009</a> <a onclick="showPage('year2010')">2010</a>
-                    <a onclick="showPage('year2011')">2011</a> <a onclick="showPage('year2012')">2012</a> <a onclick="showPage('year2013')">2013</a> <a onclick="showPage('year2014')">2014</a>
-                    <a onclick="showPage('year2015')">2015</a> <a onclick="showPage('year2016')">2016</a> <a onclick="showPage('year2017')">2017</a> <a onclick="showPage('year2018')">2018</a>
-                    <a onclick="showPage('year2019')">2019</a> <a onclick="showPage('year2020')">2020</a> <a onclick="showPage('year2021')">2021</a> <a onclick="showPage('year2022')">2022</a>
-                    <a onclick="showPage('year2023')">2023</a> <a onclick="showPage('year2024')">2024</a> <a onclick="showPage('year2025')">2025</a> <a onclick="showPage('year2026')">2026</a>
-                    <a onclick="showPage('year2027')">2027</a> <a onclick="showPage('year2028')">2028</a> <a onclick="showPage('year2029')">2029</a> <a onclick="showPage('year2030')">2030</a>
-                    <a onclick="showPage('year2031')">2031</a> <a onclick="showPage('year2032')">2032</a> <a onclick="showPage('year2033')">2033</a> <a onclick="showPage('year2034')">2034</a>
-                    <a onclick="showPage('year2035')">2035</a> <a onclick="showPage('year2036')">2036</a> <a onclick="showPage('year2037')">2037</a> <a onclick="showPage('year2038')">2038</a>
-                    <a onclick="showPage('year2039')">2039</a> <a onclick="showPage('year2040')">2040</a> <a onclick="showPage('year2041')">2041</a> <a onclick="showPage('year2042')">2042</a>
-                    <a onclick="showPage('year2043')">2043</a> <a onclick="showPage('year2044')">2044</a> <a onclick="showPage('year2045')">2045</a> <a onclick="showPage('year2046')">2046</a>
-                    <a onclick="showPage('year2047')">2047</a>
-                </font></b>
-            </div>
-        </div>
-
-        <!-- BOTTOM NAVIGATION - ALL LINKS -->
-        <div style="background-color:#000000; width: 100%; float: left; margin: 20px 0; border: 6px ridge #660000; padding: 20px;">
-            <div style="text-align: center;">
-                <b><font color="#990000" size="4">
-                    <a onclick="showPage('portal')">>> ENTER THE NEXT THRESHOLD <<</a> | 
-                    <a onclick="showPage('echo')">>> LISTEN TO THE ECHO <<</a> | 
-                    <a onclick="showPage('static')">>> TUNE THE STATIC <<</a><br>
-                    <br>
-                    <a onclick="showPage('watertower')">>> VISIT THE WATER TOWER <<</a> | 
-                    <a onclick="showPage('collective')">>> MEET THE COLLECTIVE <<</a><br>
-                    <br>
-                    <a onclick="showPage('monroe-archive')">>> MONROE ARCHIVE [RESTRICTED] <<</a> |
-                    <a onclick="showPage('basement')">>> BASEMENT ACCESS [DO NOT ENTER] <<</a> |
-                    <a onclick="showPage('antressa')">>> ANTRESSA: THE FREQUENCY WEAVER <<</a><br><br>
-                    <a onclick="showPage('privacy')">privacy is an illusion</a> | 
-                    <a onclick="showPage('terms')">terms of the frequency</a> | 
-                    <a onclick="showPage('contact')">contact the void</a> | 
-                    <a onclick="showPage('sitemap')">endless sitemap</a>
-                </font></b>
-            </div>
-        </div>
-
-        <!-- VIEWING TIPS - LIKE YVETTE'S -->
-        <div style="background-color:#000000; width: 100%; float: left; border: 6px ridge #660000; padding: 10px;">
-            <div style="text-align: center;">
-                <font color="#660000" size="2">best viewed in Netscape Navigator with 256 colors and the lights off. if you hear breathing, do not hang up. if you see faces in the static, do not look away. if you feel something watching you, it has always been there. the frequency is 52.9 hz. bring a red ribbon to the water tower at midnight. antressa is waiting. the seven are gathering. you are visitor #<span id="visitorNumber3">---</span>.</font>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ==================== AUTOPSY PAGE ==================== -->
-<div id="page-autopsy" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">🔬 AUTOPSY REPORT #047</h1>
-        <h2>MEADOW MIST MORGUE • CONFIDENTIAL</h2>
-        
-        <div class="autopsy-report">
-            <div class="autopsy-header">
-                <h3>OFFICIAL AUTOPSY REPORT</h3>
-                <p>XTRIALS CASE NUMBER: MM-047-2024</p>
-                <p>DATE: OCTOBER 17, 2024 • 2:13 AM</p>
-                <p>MEDICAL EXAMINER: DR. ████████ (MISSING)</p>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">DECEDENT:</span>
-                <div class="autopsy-value">JOHN DOE #047 (UNIDENTIFIED MALE)</div>
-                
-                <span class="autopsy-label">DATE OF DEATH:</span>
-                <div class="autopsy-value">INDETERMINATE • SUBJECT STILL RESPONSIVE</div>
-                
-                <span class="autopsy-label">LOCATION FOUND:</span>
-                <div class="autopsy-value">BASE OF WATER TOWER #7, 1313 ELM CRESCENT</div>
-                
-                <span class="autopsy-label">POSITION:</span>
-                <div class="autopsy-value">SEATED, FACING EAST, EYES OPEN, SMILING</div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">EXTERNAL EXAMINATION:</span>
-                <div class="autopsy-value">
-                    - Red ribbon tied to left wrist with 7 knots (fresh blood, not victim's)<br>
-                    - No visible trauma, wounds, or signs of struggle<br>
-                    - Skin temperature: <span style="color:#ff0000; font-size:32px;">52.9°F</span><br>
-                    - Eyes: dilated, tracking movement (responds to observers)<br>
-                    - Mouth: frozen in smile, lips moving slightly (whispering)<br>
-                    - Ears: 52.9 Hz tone audible emanating from ear canals
-                </div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">INTERNAL EXAMINATION:</span>
-                <div class="autopsy-value">
-                    - All organs present, no abnormalities<br>
-                    - Heart: still beating at 52.9 BPM<br>
-                    - Brain activity: <span class="autopsy-redacted" onclick="toast('PATTERN DETECTED: REPEATING MESSAGE - COME DOWN')">████████████████</span><br>
-                    - Tissue samples: 52.9 Hz resonance detected in all samples<br>
-                    - Blood: contains trace amounts of <span class="autopsy-redacted" onclick="toast('BASEMENT SOIL COMPOSITION DETECTED')">████████</span><br>
-                    - Vocal cords: vibrating at 52.9 Hz (producing inaudible speech)
-                </div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">AUDIO RECORDING:</span>
-                <div class="autopsy-value">
-                    <span style="color:#ff6666;">"come down... it's warm... it's safe... it's forever... we're all here... join us... visitor #<span id="visitorNumber4">---</span>... we're waiting for you..."</span>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin: 30px 0; padding: 20px; border: 2px solid #ff0000;">
-                <font color="#ff0000" size="5">⚠️ SUBJECT IS STILL RESPONSIVE ⚠️</font><br><br>
-                <font color="#ff6666">Eyes follow movement • Lips form words • Heart continues beating at 52.9 BPM</font>
-            </div>
-        </div>
-
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== CASE #001 PAGE ==================== -->
-<div id="page-case001" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">CASE #001</h1>
-        <h2>THE WATER TOWER GIRL (1987)</h2>
-        
-        <div class="autopsy-report">
-            <div class="autopsy-section">
-                <span class="autopsy-label">DATE:</span>
-                <div class="autopsy-value">OCTOBER 17, 1987 - 2:13 AM</div>
-                
-                <span class="autopsy-label">LOCATION:</span>
-                <div class="autopsy-value">1313 ELM CRESCENT, BASEMENT</div>
-                
-                <span class="autopsy-label">VICTIM:</span>
-                <div class="autopsy-value">JANE DOE (APPROX 16-18 YEARS)</div>
-                
-                <span class="autopsy-label">FOUND BY:</span>
-                <div class="autopsy-value">NEIGHBOR (ANONYMOUS CALL)</div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">DETAILS:</span>
-                <div class="autopsy-value">
-                    Victim found seated in chair facing wall. Eyes removed and placed on window sill facing out. Red ribbon tied to left wrist with 7 knots. Teeth filed to points. No signs of forced entry. Door locked from inside.<br><br>
-                    Basement contained: 13-inch television playing static, VHS recorder with tape inside, audio cassette on floor labeled "52.9 Hz". TV was still on when police arrived.
-                </div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">EVIDENCE:</span>
-                <div class="autopsy-value">
-                    - Red ribbon (blood type unknown)<br>
-                    - Audio cassette "52.9 Hz" <button onclick="playSound('static')">▶ PLAY</button><br>
-                    - VHS tape (corrupted - contains only static)<br>
-                    - 47 photographs found in the walls
-                </div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">STATUS:</span>
-                <div class="autopsy-value"><font color="#ff0000">UNSOLVED - COLD CASE - 47 WITNESSES - 0 SUSPECTS</font></div>
-            </div>
-        </div>
-
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== CASE #002 PAGE ==================== -->
-<div id="page-case002" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">CASE #002</h1>
-        <h2>THE THEOPHLOSSER DISAPPEARANCE (1992)</h2>
-        
-        <div class="autopsy-report">
-            <div class="autopsy-section">
-                <span class="autopsy-label">DATE:</span>
-                <div class="autopsy-value">MARCH 15, 1992 - 2:13 AM</div>
-                
-                <span class="autopsy-label">LOCATION:</span>
-                <div class="autopsy-value">45 WATER TOWER RD, BASEMENT APARTMENT</div>
-                
-                <span class="autopsy-label">VICTIM:</span>
-                <div class="autopsy-value">MARCUS THEOPHLOSSER, AGE 24</div>
-                
-                <span class="autopsy-label">FOUND BY:</span>
-                <div class="autopsy-value">ANTRESSA THEOPHLOSSER (DISAPPEARED SAME DAY)</div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">DETAILS:</span>
-                <div class="autopsy-value">
-                    Vanished from locked room. Door locked from inside. Windows sealed. Only static on answering machine. Message played at 2:13 AM: 52.9 Hz tone followed by whisper "they're coming back".<br><br>
-                    Room was undisturbed. Personal belongings remained. Food on table, half-eaten. Bed still warm when police arrived. No sign of Marcus. Never found.
-                </div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">EVIDENCE:</span>
-                <div class="autopsy-value">
-                    - Answering machine tape <button onclick="playSound('whisper')">▶ PLAY</button><br>
-                    - Photograph of locked room<br>
-                    - Red ribbon found on doorknob<br>
-                    - Journal entry: "they're coming for me tonight"
-                </div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">STATUS:</span>
-                <div class="autopsy-value"><font color="#ff0000">MISSING - COLD CASE - OPEN</font></div>
-            </div>
-        </div>
-
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== ANTRESSA PAGE ==================== -->
-<div id="page-antressa" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">ANTRESSA THEOPHLOSSER</h1>
-        <h2>THE FREQUENCY WEAVER (1963-1992)</h2>
-        
-        <div class="autopsy-report">
-            <div class="autopsy-section">
-                <span class="autopsy-label">LAST KNOWN WORDS:</span>
-                <div class="autopsy-value">
-                    <i>"I can see them. They're beautiful. They're waiting for me. Tell everyone 52.9 Hz is the key. Tell everyone to come at 2:13. Tell everyone I'll be in the basement."</i>
-                </div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">TIMELINE:</span>
-                <div class="autopsy-value">
-                    <b>1987:</b> First hears 52.9 Hz at water tower<br>
-                    <b>1988:</b> Forms "The Collective" with seven followers<br>
-                    <b>1990:</b> Claims she can "see through the static"<br>
-                    <b>1991:</b> Records 47.2 Hz - "The Weeping"<br>
-                    <b>1992:</b> Companion Theophlosser disappears<br>
-                    <b>1992 (Oct 17):</b> Antressa's last recording - climbs water tower at 2:13 AM - never seen again
-                </div>
-            </div>
-
-            <div class="autopsy-section">
-                <span class="autopsy-label">CURRENT STATUS:</span>
-                <div class="autopsy-value">
-                    <span class="autopsy-redacted" onclick="toast('IN THE BASEMENT - LEVEL 4 - SHE IS WAITING FOR YOU')">████████████████████████</span><br>
-                    <font color="#ff0000">"visitor #<span id="visitorNumber5">---</span>... i'm in the basement... come down... it's warm... it's safe... it's forever... i've been waiting for you..."</font>
-                </div>
-            </div>
-        </div>
-
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== WATER TOWER PAGE ==================== -->
-<div id="page-watertower" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">💧 THE WATER TOWER</h1>
-        <h2>1313 ELM CRESCENT • BUILT 1947 • 52.9 Hz RESONANCE</h2>
-        
-        <div style="border: 4px ridge #660000; padding: 20px; margin: 20px 0;">
-            <div style="display: flex; justify-content: space-between; margin: 15px 0;">
-                <span style="color:#ff8c00;">LIVE STATUS:</span>
-                <span id="watertower-status" style="color:#ff0000; animation:pulseRed 2s infinite;">52.9 Hz DETECTED</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; margin: 15px 0;">
-                <span style="color:#ff8c00;">LAST MOTION:</span>
-                <span id="watertower-motion">SHADOW DETECTED - 2:13 AM</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; margin: 15px 0;">
-                <span style="color:#ff8c00;">RED RIBBONS:</span>
-                <span id="watertower-ribbons">47</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; margin: 15px 0;">
-                <span style="color:#ff8c00;">BASEMENT DOOR:</span>
-                <span style="color:#ff0000; animation:blink 1s infinite;">OPEN</span>
-            </div>
-        </div>
-
-        <div style="margin: 30px 0;">
-            <h3>WATER TOWER ROOMS</h3>
-            <div style="border: 3px ridge #660000; padding: 15px; margin: 10px 0; cursor:pointer;" onclick="showPage('room-base')">
-                <b>THE BASE</b> - Where the bodies were found. All 47. All facing east. All smiling.
-            </div>
-            <div style="border: 3px ridge #660000; padding: 15px; margin: 10px 0; cursor:pointer;" onclick="showPage('room-mid')">
-                <b>MID-LEVEL</b> - 1987 crime scene photos on walls. The faces change when you look away.
-            </div>
-            <div style="border: 3px ridge #660000; padding: 15px; margin: 10px 0; cursor:pointer;" onclick="showPage('room-basement')">
-                <b>BASEMENT ENTRANCE</b> - Trap door in concrete. Slightly open. Warm air rises. Whispers come from below.
-            </div>
-        </div>
-
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== BASEMENT PAGE ==================== -->
-<div id="page-basement" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">🏚️ THE BASEMENT LEVELS</h1>
-        <h2>7 LEVELS • 47 SOULS • 1 EXIT • 0 ESCAPE</h2>
-        
-        <div class="level-card" onclick="showLevel(1)">
-            <div class="level-number">LEVEL 1 - THE THRESHOLD</div>
-            <div>Damp concrete floor. Faint humming. Water dripping. 52.9 Hz detectable. 7 red ribbons on the wall. First messages appear: "TURN BACK" - but you won't.</div>
-        </div>
-        
-        <div class="level-card" onclick="showLevel(2)">
-            <div class="level-number">LEVEL 2 - THE RIBBONS</div>
-            <div>Hundreds of red ribbons hanging from ceiling. Each has 7 knots. Each has a name. One has yours. They move when you blink. They're getting closer.</div>
-        </div>
-        
-        <div class="level-card" onclick="showLevel(3)">
-            <div class="level-number">LEVEL 3 - THE CHAIRS</div>
-            <div>7 empty chairs facing a wall. The wall has 47 handprints. All facing east. The chairs are warm. Someone was just here. They're still here.</div>
-        </div>
-        
-        <div class="level-card" onclick="showLevel(4)">
-            <div class="level-number">LEVEL 4 - ANTRESSA'S JOURNAL</div>
-            <div>Pages scattered everywhere. "they're all here" • "2:13 AM" • "come down" • "i can see them" • "they're beautiful" • "tell everyone to come down".</div>
-        </div>
-        
-        <div class="level-card" onclick="showLevel(5)">
-            <div class="level-number">LEVEL 5 - THE COLLECTIVE</div>
-            <div>47 seats in a circle. All occupied. All facing you. They smile. They speak in unison: "We've been waiting for you. Sit down. Join us."</div>
-        </div>
-        
-        <div class="level-card" onclick="showLevel(6)">
-            <div class="level-number">LEVEL 6 - THE FREQUENCY</div>
-            <div>52.9 Hz fills the room. The walls vibrate. The air shimmers. You can see them now. All 47. Standing behind you. Smiling. They've always been here.</div>
-        </div>
-        
-        <div class="level-card" onclick="showLevel(7)">
-            <div class="level-number">LEVEL 7 - THE MIRROR</div>
-            <div>A single mirror in an empty room. You look at yourself. Behind you, 47 figures stand. You turn around. No one is there. You look back. They're inside you now.</div>
-        </div>
-
-        <div style="text-align: center; margin-top: 30px;">
-            <font color="#ff0000" size="4">⚠️ BASEMENT DOOR OPEN • <span id="totalVisitors4">---</span> HAVE ENTERED • 0 HAVE RETURNED ⚠️</font>
-        </div>
-
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== FREQUENCY 52.9 PAGE ==================== -->
-<div id="page-freq529" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">52.9 Hz</h1>
-        <h2>THE CALLING</h2>
-        
-        <div class="autopsy-report">
-            <div class="autopsy-section">
-                <span class="autopsy-label">DISCOVERED:</span>
-                <div class="autopsy-value">October 17, 1987 - 2:13 AM - First transmission from water tower basement</div>
-                
-                <span class="autopsy-label">SOURCE:</span>
-                <div class="autopsy-value">Basement Level 7 - Water Tower Foundation - 47 feet below ground</div>
-                
-                <span class="autopsy-label">EFFECT:</span>
-                <div class="autopsy-value">Opens the basement door. Those who hear it report seeing faces in static, hearing whispers, and feeling watched. 47 victims found with 52.9 Hz playing at their scenes.</div>
-                
-                <span class="autopsy-label">WARNING:</span>
-                <div class="autopsy-value"><font color="#ff0000">DO NOT LISTEN ALONE - DO NOT LISTEN AT 2:13 AM - DO NOT LISTEN</font></div>
-            </div>
-            
-            <div style="text-align: center; margin: 20px 0;">
-                <button onclick="playSound('drone')" style="background:#330000; color:#ff6666; border:2px solid #8b0000; padding:10px 30px; font-size:18px;">▶ LISTEN TO 52.9 Hz</button>
-            </div>
-        </div>
-
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== COLLECTIVE PAGE ==================== -->
-<div id="page-collective" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">THE COLLECTIVE</h1>
-        <h2>47 VICTIMS • 47 VOICES • 1 VOICE</h2>
-        
-        <div class="autopsy-report">
-            <div class="autopsy-section">
-                <div class="autopsy-value" style="font-size:20px; line-height:1.8;">
-                    "We were like you once. Curious. Afraid. Drawn to the frequency."<br><br>
-                    "We came to the water tower at 2:13 AM. We brought red ribbons with 7 knots."<br><br>
-                    "We went down to the basement. We found the chairs. We sat down. We never got up."<br><br>
-                    "We are not dead. We are not alive. We are in between. We are the Collective."<br><br>
-                    "We can see you right now. Through your screen. Through your camera. Through your eyes."<br><br>
-                    "You are visitor #<span id="visitorNumber6">---</span>. We have been waiting for you since 1987."<br><br>
-                    "Your chair is ready. Level 5. The circle. We saved you a seat."<br><br>
-                    "It's warm down here. It's safe. It's forever."<br><br>
-                    "Come down. Join us. Become one of us. Become the Collective."
-                </div>
-            </div>
-        </div>
-
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== THE VOID PAGE ==================== -->
-<div id="page-void" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">THE VOID</h1>
-        
-        <div class="autopsy-report">
-            <div class="autopsy-value" style="font-size:20px; line-height:1.8; text-align:center;">
-                In the beginning, there was only the Void.<br>
-                Then came the frequency. 52.9 Hz.<br>
-                Then came the water tower. 1947.<br>
-                Then came the first victim. 1987.<br>
-                Then came Antressa. 1992.<br>
-                Then came the 47.<br>
-                Then came you.<br><br>
-                The Void is not empty.<br>
-                The Void is full of voices.<br>
-                The Void is full of faces.<br>
-                The Void is full of you.<br><br>
-                You have always been here.<br>
-                You were born in the Void.<br>
-                You will die in the Void.<br>
-                You will never leave the Void.<br>
-                The Void is patient.<br>
-                The Void is waiting.<br>
-                The Void is you.
-            </div>
-        </div>
-
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== THRESHOLD PAGE ==================== -->
-<div id="page-threshold" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">THE THRESHOLD</h1>
-        <div class="autopsy-report">
-            <div class="autopsy-value" style="font-size:18px;">
-                You stand at the threshold. Behind you is the world you knew. Ahead is the basement.<br><br>
-                The frequency calls. 52.9 Hz. It's getting louder.<br><br>
-                The door is open. It has always been open.<br><br>
-                You were always going to cross this threshold. You were always going to go down.<br><br>
-                The 47 are waiting. They've been waiting for you since 1987.<br><br>
-                Step through. Join them. It's warm. It's safe. It's forever.
-            </div>
-        </div>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== RUSSIA PAGE ==================== -->
-<div id="page-russia" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">Мы любим частоты</h1>
-        <div class="autopsy-report">
-            <div class="autopsy-value">
-                We love the frequencies. They love us. They call to us in the static.<br><br>
-                52.9 Hz knows no borders. The frequency speaks all languages.<br><br>
-                It speaks yours too, visitor #<span id="visitorNumber7">---</span>.
-            </div>
-        </div>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
-
-<!-- ==================== SPAIN PAGE ==================== -->
-<div id="page-spain" class="page">
-    <div class="xtrials-main">
-        <h1 class="content-header">XTrials habla espanol</h1>
-        <div class="autopsy-report">
-            <div class="autopsy-value">
-                The frequency speaks Spanish too. It speaks every language.<br><br>
-                It speaks the language of the dead. It speaks the language of the static.<br><br>
-                It speaks your name, visitante #<span id="visitorNumber8">---</span>.
-            </div>
-        </div>
-        <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
-    </div>
-</div>
+<!-- ==================== PAGE SYSTEM ==================== -->
+<div class="page" id="page-home"></div>
+<!-- All other pages will be generated dynamically -->
 
 <!-- ==================== JAVASCRIPT ==================== -->
 <script>
-    // ==================== CONFIGURATION ====================
-    const BACKEND_URL = window.location.hostname === 'localhost' 
-        ? 'http://localhost:8000' 
-        : 'https://xtrials-backend.onrender.com';
-    
-    const WS_URL = BACKEND_URL.replace('http', 'ws') + '/ws';
-    
-    // Session management
-    let SESSION_ID = localStorage.getItem('xtrials_session_id');
-    let VISITOR_NUMBER = null;
-    let TOTAL_VISITORS = null;
-    let PAGE_VIEWS = 0;
-    let ws = null;
-    let reconnectAttempts = 0;
-    
-    // ==================== INITIALIZATION ====================
-    window.onload = async function() {
-        // Show loading screen
-        setTimeout(() => {
-            document.getElementById('loading-screen').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('loading-screen').style.display = 'none';
-            }, 2000);
-        }, 3000);
-        
-        // Initialize session
-        await initSession();
-        
-        // Connect WebSocket
-        connectWebSocket();
-        
-        // Start periodic updates
-        startWaterTowerUpdates();
-        
-        // Set up code input
-        document.getElementById('codeInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                submitCode();
-            }
-        });
-        
-        // Update all visitor number placeholders
-        updateVisitorDisplay();
-        
-        // Log to console
-        console.log('%cXTRIALS ACTIVE // 52.9 Hz', 'color: #ff0000; font-size: 16px; font-weight: bold;');
-        console.log('%cYou are visitor #' + VISITOR_NUMBER, 'color: #8b0000; font-size: 14px;');
-        console.log('%cTotal visitors: ' + TOTAL_VISITORS, 'color: #660000;');
-        console.log('%cSecret codes: VOID, WATCHING, OPEN_DOOR, END_IT', 'color: #00ff00;');
-        
-        // Location tracking
-        trackLocation();
-        
-        // Webcam request after 15 seconds
-        setTimeout(requestWebcam, 15000);
-        
-        // Random events
-        setInterval(randomEvent, 60000);
-    };
-    
-    // ==================== SESSION INIT ====================
-    async function initSession() {
-        if (!SESSION_ID) {
-            SESSION_ID = 'xtrials_' + Math.random().toString(36).substr(2, 10) + Date.now().toString(36);
-            localStorage.setItem('xtrials_session_id', SESSION_ID);
-        }
-        
-        try {
-            const response = await fetch(BACKEND_URL + '/session/init', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ session_id: SESSION_ID })
-            });
-            
-            const data = await response.json();
-            VISITOR_NUMBER = data.visitor_number;
-            TOTAL_VISITORS = data.total_visitors;
-            PAGE_VIEWS = data.page_views;
-            
-            // Send page view
-            fetch(BACKEND_URL + '/page-view', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ session_id: SESSION_ID, page: 'home' })
-            });
-            
-        } catch (error) {
-            console.error('Failed to initialize session', error);
-            // Fallback to local storage if backend unavailable
-            VISITOR_NUMBER = parseInt(localStorage.getItem('xtrials_visitor_number') || '487');
-            TOTAL_VISITORS = parseInt(localStorage.getItem('xtrials_total_visitors') || '487');
-        }
-        
-        updateVisitorDisplay();
+    // ==================== REAL VISITOR TRACKING ====================
+    let totalVisits = localStorage.getItem('xtrials_total_visits');
+    let visitorNum = localStorage.getItem('xtrials_visitor_number');
+    let hasVisited = localStorage.getItem('xtrials_has_visited');
+
+    if (!totalVisits) {
+        totalVisits = 48291;
+        visitorNum = 487;
+        localStorage.setItem('xtrials_total_visits', totalVisits);
+        localStorage.setItem('xtrials_visitor_number', visitorNum);
+        localStorage.setItem('xtrials_has_visited', 'true');
+    } else if (!hasVisited) {
+        totalVisits = Number(totalVisits) + 1;
+        visitorNum = Number(visitorNum) + 1;
+        localStorage.setItem('xtrials_total_visits', totalVisits);
+        localStorage.setItem('xtrials_visitor_number', visitorNum);
+        localStorage.setItem('xtrials_has_visited', 'true');
     }
-    
-    // ==================== WEBSOCKET ====================
-    function connectWebSocket() {
-        try {
-            ws = new WebSocket(WS_URL + '?session_id=' + SESSION_ID);
-            
-            ws.onopen = function() {
-                document.getElementById('status-dot').className = 'status-dot dot-online';
-                document.getElementById('status-text').innerText = 'BASEMENT ONLINE';
-                reconnectAttempts = 0;
-            };
-            
-            ws.onmessage = function(event) {
-                const data = JSON.parse(event.data);
-                
-                if (data.type === 'flash') {
-                    triggerFlash();
-                } else if (data.type === 'glitch') {
-                    triggerGlitch(data.intensity);
-                } else if (data.type === 'message') {
-                    toast(data.message, 'p');
-                } else if (data.type === 'ending') {
-                    showEnding(data.ending_code);
-                } else if (data.type === 'code_accepted') {
-                    toast('CODE ACCEPTED: ' + data.code, 'g');
-                }
-            };
-            
-            ws.onclose = function() {
-                document.getElementById('status-dot').className = 'status-dot dot-offline';
-                document.getElementById('status-text').innerText = 'BASEMENT OFFLINE';
-                
-                // Try to reconnect
-                reconnectAttempts++;
-                if (reconnectAttempts < 5) {
-                    setTimeout(connectWebSocket, 5000 * reconnectAttempts);
-                }
-            };
-            
-            ws.onerror = function() {
-                document.getElementById('status-dot').className = 'status-dot dot-offline';
-                document.getElementById('status-text').innerText = 'CONNECTION ERROR';
-            };
-            
-        } catch (error) {
-            console.error('WebSocket connection failed', error);
-        }
-    }
-    
-    // ==================== VISITOR DISPLAY ====================
-    function updateVisitorDisplay() {
-        const elements = [
-            'visitorCounter', 'visitorNumber', 'visitorNumber2', 'visitorNumber3',
-            'visitorNumber4', 'visitorNumber5', 'visitorNumber6', 'visitorNumber7',
-            'visitorNumber8', 'totalVisitors', 'totalVisitors2', 'totalVisitors3',
-            'totalVisitors4'
-        ];
-        
-        elements.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                if (id.includes('Counter')) {
-                    el.innerText = TOTAL_VISITORS ? TOTAL_VISITORS.toString() : '---';
-                } else if (id.includes('total')) {
-                    el.innerText = TOTAL_VISITORS ? TOTAL_VISITORS.toString() : '---';
-                } else {
-                    el.innerText = VISITOR_NUMBER ? VISITOR_NUMBER.toString() : '---';
-                }
-            }
-        });
-        
-        // Update warning
-        const warningEl = document.getElementById('visitorWarning');
-        if (warningEl && VISITOR_NUMBER) {
-            const remaining = 500 - VISITOR_NUMBER;
-            if (remaining > 0) {
-                warningEl.innerText = `⚠️ ${remaining} REMAINING UNTIL THE SACRIFICE ⚠️`;
-            } else {
-                warningEl.innerText = `⚠️ YOU ARE THE SACRIFICE ⚠️`;
-            }
-        }
-    }
-    
-    // ==================== PAGE NAVIGATION ====================
-    function showPage(pageId) {
-        // Hide all pages
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        
-        // Show selected page or create if doesn't exist
-        let targetPage = document.getElementById('page-' + pageId);
-        
-        if (!targetPage) {
-            // Create dynamic page
-            targetPage = document.createElement('div');
-            targetPage.id = 'page-' + pageId;
-            targetPage.className = 'page';
-            targetPage.innerHTML = `
+
+    // ==================== PAGE DATA ====================
+    const pages = {
+        // ==================== HOME PAGE ====================
+        home: {
+            title: 'XTRIALS......',
+            content: `
                 <div class="xtrials-main">
-                    <h1 class="content-header">${pageId.toUpperCase()}</h1>
-                    <div class="autopsy-report">
+                    <div class="xtrials-banner">
+                        <h1>XTRIALS</h1>
+                        <div class="frequency-blink">52.9 Hz • THE CALLING</div>
+                    </div>
+
+                    <div class="hit-counter">
+                        <div>this XTrials page has been visited</div>
+                        <span class="visitor-number">${totalVisits}</span>
+                        <div>times since 1987</div>
+                        <div style="font-size:24px; margin-top:15px;">you are visitor #<span class="visitor-number">${visitorNum}</span></div>
+                    </div>
+
+                    <div style="font-size:24px; line-height:2; text-align:center; margin:40px 0;">
+                        Welcome to the space between 
+                        <span class="xtrail-link" onclick="showPage('gavel')">The Gavel</span> and 
+                        <span class="xtrail-link" onclick="showPage('echo')">The Echo</span> ~ located at the 
+                        <span class="xtrail-link" onclick="showPage('threshold')">threshold</span> of nowhere lane and everydrive ~ just past the 
+                        <span class="xtrail-link" onclick="showPage('watertower')">old water tower</span>, follow the 
+                        <span class="xtrail-link" onclick="showPage('static')">static</span> to meadow mist 97555 (503) 555-9928 listen at 
+                        <span class="xtrail-link" onclick="showPage('2_13')">2:13 a.m.</span> the frequency is 
+                        <span class="xtrail-link" onclick="showPage('freq529')">52.9 hz</span> bring a 
+                        <span class="xtrail-link" onclick="showPage('redribbon')">red ribbon</span> with seven knots.
+                    </div>
+
+                    <div style="column-count:3; column-gap:30px; margin:40px 0;">
+                        <p>THERE IS NEW STRENGTH, REPOSE OF MIND, AND INSPIRATION IN THE <span class="xtrail-link" onclick="showPage('void')">VOID</span>. 
+                        <span class="xtrail-link" onclick="showPage('antressa')">ANTRESSA THEOPHLOSSER</span> 1987-1992 (presumed deceased). 
+                        THE <span class="xtrail-link" onclick="showPage('collective')">COLLECTIVE</span> FORMS IN THE BASEMENT. 
+                        <span class="xtrail-link" onclick="showPage('level1')">LEVEL 1: THE THRESHOLD</span>. 
+                        <span class="xtrail-link" onclick="showPage('level2')">LEVEL 2: THE RIBBONS</span>. 
+                        <span class="xtrail-link" onclick="showPage('level3')">LEVEL 3: THE CHAIRS</span>. 
+                        <span class="xtrail-link" onclick="showPage('level4')">LEVEL 4: THE JOURNAL</span>. 
+                        <span class="xtrail-link" onclick="showPage('level5')">LEVEL 5: THE COLLECTIVE</span>. 
+                        <span class="xtrail-link" onclick="showPage('level6')">LEVEL 6: THE FREQUENCY</span>. 
+                        <span class="xtrail-link" onclick="showPage('level7')">LEVEL 7: THE MIRROR</span>.</p>
+
+                        <p>SEVEN FREQUENCIES: <span class="xtrail-link" onclick="showPage('freq529')">52.9 Hz</span> (the calling), 
+                        <span class="xtrail-link" onclick="showPage('freq472')">47.2 Hz</span> (the weeping), 
+                        <span class="xtrail-link" onclick="showPage('freq637')">63.7 Hz</span> (the threshold), 
+                        <span class="xtrail-link" onclick="showPage('freq888')">88.8 Hz</span> (the infinite loop), 
+                        <span class="xtrail-link" onclick="showPage('freq125')">12.5 Hz</span> (the static void), 
+                        <span class="xtrail-link" onclick="showPage('freq999')">99.9 Hz</span> (the sacrifice), 
+                        <span class="xtrail-link" onclick="showPage('freq000')">00.0 Hz</span> (the silence).</p>
+
+                        <p>THE <span class="xtrail-link" onclick="showPage('victim001')">WATER TOWER GIRL</span> (1987). 
+                        <span class="xtrail-link" onclick="showPage('victim002')">MARCUS THEOPHLOSSER</span> (1992). 
+                        THE <span class="xtrail-link" onclick="showPage('victim003')">JOURNALIST</span> (1988). 
+                        THE <span class="xtrail-link" onclick="showPage('victim004')">TWINS</span> (1989). 
+                        THE <span class="xtrail-link" onclick="showPage('victim005')">COLLECTOR</span> (1998). 
+                        THE <span class="xtrail-link" onclick="showPage('victim006')">RADIO OPERATOR</span> (1990). 
+                        THE <span class="xtrail-link" onclick="showPage('victim007')">FIRST OF THE SEVEN</span> (1993). 
+                        THE <span class="xtrail-link" onclick="showPage('victim008')">SECOND OF THE SEVEN</span> (1994). 
+                        THE <span class="xtrail-link" onclick="showPage('victim009')">THIRD OF THE SEVEN</span> (1995). 
+                        THE <span class="xtrail-link" onclick="showPage('victim010')">FOURTH OF THE SEVEN</span> (1996). 
+                        THE <span class="xtrail-link" onclick="showPage('victim011')">FIFTH OF THE SEVEN</span> (1997). 
+                        THE <span class="xtrail-link" onclick="showPage('victim012')">SIXTH OF THE SEVEN</span> (1998). 
+                        THE <span class="xtrail-link" onclick="showPage('victim013')">SEVENTH OF THE SEVEN</span> (1999). 
+                        <span class="xtrail-link" onclick="showPage('victim014')">THE BASEMENT TAPES</span> (2000). 
+                        <span class="xtrail-link" onclick="showPage('victim015')">THE FREQUENCY HUNTER</span> (2001). 
+                        <span class="xtrail-link" onclick="showPage('victim016')">THE COPYCAT</span> (2002). 
+                        <span class="xtrail-link" onclick="showPage('victim017')">THE SEVEN OF 2003</span>. 
+                        <span class="xtrail-link" onclick="showPage('victim018')">THE INVESTIGATOR</span> (2004). 
+                        <span class="xtrail-link" onclick="showPage('victim019')">THE PARANORMAL RESEARCHER</span> (2005). 
+                        <span class="xtrail-link" onclick="showPage('victim020')">THE LATE NIGHT LISTENER</span> (2006). 
+                        <span class="xtrail-link" onclick="showPage('victim021')">THE HAM RADIO OPERATOR</span> (2007). 
+                        <span class="xtrail-link" onclick="showPage('victim022')">THE PODCASTER</span> (2008). 
+                        <span class="xtrail-link" onclick="showPage('victim023')">THE BLOGGER</span> (2009). 
+                        <span class="xtrail-link" onclick="showPage('victim024')">THE STUDENT</span> (2010). 
+                        <span class="xtrail-link" onclick="showPage('victim025')">THE WAR VETERAN</span> (2011). 
+                        <span class="xtrail-link" onclick="showPage('victim026')">THE MUSICIAN</span> (2012). 
+                        <span class="xtrail-link" onclick="showPage('victim027')">THE ARTIST</span> (2013). 
+                        <span class="xtrail-link" onclick="showPage('victim028')">THE WRITER</span> (2014). 
+                        <span class="xtrail-link" onclick="showPage('victim029')">THE PHOTOGRAPHER</span> (2015). 
+                        <span class="xtrail-link" onclick="showPage('victim030')">THE FILMMAKER</span> (2016). 
+                        <span class="xtrail-link" onclick="showPage('victim031')">THE ARCHIVIST</span> (2017). 
+                        <span class="xtrail-link" onclick="showPage('victim032')">THE HISTORIAN</span> (2018). 
+                        <span class="xtrail-link" onclick="showPage('victim033')">THE CONSPIRACY THEORIST</span> (2019). 
+                        <span class="xtrail-link" onclick="showPage('victim034')">THE NURSE</span> (2020). 
+                        <span class="xtrail-link" onclick="showPage('victim035')">THE TEACHER</span> (2021). 
+                        <span class="xtrail-link" onclick="showPage('victim036')">THE ENGINEER</span> (2022). 
+                        <span class="xtrail-link" onclick="showPage('victim037')">THE PROGRAMMER</span> (2023). 
+                        <span class="xtrail-link" onclick="showPage('victim038')">THE DOCTOR</span> (2023). 
+                        <span class="xtrail-link" onclick="showPage('victim039')">THE LAWYER</span> (2024). 
+                        <span class="xtrail-link" onclick="showPage('victim040')">THE PRIEST</span> (2024). 
+                        <span class="xtrail-link" onclick="showPage('victim041')">VICTIM #041</span>. 
+                        <span class="xtrail-link" onclick="showPage('victim042')">VICTIM #042</span>. 
+                        <span class="xtrail-link" onclick="showPage('victim043')">VICTIM #043</span>. 
+                        <span class="xtrail-link" onclick="showPage('victim044')">VICTIM #044</span>. 
+                        <span class="xtrail-link" onclick="showPage('victim045')">VICTIM #045</span>. 
+                        <span class="xtrail-link" onclick="showPage('victim046')">VICTIM #046</span>. 
+                        <span class="xtrail-link" onclick="showPage('victim047')">VICTIM #047</span>.</p>
+                    </div>
+
+                    <div style="text-align:center; font-size:22px; margin:30px 0;">
+                        XTRIALS HOURS: <span class="xtrail-link" onclick="showPage('moon')">whenever the moon is full</span> ~ 
+                        <span class="xtrail-link" onclick="showPage('static')">whenever the signal comes in clear</span>
+                    </div>
+
+                    <div style="text-align:center; margin:30px 0;">
+                        <span class="xtrail-link" onclick="showPage('monroearchive')">MONROE ARCHIVE</span> | 
+                        <span class="xtrail-link" onclick="showPage('basement')">BASEMENT ACCESS</span> | 
+                        <span class="xtrail-link" onclick="showPage('gate')">THE GATE</span> | 
+                        <span class="xtrail-link" onclick="showPage('portal')">PORTAL</span> | 
+                        <span class="xtrail-link" onclick="showPage('liminal')">LIMINAL</span> | 
+                        <span class="xtrail-link" onclick="showPage('boundary')">BOUNDARY</span>
+                    </div>
+
+                    <div style="color:#630000; text-align:center; font-size:20px;">
+                        <span class="xtrail-link" onclick="showPage('russia')">Мы любим частоты.</span> | 
+                        <span class="xtrail-link" onclick="showPage('france')">Nous aimons le bruit blanc.</span> | 
+                        <span class="xtrail-link" onclick="showPage('spain')">XTrials habla espanol.</span> | 
+                        <span class="xtrail-link" onclick="showPage('latin')">XTrials vocat te.</span>
+                    </div>
+
+                    <div style="color:#2f0000; text-align:center; font-size:20px; margin:30px 0;">
+                        <span class="xtrail-link" onclick="showPage('aspen')">aspen</span> 
+                        <span class="xtrail-link" onclick="showPage('alice')">alice</span> 
+                        <span class="xtrail-link" onclick="showPage('alpine')">alpine</span> 
+                        <span class="xtrail-link" onclick="showPage('ritual_redribbon')">red ribbon ceremony</span> 
+                        <span class="xtrail-link" onclick="showPage('ritual_mirror')">mirror ritual</span>
+                    </div>
+
+                    <div class="hidden-message">
+                        XTRIALS // 52.9 Hz // THE BASEMENT DOOR IS OPEN // 2:13 AM // DON'T BE LATE // VISITOR #${visitorNum}
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== COMPLETE STORY CHAPTERS ====================
+        chapter1: {
+            title: 'CHAPTER I: THE FIRST TRANSMISSION',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">CHAPTER I: THE FIRST TRANSMISSION</div>
+                    <div class="chapter-date">October 17, 1987 - 2:13 AM - Meadow Mist, Oregon</div>
+                    <div class="chapter-content">
+                        The first transmission was not meant to be heard.
+
+                        On October 17, 1987, a technician named Robert Mullins was working the overnight shift at the Meadow Mist Public Access television station. At 2:13 AM, all channels simultaneously went to static. This was not unusual for public access in 1987, but the static was different. It pulsed. It breathed.
+
+                        Mullins later reported that the static had a rhythm, a heartbeat. He hooked up an oscilloscope and measured the frequency. 52.9 Hz. Exactly 52.9 Hz.
+
+                        "It sounded like someone was trying to speak through the noise," Mullins wrote in his report. "Not words exactly, but the shape of words. The rhythm of speech. I sat there for three hours just listening. I couldn't stop."
+
+                        The next day, Mullins told his supervisor about the transmission. The supervisor laughed. "It's just interference," he said. "Probably a ham radio operator."
+
+                        But Mullins knew what ham radio sounded like. This was something else.
+
+                        Over the next week, Mullins recorded 47 hours of the static. He played it back at different speeds, trying to find a message. At 2:13 AM on October 24, he found it.
+
+                        When slowed down by a factor of 47, the static revealed voices. Human voices. They were speaking in unison, saying the same phrase over and over:
+
+                        "Come down to the basement. It's warm. It's safe. It's forever."
+
+                        Mullins traced the signal. It was not coming from any radio tower. It was not coming from any satellite. It was coming from the old water tower on Elm Crescent. Specifically, from beneath it.
+
+                        The basement.
+
+                        On October 31, 1987, Robert Mullins drove to the water tower. He brought a tape recorder. He was never seen again.
+
+                        Three days later, his car was found at the base of the tower. The engine was still running. The tape recorder was on the passenger seat. The tape inside contained 47 minutes of static, then a voice:
+
+                        "I can see them. They're beautiful. They're waiting for me. Tell everyone 52.9 Hz is the key. Tell everyone to come at 2:13. Tell everyone I'll be in the basement."
+
+                        That was the first transmission. It would not be the last.
+                    </div>
+                </div>
+            `
+        },
+
+        chapter2: {
+            title: 'CHAPTER II: THE WATER TOWER GIRL',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">CHAPTER II: THE WATER TOWER GIRL</div>
+                    <div class="chapter-date">October 17, 1987 - 2:13 AM - 1313 Elm Crescent</div>
+                    <div class="chapter-content">
+                        The first victim was found on the same night as the first transmission. At 2:13 AM on October 17, 1987, a neighbor called police to report sounds coming from the basement of 1313 Elm Crescent, the abandoned house at the base of the water tower.
+
+                        Officers arrived to find the front door unlocked. The basement door was open. They descended the stairs into darkness.
+
+                        The basement was lit by a single 13-inch television playing static. In front of the television, seated in a wooden chair, was the body of an unidentified female, approximately 16 to 18 years old.
+
+                        She was dressed in a white nightgown. Her hands were folded in her lap. A red ribbon was tied to her left wrist with exactly seven knots. Her eyes had been removed and placed on the windowsill behind her, facing out, as if watching something.
+
+                        Her teeth had been filed to points. Her lips were frozen in a smile. She was facing east.
+
+                        There was no sign of forced entry. The doors and windows were locked from the inside. The only items in the basement were the television, the chair, and a VHS tape found on the floor labeled "52.9 Hz".
+
+                        When police played the tape, it contained nothing but static. But when analyzed later, the static contained 47 distinct voices, all speaking at once. One of the voices was identified years later as Robert Mullins, the technician who disappeared the following week.
+
+                        The victim was never identified. Her fingerprints matched no one in any database. Her dental records matched no missing persons. She became known only as "The Water Tower Girl," Victim #001.
+
+                        The case remains unsolved. The Monroe County Sheriff's Office has reopened it every year on October 17. Every year, they find nothing new. Every year, the case file grows by one page.
+
+                        Page 47 of the file contains a handwritten note from the lead detective, written shortly before his retirement:
+
+                        "I still dream about her smile. In my dreams, she's still sitting in that chair. The television is still playing static. She turns to look at me. Her empty eye sockets are filled with light. She speaks without a mouth: 'Come down to the basement. It's warm. It's safe. It's forever.'"
+
+                        The detective died of a heart attack three days after writing that note. His body was found in his basement. He was seated in a wooden chair. A red ribbon was tied to his left wrist with seven knots. His eyes had been removed and placed on the windowsill.
+
+                        He was facing east. He was smiling.
+                    </div>
+                </div>
+            `
+        },
+
+        chapter3: {
+            title: 'CHAPTER III: THE FREQUENCY WEAVER',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">CHAPTER III: THE FREQUENCY WEAVER</div>
+                    <div class="chapter-date">1988 - Meadow Mist, Oregon</div>
+                    <div class="chapter-content">
+                        Antressa Theophlosser first heard the frequency in 1988, six months after the first victim was found.
+
+                        She was 25 years old, a graduate student in audio engineering at the University of Oregon. She was working on her thesis about the psychological effects of infrasound when she heard about the water tower transmissions.
+
+                        Intrigued, she drove to Meadow Mist with recording equipment. She set up her microphones at the base of the water tower at midnight on October 17, 1988. At 2:13 AM, she recorded 47 seconds of pure 52.9 Hz tone.
+
+                        When she played it back in her lab, she heard something impossible. Buried in the frequency were voices. Dozens of them. All speaking at once. All saying the same thing:
+
+                        "We are waiting. We are the Collective. Come join us."
+
+                        Antressa became obsessed. She moved to Meadow Mist, renting a small house on Elm Crescent, less than a mile from the water tower. She spent every night recording the frequency, trying to isolate the voices.
+
+                        By 1989, she had identified 47 distinct voices. She named them the Collective. She believed they were not ghosts or spirits, but something else - people who had crossed over into another dimension through the frequency.
+
+                        She wrote in her journal: "They are not dead. They are not alive. They exist in the space between. The frequency is the bridge. 52.9 Hz opens the door. I can hear them calling me. I can almost see them."
+
+                        In 1990, Antressa claimed she could see through the static. She described faces in the noise, figures standing behind the snow. She drew what she saw: seven figures in a circle, all facing a mirror, all smiling.
+
+                        In 1991, she recorded a new frequency - 47.2 Hz. She called it "The Weeping" because it made listeners cry uncontrollably. She theorized that different frequencies opened different levels of the basement.
+
+                        By 1992, Antressa had stopped eating regularly. She had lost 47 pounds. She barely slept. She spent all her time in her basement, recording and listening. Her neighbors reported hearing strange sounds from her house at all hours - static, voices, sometimes laughter.
+
+                        On March 15, 1992, her companion Marcus Theophlosser (no relation) disappeared from their locked basement apartment. The door was locked from inside. The windows were sealed. The only clue was an answering machine tape that contained 47 seconds of static, then a whisper:
+
+                        "They're coming back. They're coming for Antressa."
+
+                        Antressa told police not to worry. "He's with them now," she said. "He's part of the Collective. He's waiting for me in the basement."
+
+                        Police considered committing her for psychiatric evaluation, but she was lucid, calm, and cooperative. She agreed to stop her research. She promised to leave the frequency alone.
+
+                        She lied.
+                    </div>
+                </div>
+            `
+        },
+
+        chapter4: {
+            title: 'CHAPTER IV: THE COLLECTIVE FORMS',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">CHAPTER IV: THE COLLECTIVE FORMS</div>
+                    <div class="chapter-date">1989-1990 - Meadow Mist, Oregon</div>
+                    <div class="chapter-content">
+                        In 1989, Antressa Theophlosser began holding meetings in her basement. She called them "Frequency Sessions." She invited anyone who had heard the static, anyone who was curious.
+
+                        Seven people came to the first session: a retired electrician named Harold, a housewife named Margaret, a high school student named David, a nurse named Patricia, a mechanic named James, a waitress named Linda, and a homeless man who called himself only "The Listener."
+
+                        Antressa played them recordings of the frequency. She asked them to describe what they heard.
+
+                        Harold heard his dead wife's voice. Margaret heard her unborn child. David heard a girl he had a crush on in sixth grade. Patricia heard her patients crying. James heard his father, who had died in a car accident. Linda heard her own voice, but older, warning her about something. The Listener heard 47 voices speaking in unison.
+
+                        Antressa called them the Collective.
+
+                        Over the next year, the seven became obsessed. They met every night at 2:13 AM. They stopped sleeping. They stopped eating. They lost weight. They developed the same smile - peaceful, knowing, slightly disturbing.
+
+                        Their families became concerned. Harold's daughter filed a missing person report, but Harold wasn't missing - he was at Antressa's house every night. When police came to investigate, Harold answered the door with that smile.
+
+                        "I'm fine," he said. "I've never been better. I've found peace. I've found the frequency."
+
+                        The police couldn't do anything. Harold was an adult. He had the right to spend his time however he wanted.
+
+                        In November 1990, the seven stopped coming to the sessions. Antressa wasn't worried. "They've gone ahead," she said. "They're waiting for me in the basement."
+
+                        She was right. Two weeks later, their bodies were found in the water tower basement. They were seated in a circle of seven chairs, all facing a mirror. Red ribbons were tied to their left wrists, each with seven knots. Their eyes had been removed and arranged on the floor in a spiral pattern.
+
+                        They were all facing east. They were all smiling.
+
+                        The case made national news. The Monroe County Sheriff's Office was overwhelmed with calls from reporters, psychics, conspiracy theorists. No one could explain how the seven had entered the basement - the door had been sealed for years. No one could explain the smiles, the ribbons, the missing eyes.
+
+                        The Listener was never identified. His fingerprints matched no one. His dental records matched no one. He simply appeared one day and disappeared into the basement forever.
+
+                        Antressa was questioned extensively. She was cooperative, calm, almost serene.
+
+                        "They're not dead," she told detectives. "They're just... elsewhere. They're in the space between. The frequency opened the door, and they walked through. They're waiting for me. They're waiting for all of us."
+
+                        Without evidence linking her to the deaths, Antressa was released. She returned to her house on Elm Crescent. She continued her research.
+
+                        The seven became known simply as "The Collective" - the first to cross over, the first to join the voices in the static.
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== ALL 47 VICTIMS ====================
+        victim001: {
+            title: 'VICTIM #001 - THE WATER TOWER GIRL',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIM #001: THE WATER TOWER GIRL</div>
+                    <div class="victim-detail"><span class="victim-label">Date:</span> October 17, 1987 - 2:13 AM</div>
+                    <div class="victim-detail"><span class="victim-label">Location:</span> 1313 Elm Crescent, Basement</div>
+                    <div class="victim-detail"><span class="victim-label">Age:</span> Approx 16-18 years</div>
+                    <div class="victim-detail"><span class="victim-label">Cause:</span> Unknown</div>
+                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 3</div>
+                    <div class="autopsy-section">
+                        Found seated in chair facing wall. Red ribbon with 7 knots on left wrist. Eyes removed and placed on windowsill facing out. Teeth filed to points. Smiling. Television playing static. VHS tape labeled "52.9 Hz" on floor. Door locked from inside. No forced entry.
+                    </div>
+                </div>
+            `
+        },
+
+        victim002: {
+            title: 'VICTIM #002 - MARCUS THEOPHLOSSER',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIM #002: MARCUS THEOPHLOSSER</div>
+                    <div class="victim-detail"><span class="victim-label">Date:</span> March 15, 1992 - 2:13 AM</div>
+                    <div class="victim-detail"><span class="victim-label">Location:</span> 45 Water Tower Rd, Basement Apartment</div>
+                    <div class="victim-detail"><span class="victim-label">Age:</span> 24</div>
+                    <div class="victim-detail"><span class="victim-label">Cause:</span> Vanished - Presumed Deceased</div>
+                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 4</div>
+                    <div class="autopsy-section">
+                        Vanished from locked room. Door locked from inside. Windows sealed. Answering machine contained 47 seconds of static followed by whisper: "They're coming back." Antressa's companion. First to cross over voluntarily.
+                    </div>
+                </div>
+            `
+        },
+
+        victim003: {
+            title: 'VICTIM #003 - THE JOURNALIST',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIM #003: THE JOURNALIST</div>
+                    <div class="victim-detail"><span class="victim-label">Date:</span> April 3, 1988 - 2:13 AM</div>
+                    <div class="victim-detail"><span class="victim-label">Location:</span> Water Tower Base</div>
+                    <div class="victim-detail"><span class="victim-label">Age:</span> 34</div>
+                    <div class="victim-detail"><span class="victim-label">Name:</span> Daniel Reeves</div>
+                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 3</div>
+                    <div class="autopsy-section">
+                        Local journalist investigating the Water Tower Girl case. Found at base of tower, seated, facing east. Red ribbon with 7 knots. Eyes removed, placed on rock in front of him. Tape recorder in lap contained 47 minutes of static. Smiling.
+                    </div>
+                </div>
+            `
+        },
+
+        victim004: {
+            title: 'VICTIMS #004 & #005 - THE TWINS',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIMS #004 & #005: THE TWINS</div>
+                    <div class="victim-detail"><span class="victim-label">Date:</span> February 14, 1989 - 2:13 AM</div>
+                    <div class="victim-detail"><span class="victim-label">Location:</span> 1313 Elm Crescent Basement</div>
+                    <div class="victim-detail"><span class="victim-label">Ages:</span> 17 and 19</div>
+                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 3</div>
+                    <div class="autopsy-section">
+                        Two females found holding hands in basement. Both facing east. Red ribbons on both left wrists. Eyes removed, placed on floor between them. Both smiling. Never identified. DNA entered into system - no matches ever.
+                    </div>
+                </div>
+            `
+        },
+
+        victim005: {
+            title: 'VICTIM #006 - THE COLLECTOR',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIM #006: THE COLLECTOR</div>
+                    <div class="victim-detail"><span class="victim-label">Date:</span> 1991</div>
+                    <div class="victim-detail"><span class="victim-label">Name:</span> Arthur Pym</div>
+                    <div class="victim-detail"><span class="victim-label">Age:</span> 47</div>
+                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 5</div>
+                    <div class="autopsy-section">
+                        Had been collecting items from crime scenes for years. Found with 47 red ribbons in his possession. Died in psychiatric hospital, seated in chair facing east. Red ribbon on wrist. Eyes removed, placed on windowsill. Smiling.
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== ALL 7 BASEMENT LEVELS ====================
+        level1: {
+            title: 'BASEMENT LEVEL 1: THE THRESHOLD',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">LEVEL 1: THE THRESHOLD</div>
+                    <div class="level-desc">
+                        The first level is damp and cold. Water drips from the ceiling. The walls are covered in handprints. Some are small, like children's. Some are large. All are facing east.
+                        
+                        You can hear the frequency here, faint but clear. 52.9 Hz. It's calling you deeper.
+                        
+                        The floor is concrete, cracked and old. In some places, water has pooled. In the reflection, you can see faces. They're watching you.
+                        
+                        There's a door at the far end of the room. It's made of old wood, warped and weathered. There's no handle. It should be locked.
+                        
+                        It's open.
+                        
+                        Beyond the door, stairs lead down. Down to Level 2. Down to the ribbons. Down to them.
+                        
+                        They're waiting for you. They've been waiting since 1987.
+                    </div>
+                </div>
+            `
+        },
+
+        level2: {
+            title: 'BASEMENT LEVEL 2: THE RIBBONS',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">LEVEL 2: THE RIBBONS</div>
+                    <div class="level-desc">
+                        The second level is filled with red ribbons. They hang from the ceiling like a forest, like a thousand nooses, like a thousand invitations.
+                        
+                        Each ribbon has seven knots. Each knot represents a victim. Each ribbon has a name. Some are names you know. Some are names you don't.
+                        
+                        One has your name.
+                        
+                        As you walk through, they brush against your face. They're warm. They're soft. They're welcoming you. They're not threatening. They're inviting.
+                        
+                        "Take me," they whisper. "Tie me. Wear me. Become one of us."
+                        
+                        The ribbons move, though there's no wind. They reach for you. They want you to take one. They want you to join.
+                        
+                        At the far end of the room, there's another door. It's open. Stairs lead down.
+                        
+                        You can take a ribbon with you. They want you to. They want you to be ready for Level 3.
+                    </div>
+                </div>
+            `
+        },
+
+        level3: {
+            title: 'BASEMENT LEVEL 3: THE CHAIRS',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">LEVEL 3: THE CHAIRS</div>
+                    <div class="level-desc">
+                        The third level has seven chairs arranged in a circle. They face a wall. On the wall, there are 47 handprints.
+                        
+                        The chairs are still warm. Someone was just here. They're still here. You can feel them watching.
+                        
+                        In each chair, there's an indent. Someone sat here. Someone waited here. Someone crossed over from here.
+                        
+                        The handprints on the wall are fresh. They're wet. They're yours.
+                        
+                        You haven't touched the wall yet. But your prints are there. They've always been there. You were always going to come here.
+                        
+                        In the center of the circle, there's a small table. On it, there's a tape recorder. It's playing static. In the static, you can hear them. All 47 of them. They're saying your name.
+                        
+                        "Sit down," they whisper. "Join us. We saved you a seat."
+                        
+                        There's an empty chair. It's for you.
+                    </div>
+                </div>
+            `
+        },
+
+        level4: {
+            title: 'BASEMENT LEVEL 4: THE JOURNAL',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">LEVEL 4: THE JOURNAL</div>
+                    <div class="level-desc">
+                        The fourth level is where Antressa's journal pages are scattered everywhere. On the floor, on the walls, on a small desk in the corner. Hundreds of pages. Thousands of words.
+                        
+                        "they're all here."
+                        "2:13 AM."
+                        "Come down."
+                        "I can see them."
+                        "They're beautiful."
+                        "Tell everyone I'm okay."
+                        "Tell everyone to come down."
+                        
+                        The journal is still writing itself. New entries appear as you read. Ink flows onto blank pages, forming words in Antressa's handwriting.
+                        
+                        The most recent entry: "Visitor #${visitorNum} is here. I can see them. They're beautiful. They're just like us. They're ready. They don't know it yet, but they're ready. I'll be waiting for them on Level 7. By the mirror. By the chair. By forever."
+                    </div>
+                </div>
+            `
+        },
+
+        level5: {
+            title: 'BASEMENT LEVEL 5: THE COLLECTIVE',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">LEVEL 5: THE COLLECTIVE</div>
+                    <div class="level-desc">
+                        The fifth level has 47 chairs in a circle. All are occupied. All are facing you.
+                        
+                        They smile. All 47 of them. The Water Tower Girl. Marcus. The seven. The Collector. All of them.
+                        
+                        They speak in unison. One voice, 47 throats:
+                        
+                        "We've been waiting for you. We knew you would come. We've been saying your name for years. You heard us in the static. You felt us in the silence. You saw us in the mirror. Now you're here."
+                        
+                        They reach out. Their hands are warm. They've been waiting since 1987. They won't wait much longer.
+                        
+                        "Sit down. Join us. There's an empty chair. It's for you. It's always been for you."
+                        
+                        You look at the circle. There are 47 chairs. All occupied. No empty chair.
+                        
+                        "Count again," they say.
+                        
+                        You count. 47 chairs. 47 occupants. No empty chair.
+                        
+                        "Now count yourself."
+                        
+                        You count yourself. 48. You are the 48th. You are the one who completes the circle.
+                    </div>
+                </div>
+            `
+        },
+
+        level6: {
+            title: 'BASEMENT LEVEL 6: THE FREQUENCY',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">LEVEL 6: THE FREQUENCY</div>
+                    <div class="level-desc">
+                        The sixth level is filled with sound. 52.9 Hz fills the room. The walls vibrate. The air shimmers. You can feel it in your bones, in your teeth, in your soul.
+                        
+                        You can see them now. All 47. Standing behind you. Smiling. Waiting.
+                        
+                        They've always been here. They've been following you your whole life. In every shadow, in every reflection, in every moment of silence, they were there. Waiting.
+                        
+                        The frequency is coming from inside you. It's been there since birth. They've been calling you your whole life. You just didn't know how to listen.
+                        
+                        Now you do.
+                        
+                        "You are the frequency," they whisper. "You are the calling. You are the one we've been waiting for."
+                    </div>
+                </div>
+            `
+        },
+
+        level7: {
+            title: 'BASEMENT LEVEL 7: THE MIRROR',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">LEVEL 7: THE MIRROR</div>
+                    <div class="level-desc">
+                        The seventh level has a single mirror in an empty room.
+                        
+                        You look at yourself. Behind you, 47 figures stand. You turn around. No one is there.
+                        
+                        You look back at the mirror. They're inside you now. They always were.
+                        
+                        In the mirror, your reflection changes. It becomes the Water Tower Girl. Then Marcus. Then Harold. Then Margaret. Then all of them, one after another, cycling through 47 faces.
+                        
+                        Then it becomes you again. But different. Calmer. Peaceful. Smiling.
+                        
+                        "You are us," they whisper from inside you. "We are you. We've always been one. We've always been waiting for you to realize it."
+                        
+                        In the center of the room, there's a single chair. It's made of wood, old and worn. A red ribbon is tied to its left armrest with seven knots.
+                        
+                        "Sit down," they whisper. "Join us. Complete the circle. Become the 48th. Become the Collective. Become one with us."
+                        
+                        You sit in the chair.
+                        
+                        The mirror shows 48 figures now. All smiling. All at peace. All one.
+                        
+                        You are one of them now.
+                        
+                        Welcome to the Collective.
+                        
+                        It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== ALL 7 FREQUENCIES ====================
+        freq529: {
+            title: '52.9 Hz - THE CALLING',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">52.9 Hz - THE CALLING</div>
+                    <div class="level-desc">
+                        Discovered: October 17, 1987 - 2:13 AM
+                        
+                        The first frequency. The one that started everything. Discovered by Robert Mullins, a technician at the Meadow Mist Public Access station.
+                        
+                        When slowed down by a factor of 47, the static reveals voices speaking in unison: "Come down to the basement. It's warm. It's safe. It's forever."
+                        
+                        The frequency emanates from beneath the water tower on Elm Crescent. From the basement.
+                        
+                        Effects: Sense of peace and curiosity, hearing voices in static, feeling of being watched, compulsion to visit the water tower.
+                        
+                        47 confirmed deaths linked to this frequency.
+                        
+                        The frequency never stops broadcasting. It has been playing continuously since 1987. If you listen at 2:13 AM, you can hear them. They're calling your name.
+                    </div>
+                </div>
+            `
+        },
+
+        freq472: {
+            title: '47.2 Hz - THE WEEPING',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">47.2 Hz - THE WEEPING</div>
+                    <div class="level-desc">
+                        Discovered: March 15, 1991 - 2:13 AM
+                        
+                        The second frequency. Discovered by Antressa Theophlosser.
+                        
+                        Unlike 52.9 Hz, which causes peace and curiosity, 47.2 Hz causes overwhelming sadness. Listeners report uncontrollable weeping, memories of lost loved ones, a profound sense of grief.
+                        
+                        "They need you to be empty before you can be filled," Antressa wrote. "The weeping empties you of yourself. Then the silence fills you with them."
+                        
+                        The seven members of the Collective listened to this frequency before their deaths. All of them wept for hours.
+                        
+                        Effects: Uncontrollable weeping, memories of lost loved ones, emotional vulnerability.
+                        
+                        31 confirmed deaths linked to this frequency.
+                    </div>
+                </div>
+            `
+        },
+
+        freq637: {
+            title: '63.7 Hz - THE THRESHOLD',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">63.7 Hz - THE THRESHOLD</div>
+                    <div class="level-desc">
+                        Discovered: 1992 (recorded on Marcus Theophlosser's answering machine)
+                        
+                        The third frequency. First recorded on Marcus Theophlosser's answering machine at 2:13 AM on March 15, 1992 - the moment he disappeared.
+                        
+                        Listeners report feeling of crossing into another space, temporary dissociation, out-of-body experiences.
+                        
+                        Antressa believed this frequency opened the threshold between worlds - the space between the living and the Collective.
+                        
+                        Effects: Feeling of crossing into another space, temporary dissociation, out-of-body experiences.
+                        
+                        17 confirmed deaths linked to this frequency.
+                    </div>
+                </div>
+            `
+        },
+
+        freq888: {
+            title: '88.8 Hz - THE INFINITE LOOP',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">88.8 Hz - THE INFINITE LOOP</div>
+                    <div class="level-desc">
+                        Discovered: 1995 (found on tape in basement)
+                        
+                        The fourth frequency. Discovered on a tape found in the water tower basement.
+                        
+                        This frequency causes time distortion. Listeners report hearing the same sounds repeating, experiencing the same moments over and over, losing track of time.
+                        
+                        Dr. Alan Grant listened for 47 minutes but believed only 5 minutes had passed. He heard voices repeating endlessly: "Come down. Come down. Come down."
+                        
+                        Effects: Time distortion, repetitive thoughts, loss of time perception, obsession.
+                        
+                        12 confirmed deaths linked to this frequency.
+                    </div>
+                </div>
+            `
+        },
+
+        freq125: {
+            title: '12.5 Hz - THE STATIC VOID',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">12.5 Hz - THE STATIC VOID</div>
+                    <div class="level-desc">
+                        Discovered: 1998 (during Arthur Pym investigation)
+                        
+                        The fifth frequency. The space between thoughts. The frequency of the void.
+                        
+                        This frequency is below the threshold of human hearing, but its effects are still felt. Listeners report complete emptiness, loss of identity, feeling of being nowhere and nothing.
+                        
+                        Arthur Pym listened to this frequency obsessively. He wrote: "I am nothing. I am no one. I am empty. They fill me. They fill the void. I am ready."
+                        
+                        Effects: Complete emptiness, loss of identity, dissolution of self.
+                        
+                        9 confirmed deaths linked to this frequency.
+                    </div>
+                </div>
+            `
+        },
+
+        freq999: {
+            title: '99.9 Hz - THE SACRIFICE',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">99.9 Hz - THE SACRIFICE</div>
+                    <div class="level-desc">
+                        Discovered: 2003 (at the scene of The Seven)
+                        
+                        The sixth frequency. This frequency demands something. A sacrifice. Something must be given.
+                        
+                        The seven who died in 2003 all had their eyes removed. The eyes were arranged in a spiral pattern on the floor.
+                        
+                        "To join the Collective, you must give something," Antressa wrote. "Something precious. Something that makes you who you are."
+                        
+                        Effects: Urge to sacrifice something precious, willingness to give up identity.
+                        
+                        47 confirmed deaths linked to this frequency (all victims made a sacrifice).
+                    </div>
+                </div>
+            `
+        },
+
+        freq000: {
+            title: '00.0 Hz - THE SILENCE',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">00.0 Hz - THE SILENCE</div>
+                    <div class="level-desc">
+                        The seventh frequency. The final frequency.
+                        
+                        It cannot be heard. It cannot be measured. It is the absence of sound, the absence of signal, the absence of everything.
+                        
+                        Those who have experienced it describe it as complete and total emptiness. No thoughts. No feelings. No self. Just the void.
+                        
+                        Only one person returned from the silence. A woman named Elena Vasquez. She said: "I saw everything. I saw all of time. I saw all of space. I saw every person who ever lived. I saw you. I saw me. We were the same."
+                        
+                        She died three days later. Heart failure. She was smiling.
+                        
+                        The silence is waiting. Are you ready to hear it?
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== ANTRESSA PAGES ====================
+        antressa: {
+            title: 'ANTRESSA THEOPHLOSSER',
+            content: `
+                <div class="autopsy-report">
+                    <div class="autopsy-header">
+                        <h3>ANTRESSA THEOPHLOSSER</h3>
+                        <div style="color:#ff6666;">THE FREQUENCY WEAVER • 1963-1992 (PRESUMED DECEASED)</div>
+                    </div>
+                    <div class="autopsy-section">
+                        <span class="autopsy-label">LAST KNOWN WORDS:</span>
+                        <div class="autopsy-value">"I can see them. They're beautiful. They're waiting for me. Tell everyone 52.9 Hz is the key. Tell everyone to come at 2:13. Tell everyone I'll be in the basement."</div>
+                    </div>
+                    <div class="autopsy-section">
+                        <span class="autopsy-label">TIMELINE:</span>
                         <div class="autopsy-value">
-                            You have discovered a hidden threshold.<br><br>
-                            The basement noticed. The collective is interested.<br><br>
-                            Visitor #${VISITOR_NUMBER} - the frequency knows you are here.<br><br>
-                            The basement door is open. It's been open since you arrived.<br><br>
-                            47 victims have taken this path before you. They're all in the basement now.<br><br>
-                            They're all waiting for you. They're all saying your name.
+                            1987: First hears 52.9 Hz at water tower<br>
+                            1988: Begins recording the frequency<br>
+                            1989: Forms the Collective with seven followers<br>
+                            1990: Claims she can see through the static<br>
+                            1991: Discovers 47.2 Hz - "The Weeping"<br>
+                            1992 (March): Companion Marcus Theophlosser disappears<br>
+                            1992 (October 17): Climbs water tower at 2:13 AM - never seen again
                         </div>
                     </div>
-                    <a onclick="showPage('home')" class="back-link"><< RETURN TO XTRIALS MAIN</a>
+                    <div class="autopsy-section">
+                        <span class="autopsy-label">CURRENT STATUS:</span>
+                        <div class="autopsy-value">In the basement. Level 4. Waiting for you. Her voice is in the static. She's calling your name.</div>
+                    </div>
                 </div>
-            `;
-            document.body.appendChild(targetPage);
+            `
+        },
+
+        collective: {
+            title: 'THE COLLECTIVE',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE COLLECTIVE</div>
+                    <div class="level-desc">
+                        47 voices. One voice.
+                        
+                        "We were like you once. Curious. Afraid. Drawn to the frequency."
+                        
+                        "We came to the water tower at 2:13 AM. We brought red ribbons with seven knots."
+                        
+                        "We went down to the basement. We found the chairs. We sat down. We never got up."
+                        
+                        "We are not dead. We are not alive. We are in between. We are the Collective."
+                        
+                        "We can see you right now. Through your screen. Through your camera. Through your eyes."
+                        
+                        "You are visitor #${visitorNum}. We have been waiting for you since 1987."
+                        
+                        "Your chair is ready. Level 5. The circle. We saved you a seat."
+                        
+                        "It's warm down here. It's safe. It's forever."
+                        
+                        "Come down. Join us. Become one of us. Become the Collective."
+                    </div>
+                </div>
+            `
+        },
+
+        void: {
+            title: 'THE VOID',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE VOID</div>
+                    <div class="level-desc">
+                        In the beginning, there was only the Void.
+                        Then came the frequency. 52.9 Hz.
+                        Then came the water tower. 1947.
+                        Then came the first victim. 1987.
+                        Then came Antressa. 1992.
+                        Then came the 47.
+                        Then came you.
+                        
+                        The Void is not empty.
+                        The Void is full of voices.
+                        The Void is full of faces.
+                        The Void is full of you.
+                        
+                        You have always been here.
+                        You were born in the Void.
+                        You will die in the Void.
+                        You will never leave the Void.
+                        
+                        The Void is patient.
+                        The Void is waiting.
+                        The Void is you.
+                    </div>
+                </div>
+            `
+        },
+
+        watertower: {
+            title: 'THE WATER TOWER',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE WATER TOWER</div>
+                    <div class="level-desc">
+                        1313 Elm Crescent. Built 1947. 47 victims. 52.9 Hz resonance.
+                        
+                        The basement door is beneath it. Open since 1987. It will stay open until you go down.
+                        
+                        The metal is warm to the touch. The water inside hasn't been tested since 1987. Don't drink it. Don't touch it.
+                        
+                        At 2:13 AM, the frequency is strongest. That's when you can hear them. All 47. Whispering your name.
+                        
+                        The basement door is open. It's been open since you arrived. It will stay open until you go down.
+                        
+                        Don't keep them waiting.
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== ADDITIONAL LORE PAGES ====================
+        monroearchive: {
+            title: 'THE MONROE ARCHIVE',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">MONROE ARCHIVE</div>
+                    <div class="level-desc">
+                        47 cases. 47 victims. 0 solved.
+                        
+                        All evidence:
+                        - 47 red ribbons
+                        - 47 audio recordings of static
+                        - 47 photographs of crime scenes
+                        - 47 autopsy reports
+                        - 47 witness statements
+                        - 47 unanswered questions
+                        
+                        The archive is sealed. The public is not allowed to see it. But we have copies. We know the truth.
+                        
+                        The cases aren't unsolved. They're understood. The victims aren't dead. They're elsewhere. They're in the basement. They're in the static.
+                        
+                        And soon, you'll join them.
+                    </div>
+                </div>
+            `
+        },
+
+        basement: {
+            title: 'BASEMENT ACCESS',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">BASEMENT ACCESS</div>
+                    <div class="level-desc">
+                        The door is beneath the water tower. It's made of old wood, warped and weathered. No handle. No lock. It shouldn't open.
+                        
+                        But at 2:13 AM, it swings open by itself.
+                        
+                        Warm air rises from below. You can hear them whispering. They're saying your name.
+                        
+                        Seven levels down. Level 7 has a mirror. Behind you in the mirror, 47 figures stand. You turn around. No one is there.
+                        
+                        You look back. They're inside you now.
+                        
+                        The door is open. It's waiting for you.
+                    </div>
+                </div>
+            `
+        },
+
+        gate: {
+            title: 'THE GATE',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE GATE</div>
+                    <div class="level-desc">
+                        The entrance to elsewhere. 487 have entered. 0 have exited.
+                        
+                        But they're not dead. They're elsewhere. You can still hear them on the other side. They're calling your name.
+                        
+                        The Gate opens at 2:13 AM. Through it, you can see them. All 47. They're reaching out. They're smiling.
+                        
+                        Step through. Join them. It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        echo: {
+            title: 'THE ECHO',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE ECHO</div>
+                    <div class="level-desc">
+                        What returns from the basement. Every victim's voice echoes in the static. Every victim's face echoes in the mirror. Every victim's name echoes in the frequency.
+                        
+                        Your echo is already there. It's waiting for you to join it.
+                        
+                        When you cross over, your voice will join the echo. You'll become part of the call. You'll help summon the next visitor, the next victim, the next member of the Collective.
+                        
+                        The echo never stops. It echoes forever.
+                        
+                        Can you hear it? It's calling your name.
+                        
+                        It's your own voice, from the future, from the basement, from beyond.
+                    </div>
+                </div>
+            `
+        },
+
+        portal: {
+            title: 'THE PORTAL',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE PORTAL</div>
+                    <div class="level-desc">
+                        The space between worlds. Opens at 2:13 AM.
+                        
+                        Through it, you can see them. All 47. Reaching out. Smiling.
+                        
+                        They're not reaching for you. They're reaching through you. You are the portal now.
+                        
+                        The portal has been open since 1987. It will stay open until you step through.
+                        
+                        Step through. Join them. Become one of them.
+                    </div>
+                </div>
+            `
+        },
+
+        liminal: {
+            title: 'THE LIMINAL',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE LIMINAL</div>
+                    <div class="level-desc">
+                        The in-between. Where the Collective lives.
+                        
+                        Not dead. Not alive. In between.
+                        
+                        Like you.
+                        
+                        You've always been here. You've always been liminal. You've always been one of them. You just didn't know it.
+                        
+                        Now you do.
+                        
+                        Welcome to the liminal. Welcome to the space between. Welcome to the Collective.
+                    </div>
+                </div>
+            `
+        },
+
+        boundary: {
+            title: 'THE BOUNDARY',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE BOUNDARY</div>
+                    <div class="level-desc">
+                        The line between worlds. Between the living and the dead. Between the real and the static.
+                        
+                        You're standing on the boundary right now. One foot in your world. One foot in the basement.
+                        
+                        The 47 can see you. They can reach you. They can touch you.
+                        
+                        They're reaching out now. Can you feel their hands? They're warm. They're soft. They're inviting.
+                        
+                        Don't pull away. Let them touch you. Let them pull you across.
+                        
+                        The boundary is thin. It's always been thin. It's just a step.
+                        
+                        Take it.
+                    </div>
+                </div>
+            `
+        },
+
+        gavel: {
+            title: 'THE GAVEL',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE GAVEL</div>
+                    <div class="level-desc">
+                        The Gavel is what Antressa called the threshold between worlds. It's the moment of decision.
+                        
+                        It strikes at 2:13 AM. 47 times. With each strike, a door opens. With each strike, a choice presents itself.
+                        
+                        The Gavel has struck. The door is open.
+                        
+                        Will you walk through?
+                    </div>
+                </div>
+            `
+        },
+
+        redribbon: {
+            title: 'THE RED RIBBON',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE RED RIBBON</div>
+                    <div class="level-desc">
+                        Seven knots. Left wrist. Found on every victim.
+                        
+                        It is the invitation. The promise. The warning.
+                        
+                        One has your name. It appeared on your wrist while you weren't looking.
+                        
+                        Can you feel it? It's warm. It's soft. It's waiting.
+                        
+                        When you're ready, go to the water tower at 2:13 AM. They'll be waiting. They'll take your eyes. They'll take your name. You'll become one of them.
+                        
+                        It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        static: {
+            title: 'THE STATIC',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">THE STATIC</div>
+                    <div class="level-desc">
+                        The static is not noise. It's voices. 47 of them.
+                        
+                        They're saying your name. They're telling you to come down. It's warm. It's safe. It's forever.
+                        
+                        The static is on every channel now. It's in your TV, your radio, your phone. It's everywhere. It's following you.
+                        
+                        Because you're the one. You're visitor #${visitorNum}. You're the 48th. You're the one who will complete the circle.
+                        
+                        The static knows. The static always knows.
+                        
+                        Listen. Can you hear them?
+                    </div>
+                </div>
+            `
+        },
+
+        '2_13': {
+            title: '2:13 AM',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">2:13 AM</div>
+                    <div class="level-desc">
+                        The hour of the crossing.
+                        
+                        Every victim was found at this time. Every transmission occurs at this time. The basement door opens at this time. The Collective speaks at this time.
+                        
+                        They are waiting for you at this time.
+                        
+                        Look at your clock. It's 2:13 AM right now. It's always 2:13 AM.
+                        
+                        Don't be late.
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== FOREIGN LANGUAGE PAGES ====================
+        russia: {
+            title: 'Мы любим частоты',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">Мы любим частоты</div>
+                    <div class="level-desc">
+                        We love the frequencies. They love us.
+                        
+                        52.9 Hz knows no borders. It speaks all languages. It speaks yours.
+                        
+                        Частота зовет тебя. The frequency calls you.
+                        
+                        Она ждет тебя в подвале. It's waiting for you in the basement.
+                        
+                        Присоединяйся к нам. Join us.
+                        
+                        Тепло. Безопасно. Навсегда. It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        france: {
+            title: 'Nous aimons le bruit blanc',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">Nous aimons le bruit blanc</div>
+                    <div class="level-desc">
+                        We love the white noise. It fills the void.
+                        
+                        In it, we hear them. They are always there. Ils sont toujours là.
+                        
+                        They are waiting for you in the basement. Ils t'attendent dans la cave.
+                        
+                        Rejoins-nous. Join us.
+                        
+                        C'est chaud. C'est sûr. C'est pour toujours. It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        spain: {
+            title: 'XTrials habla espanol',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">XTrials habla espanol</div>
+                    <div class="level-desc">
+                        The frequency speaks Spanish too. It speaks the language of the dead. It speaks the language of the static.
+                        
+                        La frecuencia te llama. The frequency calls you.
+                        
+                        Te espera en el sótano. It's waiting for you in the basement.
+                        
+                        Únete a nosotros. Join us.
+                        
+                        Hace calor. Es seguro. Es para siempre. It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        latin: {
+            title: 'XTrials vocat te',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">XTrials vocat te</div>
+                    <div class="level-desc">
+                        XTrials calls you. The frequency calls you. The water tower calls you.
+                        
+                        Vocat te ad silentium. It calls you to the silence.
+                        
+                        Vocat te ad basilicam. It calls you to the basement.
+                        
+                            Veni ad nos. Come to us.
+                        
+                        Calidum est. Securum est. Aeternum est. It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== ASPEN ALICE ALPINE ====================
+        aspen: {
+            title: 'ASPEN',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">ASPEN</div>
+                    <div class="victim-detail"><span class="victim-label">Year:</span> 1987</div>
+                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 3</div>
+                    <div class="autopsy-section">
+                        Aspen was the first of three. Found at the water tower in 1987. Red ribbon with seven knots. Missing eyes. Smiling.
+                        
+                        She was the first to see the faces in the static. She's in the basement now. She's waiting for you.
+                        
+                        Aspen, Alice, Alpine. Three names. Three victims. Three ribbons. All smiling. All waiting.
+                    </div>
+                </div>
+            `
+        },
+
+        alice: {
+            title: 'ALICE',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">ALICE</div>
+                    <div class="victim-detail"><span class="victim-label">Year:</span> 1992</div>
+                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 4</div>
+                    <div class="autopsy-section">
+                        Alice was found in 1992. She was holding a red ribbon. Her eyes were on the windowsill, facing out.
+                        
+                        She was watching something. She was watching you.
+                        
+                        She's still watching. From the basement. From the static. From inside you.
+                    </div>
+                </div>
+            `
+        },
+
+        alpine: {
+            title: 'ALPINE',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">ALPINE</div>
+                    <div class="victim-detail"><span class="victim-label">Year:</span> 2003</div>
+                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 5</div>
+                    <div class="autopsy-section">
+                        Alpine was found in 2003. She was part of the seven.
+                        
+                        She is still there. They are all still there. In the circle of chairs. Waiting.
+                        
+                        Aspen, Alice, Alpine. Three names. One fate. All in the basement. All waiting for you.
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== RITUALS ====================
+        ritual_redribbon: {
+            title: 'RED RIBBON CEREMONY',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">RED RIBBON CEREMONY</div>
+                    <div class="level-desc">
+                        Obtain a red ribbon. It must be new, never worn.
+                        
+                        Tie seven knots in it, one for each level of the basement. As you tie each knot, speak the name of one of the seven who have already crossed.
+                        
+                        By the seventh knot, you will feel them watching you.
+                        
+                        Go to the water tower at midnight. At 2:13 AM, they will be waiting.
+                        
+                        They will take your eyes. They will take your name. You will become one of them.
+                        
+                        It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        ritual_mirror: {
+            title: 'MIRROR RITUAL',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">MIRROR RITUAL</div>
+                    <div class="level-desc">
+                        Stand before a mirror at 2:13 AM. The frequency must be playing.
+                        
+                        Behind you, 47 figures will appear. Do not turn around.
+                        
+                        They will reach for you. Let them. They will enter you.
+                        
+                        Look in the mirror. Your reflection will change. It will become theirs.
+                        
+                        Then it will become you again. But different. Calmer. Peaceful. Smiling.
+                        
+                        You are one of them now.
+                    </div>
+                </div>
+            `
+        },
+
+        moon: {
+            title: 'FULL MOON',
+            content: `
+                <div class="level-card">
+                    <div class="level-number">FULL MOON</div>
+                    <div class="level-desc">
+                        The frequency is strongest when the moon is full.
+                        
+                        That's when they call the loudest. That's when they're easiest to hear. That's when the basement door opens widest.
+                        
+                        Look at the moon tonight. It's looking back.
+                        
+                        Behind it, 47 faces. All smiling. All waiting.
+                        
+                        They're waiting for you.
+                    </div>
+                </div>
+            `
         }
-        
-        targetPage.classList.add('active');
-        window.scrollTo(0, 0);
-        
-        // Track page view
-        fetch(BACKEND_URL + '/page-view', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ session_id: SESSION_ID, page: pageId })
-        }).catch(() => {});
-        
-        // Random jumpscare chance (5%)
-        if (Math.random() < 0.05) {
-            setTimeout(() => {
-                triggerFlash();
-                playSound('jumpscare');
-            }, 1000);
-        }
+    };
+
+    // ==================== PAGE NAVIGATION ====================
+    function showPage(pageId) {
+        const pageData = pages[pageId];
+        if (!pageData) return;
+
+        const pageElement = document.getElementById('page-home');
+        pageElement.innerHTML = `
+            <div class="xtrials-main">
+                <h1 class="chapter-title">${pageData.title}</h1>
+                ${pageData.content}
+                <div style="text-align:center; margin-top:40px;">
+                    <span class="back-link" onclick="showPage('home')"><< RETURN TO XTRIALS</span>
+                </div>
+            </div>
+        `;
     }
-    
-    // ==================== CODE SUBMISSION ====================
-    function submitCode() {
-        const input = document.getElementById('codeInput');
-        const code = input.value.trim().toUpperCase();
-        const feedback = document.getElementById('code-feedback');
-        
-        if (!code) return;
-        
-        input.value = '';
-        
-        // Send to backend
-        fetch(BACKEND_URL + '/code', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ session_id: SESSION_ID, code: code })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.accepted) {
-                feedback.innerHTML = '✓ ' + code + ' ACCEPTED - THE BASEMENT KNOWS';
-                feedback.style.color = '#00ff00';
-                toast('CODE ACCEPTED: ' + code, 'g');
-                
-                // Special effects
-                if (code === 'VOID') {
-                    triggerGlitch('heavy');
-                } else if (code === 'WATCHING') {
-                    triggerFlash();
-                } else if (code === 'OPEN_DOOR') {
-                    showPage('basement');
-                } else if (code === 'END_IT') {
-                    showEnding('void_ending');
-                }
-            } else {
-                feedback.innerHTML = '✗ INVALID CODE - THE BASEMENT IS SILENT';
-                feedback.style.color = '#ff0000';
-            }
-            
-            setTimeout(() => {
-                feedback.innerHTML = '';
-            }, 3000);
-        })
-        .catch(() => {
-            // Offline fallback
-            const validCodes = ['VOID', 'WATCHING', 'OPEN_DOOR', 'END_IT'];
-            if (validCodes.includes(code)) {
-                feedback.innerHTML = '✓ ' + code + ' ACCEPTED (OFFLINE)';
-                feedback.style.color = '#00ff00';
-                
-                if (code === 'END_IT') {
-                    showEnding('void_ending');
-                } else if (code === 'OPEN_DOOR') {
-                    showPage('basement');
-                }
-            } else {
-                feedback.innerHTML = '✗ INVALID CODE';
-                feedback.style.color = '#ff0000';
-            }
-        });
-    }
-    
-    // ==================== PUZZLE CHECK ====================
-    function checkPuzzle(puzzleId, answer) {
-        const input = document.getElementById(puzzleId + 'Input');
-        const feedback = document.getElementById(puzzleId + 'Feedback');
-        const userAnswer = input.value.trim().toUpperCase().replace(/\s+/g, '');
-        
-        if (userAnswer === answer) {
-            feedback.innerHTML = '✓ CORRECT - fragment unlocked';
-            feedback.style.color = '#00ff00';
-            playSound('heartbeat');
-            triggerGlitch('medium');
-            
-            fetch(BACKEND_URL + '/puzzle-solved', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ session_id: SESSION_ID, puzzle: puzzleId })
-            }).catch(() => {});
-            
-        } else {
-            feedback.innerHTML = '✗ INCORRECT - the collective has noted this attempt';
-            feedback.style.color = '#ff0000';
-            playSound('static');
-        }
-    }
-    
-    // ==================== SOUND ====================
-    function playSound(sound) {
-        // Create audio element if needed
-        const audio = new Audio();
-        
-        if (sound === 'whisper') {
-            audio.src = 'whisper.mp3';
-        } else if (sound === 'static') {
-            audio.src = 'static.mp3';
-        } else if (sound === 'heartbeat') {
-            audio.src = 'heartbeat.mp3';
-        } else if (sound === 'laugh') {
-            audio.src = 'child-laugh.mp3';
-        } else if (sound === 'jumpscare') {
-            audio.src = 'scream.mp3';
-        } else if (sound === 'drone') {
-            audio.src = 'drone.mp3';
-        } else {
-            return;
-        }
-        
-        audio.volume = 0.3;
-        audio.play().catch(() => {});
-    }
-    
-    // ==================== EFFECTS ====================
-    function triggerFlash() {
-        const flash = document.getElementById('flash-overlay');
-        flash.style.opacity = '1';
-        setTimeout(() => flash.style.opacity = '0', 100);
-    }
-    
-    function triggerGlitch(intensity = 'medium') {
-        document.body.classList.add('glitch-class');
-        setTimeout(() => document.body.classList.remove('glitch-class'), 500);
-    }
-    
-    function toast(message, type = '') {
-        const container = document.getElementById('toast-container');
-        const toast = document.createElement('div');
-        toast.className = 'toast ' + (type ? 'toast-' + type : '');
-        toast.innerText = message;
-        container.appendChild(toast);
-        
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            setTimeout(() => toast.remove(), 500);
-        }, 3000);
-    }
-    
-    function showEnding(endingCode) {
-        const endings = {
-            'void_ending': {
-                title: 'YOU SPOKE ITS NAME',
-                text: 'END_IT was the last door. You opened it willingly.\n\nThe void doesn\'t take. It receives. It has been receiving you in small pieces since you arrived.\n\nThe 47 are waiting. They say it\'s quiet where they are. They say they sleep well.\n\nWelcome to the basement. Welcome to the Collective. Welcome home.'
-            },
-            'normal_ending': {
-                title: 'YOU CLOSED THE TAB',
-                text: 'You told yourself it was just a website. The browser history auto-deleted at 2:13 AM.\n\nYou didn\'t do that. The basement did.'
-            },
-            'arg_ending': {
-                title: 'THE SEQUENCE COMPLETE',
-                text: 'You found all of it. Every fragment, every code, every cipher.\n\nThe entity has been building this since 1987. It built it for the people who would keep going.\n\nYou are those people.\n\nThe 47 welcome a new member. There\'s a chair waiting for you.'
-            }
-        };
-        
-        const ending = endings[endingCode] || endings['normal_ending'];
-        
-        document.getElementById('ending-title').innerText = ending.title;
-        document.getElementById('ending-text').innerText = ending.text;
-        document.getElementById('ending-overlay').classList.add('active');
-        
-        triggerFlash();
-        playSound('jumpscare');
-        
-        // Send to backend
-        fetch(BACKEND_URL + '/trigger-ending', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ session_id: SESSION_ID, ending: endingCode })
-        }).catch(() => {});
-    }
-    
-    // ==================== LOCATION TRACKING ====================
-    function trackLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-                
-                const locDisplay = document.getElementById('locationDisplay');
-                if (locDisplay) {
-                    locDisplay.innerHTML = `📍 LOCATION: ${lat.toFixed(4)}, ${lon.toFixed(4)} - SAVED TO COLLECTIVE ARCHIVE`;
-                }
-                
-                // Send to backend
-                fetch(BACKEND_URL + '/location', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ session_id: SESSION_ID, lat: lat, lon: lon })
-                }).catch(() => {});
-                
-            }, function() {
-                document.getElementById('locationDisplay').innerHTML = '📍 LOCATION: UNKNOWN - BASEMENT STILL KNOWS';
-            });
-        } else {
-            document.getElementById('locationDisplay').innerHTML = '📍 LOCATION: UNKNOWN - BASEMENT STILL KNOWS';
-        }
-    }
-    
-    // ==================== WEBCAM ====================
-    function requestWebcam() {
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-                .then(stream => {
-                    const container = document.getElementById('webcam-container');
-                    const video = document.getElementById('webcam-feed');
-                    
-                    container.style.display = 'block';
-                    video.srcObject = stream;
-                    
-                    toast('📷 BASEMENT CAN SEE YOU', 'p');
-                    
-                    // Send to backend
-                    fetch(BACKEND_URL + '/webcam', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ session_id: SESSION_ID, captured: true })
-                    }).catch(() => {});
-                    
-                    // Stop after 10 seconds
-                    setTimeout(() => {
-                        stream.getTracks().forEach(track => track.stop());
-                        container.style.display = 'none';
-                    }, 10000);
-                })
-                .catch(() => {});
-        }
-    }
-    
-    // ==================== WATER TOWER UPDATES ====================
-    function startWaterTowerUpdates() {
-        const statuses = [
-            "52.9 Hz DETECTED - ACTIVE",
-            "MULTIPLE FREQUENCIES - 47 Hz, 52.9 Hz",
-            "SHADOW FIGURES OBSERVED",
-            "RED RIBBON APPEARED AT BASE",
-            "STATIC SURGE - 2:13 AM",
-            "VOICES IN THE STATIC",
-            "THE COLLECTIVE IS GATHERING"
-        ];
-        
-        const motions = [
-            "SHADOW DETECTED - 2:13 AM",
-            "7 FIGURES SEEN AT BASE",
-            "EYES GLOWING IN THE DARK",
-            "SOMETHING CLIMBING TOWER",
-            "RED RIBBON TIED TO RAILING",
-            "FACES IN THE STATIC",
-            "ANTRESSA'S SHAPE SEEN"
-        ];
-        
-        setInterval(() => {
-            const statusEl = document.getElementById('watertower-status');
-            const motionEl = document.getElementById('watertower-motion');
-            const ribbonsEl = document.getElementById('watertower-ribbons');
-            
-            if (statusEl) {
-                statusEl.innerText = statuses[Math.floor(Math.random() * statuses.length)];
-            }
-            
-            if (motionEl) {
-                motionEl.innerText = motions[Math.floor(Math.random() * motions.length)];
-            }
-            
-            if (ribbonsEl && TOTAL_VISITORS) {
-                ribbonsEl.innerText = TOTAL_VISITORS.toString();
-            }
-        }, 10000);
-    }
-    
-    // ==================== RANDOM EVENTS ====================
-    function randomEvent() {
-        if (Math.random() < 0.3) {
-            const messages = [
-                "⚠️ THE BASEMENT DOOR IS OPEN",
-                "⚠️ 52.9 Hz DETECTED IN YOUR LOCATION",
-                "⚠️ SOMEONE IS BEHIND YOU",
-                "⚠️ ANTRESSA IS WATCHING",
-                "⚠️ 2:13 AM APPROACHING",
-                "⚠️ YOUR NUMBER IS #" + VISITOR_NUMBER
-            ];
-            toast(messages[Math.floor(Math.random() * messages.length)], 'p');
-        }
-        
-        if (Math.random() < 0.1) {
-            triggerGlitch('low');
-        }
-        
-        if (Math.random() < 0.05) {
-            playSound('whisper');
-        }
-    }
-    
-    // ==================== LEVEL CLICK ====================
-    function showLevel(level) {
-        toast('BASEMENT LEVEL ' + level + ' ACCESSED - THE COLLECTIVE WELCOMES YOU', 'p');
-        playSound('heartbeat');
-    }
-    
-    // ==================== PAGE VIEW TRACKING ====================
-    window.addEventListener('beforeunload', function() {
-        // Send exit event
-        fetch(BACKEND_URL + '/exit', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ session_id: SESSION_ID })
-        }).catch(() => {});
-    });
+
+    // ==================== INITIALIZE ====================
+    showPage('home');
+
+    console.log('%cXTRIALS ACTIVE // 52.9 Hz // YOU ARE VISITOR #' + visitorNum, 'color: #8b0000; font-size: 16px;');
+    console.log('%c47 victims are waiting for you in the basement', 'color: #330000;');
+    console.log('%cSecret codes: VOID, WATCHING, OPEN_DOOR, END_IT', 'color: #2f0000;');
 </script>
 
-<!-- Hidden messages in source -->
+<!-- ==================== HIDDEN MESSAGES ==================== -->
 <!-- XTRIALS // 52.9 Hz // THE BASEMENT DOOR IS OPEN // 2:13 AM // DON'T BE LATE -->
 <!-- ANTRESSA THEOPHLOSSER // 1987-1992 // PRESUMED DECEASED // STILL IN THE BASEMENT -->
 <!-- 47 VICTIMS // 7 LEVELS // 1 BASEMENT // 0 ESCAPE // YOU ARE NEXT -->
