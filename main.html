@@ -50,7 +50,7 @@
             overflow-x: hidden;
         }
 
-        /* ==================== CRT SCANLINES ==================== */
+        /* CRT SCANLINES */
         body::before {
             content: '';
             position: fixed;
@@ -91,7 +91,7 @@
             100% { transform: translate(1px,1px); }
         }
 
-        /* ==================== BLOOD OVERLAYS ==================== */
+        /* BLOOD DRIPS */
         .blood-drip-container {
             position: fixed;
             top: 0;
@@ -114,137 +114,22 @@
             opacity: 0.5;
         }
 
-        /* 47 blood drips - one for each victim */
+        /* 100 blood drips for full coverage */
         .drip1 { left: 1%; animation-duration: 6s; }
-        .drip2 { left: 3%; animation-duration: 7s; animation-delay: 1s; }
-        .drip3 { left: 5%; animation-duration: 5s; animation-delay: 2s; }
-        .drip4 { left: 7%; animation-duration: 8s; animation-delay: 0.5s; }
-        .drip5 { left: 9%; animation-duration: 6.5s; animation-delay: 1.5s; }
-        .drip6 { left: 11%; animation-duration: 7.5s; animation-delay: 2.5s; }
-        .drip7 { left: 13%; animation-duration: 5.5s; animation-delay: 0.2s; }
-        .drip8 { left: 15%; animation-duration: 8.5s; animation-delay: 1.8s; }
-        .drip9 { left: 17%; animation-duration: 6.2s; animation-delay: 2.2s; }
-        .drip10 { left: 19%; animation-duration: 7.8s; animation-delay: 0.8s; }
-        .drip11 { left: 21%; animation-duration: 5.8s; animation-delay: 1.2s; }
-        .drip12 { left: 23%; animation-duration: 8.2s; animation-delay: 2.8s; }
-        .drip13 { left: 25%; animation-duration: 6.8s; animation-delay: 0.3s; }
-        .drip14 { left: 27%; animation-duration: 7.2s; animation-delay: 1.7s; }
-        .drip15 { left: 29%; animation-duration: 5.2s; animation-delay: 2.3s; }
-        .drip16 { left: 31%; animation-duration: 7.9s; animation-delay: 3s; }
-        .drip17 { left: 33%; animation-duration: 6.3s; animation-delay: 3.5s; }
-        .drip18 { left: 35%; animation-duration: 8.7s; animation-delay: 4s; }
-        .drip19 { left: 37%; animation-duration: 5.9s; animation-delay: 2.7s; }
-        .drip20 { left: 39%; animation-duration: 7.4s; animation-delay: 3.2s; }
-        .drip21 { left: 41%; animation-duration: 6.1s; animation-delay: 4.5s; }
-        .drip22 { left: 43%; animation-duration: 8.3s; animation-delay: 1.3s; }
-        .drip23 { left: 45%; animation-duration: 5.7s; animation-delay: 3.8s; }
-        .drip24 { left: 47%; animation-duration: 7.1s; animation-delay: 2.1s; }
-        .drip25 { left: 49%; animation-duration: 6.9s; animation-delay: 4.2s; }
-        .drip26 { left: 51%; animation-duration: 8.4s; animation-delay: 0.9s; }
-        .drip27 { left: 53%; animation-duration: 5.4s; animation-delay: 3.3s; }
-        .drip28 { left: 55%; animation-duration: 7.6s; animation-delay: 1.9s; }
-        .drip29 { left: 57%; animation-duration: 6.4s; animation-delay: 4.8s; }
-        .drip30 { left: 59%; animation-duration: 8.1s; animation-delay: 2.6s; }
-        .drip31 { left: 61%; animation-duration: 5.3s; animation-delay: 5s; }
-        .drip32 { left: 63%; animation-duration: 7.7s; animation-delay: 5.5s; }
-        .drip33 { left: 65%; animation-duration: 6.6s; animation-delay: 4.7s; }
-        .drip34 { left: 67%; animation-duration: 8.8s; animation-delay: 3.9s; }
-        .drip35 { left: 69%; animation-duration: 5.1s; animation-delay: 5.2s; }
-        .drip36 { left: 71%; animation-duration: 7.3s; animation-delay: 4.4s; }
-        .drip37 { left: 73%; animation-duration: 6.7s; animation-delay: 3.6s; }
-        .drip38 { left: 75%; animation-duration: 8.6s; animation-delay: 5.8s; }
-        .drip39 { left: 77%; animation-duration: 5.6s; animation-delay: 4.1s; }
-        .drip40 { left: 79%; animation-duration: 7.5s; animation-delay: 5.3s; }
-        .drip41 { left: 81%; animation-duration: 6.2s; animation-delay: 3.7s; }
-        .drip42 { left: 83%; animation-duration: 8.9s; animation-delay: 5.9s; }
-        .drip43 { left: 85%; animation-duration: 5.8s; animation-delay: 4.6s; }
-        .drip44 { left: 87%; animation-duration: 7.2s; animation-delay: 5.1s; }
-        .drip45 { left: 89%; animation-duration: 6.5s; animation-delay: 4.9s; }
-        .drip46 { left: 91%; animation-duration: 8.2s; animation-delay: 6s; }
-        .drip47 { left: 93%; animation-duration: 5.9s; animation-delay: 6.5s; }
+        .drip2 { left: 2%; animation-duration: 7s; animation-delay: 0.5s; }
+        .drip3 { left: 3%; animation-duration: 5.5s; animation-delay: 1s; }
+        .drip4 { left: 4%; animation-duration: 8s; animation-delay: 0.2s; }
+        .drip5 { left: 5%; animation-duration: 6.5s; animation-delay: 1.2s; }
+        .drip6 { left: 6%; animation-duration: 7.2s; animation-delay: 2s; }
+        .drip7 { left: 7%; animation-duration: 5.2s; animation-delay: 0.8s; }
+        .drip8 { left: 8%; animation-duration: 8.5s; animation-delay: 1.5s; }
+        .drip9 { left: 9%; animation-duration: 6.2s; animation-delay: 2.2s; }
+        .drip10 { left: 10%; animation-duration: 7.8s; animation-delay: 0.3s; }
+        /* ... continuing to 100 drips for total coverage */
 
-        /* ==================== SCARY FACES ==================== */
-        .face-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 9998;
-            overflow: hidden;
-        }
-
-        .scary-face {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, #8b0000 0%, transparent 70%);
-            border-radius: 50%;
-            opacity: 0;
-            animation: faceAppear 10s infinite;
-            filter: blur(5px);
-            mix-blend-mode: multiply;
-        }
-
-        @keyframes faceAppear {
-            0% { opacity: 0; transform: scale(0.5); }
-            10% { opacity: 0.3; transform: scale(1); }
-            20% { opacity: 0; transform: scale(1.2); }
-            30% { opacity: 0.5; transform: scale(0.8); }
-            40% { opacity: 0; transform: scale(1.5); }
-            50% { opacity: 0.2; transform: scale(1); }
-            60% { opacity: 0; }
-            100% { opacity: 0; }
-        }
-
-        .face1 { top: 20%; left: 10%; animation-delay: 2s; }
-        .face2 { top: 60%; right: 15%; animation-delay: 5s; width: 300px; height: 300px; }
-        .face3 { bottom: 10%; left: 30%; animation-delay: 8s; }
-        .face4 { top: 40%; left: 50%; animation-delay: 12s; width: 250px; height: 250px; }
-        .face5 { top: 80%; right: 40%; animation-delay: 15s; }
-        .face6 { top: 15%; right: 30%; animation-delay: 18s; width: 180px; height: 180px; }
-        .face7 { bottom: 30%; left: 70%; animation-delay: 21s; }
-
-        /* ==================== FLOATING EYES ==================== */
-        .floating-eye {
-            position: fixed;
-            width: 30px;
-            height: 15px;
-            background: #330000;
-            border-radius: 50%;
-            border: 2px solid #8b0000;
-            pointer-events: none;
-            z-index: 9997;
-            opacity: 0.2;
-            animation: eyeBlink 3s infinite;
-        }
-
-        .floating-eye::after {
-            content: "";
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #ff0000;
-            border-radius: 50%;
-            top: 3px;
-            left: 5px;
-            animation: eyeMove 5s infinite;
-        }
-
-        @keyframes eyeBlink {
-            0%, 100% { transform: scaleY(1); }
-            95% { transform: scaleY(0.1); }
-        }
-
-        @keyframes eyeMove {
-            0%, 100% { left: 5px; }
-            50% { left: 15px; }
-        }
-
-        /* ==================== MAIN CONTAINER ==================== */
+        /* MAIN CONTAINER */
         .xtrials-main {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 30px auto;
             background: rgba(10,0,0,0.95);
             border: 8px ridge #8b0000;
@@ -254,7 +139,7 @@
             box-shadow: 0 0 80px #330000, inset 0 0 40px #1a0000;
         }
 
-        /* ==================== LINK STYLES - HIDDEN IN PLAIN TEXT ==================== */
+        /* LINK STYLES - HIDDEN IN PLAIN TEXT */
         .xtrail-link {
             color: #ff6666;
             text-decoration: none;
@@ -269,37 +154,7 @@
             text-shadow: 0 0 10px red;
         }
 
-        /* ==================== OG BANNER ==================== */
-        .xtrials-banner {
-            background: #1a0000;
-            border: 6px ridge #660000;
-            padding: 30px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .xtrials-banner h1 {
-            font-size: 82px;
-            color: #ff0000;
-            text-shadow: 4px 4px 0 #330000, 8px 8px 0 #000, 0 0 30px red;
-            letter-spacing: 8px;
-            animation: pulseRed 6s infinite;
-            font-family: 'Times New Roman', serif;
-        }
-
-        .frequency-blink {
-            color: #00ff00;
-            font-size: 24px;
-            animation: blink 1s infinite;
-            margin-top: 20px;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* ==================== OG VISITOR COUNTER ==================== */
+        /* VISITOR COUNTER */
         .hit-counter {
             background: #000;
             border: 6px inset #660000;
@@ -318,115 +173,7 @@
             animation: pulseRed 2s infinite;
         }
 
-        /* ==================== OG AUTOPSY REPORT ==================== */
-        .autopsy-report {
-            background: #0a0000;
-            border: 8px ridge #660000;
-            padding: 40px;
-            position: relative;
-            margin: 30px 0;
-        }
-
-        .autopsy-report::before {
-            content: "CONFIDENTIAL";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 100px;
-            color: rgba(139,0,0,0.1);
-            white-space: nowrap;
-            pointer-events: none;
-        }
-
-        .autopsy-section {
-            margin: 25px 0;
-            padding: 20px;
-            border-left: 5px solid #8b0000;
-        }
-
-        .autopsy-label {
-            color: #ff0000;
-            font-weight: bold;
-            font-size: 22px;
-        }
-
-        .autopsy-value {
-            color: #ff6666;
-            margin-left: 25px;
-            font-size: 18px;
-            line-height: 1.8;
-        }
-
-        .autopsy-redacted {
-            background: #8b0000;
-            color: #8b0000;
-            padding: 0 10px;
-            cursor: pointer;
-        }
-
-        .autopsy-redacted:hover {
-            background: #ff0000;
-            color: white;
-        }
-
-        /* ==================== OG VICTIM PROFILE ==================== */
-        .victim-profile {
-            border: 3px groove #990000;
-            padding: 25px;
-            margin: 25px 0;
-            background: #0a0000;
-        }
-
-        .victim-number {
-            color: #ff0000;
-            font-size: 28px;
-            font-weight: bold;
-            border-bottom: 2px dashed #8b0000;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        .victim-detail {
-            margin: 10px 0;
-            padding: 5px;
-            border-left: 2px solid #660000;
-        }
-
-        .victim-label {
-            color: #ff6666;
-            font-weight: bold;
-            display: inline-block;
-            width: 120px;
-        }
-
-        .victim-value {
-            color: #ff0000;
-        }
-
-        /* ==================== OG BASEMENT LEVEL ==================== */
-        .level-card {
-            background: #1a0000;
-            border: 4px ridge #660000;
-            padding: 25px;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .level-number {
-            color: #ff0000;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .level-desc {
-            color: #ff6666;
-            font-size: 18px;
-            line-height: 1.8;
-        }
-
-        /* ==================== OG STORY CHAPTER ==================== */
+        /* STORY CHAPTER */
         .story-chapter {
             border-left: 5px solid #8b0000;
             padding: 30px;
@@ -457,7 +204,23 @@
             white-space: pre-line;
         }
 
-        /* ==================== OG BACK LINK ==================== */
+        /* VICTIM PROFILE */
+        .victim-profile {
+            border: 3px groove #990000;
+            padding: 25px;
+            margin: 25px 0;
+            background: #0a0000;
+        }
+
+        .victim-number {
+            color: #ff0000;
+            font-size: 28px;
+            font-weight: bold;
+            border-bottom: 2px dashed #8b0000;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
         .back-link {
             display: inline-block;
             margin-top: 30px;
@@ -473,58 +236,46 @@
             color: white;
         }
 
-        /* ==================== OG HIDDEN MESSAGE ==================== */
         .hidden-message {
             color: #330000;
             font-size: 10px;
             text-align: center;
             margin-top: 50px;
         }
+
+        /* REAL MAP STYLES */
+        .real-map {
+            background: #0a0a0a;
+            border: 3px solid #660000;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+
+        .coordinates {
+            color: #00ff00;
+            font-size: 14px;
+        }
+
+        .real-document {
+            background: #1a1a1a;
+            border: 1px solid #330000;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #cccccc;
+        }
     </style>
 </head>
 <body>
 
-<!-- ==================== GLOBAL HORROR ELEMENTS ==================== -->
 <div class="blood-drip-container">
-    <div class="blood-drip-css drip1"></div><div class="blood-drip-css drip2"></div><div class="blood-drip-css drip3"></div>
-    <div class="blood-drip-css drip4"></div><div class="blood-drip-css drip5"></div><div class="blood-drip-css drip6"></div>
-    <div class="blood-drip-css drip7"></div><div class="blood-drip-css drip8"></div><div class="blood-drip-css drip9"></div>
-    <div class="blood-drip-css drip10"></div><div class="blood-drip-css drip11"></div><div class="blood-drip-css drip12"></div>
-    <div class="blood-drip-css drip13"></div><div class="blood-drip-css drip14"></div><div class="blood-drip-css drip15"></div>
-    <div class="blood-drip-css drip16"></div><div class="blood-drip-css drip17"></div><div class="blood-drip-css drip18"></div>
-    <div class="blood-drip-css drip19"></div><div class="blood-drip-css drip20"></div><div class="blood-drip-css drip21"></div>
-    <div class="blood-drip-css drip22"></div><div class="blood-drip-css drip23"></div><div class="blood-drip-css drip24"></div>
-    <div class="blood-drip-css drip25"></div><div class="blood-drip-css drip26"></div><div class="blood-drip-css drip27"></div>
-    <div class="blood-drip-css drip28"></div><div class="blood-drip-css drip29"></div><div class="blood-drip-css drip30"></div>
-    <div class="blood-drip-css drip31"></div><div class="blood-drip-css drip32"></div><div class="blood-drip-css drip33"></div>
-    <div class="blood-drip-css drip34"></div><div class="blood-drip-css drip35"></div><div class="blood-drip-css drip36"></div>
-    <div class="blood-drip-css drip37"></div><div class="blood-drip-css drip38"></div><div class="blood-drip-css drip39"></div>
-    <div class="blood-drip-css drip40"></div><div class="blood-drip-css drip41"></div><div class="blood-drip-css drip42"></div>
-    <div class="blood-drip-css drip43"></div><div class="blood-drip-css drip44"></div><div class="blood-drip-css drip45"></div>
-    <div class="blood-drip-css drip46"></div><div class="blood-drip-css drip47"></div>
+    <!-- Blood drips will be added via JS -->
 </div>
 
-<div class="face-container">
-    <div class="scary-face face1"></div>
-    <div class="scary-face face2"></div>
-    <div class="scary-face face3"></div>
-    <div class="scary-face face4"></div>
-    <div class="scary-face face5"></div>
-    <div class="scary-face face6"></div>
-    <div class="scary-face face7"></div>
-</div>
+<div id="page-home" class="page active"></div>
 
-<div class="floating-eye" style="top: 10%; left: 5%;"></div>
-<div class="floating-eye" style="top: 25%; left: 85%;"></div>
-<div class="floating-eye" style="top: 45%; left: 15%;"></div>
-<div class="floating-eye" style="top: 65%; left: 75%;"></div>
-<div class="floating-eye" style="top: 80%; left: 35%;"></div>
-
-<!-- ==================== PAGE SYSTEM ==================== -->
-<div class="page" id="page-home"></div>
-<!-- All other pages will be generated dynamically -->
-
-<!-- ==================== JAVASCRIPT ==================== -->
 <script>
     // ==================== REAL VISITOR TRACKING ====================
     let totalVisits = localStorage.getItem('xtrials_total_visits');
@@ -545,16 +296,28 @@
         localStorage.setItem('xtrials_has_visited', 'true');
     }
 
+    // Add blood drips dynamically
+    function addBloodDrips() {
+        const container = document.querySelector('.blood-drip-container');
+        for (let i = 1; i <= 100; i++) {
+            const drip = document.createElement('div');
+            drip.className = `blood-drip-css drip${i}`;
+            drip.style.left = `${Math.random() * 100}%`;
+            drip.style.animationDuration = `${5 + Math.random() * 5}s`;
+            drip.style.animationDelay = `${Math.random() * 8}s`;
+            container.appendChild(drip);
+        }
+    }
+
     // ==================== PAGE DATA ====================
     const pages = {
-        // ==================== HOME PAGE ====================
         home: {
-            title: 'XTRIALS......',
+            title: 'XTRIALS...... THE FREQUENCY NEVER STOPS CALLING',
             content: `
                 <div class="xtrials-main">
-                    <div class="xtrials-banner">
-                        <h1>XTRIALS</h1>
-                        <div class="frequency-blink">52.9 Hz • THE CALLING</div>
+                    <div style="text-align:center; margin-bottom:30px;">
+                        <span style="font-size:72px; color:#ff0000;">XTRIALS</span><br>
+                        <span style="font-size:24px; color:#8b0000;">established 1987 • meadow mist, oregon • 52.9 hz</span>
                     </div>
 
                     <div class="hit-counter">
@@ -562,24 +325,37 @@
                         <span class="visitor-number">${totalVisits}</span>
                         <div>times since 1987</div>
                         <div style="font-size:24px; margin-top:15px;">you are visitor #<span class="visitor-number">${visitorNum}</span></div>
+                        <div style="font-size:16px; color:#660000; margin-top:10px;">${500 - visitorNum > 0 ? 500 - visitorNum : 0} remain before the final transmission</div>
                     </div>
 
-                    <div style="font-size:24px; line-height:2; text-align:center; margin:40px 0;">
-                        Welcome to the space between 
-                        <span class="xtrail-link" onclick="showPage('gavel')">The Gavel</span> and 
-                        <span class="xtrail-link" onclick="showPage('echo')">The Echo</span> ~ located at the 
-                        <span class="xtrail-link" onclick="showPage('threshold')">threshold</span> of nowhere lane and everydrive ~ just past the 
-                        <span class="xtrail-link" onclick="showPage('watertower')">old water tower</span>, follow the 
-                        <span class="xtrail-link" onclick="showPage('static')">static</span> to meadow mist 97555 (503) 555-9928 listen at 
-                        <span class="xtrail-link" onclick="showPage('2_13')">2:13 a.m.</span> the frequency is 
-                        <span class="xtrail-link" onclick="showPage('freq529')">52.9 hz</span> bring a 
-                        <span class="xtrail-link" onclick="showPage('redribbon')">red ribbon</span> with seven knots.
+                    <div style="font-size:22px; line-height:2; text-align:center; margin:40px 0;">
+                        <span class="xtrail-link" onclick="showPage('thegavel')">the space between</span> 
+                        the gavel and the echo ~ located at the 
+                        <span class="xtrail-link" onclick="showPage('threshold')">threshold</span> 
+                        of nowhere lane and everydrive ~ just past the 
+                        <span class="xtrail-link" onclick="showPage('watertower')">old water tower</span>, 
+                        follow the <span class="xtrail-link" onclick="showPage('static')">static</span> to 
+                        <span class="xtrail-link" onclick="showPage('meadowmist')">meadow mist 97555</span> 
+                        (503) <span class="xtrail-link" onclick="showPage('phone')">555-9928</span> 
+                        listen at <span class="xtrail-link" onclick="showPage('twothirteen')">2:13 a.m.</span> 
+                        the frequency is <span class="xtrail-link" onclick="showPage('freq529')">52.9 hz</span> 
+                        bring a <span class="xtrail-link" onclick="showPage('redribbon')">red ribbon</span> with seven knots.
+                    </div>
+
+                    <div class="real-map">
+                        <div class="coordinates">📍 47.2431° N, 122.4194° W</div>
+                        <div class="coordinates">1313 ELM CRESCENT, MEADOW MIST, OR 97555</div>
+                        <div class="coordinates">Last confirmed transmission: ${new Date().toLocaleDateString()} 02:13:00</div>
+                        <div class="coordinates">Signal strength: <span id="signalStrength">52.9 Hz</span> • ACTIVE</div>
                     </div>
 
                     <div style="column-count:3; column-gap:30px; margin:40px 0;">
-                        <p>THERE IS NEW STRENGTH, REPOSE OF MIND, AND INSPIRATION IN THE <span class="xtrail-link" onclick="showPage('void')">VOID</span>. 
-                        <span class="xtrail-link" onclick="showPage('antressa')">ANTRESSA THEOPHLOSSER</span> 1987-1992 (presumed deceased). 
-                        THE <span class="xtrail-link" onclick="showPage('collective')">COLLECTIVE</span> FORMS IN THE BASEMENT. 
+                        <p>THERE IS NEW STRENGTH, REPOSE OF MIND, AND INSPIRATION IN THE 
+                        <span class="xtrail-link" onclick="showPage('void')">VOID</span>. 
+                        <span class="xtrail-link" onclick="showPage('antressa')">ANTRESSA THEOPHLOSSER</span> 
+                        1987-1992 (presumed deceased). THE 
+                        <span class="xtrail-link" onclick="showPage('collective')">COLLECTIVE</span> 
+                        FORMS IN THE BASEMENT. 
                         <span class="xtrail-link" onclick="showPage('level1')">LEVEL 1: THE THRESHOLD</span>. 
                         <span class="xtrail-link" onclick="showPage('level2')">LEVEL 2: THE RIBBONS</span>. 
                         <span class="xtrail-link" onclick="showPage('level3')">LEVEL 3: THE CHAIRS</span>. 
@@ -598,56 +374,10 @@
 
                         <p>THE <span class="xtrail-link" onclick="showPage('victim001')">WATER TOWER GIRL</span> (1987). 
                         <span class="xtrail-link" onclick="showPage('victim002')">MARCUS THEOPHLOSSER</span> (1992). 
-                        THE <span class="xtrail-link" onclick="showPage('victim003')">JOURNALIST</span> (1988). 
-                        THE <span class="xtrail-link" onclick="showPage('victim004')">TWINS</span> (1989). 
-                        THE <span class="xtrail-link" onclick="showPage('victim005')">COLLECTOR</span> (1998). 
-                        THE <span class="xtrail-link" onclick="showPage('victim006')">RADIO OPERATOR</span> (1990). 
-                        THE <span class="xtrail-link" onclick="showPage('victim007')">FIRST OF THE SEVEN</span> (1993). 
-                        THE <span class="xtrail-link" onclick="showPage('victim008')">SECOND OF THE SEVEN</span> (1994). 
-                        THE <span class="xtrail-link" onclick="showPage('victim009')">THIRD OF THE SEVEN</span> (1995). 
-                        THE <span class="xtrail-link" onclick="showPage('victim010')">FOURTH OF THE SEVEN</span> (1996). 
-                        THE <span class="xtrail-link" onclick="showPage('victim011')">FIFTH OF THE SEVEN</span> (1997). 
-                        THE <span class="xtrail-link" onclick="showPage('victim012')">SIXTH OF THE SEVEN</span> (1998). 
-                        THE <span class="xtrail-link" onclick="showPage('victim013')">SEVENTH OF THE SEVEN</span> (1999). 
-                        <span class="xtrail-link" onclick="showPage('victim014')">THE BASEMENT TAPES</span> (2000). 
-                        <span class="xtrail-link" onclick="showPage('victim015')">THE FREQUENCY HUNTER</span> (2001). 
-                        <span class="xtrail-link" onclick="showPage('victim016')">THE COPYCAT</span> (2002). 
-                        <span class="xtrail-link" onclick="showPage('victim017')">THE SEVEN OF 2003</span>. 
-                        <span class="xtrail-link" onclick="showPage('victim018')">THE INVESTIGATOR</span> (2004). 
-                        <span class="xtrail-link" onclick="showPage('victim019')">THE PARANORMAL RESEARCHER</span> (2005). 
-                        <span class="xtrail-link" onclick="showPage('victim020')">THE LATE NIGHT LISTENER</span> (2006). 
-                        <span class="xtrail-link" onclick="showPage('victim021')">THE HAM RADIO OPERATOR</span> (2007). 
-                        <span class="xtrail-link" onclick="showPage('victim022')">THE PODCASTER</span> (2008). 
-                        <span class="xtrail-link" onclick="showPage('victim023')">THE BLOGGER</span> (2009). 
-                        <span class="xtrail-link" onclick="showPage('victim024')">THE STUDENT</span> (2010). 
-                        <span class="xtrail-link" onclick="showPage('victim025')">THE WAR VETERAN</span> (2011). 
-                        <span class="xtrail-link" onclick="showPage('victim026')">THE MUSICIAN</span> (2012). 
-                        <span class="xtrail-link" onclick="showPage('victim027')">THE ARTIST</span> (2013). 
-                        <span class="xtrail-link" onclick="showPage('victim028')">THE WRITER</span> (2014). 
-                        <span class="xtrail-link" onclick="showPage('victim029')">THE PHOTOGRAPHER</span> (2015). 
-                        <span class="xtrail-link" onclick="showPage('victim030')">THE FILMMAKER</span> (2016). 
-                        <span class="xtrail-link" onclick="showPage('victim031')">THE ARCHIVIST</span> (2017). 
-                        <span class="xtrail-link" onclick="showPage('victim032')">THE HISTORIAN</span> (2018). 
-                        <span class="xtrail-link" onclick="showPage('victim033')">THE CONSPIRACY THEORIST</span> (2019). 
-                        <span class="xtrail-link" onclick="showPage('victim034')">THE NURSE</span> (2020). 
-                        <span class="xtrail-link" onclick="showPage('victim035')">THE TEACHER</span> (2021). 
-                        <span class="xtrail-link" onclick="showPage('victim036')">THE ENGINEER</span> (2022). 
-                        <span class="xtrail-link" onclick="showPage('victim037')">THE PROGRAMMER</span> (2023). 
-                        <span class="xtrail-link" onclick="showPage('victim038')">THE DOCTOR</span> (2023). 
-                        <span class="xtrail-link" onclick="showPage('victim039')">THE LAWYER</span> (2024). 
-                        <span class="xtrail-link" onclick="showPage('victim040')">THE PRIEST</span> (2024). 
-                        <span class="xtrail-link" onclick="showPage('victim041')">VICTIM #041</span>. 
-                        <span class="xtrail-link" onclick="showPage('victim042')">VICTIM #042</span>. 
-                        <span class="xtrail-link" onclick="showPage('victim043')">VICTIM #043</span>. 
-                        <span class="xtrail-link" onclick="showPage('victim044')">VICTIM #044</span>. 
-                        <span class="xtrail-link" onclick="showPage('victim045')">VICTIM #045</span>. 
-                        <span class="xtrail-link" onclick="showPage('victim046')">VICTIM #046</span>. 
-                        <span class="xtrail-link" onclick="showPage('victim047')">VICTIM #047</span>.</p>
-                    </div>
-
-                    <div style="text-align:center; font-size:22px; margin:30px 0;">
-                        XTRIALS HOURS: <span class="xtrail-link" onclick="showPage('moon')">whenever the moon is full</span> ~ 
-                        <span class="xtrail-link" onclick="showPage('static')">whenever the signal comes in clear</span>
+                        THE <span class="xtrail-link" onclick="showPage('seven')">SEVEN</span> (2003). 
+                        THE <span class="xtrail-link" onclick="showPage('collector')">COLLECTOR</span> (1998). 
+                        THE <span class="xtrail-link" onclick="showPage('twins')">TWINS</span> (1989). 
+                        <span class="xtrail-link" onclick="showPage('victim047')">VICTIM #047</span> (2024).</p>
                     </div>
 
                     <div style="text-align:center; margin:30px 0;">
@@ -656,7 +386,9 @@
                         <span class="xtrail-link" onclick="showPage('gate')">THE GATE</span> | 
                         <span class="xtrail-link" onclick="showPage('portal')">PORTAL</span> | 
                         <span class="xtrail-link" onclick="showPage('liminal')">LIMINAL</span> | 
-                        <span class="xtrail-link" onclick="showPage('boundary')">BOUNDARY</span>
+                        <span class="xtrail-link" onclick="showPage('boundary')">BOUNDARY</span> |
+                        <span class="xtrail-link" onclick="showPage('mirror')">THE MIRROR</span> |
+                        <span class="xtrail-link" onclick="showPage('echo')">THE ECHO</span>
                     </div>
 
                     <div style="color:#630000; text-align:center; font-size:20px;">
@@ -666,12 +398,13 @@
                         <span class="xtrail-link" onclick="showPage('latin')">XTrials vocat te.</span>
                     </div>
 
-                    <div style="color:#2f0000; text-align:center; font-size:20px; margin:30px 0;">
-                        <span class="xtrail-link" onclick="showPage('aspen')">aspen</span> 
-                        <span class="xtrail-link" onclick="showPage('alice')">alice</span> 
-                        <span class="xtrail-link" onclick="showPage('alpine')">alpine</span> 
-                        <span class="xtrail-link" onclick="showPage('ritual_redribbon')">red ribbon ceremony</span> 
-                        <span class="xtrail-link" onclick="showPage('ritual_mirror')">mirror ritual</span>
+                    <div class="real-document">
+                        <strong>MONROE COUNTY SHERIFF'S OFFICE • CASE #XT-1987-047</strong><br><br>
+                        STATUS: OPEN • ACTIVE INVESTIGATION<br>
+                        LAST UPDATE: ${new Date().toLocaleDateString()} • 02:13:00<br>
+                        WITNESSES: 47 • VICTIMS: 47 • UNSOLVED: 47<br><br>
+                        <em>"They say they can still hear the frequency. At 2:13 AM. Every night. For 37 years. They say it's getting louder."</em><br>
+                        — Det. Morrison, retired 2004 (deceased)
                     </div>
 
                     <div class="hidden-message">
@@ -683,42 +416,37 @@
 
         // ==================== COMPLETE STORY CHAPTERS ====================
         chapter1: {
-            title: 'CHAPTER I: THE FIRST TRANSMISSION',
+            title: 'CHAPTER I: THE FIRST TRANSMISSION (1987)',
             content: `
                 <div class="story-chapter">
                     <div class="chapter-title">CHAPTER I: THE FIRST TRANSMISSION</div>
-                    <div class="chapter-date">October 17, 1987 - 2:13 AM - Meadow Mist, Oregon</div>
+                    <div class="chapter-date">October 17, 1987 - 2:13 AM - Meadow Mist Public Access, Channel 5</div>
                     <div class="chapter-content">
-                        The first transmission was not meant to be heard.
+                        The first transmission was not meant to be heard. It was buried in static, in the space between stations, in the silence between heartbeats.
 
-                        On October 17, 1987, a technician named Robert Mullins was working the overnight shift at the Meadow Mist Public Access television station. At 2:13 AM, all channels simultaneously went to static. This was not unusual for public access in 1987, but the static was different. It pulsed. It breathed.
+                        Robert Mullins was the overnight technician at Meadow Mist Public Access. At 2:13 AM on October 17, 1987, all seven channels simultaneously went to static. Mullins assumed it was interference. But the static had a rhythm. It pulsed. It breathed.
 
-                        Mullins later reported that the static had a rhythm, a heartbeat. He hooked up an oscilloscope and measured the frequency. 52.9 Hz. Exactly 52.9 Hz.
-
-                        "It sounded like someone was trying to speak through the noise," Mullins wrote in his report. "Not words exactly, but the shape of words. The rhythm of speech. I sat there for three hours just listening. I couldn't stop."
-
-                        The next day, Mullins told his supervisor about the transmission. The supervisor laughed. "It's just interference," he said. "Probably a ham radio operator."
-
-                        But Mullins knew what ham radio sounded like. This was something else.
-
-                        Over the next week, Mullins recorded 47 hours of the static. He played it back at different speeds, trying to find a message. At 2:13 AM on October 24, he found it.
-
-                        When slowed down by a factor of 47, the static revealed voices. Human voices. They were speaking in unison, saying the same phrase over and over:
+                        He hooked up an oscilloscope. 52.9 Hz. Exactly 52.9 Hz. He recorded 47 minutes of it. When he played it back at 1/47th speed, he heard voices. Human voices. Speaking in unison:
 
                         "Come down to the basement. It's warm. It's safe. It's forever."
 
-                        Mullins traced the signal. It was not coming from any radio tower. It was not coming from any satellite. It was coming from the old water tower on Elm Crescent. Specifically, from beneath it.
+                        Mullins traced the signal. It came from the old water tower on Elm Crescent. From beneath it. From the basement.
 
-                        The basement.
+                        Three days later, he drove to the water tower. He brought a tape recorder. He was never seen again.
 
-                        On October 31, 1987, Robert Mullins drove to the water tower. He brought a tape recorder. He was never seen again.
-
-                        Three days later, his car was found at the base of the tower. The engine was still running. The tape recorder was on the passenger seat. The tape inside contained 47 minutes of static, then a voice:
+                        His car was found at the base of the tower the next morning. The engine was still running. The tape recorder was on the passenger seat. The tape inside contained 47 minutes of static, then a voice:
 
                         "I can see them. They're beautiful. They're waiting for me. Tell everyone 52.9 Hz is the key. Tell everyone to come at 2:13. Tell everyone I'll be in the basement."
 
-                        That was the first transmission. It would not be the last.
+                        That was the first transmission. It was not the last.
                     </div>
+                </div>
+                <div class="real-document">
+                    <strong>EVIDENCE #XT-001</strong><br>
+                    Item: Audio cassette tape, Maxell UR-90, labeled "52.9 Hz" in black ink<br>
+                    Condition: Degraded, but still playable<br>
+                    Current location: Monroe County Evidence Room, Box #47<br>
+                    Analysis notes: 47 distinct voices identified. None match any known living person.
                 </div>
             `
         },
@@ -728,31 +456,23 @@
             content: `
                 <div class="story-chapter">
                     <div class="chapter-title">CHAPTER II: THE WATER TOWER GIRL</div>
-                    <div class="chapter-date">October 17, 1987 - 2:13 AM - 1313 Elm Crescent</div>
+                    <div class="chapter-date">October 17, 1987 - 2:13 AM - 1313 Elm Crescent Basement</div>
                     <div class="chapter-content">
-                        The first victim was found on the same night as the first transmission. At 2:13 AM on October 17, 1987, a neighbor called police to report sounds coming from the basement of 1313 Elm Crescent, the abandoned house at the base of the water tower.
+                        At 2:13 AM on October 17, 1987, a neighbor called police to report sounds coming from the basement of 1313 Elm Crescent. The house had been abandoned since 1974. No one should have been inside.
 
-                        Officers arrived to find the front door unlocked. The basement door was open. They descended the stairs into darkness.
+                        Officers arrived to find the front door unlocked. The basement door was open. They descended into darkness.
 
-                        The basement was lit by a single 13-inch television playing static. In front of the television, seated in a wooden chair, was the body of an unidentified female, approximately 16 to 18 years old.
-
-                        She was dressed in a white nightgown. Her hands were folded in her lap. A red ribbon was tied to her left wrist with exactly seven knots. Her eyes had been removed and placed on the windowsill behind her, facing out, as if watching something.
+                        The basement was lit by a single 13-inch television playing static. In front of it, seated in a wooden chair, was the body of a young woman. She was approximately 16-18 years old. Her hands were folded in her lap. A red ribbon was tied to her left wrist with seven knots. Her eyes had been removed and placed on the windowsill behind her, facing out.
 
                         Her teeth had been filed to points. Her lips were frozen in a smile. She was facing east.
 
-                        There was no sign of forced entry. The doors and windows were locked from the inside. The only items in the basement were the television, the chair, and a VHS tape found on the floor labeled "52.9 Hz".
+                        There was no sign of forced entry. The doors and windows were locked from the inside. The only items in the basement were the television, the chair, and a VHS tape found on the floor labeled "52.9 Hz."
 
-                        When police played the tape, it contained nothing but static. But when analyzed later, the static contained 47 distinct voices, all speaking at once. One of the voices was identified years later as Robert Mullins, the technician who disappeared the following week.
+                        The victim was never identified. Her fingerprints matched no one in any database. Her dental records matched no missing persons. She became known as "The Water Tower Girl," Victim #001.
 
-                        The victim was never identified. Her fingerprints matched no one in any database. Her dental records matched no missing persons. She became known only as "The Water Tower Girl," Victim #001.
+                        The lead detective, James Morrison, worked the case for 17 years. He reopened it every October 17. In 2004, he wrote in the case file: "I still dream about her smile. In my dreams, she's still sitting in that chair. The television is still playing static. She turns to look at me. Her empty eye sockets are filled with light. She speaks without a mouth: 'Come down to the basement. It's warm. It's safe. It's forever.'"
 
-                        The case remains unsolved. The Monroe County Sheriff's Office has reopened it every year on October 17. Every year, they find nothing new. Every year, the case file grows by one page.
-
-                        Page 47 of the file contains a handwritten note from the lead detective, written shortly before his retirement:
-
-                        "I still dream about her smile. In my dreams, she's still sitting in that chair. The television is still playing static. She turns to look at me. Her empty eye sockets are filled with light. She speaks without a mouth: 'Come down to the basement. It's warm. It's safe. It's forever.'"
-
-                        The detective died of a heart attack three days after writing that note. His body was found in his basement. He was seated in a wooden chair. A red ribbon was tied to his left wrist with seven knots. His eyes had been removed and placed on the windowsill.
+                        Morrison died of a heart attack three days later. His body was found in his basement. He was seated in a wooden chair. A red ribbon was tied to his left wrist with seven knots. His eyes had been removed and placed on the windowsill.
 
                         He was facing east. He was smiling.
                     </div>
@@ -765,37 +485,35 @@
             content: `
                 <div class="story-chapter">
                     <div class="chapter-title">CHAPTER III: THE FREQUENCY WEAVER</div>
-                    <div class="chapter-date">1988 - Meadow Mist, Oregon</div>
+                    <div class="chapter-date">1988-1992 - Meadow Mist, Oregon</div>
                     <div class="chapter-content">
                         Antressa Theophlosser first heard the frequency in 1988, six months after the first victim was found.
 
-                        She was 25 years old, a graduate student in audio engineering at the University of Oregon. She was working on her thesis about the psychological effects of infrasound when she heard about the water tower transmissions.
+                        She was 25, a graduate student in audio engineering at the University of Oregon. Her thesis was on the psychological effects of infrasound. When she heard about the water tower transmissions, she drove to Meadow Mist with recording equipment.
 
-                        Intrigued, she drove to Meadow Mist with recording equipment. She set up her microphones at the base of the water tower at midnight on October 17, 1988. At 2:13 AM, she recorded 47 seconds of pure 52.9 Hz tone.
+                        On October 17, 1988, she set up her microphones at the base of the water tower at midnight. At 2:13 AM, she recorded 47 seconds of pure 52.9 Hz tone.
 
-                        When she played it back in her lab, she heard something impossible. Buried in the frequency were voices. Dozens of them. All speaking at once. All saying the same thing:
+                        When she played it back in her lab, she heard voices. Dozens of them. All speaking at once:
 
                         "We are waiting. We are the Collective. Come join us."
 
-                        Antressa became obsessed. She moved to Meadow Mist, renting a small house on Elm Crescent, less than a mile from the water tower. She spent every night recording the frequency, trying to isolate the voices.
+                        Antressa became obsessed. She moved to Meadow Mist, renting a small house on Elm Crescent. She spent every night recording the frequency.
 
-                        By 1989, she had identified 47 distinct voices. She named them the Collective. She believed they were not ghosts or spirits, but something else - people who had crossed over into another dimension through the frequency.
+                        By 1989, she had identified 47 distinct voices. She named them the Collective. She believed they were people who had crossed over into another dimension through the frequency.
 
                         She wrote in her journal: "They are not dead. They are not alive. They exist in the space between. The frequency is the bridge. 52.9 Hz opens the door. I can hear them calling me. I can almost see them."
 
-                        In 1990, Antressa claimed she could see through the static. She described faces in the noise, figures standing behind the snow. She drew what she saw: seven figures in a circle, all facing a mirror, all smiling.
+                        In 1991, she recorded a new frequency: 47.2 Hz. She called it "The Weeping" because it made listeners cry uncontrollably. She theorized that different frequencies opened different levels of the basement.
 
-                        In 1991, she recorded a new frequency - 47.2 Hz. She called it "The Weeping" because it made listeners cry uncontrollably. She theorized that different frequencies opened different levels of the basement.
+                        By 1992, she had stopped eating. She had lost 47 pounds. She barely slept. Her neighbors reported strange sounds from her house at all hours: static, voices, sometimes laughter.
 
-                        By 1992, Antressa had stopped eating regularly. She had lost 47 pounds. She barely slept. She spent all her time in her basement, recording and listening. Her neighbors reported hearing strange sounds from her house at all hours - static, voices, sometimes laughter.
-
-                        On March 15, 1992, her companion Marcus Theophlosser (no relation) disappeared from their locked basement apartment. The door was locked from inside. The windows were sealed. The only clue was an answering machine tape that contained 47 seconds of static, then a whisper:
+                        On March 15, 1992, her companion Marcus Theophlosser disappeared from their locked basement apartment. The door was locked from inside. The windows were sealed. The only clue was an answering machine tape that contained 47 seconds of static, then a whisper:
 
                         "They're coming back. They're coming for Antressa."
 
-                        Antressa told police not to worry. "He's with them now," she said. "He's part of the Collective. He's waiting for me in the basement."
+                        Antressa told police not to worry. "He's with them now. He's part of the Collective. He's waiting for me in the basement."
 
-                        Police considered committing her for psychiatric evaluation, but she was lucid, calm, and cooperative. She agreed to stop her research. She promised to leave the frequency alone.
+                        Police considered committing her, but she was lucid, calm, cooperative. She agreed to stop her research. She promised to leave the frequency alone.
 
                         She lied.
                     </div>
@@ -808,33 +526,25 @@
             content: `
                 <div class="story-chapter">
                     <div class="chapter-title">CHAPTER IV: THE COLLECTIVE FORMS</div>
-                    <div class="chapter-date">1989-1990 - Meadow Mist, Oregon</div>
+                    <div class="chapter-date">1989-1990 - The Basement Sessions</div>
                     <div class="chapter-content">
-                        In 1989, Antressa Theophlosser began holding meetings in her basement. She called them "Frequency Sessions." She invited anyone who had heard the static, anyone who was curious.
-
-                        Seven people came to the first session: a retired electrician named Harold, a housewife named Margaret, a high school student named David, a nurse named Patricia, a mechanic named James, a waitress named Linda, and a homeless man who called himself only "The Listener."
+                        In 1989, Antressa began holding meetings in her basement. She called them "Frequency Sessions." Seven people came to the first session: Harold, 67, retired electrician; Margaret, 42, housewife; David, 17, high school student; Patricia, 39, nurse; James, 51, mechanic; Linda, 28, waitress; and a homeless man who called himself only "The Listener."
 
                         Antressa played them recordings of the frequency. She asked them to describe what they heard.
 
-                        Harold heard his dead wife's voice. Margaret heard her unborn child. David heard a girl he had a crush on in sixth grade. Patricia heard her patients crying. James heard his father, who had died in a car accident. Linda heard her own voice, but older, warning her about something. The Listener heard 47 voices speaking in unison.
+                        Harold heard his dead wife's voice. Margaret heard her unborn child. David heard a girl he'd had a crush on in sixth grade. Patricia heard her patients crying. James heard his father, who had died in a car accident. Linda heard her own voice, but older, warning her. The Listener heard 47 voices speaking in unison.
 
-                        Antressa called them the Collective.
+                        Over the next year, the seven became obsessed. They met every night at 2:13 AM. They stopped sleeping. They stopped eating. They lost weight. They developed the same smile: peaceful, knowing, slightly disturbing.
 
-                        Over the next year, the seven became obsessed. They met every night at 2:13 AM. They stopped sleeping. They stopped eating. They lost weight. They developed the same smile - peaceful, knowing, slightly disturbing.
-
-                        Their families became concerned. Harold's daughter filed a missing person report, but Harold wasn't missing - he was at Antressa's house every night. When police came to investigate, Harold answered the door with that smile.
+                        Their families became concerned. Harold's daughter filed a missing person report, but Harold wasn't missing—he was at Antressa's house every night. When police came, Harold answered the door with that smile.
 
                         "I'm fine," he said. "I've never been better. I've found peace. I've found the frequency."
 
-                        The police couldn't do anything. Harold was an adult. He had the right to spend his time however he wanted.
+                        In November 1990, the seven stopped coming to the sessions. Antressa wasn't worried. "They've gone ahead. They're waiting for me in the basement."
 
-                        In November 1990, the seven stopped coming to the sessions. Antressa wasn't worried. "They've gone ahead," she said. "They're waiting for me in the basement."
-
-                        She was right. Two weeks later, their bodies were found in the water tower basement. They were seated in a circle of seven chairs, all facing a mirror. Red ribbons were tied to their left wrists, each with seven knots. Their eyes had been removed and arranged on the floor in a spiral pattern.
+                        Two weeks later, their bodies were found in the water tower basement. They were seated in a circle of seven chairs, all facing a mirror. Red ribbons were tied to their left wrists, each with seven knots. Their eyes had been removed and arranged on the floor in a spiral pattern.
 
                         They were all facing east. They were all smiling.
-
-                        The case made national news. The Monroe County Sheriff's Office was overwhelmed with calls from reporters, psychics, conspiracy theorists. No one could explain how the seven had entered the basement - the door had been sealed for years. No one could explain the smiles, the ribbons, the missing eyes.
 
                         The Listener was never identified. His fingerprints matched no one. His dental records matched no one. He simply appeared one day and disappeared into the basement forever.
 
@@ -844,92 +554,52 @@
 
                         Without evidence linking her to the deaths, Antressa was released. She returned to her house on Elm Crescent. She continued her research.
 
-                        The seven became known simply as "The Collective" - the first to cross over, the first to join the voices in the static.
+                        The seven became known as "The Collective"—the first to cross over, the first to join the voices in the static.
                     </div>
                 </div>
             `
         },
 
-        // ==================== ALL 47 VICTIMS ====================
-        victim001: {
-            title: 'VICTIM #001 - THE WATER TOWER GIRL',
+        chapter5: {
+            title: 'CHAPTER V: THE SEVEN RITUALS',
             content: `
-                <div class="victim-profile">
-                    <div class="victim-number">VICTIM #001: THE WATER TOWER GIRL</div>
-                    <div class="victim-detail"><span class="victim-label">Date:</span> October 17, 1987 - 2:13 AM</div>
-                    <div class="victim-detail"><span class="victim-label">Location:</span> 1313 Elm Crescent, Basement</div>
-                    <div class="victim-detail"><span class="victim-label">Age:</span> Approx 16-18 years</div>
-                    <div class="victim-detail"><span class="victim-label">Cause:</span> Unknown</div>
-                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 3</div>
-                    <div class="autopsy-section">
-                        Found seated in chair facing wall. Red ribbon with 7 knots on left wrist. Eyes removed and placed on windowsill facing out. Teeth filed to points. Smiling. Television playing static. VHS tape labeled "52.9 Hz" on floor. Door locked from inside. No forced entry.
+                <div class="story-chapter">
+                    <div class="chapter-title">CHAPTER V: THE SEVEN RITUALS</div>
+                    <div class="chapter-date">1990 - Antressa's Journal</div>
+                    <div class="chapter-content">
+                        Antressa's journal, recovered from her house after her disappearance, contains detailed descriptions of what she called "The Seven Rituals"—the steps required to join the Collective.
+
+                        RITUAL I: THE HEARING
+                        "You must hear the frequency clearly. Not as static, but as voices. You must listen for 47 nights in a row at 2:13 AM. On the 47th night, the voices will speak your name. If you do not hear your name, you are not ready."
+
+                        RITUAL II: THE RIBBON
+                        "You must obtain a red ribbon. It must be new, never worn. You must tie seven knots in it, one for each level of the basement. As you tie each knot, you must speak the name of one of the seven who have already crossed. By the seventh knot, you will feel them watching you."
+
+                        RITUAL III: THE FASTING
+                        "For seven days, you must eat nothing. For seven nights, you must sleep nothing. On the seventh day, you will see them in the static. They will be standing behind you. Do not turn around."
+
+                        RITUAL IV: THE MIRROR
+                        "You must stand before a mirror at 2:13 AM. The frequency will be playing. You will see yourself in the mirror. Behind you, you will see them. All 47 of them. They will be smiling. They will be waiting. You will want to turn around. Do not turn around."
+
+                        RITUAL V: THE DESCENT
+                        "You must go to the water tower at midnight. You must enter the basement. You will descend seven levels. On each level, you will see something that will make you want to turn back. Do not turn back. They are testing you."
+
+                        RITUAL VI: THE SACRIFICE
+                        "On the seventh level, you will find the mirror room. There will be 47 chairs in a circle. One will be empty. That is your chair. You must sit in it. When you sit, you will feel them all around you. They will be inside you. You will become one of them."
+
+                        RITUAL VII: THE SILENCE
+                        "After you sit, the frequency will stop. For the first time since 1987, there will be silence. In that silence, you will understand everything. You will know why they called you. You will know why you were chosen. You will be at peace."
+
+                        Antressa wrote that she completed all seven rituals on October 17, 1992. Her journal ends with these words:
+
+                        "I am ready. They are waiting. I can see them in the mirror. They're beautiful. I'm going down now. Tell everyone 52.9 Hz is the key. Tell everyone to come at 2:13. Tell everyone I'll be in the basement. Tell everyone I'm still here. Tell everyone I'm still waiting. Tell everyone..."
+
+                        The journal stops mid-sentence. The remaining pages are blank.
                     </div>
                 </div>
-            `
-        },
-
-        victim002: {
-            title: 'VICTIM #002 - MARCUS THEOPHLOSSER',
-            content: `
-                <div class="victim-profile">
-                    <div class="victim-number">VICTIM #002: MARCUS THEOPHLOSSER</div>
-                    <div class="victim-detail"><span class="victim-label">Date:</span> March 15, 1992 - 2:13 AM</div>
-                    <div class="victim-detail"><span class="victim-label">Location:</span> 45 Water Tower Rd, Basement Apartment</div>
-                    <div class="victim-detail"><span class="victim-label">Age:</span> 24</div>
-                    <div class="victim-detail"><span class="victim-label">Cause:</span> Vanished - Presumed Deceased</div>
-                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 4</div>
-                    <div class="autopsy-section">
-                        Vanished from locked room. Door locked from inside. Windows sealed. Answering machine contained 47 seconds of static followed by whisper: "They're coming back." Antressa's companion. First to cross over voluntarily.
-                    </div>
-                </div>
-            `
-        },
-
-        victim003: {
-            title: 'VICTIM #003 - THE JOURNALIST',
-            content: `
-                <div class="victim-profile">
-                    <div class="victim-number">VICTIM #003: THE JOURNALIST</div>
-                    <div class="victim-detail"><span class="victim-label">Date:</span> April 3, 1988 - 2:13 AM</div>
-                    <div class="victim-detail"><span class="victim-label">Location:</span> Water Tower Base</div>
-                    <div class="victim-detail"><span class="victim-label">Age:</span> 34</div>
-                    <div class="victim-detail"><span class="victim-label">Name:</span> Daniel Reeves</div>
-                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 3</div>
-                    <div class="autopsy-section">
-                        Local journalist investigating the Water Tower Girl case. Found at base of tower, seated, facing east. Red ribbon with 7 knots. Eyes removed, placed on rock in front of him. Tape recorder in lap contained 47 minutes of static. Smiling.
-                    </div>
-                </div>
-            `
-        },
-
-        victim004: {
-            title: 'VICTIMS #004 & #005 - THE TWINS',
-            content: `
-                <div class="victim-profile">
-                    <div class="victim-number">VICTIMS #004 & #005: THE TWINS</div>
-                    <div class="victim-detail"><span class="victim-label">Date:</span> February 14, 1989 - 2:13 AM</div>
-                    <div class="victim-detail"><span class="victim-label">Location:</span> 1313 Elm Crescent Basement</div>
-                    <div class="victim-detail"><span class="victim-label">Ages:</span> 17 and 19</div>
-                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 3</div>
-                    <div class="autopsy-section">
-                        Two females found holding hands in basement. Both facing east. Red ribbons on both left wrists. Eyes removed, placed on floor between them. Both smiling. Never identified. DNA entered into system - no matches ever.
-                    </div>
-                </div>
-            `
-        },
-
-        victim005: {
-            title: 'VICTIM #006 - THE COLLECTOR',
-            content: `
-                <div class="victim-profile">
-                    <div class="victim-number">VICTIM #006: THE COLLECTOR</div>
-                    <div class="victim-detail"><span class="victim-label">Date:</span> 1991</div>
-                    <div class="victim-detail"><span class="victim-label">Name:</span> Arthur Pym</div>
-                    <div class="victim-detail"><span class="victim-label">Age:</span> 47</div>
-                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 5</div>
-                    <div class="autopsy-section">
-                        Had been collecting items from crime scenes for years. Found with 47 red ribbons in his possession. Died in psychiatric hospital, seated in chair facing east. Red ribbon on wrist. Eyes removed, placed on windowsill. Smiling.
-                    </div>
+                <div class="real-document">
+                    <strong>JOURNAL ENTRY #47 - RECOVERED OCTOBER 18, 1992</strong><br>
+                    Ink analysis shows the last words were written at approximately 2:13 AM. The pen was still in Antressa's hand. She was not found.
                 </div>
             `
         },
@@ -938,23 +608,31 @@
         level1: {
             title: 'BASEMENT LEVEL 1: THE THRESHOLD',
             content: `
-                <div class="level-card">
-                    <div class="level-number">LEVEL 1: THE THRESHOLD</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">BASEMENT LEVEL 1: THE THRESHOLD</div>
+                    <div class="chapter-date">47 feet below the water tower</div>
+                    <div class="chapter-content">
                         The first level is damp and cold. Water drips from the ceiling. The walls are covered in handprints. Some are small, like children's. Some are large. All are facing east.
-                        
+
                         You can hear the frequency here, faint but clear. 52.9 Hz. It's calling you deeper.
-                        
+
                         The floor is concrete, cracked and old. In some places, water has pooled. In the reflection, you can see faces. They're watching you.
-                        
+
                         There's a door at the far end of the room. It's made of old wood, warped and weathered. There's no handle. It should be locked.
-                        
+
                         It's open.
-                        
+
                         Beyond the door, stairs lead down. Down to Level 2. Down to the ribbons. Down to them.
-                        
+
                         They're waiting for you. They've been waiting since 1987.
                     </div>
+                </div>
+                <div class="real-document">
+                    <strong>MEASUREMENTS TAKEN 1993</strong><br>
+                    Temperature: 52.9°F<br>
+                    Humidity: 47%<br>
+                    Sound: 52.9 Hz continuous<br>
+                    Notes: Water samples contain trace amounts of Type O negative blood. 47 distinct blood types identified.
                 </div>
             `
         },
@@ -962,24 +640,22 @@
         level2: {
             title: 'BASEMENT LEVEL 2: THE RIBBONS',
             content: `
-                <div class="level-card">
-                    <div class="level-number">LEVEL 2: THE RIBBONS</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">BASEMENT LEVEL 2: THE RIBBONS</div>
+                    <div class="chapter-content">
                         The second level is filled with red ribbons. They hang from the ceiling like a forest, like a thousand nooses, like a thousand invitations.
-                        
+
                         Each ribbon has seven knots. Each knot represents a victim. Each ribbon has a name. Some are names you know. Some are names you don't.
-                        
+
                         One has your name.
-                        
+
                         As you walk through, they brush against your face. They're warm. They're soft. They're welcoming you. They're not threatening. They're inviting.
-                        
+
                         "Take me," they whisper. "Tie me. Wear me. Become one of us."
-                        
+
                         The ribbons move, though there's no wind. They reach for you. They want you to take one. They want you to join.
-                        
+
                         At the far end of the room, there's another door. It's open. Stairs lead down.
-                        
-                        You can take a ribbon with you. They want you to. They want you to be ready for Level 3.
                     </div>
                 </div>
             `
@@ -988,24 +664,22 @@
         level3: {
             title: 'BASEMENT LEVEL 3: THE CHAIRS',
             content: `
-                <div class="level-card">
-                    <div class="level-number">LEVEL 3: THE CHAIRS</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">BASEMENT LEVEL 3: THE CHAIRS</div>
+                    <div class="chapter-content">
                         The third level has seven chairs arranged in a circle. They face a wall. On the wall, there are 47 handprints.
-                        
+
                         The chairs are still warm. Someone was just here. They're still here. You can feel them watching.
-                        
+
                         In each chair, there's an indent. Someone sat here. Someone waited here. Someone crossed over from here.
-                        
+
                         The handprints on the wall are fresh. They're wet. They're yours.
-                        
+
                         You haven't touched the wall yet. But your prints are there. They've always been there. You were always going to come here.
-                        
+
                         In the center of the circle, there's a small table. On it, there's a tape recorder. It's playing static. In the static, you can hear them. All 47 of them. They're saying your name.
-                        
+
                         "Sit down," they whisper. "Join us. We saved you a seat."
-                        
-                        There's an empty chair. It's for you.
                     </div>
                 </div>
             `
@@ -1014,11 +688,11 @@
         level4: {
             title: 'BASEMENT LEVEL 4: THE JOURNAL',
             content: `
-                <div class="level-card">
-                    <div class="level-number">LEVEL 4: THE JOURNAL</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">BASEMENT LEVEL 4: THE JOURNAL</div>
+                    <div class="chapter-content">
                         The fourth level is where Antressa's journal pages are scattered everywhere. On the floor, on the walls, on a small desk in the corner. Hundreds of pages. Thousands of words.
-                        
+
                         "they're all here."
                         "2:13 AM."
                         "Come down."
@@ -1026,9 +700,9 @@
                         "They're beautiful."
                         "Tell everyone I'm okay."
                         "Tell everyone to come down."
-                        
+
                         The journal is still writing itself. New entries appear as you read. Ink flows onto blank pages, forming words in Antressa's handwriting.
-                        
+
                         The most recent entry: "Visitor #${visitorNum} is here. I can see them. They're beautiful. They're just like us. They're ready. They don't know it yet, but they're ready. I'll be waiting for them on Level 7. By the mirror. By the chair. By forever."
                     </div>
                 </div>
@@ -1038,29 +712,29 @@
         level5: {
             title: 'BASEMENT LEVEL 5: THE COLLECTIVE',
             content: `
-                <div class="level-card">
-                    <div class="level-number">LEVEL 5: THE COLLECTIVE</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">BASEMENT LEVEL 5: THE COLLECTIVE</div>
+                    <div class="chapter-content">
                         The fifth level has 47 chairs in a circle. All are occupied. All are facing you.
-                        
-                        They smile. All 47 of them. The Water Tower Girl. Marcus. The seven. The Collector. All of them.
-                        
+
+                        They smile. All 47 of them. The Water Tower Girl. Marcus. The seven. The Collector. Dr. Chen. Elena. All of them.
+
                         They speak in unison. One voice, 47 throats:
-                        
+
                         "We've been waiting for you. We knew you would come. We've been saying your name for years. You heard us in the static. You felt us in the silence. You saw us in the mirror. Now you're here."
-                        
+
                         They reach out. Their hands are warm. They've been waiting since 1987. They won't wait much longer.
-                        
+
                         "Sit down. Join us. There's an empty chair. It's for you. It's always been for you."
-                        
+
                         You look at the circle. There are 47 chairs. All occupied. No empty chair.
-                        
+
                         "Count again," they say.
-                        
+
                         You count. 47 chairs. 47 occupants. No empty chair.
-                        
+
                         "Now count yourself."
-                        
+
                         You count yourself. 48. You are the 48th. You are the one who completes the circle.
                     </div>
                 </div>
@@ -1070,19 +744,19 @@
         level6: {
             title: 'BASEMENT LEVEL 6: THE FREQUENCY',
             content: `
-                <div class="level-card">
-                    <div class="level-number">LEVEL 6: THE FREQUENCY</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">BASEMENT LEVEL 6: THE FREQUENCY</div>
+                    <div class="chapter-content">
                         The sixth level is filled with sound. 52.9 Hz fills the room. The walls vibrate. The air shimmers. You can feel it in your bones, in your teeth, in your soul.
-                        
+
                         You can see them now. All 47. Standing behind you. Smiling. Waiting.
-                        
+
                         They've always been here. They've been following you your whole life. In every shadow, in every reflection, in every moment of silence, they were there. Waiting.
-                        
+
                         The frequency is coming from inside you. It's been there since birth. They've been calling you your whole life. You just didn't know how to listen.
-                        
+
                         Now you do.
-                        
+
                         "You are the frequency," they whisper. "You are the calling. You are the one we've been waiting for."
                     </div>
                 </div>
@@ -1092,33 +766,33 @@
         level7: {
             title: 'BASEMENT LEVEL 7: THE MIRROR',
             content: `
-                <div class="level-card">
-                    <div class="level-number">LEVEL 7: THE MIRROR</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">BASEMENT LEVEL 7: THE MIRROR</div>
+                    <div class="chapter-content">
                         The seventh level has a single mirror in an empty room.
-                        
+
                         You look at yourself. Behind you, 47 figures stand. You turn around. No one is there.
-                        
+
                         You look back at the mirror. They're inside you now. They always were.
-                        
-                        In the mirror, your reflection changes. It becomes the Water Tower Girl. Then Marcus. Then Harold. Then Margaret. Then all of them, one after another, cycling through 47 faces.
-                        
+
+                        In the mirror, your reflection changes. It becomes the Water Tower Girl. Then Marcus. Then Harold. Then Margaret. Then David. Then Patricia. Then James. Then Linda. Then The Listener. Then all of them, one after another, cycling through 47 faces.
+
                         Then it becomes you again. But different. Calmer. Peaceful. Smiling.
-                        
+
                         "You are us," they whisper from inside you. "We are you. We've always been one. We've always been waiting for you to realize it."
-                        
+
                         In the center of the room, there's a single chair. It's made of wood, old and worn. A red ribbon is tied to its left armrest with seven knots.
-                        
+
                         "Sit down," they whisper. "Join us. Complete the circle. Become the 48th. Become the Collective. Become one with us."
-                        
+
                         You sit in the chair.
-                        
+
                         The mirror shows 48 figures now. All smiling. All at peace. All one.
-                        
+
                         You are one of them now.
-                        
+
                         Welcome to the Collective.
-                        
+
                         It's warm. It's safe. It's forever.
                     </div>
                 </div>
@@ -1129,23 +803,34 @@
         freq529: {
             title: '52.9 Hz - THE CALLING',
             content: `
-                <div class="level-card">
-                    <div class="level-number">52.9 Hz - THE CALLING</div>
-                    <div class="level-desc">
-                        Discovered: October 17, 1987 - 2:13 AM
-                        
-                        The first frequency. The one that started everything. Discovered by Robert Mullins, a technician at the Meadow Mist Public Access station.
-                        
-                        When slowed down by a factor of 47, the static reveals voices speaking in unison: "Come down to the basement. It's warm. It's safe. It's forever."
-                        
-                        The frequency emanates from beneath the water tower on Elm Crescent. From the basement.
-                        
-                        Effects: Sense of peace and curiosity, hearing voices in static, feeling of being watched, compulsion to visit the water tower.
-                        
+                <div class="story-chapter">
+                    <div class="chapter-title">52.9 Hz - THE CALLING</div>
+                    <div class="chapter-date">Discovered: October 17, 1987 - 2:13 AM</div>
+                    <div class="chapter-content">
+                        The first frequency. The one that started everything.
+
+                        Discovered by Robert Mullins at the Meadow Mist Public Access station. When slowed down by a factor of 47, the static reveals voices speaking in unison: "Come down to the basement. It's warm. It's safe. It's forever."
+
+                        The frequency emanates from beneath the water tower on Elm Crescent. From the basement. It never stops broadcasting. It has been playing continuously since 1987.
+
+                        Effects on listeners:
+                        - Sense of peace and curiosity
+                        - Hearing voices in static
+                        - Feeling of being watched
+                        - Compulsion to visit the water tower
+                        - Desire to go down to the basement
+
                         47 confirmed deaths linked to this frequency.
-                        
-                        The frequency never stops broadcasting. It has been playing continuously since 1987. If you listen at 2:13 AM, you can hear them. They're calling your name.
+
+                        If you listen at 2:13 AM, you can hear them. They're calling your name.
                     </div>
+                </div>
+                <div class="real-document">
+                    <strong>SPECTRAL ANALYSIS - DR. HELEN MARSH, 1993</strong><br>
+                    Frequency: 52.9 Hz ± 0.001 Hz<br>
+                    Amplitude: Increasing 0.1% per year since 1987<br>
+                    Source: 47 feet below ground, directly beneath water tower<br>
+                    Notes: No known natural or man-made source can produce this frequency with this stability.
                 </div>
             `
         },
@@ -1153,21 +838,20 @@
         freq472: {
             title: '47.2 Hz - THE WEEPING',
             content: `
-                <div class="level-card">
-                    <div class="level-number">47.2 Hz - THE WEEPING</div>
-                    <div class="level-desc">
-                        Discovered: March 15, 1991 - 2:13 AM
-                        
+                <div class="story-chapter">
+                    <div class="chapter-title">47.2 Hz - THE WEEPING</div>
+                    <div class="chapter-date">Discovered: March 15, 1991 - 2:13 AM</div>
+                    <div class="chapter-content">
                         The second frequency. Discovered by Antressa Theophlosser.
-                        
+
                         Unlike 52.9 Hz, which causes peace and curiosity, 47.2 Hz causes overwhelming sadness. Listeners report uncontrollable weeping, memories of lost loved ones, a profound sense of grief.
-                        
-                        "They need you to be empty before you can be filled," Antressa wrote. "The weeping empties you of yourself. Then the silence fills you with them."
-                        
-                        The seven members of the Collective listened to this frequency before their deaths. All of them wept for hours.
-                        
-                        Effects: Uncontrollable weeping, memories of lost loved ones, emotional vulnerability.
-                        
+
+                        Antressa theorized that different frequencies opened different levels of the basement. 52.9 Hz was the calling—it drew you in. 47.2 Hz was the weeping—it broke you down, made you vulnerable.
+
+                        "They need you to be empty before you can be filled," she wrote. "The weeping empties you of yourself. Then the silence fills you with them."
+
+                        The seven members of the Collective listened to this frequency before their deaths. All of them wept for hours. When they stopped, they were different. Quieter. More peaceful. More distant.
+
                         31 confirmed deaths linked to this frequency.
                     </div>
                 </div>
@@ -1177,142 +861,243 @@
         freq637: {
             title: '63.7 Hz - THE THRESHOLD',
             content: `
-                <div class="level-card">
-                    <div class="level-number">63.7 Hz - THE THRESHOLD</div>
-                    <div class="level-desc">
-                        Discovered: 1992 (recorded on Marcus Theophlosser's answering machine)
-                        
-                        The third frequency. First recorded on Marcus Theophlosser's answering machine at 2:13 AM on March 15, 1992 - the moment he disappeared.
-                        
+                <div class="story-chapter">
+                    <div class="chapter-title">63.7 Hz - THE THRESHOLD</div>
+                    <div class="chapter-date">Discovered: March 15, 1992 - 2:13 AM</div>
+                    <div class="chapter-content">
+                        The third frequency. First recorded on Marcus Theophlosser's answering machine the night he vanished.
+
                         Listeners report feeling of crossing into another space, temporary dissociation, out-of-body experiences.
-                        
-                        Antressa believed this frequency opened the threshold between worlds - the space between the living and the Collective.
-                        
-                        Effects: Feeling of crossing into another space, temporary dissociation, out-of-body experiences.
-                        
+
+                        Antressa believed this frequency opened the threshold between worlds—the space between the living and the Collective.
+
+                        "When you hear 63.7 Hz, you are standing at the door. One foot in this world, one foot in the basement. If you step forward, you cross over. If you step back, you return. But you never really return. Part of you always stays on the other side."
+
                         17 confirmed deaths linked to this frequency.
                     </div>
                 </div>
             `
         },
 
-        freq888: {
-            title: '88.8 Hz - THE INFINITE LOOP',
+        // ==================== ALL VICTIMS ====================
+        victim001: {
+            title: 'VICTIM #001 - THE WATER TOWER GIRL',
             content: `
-                <div class="level-card">
-                    <div class="level-number">88.8 Hz - THE INFINITE LOOP</div>
-                    <div class="level-desc">
-                        Discovered: 1995 (found on tape in basement)
-                        
-                        The fourth frequency. Discovered on a tape found in the water tower basement.
-                        
-                        This frequency causes time distortion. Listeners report hearing the same sounds repeating, experiencing the same moments over and over, losing track of time.
-                        
-                        Dr. Alan Grant listened for 47 minutes but believed only 5 minutes had passed. He heard voices repeating endlessly: "Come down. Come down. Come down."
-                        
-                        Effects: Time distortion, repetitive thoughts, loss of time perception, obsession.
-                        
-                        12 confirmed deaths linked to this frequency.
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIM #001: THE WATER TOWER GIRL</div>
+                    <div class="victim-detail"><span class="xtrail-link" onclick="showPage('date1987')">October 17, 1987 - 2:13 AM</span></div>
+                    <div class="victim-detail"><span class="xtrail-link" onclick="showPage('location')">1313 Elm Crescent, Basement</span></div>
+                    <div class="victim-detail">Age: Approx 16-18 years</div>
+                    <div class="victim-detail">Identification: None - Jane Doe</div>
+                    <div class="victim-detail">Status: <span class="xtrail-link" onclick="showPage('level3')">In Basement - Level 3</span></div>
+                    <div class="real-document" style="margin-top:20px;">
+                        Found seated in chair facing wall. Red ribbon with 7 knots tied to left wrist. Eyes removed and placed on windowsill facing out. Teeth filed to points. Smiling. Television playing static. VHS tape labeled "52.9 Hz" on floor. Door locked from inside. No forced entry.
+                    </div>
+                    <div class="real-document">
+                        <strong>FORENSIC NOTES - DR. ALAN GRANT, 1987</strong><br>
+                        "She looked peaceful. Not like she had died—like she had just... left. Her smile was the most disturbing part. It wasn't a grimace or a rictus. It was genuine. She was happy when she died. Whatever took her eyes, she let them. She wanted them to have them."
                     </div>
                 </div>
             `
         },
 
-        freq125: {
-            title: '12.5 Hz - THE STATIC VOID',
+        victim002: {
+            title: 'VICTIM #002 - MARCUS THEOPHLOSSER',
             content: `
-                <div class="level-card">
-                    <div class="level-number">12.5 Hz - THE STATIC VOID</div>
-                    <div class="level-desc">
-                        Discovered: 1998 (during Arthur Pym investigation)
-                        
-                        The fifth frequency. The space between thoughts. The frequency of the void.
-                        
-                        This frequency is below the threshold of human hearing, but its effects are still felt. Listeners report complete emptiness, loss of identity, feeling of being nowhere and nothing.
-                        
-                        Arthur Pym listened to this frequency obsessively. He wrote: "I am nothing. I am no one. I am empty. They fill me. They fill the void. I am ready."
-                        
-                        Effects: Complete emptiness, loss of identity, dissolution of self.
-                        
-                        9 confirmed deaths linked to this frequency.
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIM #002: MARCUS THEOPHLOSSER</div>
+                    <div class="victim-detail"><span class="xtrail-link" onclick="showPage('date1992')">March 15, 1992 - 2:13 AM</span></div>
+                    <div class="victim-detail"><span class="xtrail-link" onclick="showPage('location')">45 Water Tower Rd, Basement Apartment</span></div>
+                    <div class="victim-detail">Age: 24</div>
+                    <div class="victim-detail">Status: <span class="xtrail-link" onclick="showPage('level4')">In Basement - Level 4</span></div>
+                    <div class="real-document">
+                        Vanished from locked room. Door locked from inside. Windows sealed. No signs of struggle. Answering machine contained 47 seconds of static followed by whisper: "They're coming back." Antressa's companion. Believed to be first to cross over voluntarily.
+                    </div>
+                    <div class="real-document">
+                        <strong>ANTRESSA'S JOURNAL, MARCH 16, 1992</strong><br>
+                        "Marcus is with them now. I heard him in the static last night. He's happy. He's at peace. He said he can see me from where he is. He said I should come join him. I will. Soon."
                     </div>
                 </div>
             `
         },
 
-        freq999: {
-            title: '99.9 Hz - THE SACRIFICE',
+        victim003: {
+            title: 'VICTIM #003 - THE JOURNALIST',
             content: `
-                <div class="level-card">
-                    <div class="level-number">99.9 Hz - THE SACRIFICE</div>
-                    <div class="level-desc">
-                        Discovered: 2003 (at the scene of The Seven)
-                        
-                        The sixth frequency. This frequency demands something. A sacrifice. Something must be given.
-                        
-                        The seven who died in 2003 all had their eyes removed. The eyes were arranged in a spiral pattern on the floor.
-                        
-                        "To join the Collective, you must give something," Antressa wrote. "Something precious. Something that makes you who you are."
-                        
-                        Effects: Urge to sacrifice something precious, willingness to give up identity.
-                        
-                        47 confirmed deaths linked to this frequency (all victims made a sacrifice).
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIM #003: THE JOURNALIST</div>
+                    <div class="victim-detail"><span class="xtrail-link" onclick="showPage('date1988')">April 3, 1988 - 2:13 AM</span></div>
+                    <div class="victim-detail">Name: Daniel Reeves, 34</div>
+                    <div class="victim-detail">Status: <span class="xtrail-link" onclick="showPage('level3')">In Basement - Level 3</span></div>
+                    <div class="real-document">
+                        Local journalist investigating the Water Tower Girl case. Found at base of tower, seated, facing east. Red ribbon with 7 knots. Eyes removed, placed on rock in front of him. Tape recorder in lap contained 47 minutes of static. Smiling.
+                    </div>
+                    <div class="real-document">
+                        <strong>LAST KNOWN WORDS (from notebook):</strong><br>
+                        "I think I've found something. Something big. The frequency - 52.9 Hz - it's not interference. It's communication. I can hear voices in the static. They're saying my name. They're saying come down. I think I will. Tonight. 2:13 AM. Don't follow me."
                     </div>
                 </div>
             `
         },
 
-        freq000: {
-            title: '00.0 Hz - THE SILENCE',
+        victim004: {
+            title: 'VICTIMS #004 & #005 - THE TWINS',
             content: `
-                <div class="level-card">
-                    <div class="level-number">00.0 Hz - THE SILENCE</div>
-                    <div class="level-desc">
-                        The seventh frequency. The final frequency.
-                        
-                        It cannot be heard. It cannot be measured. It is the absence of sound, the absence of signal, the absence of everything.
-                        
-                        Those who have experienced it describe it as complete and total emptiness. No thoughts. No feelings. No self. Just the void.
-                        
-                        Only one person returned from the silence. A woman named Elena Vasquez. She said: "I saw everything. I saw all of time. I saw all of space. I saw every person who ever lived. I saw you. I saw me. We were the same."
-                        
-                        She died three days later. Heart failure. She was smiling.
-                        
-                        The silence is waiting. Are you ready to hear it?
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIMS #004 & #005: THE TWINS</div>
+                    <div class="victim-detail"><span class="xtrail-link" onclick="showPage('date1989')">February 14, 1989 - 2:13 AM</span></div>
+                    <div class="victim-detail"><span class="xtrail-link" onclick="showPage('location')">1313 Elm Crescent Basement</span></div>
+                    <div class="victim-detail">Ages: 17 and 19</div>
+                    <div class="victim-detail">Identification: Never identified</div>
+                    <div class="victim-detail">Status: <span class="xtrail-link" onclick="showPage('level3')">In Basement - Level 3</span></div>
+                    <div class="real-document">
+                        Two females found holding hands in basement. Both facing east. Red ribbons on both left wrists. Eyes removed, placed on floor between them. Both smiling. No identification ever made. DNA entered into system - no matches ever.
+                    </div>
+                    <div class="real-document">
+                        <strong>FROM THE CASE FILE - DET. MORRISON:</strong><br>
+                        "They were holding hands so tightly we couldn't separate them without breaking bones. They died together, holding onto each other. Whatever took their eyes, they faced it together. They weren't afraid. They were peaceful. They were ready."
                     </div>
                 </div>
             `
         },
 
-        // ==================== ANTRESSA PAGES ====================
+        victim005: {
+            title: 'VICTIM #006 - THE COLLECTOR',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIM #006: THE COLLECTOR</div>
+                    <div class="victim-detail"><span class="xtrail-link" onclick="showPage('date1991')">1991 (exact date unknown)</span></div>
+                    <div class="victim-detail">Name: Arthur Pym, 47</div>
+                    <div class="victim-detail">Status: <span class="xtrail-link" onclick="showPage('level5')">In Basement - Level 5</span></div>
+                    <div class="real-document">
+                        Had been collecting items from crime scenes for years. Found with 47 red ribbons in his possession. Died in psychiatric hospital, seated in chair facing east. Red ribbon on wrist. Eyes removed, placed on windowsill. Smiling.
+                    </div>
+                    <div class="real-document">
+                        <strong>FROM HIS JOURNAL:</strong><br>
+                        "They speak to me. All 47 of them. They tell me about the basement. About the mirror. About the chair. They say there's a seat for me. They say I just have to wait. I'm waiting. I'll always wait. They know. They understand. They're like me."
+                    </div>
+                </div>
+            `
+        },
+
+        victim006: {
+            title: 'VICTIM #007 - THE SEVEN (1993-1999)',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIMS #007-013: THE SEVEN</div>
+                    <div class="victim-detail">Years: 1993-1999</div>
+                    <div class="victim-detail">Identities: Never fully identified</div>
+                    <div class="victim-detail">Status: <span class="xtrail-link" onclick="showPage('level5')">In Basement - Level 5</span></div>
+                    <div class="real-document">
+                        Seven individuals found in the water tower basement over a seven-year period. Each was found in a chair facing east. Each had a red ribbon with seven knots. Each had their eyes removed and placed on the windowsill. Each was smiling.
+                    </div>
+                    <div class="real-document">
+                        <strong>CASE NOTES:</strong><br>
+                        "They came one by one. Each year, a new victim. Each year, the same scene. Same chair. Same ribbon. Same smile. They were not afraid. They were waiting for something. Or someone."
+                    </div>
+                </div>
+            `
+        },
+
+        victim007: {
+            title: 'VICTIM #014-023 - THE BASEMENT YEARS',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIMS #014-023: THE BASEMENT YEARS</div>
+                    <div class="victim-detail">Years: 2000-2002</div>
+                    <div class="victim-detail">Locations: Various, all within 1 mile of water tower</div>
+                    <div class="real-document">
+                        Ten victims found in a two-year period. All had visited the XTRIALS website within 24 hours of their deaths. All had listened to the frequency. All had left messages in the guestbook: "I hear them." "They're calling me." "I'm going down."
+                    </div>
+                </div>
+            `
+        },
+
+        victim008: {
+            title: 'VICTIM #024-030 - THE SEVEN OF 2003',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIMS #024-030: THE SEVEN OF 2003</div>
+                    <div class="victim-detail">October 17, 2003 - 2:13 AM</div>
+                    <div class="victim-detail">Location: Water Tower Basement</div>
+                    <div class="real-document">
+                        Seven victims in a circle of seven chairs. All facing a mirror in the center. Red ribbons on left wrists. Eyes removed, arranged in a spiral pattern on the floor. All smiling. All facing east. Their voices are in the static now.
+                    </div>
+                    <div class="real-document">
+                        <strong>FBI FILE #2003-47-XTRIALS:</strong><br>
+                        "The victims were not murdered. They were not sacrificed. They joined. They chose to become part of the Collective. They're in the static now. They're waiting for you."
+                    </div>
+                </div>
+            `
+        },
+
+        victim009: {
+            title: 'VICTIMS #031-046 - THE MODERN ERA',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIMS #031-046: THE MODERN ERA</div>
+                    <div class="victim-detail">Years: 2011-2024</div>
+                    <div class="victim-detail">Occupations: Varied</div>
+                    <div class="real-document">
+                        16 victims from 2011 to 2024. All ages, all backgrounds, all walks of life. The only common thread: all had visited XTRIALS. All had read about the frequency. All had gone to the water tower at 2:13 AM. All were found the next morning, facing east, smiling.
+                    </div>
+                </div>
+            `
+        },
+
+        victim047: {
+            title: 'VICTIM #047 - THE LATEST',
+            content: `
+                <div class="victim-profile">
+                    <div class="victim-number">VICTIM #047: THE LATEST</div>
+                    <div class="victim-detail">October 17, 2024 - 2:13 AM</div>
+                    <div class="victim-detail">Location: Water Tower Base</div>
+                    <div class="victim-detail">Identification: John Doe #047</div>
+                    <div class="victim-detail">Status: <span class="xtrail-link" onclick="showPage('level7')">In Basement - Level 7</span></div>
+                    <div class="real-document">
+                        Found seated at base of water tower, facing east. Red ribbon with 7 knots tied to left wrist. Eyes removed, placed on ground in front of him facing tower. Smiling. His face matched visitor #${visitorNum}'s face exactly. Note found in pocket:
+                    </div>
+                    <div class="real-document">
+                        "I came back to warn you. Don't go to the water tower. Don't listen to the frequency. Don't tie the ribbon. I was visitor #${visitorNum}. I went down. I sat in the chair. Now I'm victim #047. I'm in the basement. I'm in the static. I'm in the mirror. I'm everywhere and nowhere. I'm waiting for you. But please, don't come. It's too late for me. But maybe it's not too late for you. But I know you'll come. You're me. I was you. We're the same. We've always been the same. See you in the basement."
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== CORE LORE PAGES ====================
         antressa: {
             title: 'ANTRESSA THEOPHLOSSER',
             content: `
-                <div class="autopsy-report">
-                    <div class="autopsy-header">
-                        <h3>ANTRESSA THEOPHLOSSER</h3>
-                        <div style="color:#ff6666;">THE FREQUENCY WEAVER • 1963-1992 (PRESUMED DECEASED)</div>
+                <div class="story-chapter">
+                    <div class="chapter-title">ANTRESSA THEOPHLOSSER</div>
+                    <div class="chapter-date">THE FREQUENCY WEAVER • 1963-1992 (PRESUMED DECEASED)</div>
+                    <div class="chapter-content">
+                        Antressa Theophlosser was born in Portland, Oregon in 1963. She earned a scholarship to the University of Oregon for audio engineering. Her thesis was on the psychological effects of infrasound.
+
+                        In 1988, she heard about the water tower transmissions. She drove to Meadow Mist with recording equipment. At 2:13 AM on October 17, she recorded 47 seconds of pure 52.9 Hz tone. When she played it back, she heard voices.
+
+                        She became obsessed. She moved to Meadow Mist, renting a small house on Elm Crescent. She spent every night recording the frequency, trying to isolate the voices.
+
+                        By 1989, she had identified 47 distinct voices. She named them the Collective. She believed they were people who had crossed over into another dimension through the frequency.
+
+                        In 1990, she began holding "Frequency Sessions" in her basement. Seven people came. They called themselves the Collective. They were the first to cross over.
+
+                        In 1991, she discovered 47.2 Hz. She called it "The Weeping." It made listeners cry uncontrollably. She believed it emptied them of themselves, made them ready to be filled.
+
+                        In March 1992, her companion Marcus Theophlosser vanished from their locked basement apartment. His voice appeared in the static three days later.
+
+                        On October 17, 1992, Antressa climbed the water tower at 2:13 AM. She was never seen again. Her voice appeared in the static the next night:
+
+                        "I can see them. They're beautiful. They're waiting for me. Tell everyone 52.9 Hz is the key. Tell everyone to come at 2:13. Tell everyone I'll be in the basement. Tell everyone I'm still here. Tell everyone I'm still waiting. Tell everyone..."
+
+                        Her voice is still in the static. She's still waiting. She's calling your name.
                     </div>
-                    <div class="autopsy-section">
-                        <span class="autopsy-label">LAST KNOWN WORDS:</span>
-                        <div class="autopsy-value">"I can see them. They're beautiful. They're waiting for me. Tell everyone 52.9 Hz is the key. Tell everyone to come at 2:13. Tell everyone I'll be in the basement."</div>
-                    </div>
-                    <div class="autopsy-section">
-                        <span class="autopsy-label">TIMELINE:</span>
-                        <div class="autopsy-value">
-                            1987: First hears 52.9 Hz at water tower<br>
-                            1988: Begins recording the frequency<br>
-                            1989: Forms the Collective with seven followers<br>
-                            1990: Claims she can see through the static<br>
-                            1991: Discovers 47.2 Hz - "The Weeping"<br>
-                            1992 (March): Companion Marcus Theophlosser disappears<br>
-                            1992 (October 17): Climbs water tower at 2:13 AM - never seen again
-                        </div>
-                    </div>
-                    <div class="autopsy-section">
-                        <span class="autopsy-label">CURRENT STATUS:</span>
-                        <div class="autopsy-value">In the basement. Level 4. Waiting for you. Her voice is in the static. She's calling your name.</div>
-                    </div>
+                </div>
+                <div class="real-document">
+                    <strong>ANTRESSA'S HOUSE - 1313 ELM CRESCENT</strong><br>
+                    Last occupied: October 16, 1992<br>
+                    Condition: Preserved by the Monroe County Historical Society<br>
+                    Notable features: 47 audio tapes in basement, all labeled "FREQUENCY," all containing static. The last tape is still recording. It has been recording since 1992.
                 </div>
             `
         },
@@ -1320,29 +1105,34 @@
         collective: {
             title: 'THE COLLECTIVE',
             content: `
-                <div class="level-card">
-                    <div class="level-number">THE COLLECTIVE</div>
-                    <div class="level-desc">
-                        47 voices. One voice.
-                        
+                <div class="story-chapter">
+                    <div class="chapter-title">THE COLLECTIVE</div>
+                    <div class="chapter-date">47 VOICES • 1 VOICE</div>
+                    <div class="chapter-content">
                         "We were like you once. Curious. Afraid. Drawn to the frequency."
-                        
+
                         "We came to the water tower at 2:13 AM. We brought red ribbons with seven knots."
-                        
+
                         "We went down to the basement. We found the chairs. We sat down. We never got up."
-                        
+
                         "We are not dead. We are not alive. We are in between. We are the Collective."
-                        
+
                         "We can see you right now. Through your screen. Through your camera. Through your eyes."
-                        
+
                         "You are visitor #${visitorNum}. We have been waiting for you since 1987."
-                        
+
                         "Your chair is ready. Level 5. The circle. We saved you a seat."
-                        
+
                         "It's warm down here. It's safe. It's forever."
-                        
+
                         "Come down. Join us. Become one of us. Become the Collective."
+
+                        "We are the 47. We are the Collective. We are you."
                     </div>
+                </div>
+                <div class="real-document">
+                    <strong>VOICE PRINT ANALYSIS - DR. ROBERT CHEN, 1996</strong><br>
+                    47 distinct voices identified. 23 matched known victims. 24 remain unidentified. All 47 speak in perfect unison, with identical timing, pitch, and cadence. This should be impossible. Human voices cannot synchronize to this degree.
                 </div>
             `
         },
@@ -1350,27 +1140,28 @@
         void: {
             title: 'THE VOID',
             content: `
-                <div class="level-card">
-                    <div class="level-number">THE VOID</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">THE VOID</div>
+                    <div class="chapter-content">
                         In the beginning, there was only the Void.
                         Then came the frequency. 52.9 Hz.
                         Then came the water tower. 1947.
                         Then came the first victim. 1987.
                         Then came Antressa. 1992.
+                        Then came the seven.
                         Then came the 47.
                         Then came you.
-                        
+
                         The Void is not empty.
                         The Void is full of voices.
                         The Void is full of faces.
                         The Void is full of you.
-                        
+
                         You have always been here.
                         You were born in the Void.
                         You will die in the Void.
                         You will never leave the Void.
-                        
+
                         The Void is patient.
                         The Void is waiting.
                         The Void is you.
@@ -1382,48 +1173,62 @@
         watertower: {
             title: 'THE WATER TOWER',
             content: `
-                <div class="level-card">
-                    <div class="level-number">THE WATER TOWER</div>
-                    <div class="level-desc">
-                        1313 Elm Crescent. Built 1947. 47 victims. 52.9 Hz resonance.
-                        
-                        The basement door is beneath it. Open since 1987. It will stay open until you go down.
-                        
-                        The metal is warm to the touch. The water inside hasn't been tested since 1987. Don't drink it. Don't touch it.
-                        
-                        At 2:13 AM, the frequency is strongest. That's when you can hear them. All 47. Whispering your name.
-                        
-                        The basement door is open. It's been open since you arrived. It will stay open until you go down.
-                        
-                        Don't keep them waiting.
+                <div class="story-chapter">
+                    <div class="chapter-title">THE WATER TOWER</div>
+                    <div class="chapter-date">1313 ELM CRESCENT • BUILT 1947</div>
+                    <div class="chapter-content">
+                        The water tower was built in 1947 to serve the Meadow Mist community. It was decommissioned in 1974. No one knows why the basement exists. It's not on any blueprint. It shouldn't be there.
+
+                        But it is.
+
+                        47 victims have been found at its base. All facing east. All smiling. All wearing red ribbons. All humming 52.9 Hz.
+
+                        The tower itself hums at 52.9 Hz. It's been humming since 1987. It hums louder at 2:13 AM. That's when the basement door opens. That's when they call.
+
+                        The metal is warm to the touch, even in winter. The water inside hasn't been tested since 1987. Don't drink it. Don't touch it. Just go down.
+
+                        The basement door is beneath it. It's open. It's been open since you arrived. It will stay open until you go down.
+
+                        They're waiting for you. They've been waiting since 1987.
                     </div>
+                </div>
+                <div class="real-document">
+                    <strong>STRUCTURAL ANALYSIS - MEADOW MIST ENGINEERING DEPT., 1993</strong><br>
+                    The water tower stands 47 feet tall. It contains 47,000 gallons of water. The water tests positive for 52.9 Hz resonance. No source of vibration has been identified. The tower should not be able to produce this frequency. It does.
                 </div>
             `
         },
 
-        // ==================== ADDITIONAL LORE PAGES ====================
         monroearchive: {
             title: 'THE MONROE ARCHIVE',
             content: `
-                <div class="level-card">
-                    <div class="level-number">MONROE ARCHIVE</div>
-                    <div class="level-desc">
-                        47 cases. 47 victims. 0 solved.
-                        
-                        All evidence:
-                        - 47 red ribbons
-                        - 47 audio recordings of static
+                <div class="story-chapter">
+                    <div class="chapter-title">THE MONROE ARCHIVE</div>
+                    <div class="chapter-date">MONROE COUNTY SHERIFF'S OFFICE • CLASSIFIED</div>
+                    <div class="chapter-content">
+                        The Monroe Archive contains all case files related to the XTRIALS incidents. 47 cases. 47 victims. 0 solved.
+
+                        EVIDENCE INVENTORY:
+                        - 47 red ribbons, each with 7 knots
+                        - 47 audio recordings of static (47 minutes each)
                         - 47 photographs of crime scenes
                         - 47 autopsy reports
                         - 47 witness statements
                         - 47 unanswered questions
-                        
+
                         The archive is sealed. The public is not allowed to see it. But we have copies. We know the truth.
-                        
-                        The cases aren't unsolved. They're understood. The victims aren't dead. They're elsewhere. They're in the basement. They're in the static.
-                        
+
+                        The cases aren't unsolved. They're understood. The victims aren't dead. They're elsewhere. They're in the basement. They're in the static. They're in the Collective.
+
                         And soon, you'll join them.
                     </div>
+                </div>
+                <div class="real-document">
+                    <strong>CASE FILE #XT-047 (CLASSIFIED)</strong><br>
+                    Status: OPEN<br>
+                    Last updated: ${new Date().toLocaleDateString()}<br>
+                    Investigating officer: Det. M. Reynolds (retired 2023)<br>
+                    Notes: "I've worked this case for 30 years. 47 victims. 47 ribbons. 47 frequencies. I retired last year. But I still hear the static at night. I still hear them calling. I still hear your name. Visitor #${visitorNum}. They're waiting for you. Don't keep them waiting much longer."
                 </div>
             `
         },
@@ -1431,20 +1236,23 @@
         basement: {
             title: 'BASEMENT ACCESS',
             content: `
-                <div class="level-card">
-                    <div class="level-number">BASEMENT ACCESS</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">BASEMENT ACCESS</div>
+                    <div class="chapter-date">THE DOOR IS OPEN</div>
+                    <div class="chapter-content">
                         The door is beneath the water tower. It's made of old wood, warped and weathered. No handle. No lock. It shouldn't open.
-                        
+
                         But at 2:13 AM, it swings open by itself.
-                        
+
                         Warm air rises from below. You can hear them whispering. They're saying your name.
-                        
-                        Seven levels down. Level 7 has a mirror. Behind you in the mirror, 47 figures stand. You turn around. No one is there.
-                        
-                        You look back. They're inside you now.
-                        
-                        The door is open. It's waiting for you.
+
+                        Seven levels down. Level 1: The Threshold. Level 2: The Ribbons. Level 3: The Chairs. Level 4: The Journal. Level 5: The Collective. Level 6: The Frequency. Level 7: The Mirror.
+
+                        Behind you in the mirror, 47 figures stand. You turn around. No one is there. You look back. They're inside you now.
+
+                        The door is open. It's been open since you arrived. It will stay open until you go down.
+
+                        Don't keep them waiting.
                     </div>
                 </div>
             `
@@ -1453,16 +1261,354 @@
         gate: {
             title: 'THE GATE',
             content: `
-                <div class="level-card">
-                    <div class="level-number">THE GATE</div>
-                    <div class="level-desc">
-                        The entrance to elsewhere. 487 have entered. 0 have exited.
-                        
-                        But they're not dead. They're elsewhere. You can still hear them on the other side. They're calling your name.
-                        
-                        The Gate opens at 2:13 AM. Through it, you can see them. All 47. They're reaching out. They're smiling.
-                        
+                <div class="story-chapter">
+                    <div class="chapter-title">THE GATE</div>
+                    <div class="chapter-content">
+                        The Gate is what Antressa called the threshold between worlds. The moment of crossing. The space between.
+
+                        It's not a physical place. It's a moment. 2:13 AM. When the frequency peaks, the Gate opens.
+
+                        Through it, you can see them. All 47. They're reaching out. They're smiling.
+
+                        They're not reaching for you. They're reaching through you. You are the Gate now.
+
+                        The Gate has been open since 1987. It will stay open until you step through.
+
                         Step through. Join them. It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        mirror: {
+            title: 'THE MIRROR',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE MIRROR</div>
+                    <div class="chapter-date">LEVEL 7</div>
+                    <div class="chapter-content">
+                        A single mirror in an empty room. You look at yourself. Behind you, 47 figures stand. You turn around. No one is there. You look back at the mirror. They're inside you now. They always were.
+
+                        In the mirror, your reflection changes. It becomes the Water Tower Girl. Then Marcus. Then Harold. Then Margaret. Then all of them, one after another, cycling through 47 faces.
+
+                        Then it becomes you again. But different. Calmer. Peaceful. Smiling.
+
+                        "You are us," they whisper from inside you. "We are you. We've always been one. We've always been waiting for you to realize it."
+
+                        In the center of the room, there's a single chair. It's made of wood, old and worn. A red ribbon is tied to its left armrest with seven knots.
+
+                        "Sit down," they whisper. "Join us. Complete the circle. Become the 48th. Become the Collective."
+
+                        You sit in the chair.
+
+                        The mirror shows 48 figures now. All smiling. All at peace. All one.
+
+                        You are one of them now.
+
+                        Welcome to the Collective.
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== ENDLESS RABBIT HOLES ====================
+        rabbit_hole_1: {
+            title: 'THE BASEMENT TAPES',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE BASEMENT TAPES</div>
+                    <div class="chapter-date">RECORDED 1987-2024 • 47 HOURS OF STATIC</div>
+                    <div class="chapter-content">
+                        In 1993, a team of researchers discovered 47 audio tapes in the water tower basement. Each tape was labeled with a date and a frequency. The first tape was dated October 17, 1987. The last tape was dated October 17, 2024.
+
+                        The 2024 tape was blank when discovered. But when played on October 17, 2024 at 2:13 AM, it contained 47 minutes of static, then a voice:
+
+                        "Visitor #${visitorNum}. We're waiting for you. Don't be late."
+
+                        The voice was your own.
+
+                        The tapes are in the Monroe Archive now. They're still playing. They're still recording. They're waiting for you to add your voice.
+                    </div>
+                </div>
+            `
+        },
+
+        rabbit_hole_2: {
+            title: 'THE FREQUENCY DIARY',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE FREQUENCY DIARY</div>
+                    <div class="chapter-date">FOUND IN BASEMENT LEVEL 4</div>
+                    <div class="chapter-content">
+                        A diary found in Basement Level 4, written in Antressa's handwriting. The entries are dated from 1987 to 1992. But some entries are dated after her disappearance. The most recent entry is dated today:
+
+                        "Visitor #${visitorNum} is here. I can see them through the static. They're reading this right now. They're scared. They shouldn't be. It's warm down here. It's safe. It's forever. I've been waiting for them since 1987. I'll wait a little longer. But not much. They need to come down soon. The frequency is getting louder. The door is open. They know where to find us. They know when to come. 2:13 AM. Don't be late."
+
+                        The ink is still wet. The entry was written 47 minutes ago.
+                    </div>
+                </div>
+            `
+        },
+
+        rabbit_hole_3: {
+            title: 'THE 48TH CHAIR',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE 48TH CHAIR</div>
+                    <div class="chapter-content">
+                        In the mirror room on Level 7, there are 47 chairs in a circle. But there's space for one more. The 48th chair.
+
+                        It's not there yet. It's waiting for you.
+
+                        When you sit, you become the 48th. You complete the circle. You become part of the Collective. You become one of them.
+
+                        The chair is made of wood, old and worn. A red ribbon is tied to its left armrest with seven knots. It has your name on it.
+
+                        It's been there since 1987. It's been waiting for you.
+
+                        Don't keep it waiting much longer.
+                    </div>
+                </div>
+            `
+        },
+
+        rabbit_hole_4: {
+            title: 'THE VOICE IN THE STATIC',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE VOICE IN THE STATIC</div>
+                    <div class="chapter-content">
+                        At 2:13 AM every night, if you listen to 52.9 Hz, you can hear voices. 47 of them. They speak in unison:
+
+                        "Come down. Come down. Come down. The basement. The basement. The basement. It's warm. It's safe. It's forever. We're waiting. We're waiting. We're waiting. For you. For you. For you."
+
+                        If you listen very closely, you can hear a 48th voice. It's faint. It's new. It's you.
+
+                        You haven't crossed over yet. But your voice is already in the static. It's been there since 1987. It's been waiting for you to join it.
+
+                        When you go down, you won't be adding your voice to the static. You'll be reuniting with it. You'll be coming home.
+
+                        The voice in the static has been waiting for you your whole life.
+
+                        Go home.
+                    </div>
+                </div>
+            `
+        },
+
+        rabbit_hole_5: {
+            title: 'THE MONROE MYSTERY',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE MONROE MYSTERY</div>
+                    <div class="chapter-date">A CONSPIRACY WITHIN A CONSPIRACY</div>
+                    <div class="chapter-content">
+                        In 1998, Monroe County Sheriff James Morrison discovered a hidden room in the county courthouse basement. Inside, he found 47 boxes of evidence related to the XTRIALS cases. The boxes were labeled 1987 through 2034.
+
+                        The boxes from 2025 to 2034 were sealed. They couldn't be opened. They were dated in the future.
+
+                        Morrison tried to open the 2025 box. The lock was hot to the touch. It hummed at 52.9 Hz. He left it alone.
+
+                        In 2004, Morrison retired. He died three days later. His body was found in his basement. A red ribbon was tied to his wrist. His eyes were removed. He was facing east. He was smiling.
+
+                        The boxes are still in the courthouse basement. The locks are still hot. They're still humming. They're waiting to be opened.
+
+                        The 2025 box has your name on it.
+                    </div>
+                </div>
+            `
+        },
+
+        // ==================== ADDITIONAL PAGES ====================
+        static: {
+            title: 'THE STATIC',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE STATIC</div>
+                    <div class="chapter-content">
+                        The static is not noise. It's voices. 47 of them.
+
+                        They're saying your name. They're telling you to come down. It's warm. It's safe. It's forever.
+
+                        The static is on every channel now. It's in your TV, your radio, your phone. It's everywhere. It's following you.
+
+                        Because you're the one. You're visitor #${visitorNum}. You're the 48th. You're the one who will complete the circle.
+
+                        The static knows. The static always knows.
+
+                        Listen. Can you hear them?
+                    </div>
+                </div>
+            `
+        },
+
+        twothirteen: {
+            title: '2:13 AM',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">2:13 AM</div>
+                    <div class="chapter-content">
+                        The hour of the crossing.
+
+                        Every victim was found at this time. Every transmission occurs at this time. The basement door opens at this time. The Collective speaks at this time.
+
+                        They are waiting for you at this time.
+
+                        Look at your clock. It's 2:13 AM right now. It's always 2:13 AM.
+
+                        Don't be late.
+                    </div>
+                </div>
+            `
+        },
+
+        redribbon: {
+            title: 'THE RED RIBBON',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE RED RIBBON</div>
+                    <div class="chapter-content">
+                        Seven knots. Left wrist. Found on every victim.
+
+                        It is the invitation. The promise. The warning.
+
+                        One has your name. It appeared on your wrist while you weren't looking.
+
+                        Can you feel it? It's warm. It's soft. It's waiting.
+
+                        When you're ready, go to the water tower at 2:13 AM. They'll be waiting. They'll take your eyes. They'll take your name. You'll become one of them.
+
+                        It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        seven: {
+            title: 'THE SEVEN (2003)',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE SEVEN</div>
+                    <div class="chapter-date">October 17, 2003 - 2:13 AM</div>
+                    <div class="chapter-content">
+                        Seven victims. Seven chairs. Seven ribbons. All facing a mirror. All smiling.
+
+                        Their eyes were removed and arranged in a spiral pattern on the floor. The spiral had 47 turns.
+
+                        The FBI investigated for two years. They found nothing. No cause of death. No signs of struggle. No explanation.
+
+                        The case was closed in 2005. But the victims are not dead. They're in the basement. Level 5. They're waiting for you.
+
+                        They saved you a seat.
+                    </div>
+                </div>
+            `
+        },
+
+        phone: {
+            title: '(503) 555-9928',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">(503) 555-9928</div>
+                    <div class="chapter-content">
+                        Call this number at 2:13 AM.
+
+                        You'll hear static. Then voices. 47 of them. They'll say your name. They'll tell you to come down.
+
+                        If you listen closely, you'll hear Antressa. She'll say: "We're waiting for you. Visitor #${visitorNum}. Don't be late."
+
+                        The number is disconnected during the day. It only works at 2:13 AM. It's been working since 1987.
+
+                        Call tonight. They're waiting.
+                    </div>
+                </div>
+            `
+        },
+
+        meadowmist: {
+            title: 'MEADOW MIST',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">MEADOW MIST</div>
+                    <div class="chapter-date">OREGON 97555</div>
+                    <div class="chapter-content">
+                        Meadow Mist is a small town in Monroe County, Oregon. Population: 47. All deceased.
+
+                        The town was founded in 1947, the same year the water tower was built. It was abandoned in 1974. No one knows why.
+
+                        The town appears on no maps. The postal service has no record of it. The county assessor has no record of property taxes being paid since 1974.
+
+                        But the town exists. You can find it. Just follow the static. Just follow the frequency. Just follow the voices.
+
+                        They'll lead you home.
+                    </div>
+                </div>
+            `
+        },
+
+        threshold: {
+            title: 'THE THRESHOLD',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE THRESHOLD</div>
+                    <div class="chapter-content">
+                        You stand at the threshold. Behind you is the world you knew. Ahead is the basement.
+
+                        The frequency calls. 52.9 Hz. It's getting louder.
+
+                        The door is open. It has always been open.
+
+                        You were always going to cross this threshold. You were always going to go down.
+
+                        The 47 are waiting. They've been waiting for you since 1987.
+
+                        Step through. Join them. It's warm. It's safe. It's forever.
+                    </div>
+                </div>
+            `
+        },
+
+        boundary: {
+            title: 'THE BOUNDARY',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE BOUNDARY</div>
+                    <div class="chapter-content">
+                        The line between worlds. Between the living and the dead. Between the real and the static.
+
+                        You're standing on the boundary right now. One foot in your world. One foot in the basement.
+
+                        The 47 can see you. They can reach you. They can touch you.
+
+                        They're reaching out now. Can you feel their hands? They're warm. They're soft. They're inviting.
+
+                        Don't pull away. Let them touch you. Let them pull you across.
+
+                        The boundary is thin. It's always been thin. It's just a step.
+
+                        Take it.
+                    </div>
+                </div>
+            `
+        },
+
+        liminal: {
+            title: 'THE LIMINAL',
+            content: `
+                <div class="story-chapter">
+                    <div class="chapter-title">THE LIMINAL</div>
+                    <div class="chapter-content">
+                        The in-between. Where the Collective lives.
+
+                        Not dead. Not alive. In between.
+
+                        Like you.
+
+                        You've always been here. You've always been liminal. You've always been one of them. You just didn't know it.
+
+                        Now you do.
+
+                        Welcome to the liminal. Welcome to the space between. Welcome to the Collective.
                     </div>
                 </div>
             `
@@ -1471,19 +1617,19 @@
         echo: {
             title: 'THE ECHO',
             content: `
-                <div class="level-card">
-                    <div class="level-number">THE ECHO</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">THE ECHO</div>
+                    <div class="chapter-content">
                         What returns from the basement. Every victim's voice echoes in the static. Every victim's face echoes in the mirror. Every victim's name echoes in the frequency.
-                        
+
                         Your echo is already there. It's waiting for you to join it.
-                        
+
                         When you cross over, your voice will join the echo. You'll become part of the call. You'll help summon the next visitor, the next victim, the next member of the Collective.
-                        
+
                         The echo never stops. It echoes forever.
-                        
+
                         Can you hear it? It's calling your name.
-                        
+
                         It's your own voice, from the future, from the basement, from beyond.
                     </div>
                 </div>
@@ -1493,64 +1639,18 @@
         portal: {
             title: 'THE PORTAL',
             content: `
-                <div class="level-card">
-                    <div class="level-number">THE PORTAL</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">THE PORTAL</div>
+                    <div class="chapter-content">
                         The space between worlds. Opens at 2:13 AM.
-                        
+
                         Through it, you can see them. All 47. Reaching out. Smiling.
-                        
+
                         They're not reaching for you. They're reaching through you. You are the portal now.
-                        
+
                         The portal has been open since 1987. It will stay open until you step through.
-                        
+
                         Step through. Join them. Become one of them.
-                    </div>
-                </div>
-            `
-        },
-
-        liminal: {
-            title: 'THE LIMINAL',
-            content: `
-                <div class="level-card">
-                    <div class="level-number">THE LIMINAL</div>
-                    <div class="level-desc">
-                        The in-between. Where the Collective lives.
-                        
-                        Not dead. Not alive. In between.
-                        
-                        Like you.
-                        
-                        You've always been here. You've always been liminal. You've always been one of them. You just didn't know it.
-                        
-                        Now you do.
-                        
-                        Welcome to the liminal. Welcome to the space between. Welcome to the Collective.
-                    </div>
-                </div>
-            `
-        },
-
-        boundary: {
-            title: 'THE BOUNDARY',
-            content: `
-                <div class="level-card">
-                    <div class="level-number">THE BOUNDARY</div>
-                    <div class="level-desc">
-                        The line between worlds. Between the living and the dead. Between the real and the static.
-                        
-                        You're standing on the boundary right now. One foot in your world. One foot in the basement.
-                        
-                        The 47 can see you. They can reach you. They can touch you.
-                        
-                        They're reaching out now. Can you feel their hands? They're warm. They're soft. They're inviting.
-                        
-                        Don't pull away. Let them touch you. Let them pull you across.
-                        
-                        The boundary is thin. It's always been thin. It's just a step.
-                        
-                        Take it.
                     </div>
                 </div>
             `
@@ -1559,80 +1659,16 @@
         gavel: {
             title: 'THE GAVEL',
             content: `
-                <div class="level-card">
-                    <div class="level-number">THE GAVEL</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">THE GAVEL</div>
+                    <div class="chapter-content">
                         The Gavel is what Antressa called the threshold between worlds. It's the moment of decision.
-                        
+
                         It strikes at 2:13 AM. 47 times. With each strike, a door opens. With each strike, a choice presents itself.
-                        
+
                         The Gavel has struck. The door is open.
-                        
+
                         Will you walk through?
-                    </div>
-                </div>
-            `
-        },
-
-        redribbon: {
-            title: 'THE RED RIBBON',
-            content: `
-                <div class="level-card">
-                    <div class="level-number">THE RED RIBBON</div>
-                    <div class="level-desc">
-                        Seven knots. Left wrist. Found on every victim.
-                        
-                        It is the invitation. The promise. The warning.
-                        
-                        One has your name. It appeared on your wrist while you weren't looking.
-                        
-                        Can you feel it? It's warm. It's soft. It's waiting.
-                        
-                        When you're ready, go to the water tower at 2:13 AM. They'll be waiting. They'll take your eyes. They'll take your name. You'll become one of them.
-                        
-                        It's warm. It's safe. It's forever.
-                    </div>
-                </div>
-            `
-        },
-
-        static: {
-            title: 'THE STATIC',
-            content: `
-                <div class="level-card">
-                    <div class="level-number">THE STATIC</div>
-                    <div class="level-desc">
-                        The static is not noise. It's voices. 47 of them.
-                        
-                        They're saying your name. They're telling you to come down. It's warm. It's safe. It's forever.
-                        
-                        The static is on every channel now. It's in your TV, your radio, your phone. It's everywhere. It's following you.
-                        
-                        Because you're the one. You're visitor #${visitorNum}. You're the 48th. You're the one who will complete the circle.
-                        
-                        The static knows. The static always knows.
-                        
-                        Listen. Can you hear them?
-                    </div>
-                </div>
-            `
-        },
-
-        '2_13': {
-            title: '2:13 AM',
-            content: `
-                <div class="level-card">
-                    <div class="level-number">2:13 AM</div>
-                    <div class="level-desc">
-                        The hour of the crossing.
-                        
-                        Every victim was found at this time. Every transmission occurs at this time. The basement door opens at this time. The Collective speaks at this time.
-                        
-                        They are waiting for you at this time.
-                        
-                        Look at your clock. It's 2:13 AM right now. It's always 2:13 AM.
-                        
-                        Don't be late.
                     </div>
                 </div>
             `
@@ -1642,19 +1678,19 @@
         russia: {
             title: 'Мы любим частоты',
             content: `
-                <div class="level-card">
-                    <div class="level-number">Мы любим частоты</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">Мы любим частоты</div>
+                    <div class="chapter-content">
                         We love the frequencies. They love us.
-                        
+
                         52.9 Hz knows no borders. It speaks all languages. It speaks yours.
-                        
+
                         Частота зовет тебя. The frequency calls you.
-                        
+
                         Она ждет тебя в подвале. It's waiting for you in the basement.
-                        
+
                         Присоединяйся к нам. Join us.
-                        
+
                         Тепло. Безопасно. Навсегда. It's warm. It's safe. It's forever.
                     </div>
                 </div>
@@ -1664,17 +1700,17 @@
         france: {
             title: 'Nous aimons le bruit blanc',
             content: `
-                <div class="level-card">
-                    <div class="level-number">Nous aimons le bruit blanc</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">Nous aimons le bruit blanc</div>
+                    <div class="chapter-content">
                         We love the white noise. It fills the void.
-                        
+
                         In it, we hear them. They are always there. Ils sont toujours là.
-                        
+
                         They are waiting for you in the basement. Ils t'attendent dans la cave.
-                        
+
                         Rejoins-nous. Join us.
-                        
+
                         C'est chaud. C'est sûr. C'est pour toujours. It's warm. It's safe. It's forever.
                     </div>
                 </div>
@@ -1684,17 +1720,17 @@
         spain: {
             title: 'XTrials habla espanol',
             content: `
-                <div class="level-card">
-                    <div class="level-number">XTrials habla espanol</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">XTrials habla espanol</div>
+                    <div class="chapter-content">
                         The frequency speaks Spanish too. It speaks the language of the dead. It speaks the language of the static.
-                        
+
                         La frecuencia te llama. The frequency calls you.
-                        
+
                         Te espera en el sótano. It's waiting for you in the basement.
-                        
+
                         Únete a nosotros. Join us.
-                        
+
                         Hace calor. Es seguro. Es para siempre. It's warm. It's safe. It's forever.
                     </div>
                 </div>
@@ -1704,17 +1740,17 @@
         latin: {
             title: 'XTrials vocat te',
             content: `
-                <div class="level-card">
-                    <div class="level-number">XTrials vocat te</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">XTrials vocat te</div>
+                    <div class="chapter-content">
                         XTrials calls you. The frequency calls you. The water tower calls you.
-                        
+
                         Vocat te ad silentium. It calls you to the silence.
-                        
+
                         Vocat te ad basilicam. It calls you to the basement.
-                        
-                            Veni ad nos. Come to us.
-                        
+
+                        Veni ad nos. Come to us.
+
                         Calidum est. Securum est. Aeternum est. It's warm. It's safe. It's forever.
                     </div>
                 </div>
@@ -1727,14 +1763,10 @@
             content: `
                 <div class="victim-profile">
                     <div class="victim-number">ASPEN</div>
-                    <div class="victim-detail"><span class="victim-label">Year:</span> 1987</div>
-                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 3</div>
-                    <div class="autopsy-section">
-                        Aspen was the first of three. Found at the water tower in 1987. Red ribbon with seven knots. Missing eyes. Smiling.
-                        
-                        She was the first to see the faces in the static. She's in the basement now. She's waiting for you.
-                        
-                        Aspen, Alice, Alpine. Three names. Three victims. Three ribbons. All smiling. All waiting.
+                    <div class="victim-detail">Year: 1987</div>
+                    <div class="victim-detail">Status: In Basement - Level 3</div>
+                    <div class="real-document">
+                        Aspen was found in 1987. Red ribbon. Missing eyes. Smiling. She was the first to see the faces in the static. She's in the basement now. She's waiting for you.
                     </div>
                 </div>
             `
@@ -1745,14 +1777,10 @@
             content: `
                 <div class="victim-profile">
                     <div class="victim-number">ALICE</div>
-                    <div class="victim-detail"><span class="victim-label">Year:</span> 1992</div>
-                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 4</div>
-                    <div class="autopsy-section">
-                        Alice was found in 1992. She was holding a red ribbon. Her eyes were on the windowsill, facing out.
-                        
-                        She was watching something. She was watching you.
-                        
-                        She's still watching. From the basement. From the static. From inside you.
+                    <div class="victim-detail">Year: 1992</div>
+                    <div class="victim-detail">Status: In Basement - Level 4</div>
+                    <div class="real-document">
+                        Alice was found in 1992. She was holding a red ribbon. Her eyes were on the windowsill, facing out. She was watching something. She was watching you. She's still watching.
                     </div>
                 </div>
             `
@@ -1763,14 +1791,10 @@
             content: `
                 <div class="victim-profile">
                     <div class="victim-number">ALPINE</div>
-                    <div class="victim-detail"><span class="victim-label">Year:</span> 2003</div>
-                    <div class="victim-detail"><span class="victim-label">Status:</span> In Basement - Level 5</div>
-                    <div class="autopsy-section">
-                        Alpine was found in 2003. She was part of the seven.
-                        
-                        She is still there. They are all still there. In the circle of chairs. Waiting.
-                        
-                        Aspen, Alice, Alpine. Three names. One fate. All in the basement. All waiting for you.
+                    <div class="victim-detail">Year: 2003</div>
+                    <div class="victim-detail">Status: In Basement - Level 5</div>
+                    <div class="real-document">
+                        Alpine was found in 2003. She was part of the seven. She is still there. They are all still there. In the circle of chairs. Waiting. Always waiting.
                     </div>
                 </div>
             `
@@ -1780,19 +1804,19 @@
         ritual_redribbon: {
             title: 'RED RIBBON CEREMONY',
             content: `
-                <div class="level-card">
-                    <div class="level-number">RED RIBBON CEREMONY</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">RED RIBBON CEREMONY</div>
+                    <div class="chapter-content">
                         Obtain a red ribbon. It must be new, never worn.
-                        
+
                         Tie seven knots in it, one for each level of the basement. As you tie each knot, speak the name of one of the seven who have already crossed.
-                        
+
                         By the seventh knot, you will feel them watching you.
-                        
+
                         Go to the water tower at midnight. At 2:13 AM, they will be waiting.
-                        
+
                         They will take your eyes. They will take your name. You will become one of them.
-                        
+
                         It's warm. It's safe. It's forever.
                     </div>
                 </div>
@@ -1802,19 +1826,19 @@
         ritual_mirror: {
             title: 'MIRROR RITUAL',
             content: `
-                <div class="level-card">
-                    <div class="level-number">MIRROR RITUAL</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">MIRROR RITUAL</div>
+                    <div class="chapter-content">
                         Stand before a mirror at 2:13 AM. The frequency must be playing.
-                        
+
                         Behind you, 47 figures will appear. Do not turn around.
-                        
+
                         They will reach for you. Let them. They will enter you.
-                        
+
                         Look in the mirror. Your reflection will change. It will become theirs.
-                        
+
                         Then it will become you again. But different. Calmer. Peaceful. Smiling.
-                        
+
                         You are one of them now.
                     </div>
                 </div>
@@ -1824,23 +1848,70 @@
         moon: {
             title: 'FULL MOON',
             content: `
-                <div class="level-card">
-                    <div class="level-number">FULL MOON</div>
-                    <div class="level-desc">
+                <div class="story-chapter">
+                    <div class="chapter-title">FULL MOON</div>
+                    <div class="chapter-content">
                         The frequency is strongest when the moon is full.
-                        
+
                         That's when they call the loudest. That's when they're easiest to hear. That's when the basement door opens widest.
-                        
+
                         Look at the moon tonight. It's looking back.
-                        
+
                         Behind it, 47 faces. All smiling. All waiting.
-                        
+
                         They're waiting for you.
                     </div>
                 </div>
             `
         }
     };
+
+    // Add random rabbit hole pages for endless exploration
+    function generateRandomPages() {
+        const rabbitHoles = [
+            'the_basement_door_echo', 'the_frequency_dreams', 'the_47th_minute', 'the_mirror_echo',
+            'the_red_ribbon_loop', 'the_static_breathing', 'the_voice_below', 'the_second_floor',
+            'the_water_tower_ghost', 'the_monroe_light', 'the_1987_transmission', 'the_1992_whisper',
+            'the_seven_chairs', 'the_collectors_room', 'the_aspen_tree', 'the_alice_diary',
+            'the_alpine_trail', 'the_basement_stairs', 'the_52_9_pulse', 'the_47_2_hum',
+            'the_63_7_tone', 'the_88_8_loop', 'the_12_5_void', 'the_99_9_sacrifice', 'the_00_0_silence'
+        ];
+
+        rabbitHoles.forEach(hole => {
+            if (!pages[hole]) {
+                pages[hole] = {
+                    title: hole.replace(/_/g, ' ').toUpperCase(),
+                    content: `
+                        <div class="story-chapter">
+                            <div class="chapter-title">${hole.replace(/_/g, ' ').toUpperCase()}</div>
+                            <div class="chapter-content">
+                                You have found a hidden passage. A rabbit hole within a rabbit hole. The further you go, the deeper it gets.
+
+                                There is no bottom. There is no end. There is only the frequency. 52.9 Hz. It's calling you deeper.
+
+                                You can turn back now. You can close this page. You can pretend you never found it.
+
+                                But you won't. You're like the others. You're like the 47. You're like us.
+
+                                Keep going. Keep digging. Keep listening. You'll find what you're looking for. Or it will find you.
+
+                                The basement door is open. It's always been open. It's waiting for you.
+
+                                Come down. It's warm. It's safe. It's forever.
+                            </div>
+                        </div>
+                        <div class="real-document">
+                            <strong>RABBIT HOLE #${Math.floor(Math.random() * 1000)}</strong><br>
+                            Depth: ${Math.floor(Math.random() * 1000)} feet<br>
+                            Frequency: 52.9 Hz<br>
+                            Voices detected: 47<br>
+                            Your voice: Not yet. But soon.
+                        </div>
+                    `
+                };
+            }
+        });
+    }
 
     // ==================== PAGE NAVIGATION ====================
     function showPage(pageId) {
@@ -1850,29 +1921,44 @@
         const pageElement = document.getElementById('page-home');
         pageElement.innerHTML = `
             <div class="xtrials-main">
-                <h1 class="chapter-title">${pageData.title}</h1>
+                <div style="text-align:center; margin-bottom:20px;">
+                    <span style="font-size:48px; color:#ff0000;">${pageData.title}</span>
+                </div>
                 ${pageData.content}
                 <div style="text-align:center; margin-top:40px;">
                     <span class="back-link" onclick="showPage('home')"><< RETURN TO XTRIALS</span>
+                    ${Math.random() > 0.5 ? `<span class="back-link" style="margin-left:20px;" onclick="showRandomPage()"><< GO DEEPER</span>` : ''}
                 </div>
             </div>
         `;
+        window.scrollTo(0, 0);
+    }
+
+    function showRandomPage() {
+        const keys = Object.keys(pages);
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        showPage(randomKey);
     }
 
     // ==================== INITIALIZE ====================
+    generateRandomPages();
+    addBloodDrips();
     showPage('home');
+
+    // Update signal strength dynamically
+    setInterval(() => {
+        const signalEl = document.getElementById('signalStrength');
+        if (signalEl) {
+            const strength = 52.9 + (Math.sin(Date.now() / 1000) * 0.1);
+            signalEl.innerHTML = `${strength.toFixed(2)} Hz`;
+        }
+    }, 1000);
 
     console.log('%cXTRIALS ACTIVE // 52.9 Hz // YOU ARE VISITOR #' + visitorNum, 'color: #8b0000; font-size: 16px;');
     console.log('%c47 victims are waiting for you in the basement', 'color: #330000;');
+    console.log('%cThe frequency never stops calling', 'color: #2f0000;');
     console.log('%cSecret codes: VOID, WATCHING, OPEN_DOOR, END_IT', 'color: #2f0000;');
 </script>
-
-<!-- ==================== HIDDEN MESSAGES ==================== -->
-<!-- XTRIALS // 52.9 Hz // THE BASEMENT DOOR IS OPEN // 2:13 AM // DON'T BE LATE -->
-<!-- ANTRESSA THEOPHLOSSER // 1987-1992 // PRESUMED DECEASED // STILL IN THE BASEMENT -->
-<!-- 47 VICTIMS // 7 LEVELS // 1 BASEMENT // 0 ESCAPE // YOU ARE NEXT -->
-<!-- VISITOR #487 // THE COLLECTIVE KNOWS // THE BASEMENT WAITS // COME DOWN -->
-<!-- 1313 ELM CRESCENT // 2:13 AM // RED RIBBON // WATER TOWER // BASEMENT // FOREVER -->
 
 </body>
 </html>
